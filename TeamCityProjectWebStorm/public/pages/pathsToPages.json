@@ -1,3 +1,11 @@
 {
   "/home":"../pages/index.html"
 }
+
+//var xhr = new XMLHttpRequest();
+//xhr.open('GET', 'http://localhost:8111/httpAuth/app/rest/builds',false);
+//xhr.setRequestHeader('Accept','application/json');
+//xhr.send();
+//xhr.responseText
+
+
