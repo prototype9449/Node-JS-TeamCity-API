@@ -1,6 +1,6 @@
 var fileModule = require('fs');
 
-function readFile(filename, response) {
+function writeFileToResponse(filename, response) {
     fileModule.readFile(filename, function(err, content) {
         if (err) {
             console.error(err);
@@ -17,4 +17,4 @@ function readFile(filename, response) {
         response.end(content);
     })}
 
-exports.readFile = readFile;
+exports.readFile = writeFileToResponse;
