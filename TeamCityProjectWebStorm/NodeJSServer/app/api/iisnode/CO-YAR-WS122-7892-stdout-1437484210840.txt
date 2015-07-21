@@ -1,9 +1,0 @@
-rute
-test
-{ entities: 
-   { list: [Function: list],
-     get: [Function: get],
-     create: [Function: create],
-     update: [Function: update],
-     remove: [Function: remove] } }
-[0mGET /app/api/hello/v1/entities [32m200 [0m5.681 ms - 19[0m

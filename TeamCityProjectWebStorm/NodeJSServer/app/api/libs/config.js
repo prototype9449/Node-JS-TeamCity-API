@@ -1,9 +1,10 @@
-// 1. Аргументы командной строки
-// 2. Переменные среды
-// 3. Наш собственный файл с конфигурацией
+
 var nconf = require('nconf');
 nconf.argv()
-  .env()
-  .file({ file: './config/main.json' });
+  .env();
+
+nconf.add('global', {type: 'file', file:  './config/teamCity.json'});
+nconf.add('user', {type: 'file', file: './config/main.json'});
+nconf.load();
 
 module.exports = nconf;

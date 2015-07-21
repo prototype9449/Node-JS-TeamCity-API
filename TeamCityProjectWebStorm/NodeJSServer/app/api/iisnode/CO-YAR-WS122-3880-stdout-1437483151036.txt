@@ -1,4 +1,0 @@
-rute
-test
-[0mGET /app/api/hello/ [33m404 [0m5.235 ms - -[0m
-[0mGET /app/api/hello/foo [33m404 [0m0.785 ms - -[0m

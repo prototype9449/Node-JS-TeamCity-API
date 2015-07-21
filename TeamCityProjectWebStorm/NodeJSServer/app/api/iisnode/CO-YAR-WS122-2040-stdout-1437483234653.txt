@@ -1,7 +1,0 @@
-rute
-test
-\\.\pipe\d867d7ca-69e7-4faa-975f-f5d8f722a63c
-[0mGET /app/api/hello/foo [33m404 [0m4.296 ms - -[0m
-[0mGET /app/api/hello/ [33m404 [0m1.359 ms - -[0m
-[0mGET /app/api/hello/foo [33m404 [0m0.545 ms - -[0m
-[0mGET /app/api/hello/bar [33m404 [0m0.920 ms - -[0m

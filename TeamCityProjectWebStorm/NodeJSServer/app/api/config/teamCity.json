@@ -1,0 +1,12 @@
+{
+  "teamCityBuilds": {
+    "url": "http://localhost:8111/httpAuth/app/rest/builds",
+    "auth": {
+      "user": "GrimRanger",
+      "pass": "!QAZ1qaz!QAZ"
+    },
+    "headers": {
+      "Accept": "application/json"
+    }
+  }
+}

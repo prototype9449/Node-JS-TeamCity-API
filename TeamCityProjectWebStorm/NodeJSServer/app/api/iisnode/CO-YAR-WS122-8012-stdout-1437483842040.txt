@@ -1,8 +1,0 @@
-rute
-test
-\\.\pipe\968ad5c9-5484-4e70-9d31-60405cef81f6
-[0mGET /app/api/hello/bar [33m404 [0m3.098 ms - -[0m
-[0mGET /app/api/hello/bar [33m404 [0m0.893 ms - -[0m
-[0mGET /app/api/hello/bar [33m404 [0m1.727 ms - -[0m
-[0mGET /app/api/hello [33m404 [0m1.027 ms - -[0m
-[0mGET /app/api/hello/bar [33m404 [0m0.788 ms - -[0m

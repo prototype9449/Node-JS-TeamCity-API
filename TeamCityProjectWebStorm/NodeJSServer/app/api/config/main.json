@@ -1,6 +1,4 @@
 {
-  "port" : 1337,
-  "mongoose": {
-    "uri": "mongodb://localhost/habr"
-  }
+  "port" : 1337
+
 }
