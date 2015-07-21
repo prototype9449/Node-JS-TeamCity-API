@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+</head>
+
+<body style="width: 100%;">
+<div class="panel panel-default"
+     style="width: 500px; margin-left: auto; margin-right: auto; margin-top: 5px; display: table;">
+    <div class="panel-heading">
+        <h3 class="panel-title">Builds:</h3>
+    </div>
+    <div class="panel-body" id="somePlace">
+        {% for build in builds %}
+        <div class="panel panel-info">
+            <div class="panel-heading">Build ID #{{ build.id }}</div>
+            <div class="panel-body">
+                <li>BuildID : {{ build.id }}</li>
+                <li>Build State : {{ build.state }}</li>
+                <li>Build Status : {{ build.state }}</li>
+                <li>Build Type ID: {{ build.buildTypeId }}</li>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <input type="button" value="Click me" style="margin-left: auto; margin-right: auto; display: table; margin-bottom: 5px;"/>
+</div>
+</body>
+</html>
