@@ -1,0 +1,7 @@
+[0mGET /app/api/hello [33m404 [0m3.913 ms - -[0m
+[0mGET /app/api/hello/v1/entities [33m404 [0m1.368 ms - -[0m
+[0mGET /app/api/hello/v1/entities [33m404 [0m1.065 ms - -[0m
+[0mGET /app/api/hello/v1/entities [33m404 [0m0.631 ms - -[0m
+[0mGET /app/api/hello/v1/entities [33m404 [0m0.313 ms - -[0m
+[0mGET /app/api/hello/foo [33m404 [0m0.438 ms - -[0m
+[0mGET /app/api/hello/foo [33m404 [0m0.361 ms - -[0m

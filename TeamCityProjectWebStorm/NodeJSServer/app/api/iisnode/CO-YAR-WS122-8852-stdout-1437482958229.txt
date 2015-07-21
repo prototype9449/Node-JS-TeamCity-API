@@ -1,0 +1,4 @@
+test
+[0mGET /app/api/hello/ [33m404 [0m4.059 ms - -[0m
+[0mGET /app/api/hello/ [33m404 [0m0.691 ms - -[0m
+[0mGET /app/api/hello/foo [33m404 [0m1.440 ms - -[0m

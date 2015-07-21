@@ -1,0 +1,4 @@
+rute
+test
+\\.\pipe\17364a1e-9a9e-4223-86de-ea370cccb0ed
+[0mGET /app/api/hello/bar [32m200 [0m4.680 ms - 32[0m

@@ -1,0 +1,1 @@
+[0mGET /app/api/hello/foo [33m404 [0m3.951 ms - -[0m

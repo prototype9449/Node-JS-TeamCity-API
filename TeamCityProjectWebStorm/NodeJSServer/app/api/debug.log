@@ -1,0 +1,7 @@
+test
+{ entities: 
+   { list: [Function: list],
+     get: [Function: get],
+     create: [Function: create],
+     update: [Function: update],
+     remove: [Function: remove] } }

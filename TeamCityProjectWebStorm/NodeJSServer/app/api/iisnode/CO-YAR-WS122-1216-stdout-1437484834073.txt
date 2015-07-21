@@ -1,0 +1,31 @@
+rute
+test
+{ entities: 
+   { list: [Function: list],
+     get: [Function: get],
+     create: [Function: create],
+     update: [Function: update],
+     remove: [Function: remove] } }
+[0mGET /app/api/hello/ [33m404 [0m6.883 ms - -[0m
+Hello from foo! [express sample]
+[0mGET /app/api/hello/foo [32m200 [0m5.879 ms - 32[0m
+[0mGET /app/api/hello/v1/entities [32m200 [0m1.314 ms - 19[0m
+[0mPOST /app/api/hello/v1/entities/1 [33m404 [0m1.273 ms - -[0m
+[0mPOST /app/api/hello/v1/entities/ [32m200 [0m0.698 ms - 6[0m
+[0mPOST /app/api/hello/v1/entities/ [32m200 [0m0.331 ms - 6[0m
+[0mPUT /app/api/hello/v1/entities/ [33m404 [0m0.333 ms - -[0m
+[0mPOST /app/api/hello/v1/entities [32m200 [0m0.453 ms - 6[0m
+[0mDELETE /app/api/hello/v1/entities:1 [33m404 [0m0.313 ms - -[0m
+[0mDELETE /app/api/hello/v1/entities/ [33m404 [0m0.249 ms - -[0m
+[0mDELETE /app/api/hello/v1/entities/ [33m404 [0m0.232 ms - -[0m
+[0mDELETE /app/api/hello/v1/entities/ [33m404 [0m0.269 ms - -[0m
+[0mGET /app/api/hello/ [33m404 [0m0.249 ms - -[0m
+[0mGET /app/api/hello/ [33m404 [0m0.253 ms - -[0m
+Hello from foo! [express sample]
+[0mGET /app/api/hello/foo [32m200 [0m1.381 ms - 32[0m
+[0mGET /app/api/hello/v1/entities [32m200 [0m0.452 ms - 19[0m
+[0mGET /app/api/hello/v1/entities/ [32m200 [0m0.356 ms - 19[0m
+[0mGET /app/api/hello/v1/entities/ [32m200 [0m0.300 ms - 19[0m
+[0mGET /app/api/hello/v1/entities/ [32m200 [0m0.525 ms - 19[0m
+[0mGET /app/api/hello/v1/entities/ [32m200 [0m0.301 ms - 19[0m
+[0mGET /app/api/hello/v1/entities/ [32m200 [0m0.348 ms - 19[0m

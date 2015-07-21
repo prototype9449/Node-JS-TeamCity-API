@@ -1,0 +1,14 @@
+rute
+test
+{ entities: 
+   { list: [Function: list],
+     get: [Function: get],
+     create: [Function: create],
+     update: [Function: update],
+     remove: [Function: remove] } }
+Hello from foo! [express sample]
+[0mGET /app/api/hello/foo [36m304 [0m8.322 ms - -[0m
+Hello from foo! [express sample]
+[0mGET /app/api/hello/foo [36m304 [0m3.532 ms - -[0m
+[0mGET /app/api/hello/v1/entities [33m404 [0m1.230 ms - -[0m
+[0mGET /app/api/hello/v1/entities [33m404 [0m0.969 ms - -[0m
