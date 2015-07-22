@@ -61,8 +61,13 @@
         //});
     }
 
-    exports.list = list;
-    exports.get = get;
-    exports.create = create;
-    exports.update = update;
-    exports.remove = remove;
+    function setupHandlers(app)
+    {
+        app.get('/test', list);
+        app.get('/test/:id', get);
+        app.post('/test', create);
+        app.put('/test/:id', update);
+        app.delete('/test/:id', remove);
+    }
+
+    exports.setupHandlers = setupHandlers;

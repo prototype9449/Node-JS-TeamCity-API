@@ -41,4 +41,9 @@ var getResultJson = function (req, res, next) {
     });
 };
 
-module.exports.getResultJson = getResultJson;
+function setupHandlers(app)
+{
+    app.get('/builds', getResultJson);
+}
+
+module.exports.setupHandlers = setupHandlers;
