@@ -1,0 +1,6 @@
+[0mGET /TeamCityApi/api/ [32m200 [0m4.493 ms - 1[0m
+[0mGET /TeamCityApi/api/foo [32m200 [0m2.209 ms - 4[0m
+[0mGET /TeamCityApi/api/foo [36m304 [0m1.837 ms - -[0m
+[0mGET /TeamCityApi/api/foo [36m304 [0m1.306 ms - -[0m
+[0mGET /TeamCityApi/api/foo [36m304 [0m0.536 ms - -[0m
+[0mGET /TeamCityApi/api/bar [32m200 [0m0.587 ms - 4[0m

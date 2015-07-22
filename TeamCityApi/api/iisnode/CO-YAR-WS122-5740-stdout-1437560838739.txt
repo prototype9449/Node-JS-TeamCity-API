@@ -1,0 +1,7 @@
+[0mGET /app/api/test [32m200 [0m8.914 ms - 19[0m
+[0mGET /app/api/test/id:2 [33m404 [0m3.070 ms - 18[0m
+[0mDELETE /app/api/test/id:2 [32m200 [0m0.717 ms - 6[0m
+[0mGET /app/api/test/id:2 [33m404 [0m0.606 ms - 18[0m
+[0mPOST /app/api/test/id:2 [33m404 [0m1.482 ms - -[0m
+[0mPUT /app/api/test/id:2 [32m200 [0m0.465 ms - 15[0m
+[0mDELETE /app/api/test/id:2 [32m200 [0m0.332 ms - 6[0m

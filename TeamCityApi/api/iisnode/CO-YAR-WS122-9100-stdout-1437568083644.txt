@@ -1,0 +1,9 @@
+[0mGET /app/api [32m200 [0m4.912 ms - 25[0m
+[0mGET /app/api/entities [33m404 [0m1.516 ms - -[0m
+[0mGET /app/api/builds [32m200 [0m46.717 ms - -[0m
+[0mGET /app/api/builds [32m200 [0m29.166 ms - -[0m
+[0mGET /app/api/builds [32m200 [0m17.277 ms - -[0m
+[0mGET /app/api/test/id:2 [33m404 [0m1.986 ms - 18[0m
+[0mGET /app/api/test [32m200 [0m0.739 ms - 19[0m
+[0mGET /app/api/bar [31m500 [0m0.692 ms - 22[0m
+[0mGET /app/api/foo [31m500 [0m0.601 ms - 22[0m

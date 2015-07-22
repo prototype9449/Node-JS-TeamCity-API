@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"CO-YAR-WS122-2236-stderr-1437560390110.txt","computername":"CO-YAR-WS122","pid":2236,"type":"stderr","created":1437560390110},{"file":"CO-YAR-WS122-2236-stdout-1437560390108.txt","computername":"CO-YAR-WS122","pid":2236,"type":"stdout","created":1437560390108},{"file":"CO-YAR-WS122-2696-stderr-1437575716563.txt","computername":"CO-YAR-WS122","pid":2696,"type":"stderr","created":1437575716563},{"file":"CO-YAR-WS122-2696-stdout-1437575716558.txt","computername":"CO-YAR-WS122","pid":2696,"type":"stdout","created":1437575716558},{"file":"CO-YAR-WS122-3064-stderr-1437559796353.txt","computername":"CO-YAR-WS122","pid":3064,"type":"stderr","created":1437559796353},{"file":"CO-YAR-WS122-3064-stdout-1437559796351.txt","computername":"CO-YAR-WS122","pid":3064,"type":"stdout","created":1437559796351},{"file":"CO-YAR-WS122-5384-stdout-1437575585134.txt","computername":"CO-YAR-WS122","pid":5384,"type":"stdout","created":1437575585134},{"file":"CO-YAR-WS122-5740-stdout-1437560838739.txt","computername":"CO-YAR-WS122","pid":5740,"type":"stdout","created":1437560838739},{"file":"CO-YAR-WS122-6156-stderr-1437569509295.txt","computername":"CO-YAR-WS122","pid":6156,"type":"stderr","created":1437569509295},{"file":"CO-YAR-WS122-6340-stdout-1437575044567.txt","computername":"CO-YAR-WS122","pid":6340,"type":"stdout","created":1437575044567},{"file":"CO-YAR-WS122-6516-stderr-1437569542415.txt","computername":"CO-YAR-WS122","pid":6516,"type":"stderr","created":1437569542415},{"file":"CO-YAR-WS122-6516-stdout-1437569542412.txt","computername":"CO-YAR-WS122","pid":6516,"type":"stdout","created":1437569542412},{"file":"CO-YAR-WS122-6700-stdout-1437575166705.txt","computername":"CO-YAR-WS122","pid":6700,"type":"stdout","created":1437575166705},{"file":"CO-YAR-WS122-7116-stdout-1437575632468.txt","computername":"CO-YAR-WS122","pid":7116,"type":"stdout","created":1437575632468},{"file":"CO-YAR-WS122-7432-stdout-1437564113447.txt","computername":"CO-YAR-WS122","pid":7432,"type":"stdout","created":1437564113447},{"file":"CO-YAR-WS122-7516-stdout-1437559859589.txt","computername":"CO-YAR-WS122","pid":7516,"type":"stdout","created":1437559859589},{"file":"CO-YAR-WS122-7644-stdout-1437572126144.txt","computername":"CO-YAR-WS122","pid":7644,"type":"stdout","created":1437572126144},{"file":"CO-YAR-WS122-8364-stdout-1437565283993.txt","computername":"CO-YAR-WS122","pid":8364,"type":"stdout","created":1437565283993},{"file":"CO-YAR-WS122-8504-stdout-1437575675549.txt","computername":"CO-YAR-WS122","pid":8504,"type":"stdout","created":1437575675549},{"file":"CO-YAR-WS122-8580-stdout-1437574982904.txt","computername":"CO-YAR-WS122","pid":8580,"type":"stdout","created":1437574982904},{"file":"CO-YAR-WS122-9100-stderr-1437568083654.txt","computername":"CO-YAR-WS122","pid":9100,"type":"stderr","created":1437568083654},{"file":"CO-YAR-WS122-9100-stdout-1437568083644.txt","computername":"CO-YAR-WS122","pid":9100,"type":"stdout","created":1437568083644}];
+        var lastUpdated = 1437575717098;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>

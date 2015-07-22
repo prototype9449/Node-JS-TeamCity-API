@@ -1,0 +1,11 @@
+Application has thrown an uncaught exception and is terminated:
+TypeError: string is not a function
+    at Request._callback (C:\NodeServer\app\api\handlers\handlers\buildHandler.js:46:9)
+    at Request.self.callback (C:\NodeServer\app\api\node_modules\request\request.js:198:22)
+    at Request.emit (events.js:110:17)
+    at Request.<anonymous> (C:\NodeServer\app\api\node_modules\request\request.js:1057:14)
+    at Request.emit (events.js:129:20)
+    at IncomingMessage.<anonymous> (C:\NodeServer\app\api\node_modules\request\request.js:1003:12)
+    at IncomingMessage.emit (events.js:129:20)
+    at _stream_readable.js:908:16
+    at process._tickCallback (node.js:355:11)
