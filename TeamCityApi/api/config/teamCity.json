@@ -2,8 +2,18 @@
   "teamCityBuilds": {
     "url": "http://localhost:8111/httpAuth/app/rest/builds",
     "auth": {
-      "user": "GrimRanger",
-      "pass": "!QAZ1qaz!QAZ"
+      "user": "prototype9449",
+      "pass": "termit"
+    },
+    "headers": {
+      "Accept": "application/json"
+    }
+  },
+  "teamCityAgents": {
+    "url": "http://localhost:8111/httpAuth/app/rest/agents",
+    "auth": {
+      "user": "prototype9449",
+      "pass": "termit"
     },
     "headers": {
       "Accept": "application/json"

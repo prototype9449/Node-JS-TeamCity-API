@@ -1,0 +1,11 @@
+{% for currentBuild in build %}
+<div class="panel panel-info">
+    <div class="panel-heading">Build ID #{{ currentBuild.id }}</div>
+    <div class="panel-body">
+        <li>BuildID: {{ currentBuild.id }}</li>
+        <li>Build State: {{ currentBuild.state }}</li>
+        <li>Build Status: {{ currentBuild.state }}</li>
+        <li>Build Type ID: {{ currentBuild.buildTypeId }}</li>
+    </div>
+</div>
+{% endfor %}

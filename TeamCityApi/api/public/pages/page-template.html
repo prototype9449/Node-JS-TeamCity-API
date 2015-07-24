@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script type="application/javascript">
+
+    </script>
 </head>
 
 <body style="width: 100%;">
@@ -14,19 +17,18 @@
         <h3 class="panel-title">Builds:</h3>
     </div>
     <div class="panel-body">
-        {% for build in builds %}
+        {% for currentBuild in build %}
         <div class="panel panel-info">
-            <div class="panel-heading">Build ID #{{ build.id }}</div>
+            <div class="panel-heading">Build ID #{{ currentBuild.id }}</div>
             <div class="panel-body">
-                <li>BuildID : {{ build.id }}</li>
-                <li>Build State : {{ build.state }}</li>
-                <li>Build Status : {{ build.state }}</li>
-                <li>Build Type ID: {{ build.buildTypeId }}</li>
+                <li>BuildID: {{ currentBuild.id }}</li>
+                <li>Build State: {{ currentBuild.state }}</li>
+                <li>Build Status: {{ currentBuild.state }}</li>
+                <li>Build Type ID: {{ currentBuild.buildTypeId }}</li>
             </div>
         </div>
         {% endfor %}
     </div>
-   
 </div>
 </body>
 </html>
