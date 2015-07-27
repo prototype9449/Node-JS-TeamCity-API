@@ -12,8 +12,9 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 var handlers = require('./handlers/handlerProvider').handlers;
+var htmlContentGeneratorHandlers = require('./handlers/handlerProvider').htmlContentGeneratorHandlers;
 
-routes.setup(app, handlers);
+routes.setup(app, handlers, htmlContentGeneratorHandlers);
 
 var port = process.env.PORT || 8080;
 app.listen(port);

@@ -2,13 +2,9 @@ var request = require('request');
 var swig = require('swig');
 var config = require('../../libs/config');
 
-var setupHandlers = function(app) {
+var setupHandlers = function(app, restApiPath, optionConfigName, pageTemplateSubdirectoryPath) {
     var templateDataBinder = require('./templateDataBinder');
-    var restApiPath = '/builds';
-    var optionConfigName = 'teamCityBuilds';
-    var pageTemplateSubdirectoryPath = '\\..\\..\\public\\pages\\build-information-panel.html';
-    templateDataBinder.templateDataBinderConstructor(optionConfigName, pageTemplateSubdirectoryPath, restApiPath);
-    templateDataBinder.setupDataBinder(app);
+    templateDataBinder.setupDataBinder(app, restApiPath, optionConfigName, pageTemplateSubdirectoryPath);
 };
 
 module.exports.setupHandlers = setupHandlers;
