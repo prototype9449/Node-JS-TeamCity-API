@@ -6,6 +6,7 @@ module.exports.setup = function (app, handlers) {
   });
 
   for (handler in handlers) {
+    console.log(handler);
     handlers[handler].setupHandlers(app);
   }
 };

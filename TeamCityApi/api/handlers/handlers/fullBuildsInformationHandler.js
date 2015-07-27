@@ -5,7 +5,7 @@ var request = require('request');
 var swig = require('swig');
 var config = require('../../libs/config');
 
-var getBuildsFullInformation = function (req, res, next) {
+var getBuildsFullInformation = function (req, res) {
     var options = config.get('teamCityBuilds');
 
     request.get(options, function (err, response) {
@@ -21,7 +21,7 @@ var getBuildsFullInformation = function (req, res, next) {
 
 function setupHandlers(app)
 {
-    app.get('/full-builds-information', getBuildsFullInformation);
+    app.get('/', getBuildsFullInformation);
 }
 
 exports.setupHandlers = setupHandlers;

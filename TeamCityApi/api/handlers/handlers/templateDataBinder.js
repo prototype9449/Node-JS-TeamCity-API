@@ -1,19 +1,31 @@
-/**
- * Created by NikitaK on 7/24/2015.
- */
-var request = require('request');
-var swig = require('swig');
-var config = require('../../libs/config');
+var _optionConfigName, _currentPageTemplateSubdirectoryPath, _restApiPath;
+var parametersWrapper;
 
-var getHtmlContent = function (req, res, optionConfig, pageTemplateSubdirectoryPath) {
-    var options = config.get(optionConfig);
+var templateDataBinderConstructor = function(optionConfigName, currentPageTemplateSubdirectoryPath, restApiPath) {
+    _optionConfigName = optionConfigName;
+    _currentPageTemplateSubdirectoryPath = currentPageTemplateSubdirectoryPath;
+    _restApiPath = restApiPath;
+    parametersWrapper = {
+        optionConfigName: _optionConfigName,
+        currentPageTemplateSubdirectoryPath : _currentPageTemplateSubdirectoryPath,
+        restApiPath : _restApiPath
+    };
+};
 
+var getHtmlContent = function (req, res) {
+    var config = require('../../libs/config');
+
+    var request = require('request');
+    var options = config.get(parametersWrapper.optionConfigName);
     request.get(options, function (err, response) {
         if (err) throw err;
 
         res.writeHeader(200, {"Content-Type": "text/plain"});
 
-        var pathDirectory = __dirname + pageTemplateSubdirectoryPath;
+        console.log(_currentPageTemplateSubdirectoryPath);
+        var pathDirectory = __dirname + parametersWrapper.currentPageTemplateSubdirectoryPath;
+
+        var swig = require('swig');
         var template = swig.compileFile(pathDirectory);
 
         var bindingJson = JSON.parse(response.body);
@@ -22,9 +34,10 @@ var getHtmlContent = function (req, res, optionConfig, pageTemplateSubdirectoryP
     });
 };
 
-function setupDataBinder(app, restApiPath)
+function setupDataBinder(app)
 {
-    app.get(restApiPath, getHtmlContent);
+    app.get(parametersWrapper.restApiPath, getHtmlContent);
 }
 
-exports.setupHandlers = setupDataBinder;
+module.exports.setupDataBinder = setupDataBinder;
+module.exports.templateDataBinderConstructor = templateDataBinderConstructor;

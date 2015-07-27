@@ -1,6 +1,6 @@
 {
-  "teamCityBuilds": {
-    "url": "http://localhost:8111/httpAuth/app/rest/builds",
+  "teamCityAgents": {
+    "url": "http://localhost:8111/httpAuth/app/rest/agents",
     "auth": {
       "user": "prototype9449",
       "pass": "termit"
@@ -9,8 +9,8 @@
       "Accept": "application/json"
     }
   },
-  "teamCityAgents": {
-    "url": "http://localhost:8111/httpAuth/app/rest/agents",
+  "teamCityBuilds": {
+    "url": "http://localhost:8111/httpAuth/app/rest/builds",
     "auth": {
       "user": "prototype9449",
       "pass": "termit"
