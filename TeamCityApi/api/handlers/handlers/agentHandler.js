@@ -7,4 +7,4 @@ var setupHandlers = function(app, restApiPath, optionConfigName, pageTemplateSub
     templateDataBinder.setupDataBinder(app, restApiPath, optionConfigName, pageTemplateSubdirectoryPath);
 };
 
-module.exports.setupHandlers = setupHandlers;
+exports.setupHandlers = setupHandlers;
