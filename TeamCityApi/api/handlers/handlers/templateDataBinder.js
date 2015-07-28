@@ -9,14 +9,52 @@ var getHtmlContentForCurrentTemplate = function (optionConfigName, currentPageTe
 
             res.writeHeader(200, {"Content-Type": "text/plain"});
 
-            console.log(currentPageTemplateSubdirectoryPath);
             var pathDirectory = __dirname + currentPageTemplateSubdirectoryPath;
+//            var pathDirectory = __dirname + '\\..\\..\\public\\pages\\json-issue.html';
 
             var swig = require('swig');
             var template = swig.compileFile(pathDirectory);
 
             var bindingJson = JSON.parse(response.body);
+//            var bindingJson = response.body;
+            console.log(response.body);
             var renderedHtml = template(bindingJson);
+
+            // Working example
+//            var renderedHtml = template({
+//                agents: [
+//                    {
+//                        href: "/httpAuth/app/rest/agents/id:3",
+//                        id: 3,
+//                        name: "localhost",
+//                        typeId: 3
+//                    },
+//                    {
+//                        href: "/httpAuth/app/rest/agents/id:1",
+//                        id: 1,
+//                        name: "NickKuzminPC",
+//                        typeId: 1
+//                    }
+//                ]
+//            });
+
+              // Bug
+//              var renderedHtml = template({
+//                  "agent": [
+//                      {
+//                          "href": "/httpAuth/app/rest/agents/id:3",
+//                          "id": 3,
+//                          "name": "localhost",
+//                          "typeId": 3
+//                      },
+//                      {
+//                          "href": "/httpAuth/app/rest/agents/id:1",
+//                          "id": 1,
+//                          "name": "NickKuzminPC",
+//                          "typeId": 1
+//                      }
+//                  ]
+//              });
             res.end(renderedHtml);
         });
     };
