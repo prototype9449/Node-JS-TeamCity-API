@@ -1,5 +1,0 @@
-[0mGET /root/api/builds [33m404 [0m7.464 ms - -[0m
-[0mGET /root/api [33m404 [0m1.219 ms - -[0m
-[0mGET /root/api/builds [33m404 [0m0.896 ms - -[0m
-[0mGET /root/api/foo [33m404 [0m0.692 ms - -[0m
-[0mGET /root/api/foo [33m404 [0m0.319 ms - -[0m

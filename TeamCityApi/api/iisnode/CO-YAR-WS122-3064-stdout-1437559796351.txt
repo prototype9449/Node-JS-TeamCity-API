@@ -1,3 +1,0 @@
-[0mGET /app/api/builds [32m200 [0m68.857 ms - -[0m
-[0mGET /app/api/foo [31m500 [0m2.836 ms - 22[0m
-[0mGET /app/api/bar [31m500 [0m1.667 ms - -[0m

@@ -1,2 +1,0 @@
-[0mGET /TeamCityApi/api/bar [31m500 [0m5.470 ms - 22[0m
-[0mGET /TeamCityApi/api/builds [32m200 [0m47.580 ms - -[0m

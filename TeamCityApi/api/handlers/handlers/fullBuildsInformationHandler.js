@@ -13,7 +13,7 @@ var getBuildsFullInformation = function (req, res) {
 
         res.writeHeader(200, {"Content-Type": "text/html"});
 
-        var pathDirectory = __dirname + "\\..\\..\\public\\pages\\index.html";
+        var pathDirectory = __dirname + "\\..\\..\\..\\app\\index.html";
         var template = swig.compileFile(pathDirectory);
         res.end(template());
     });

@@ -66,4 +66,4 @@ function setupDataBinder(app, restApiPath, optionConfigName, pageTemplateSubdire
     app.get(restApiPath, getHtmlContentForCurrentTemplate(optionConfigName, pageTemplateSubdirectoryPath));
 }
 
-exports.setupDataBinder = setupDataBinder;
+exports.setupHandlers = setupDataBinder;

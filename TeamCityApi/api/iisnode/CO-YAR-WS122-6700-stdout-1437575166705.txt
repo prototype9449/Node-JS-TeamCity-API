@@ -1,8 +1,0 @@
-[0mGET /TeamCityApi/api/foo [33m404 [0m6.923 ms - -[0m
-[0mGET /TeamCityApi/api [33m404 [0m1.393 ms - -[0m
-[0mGET /TeamCityApi/api [33m404 [0m0.547 ms - -[0m
-[0mGET /TeamCityApi/api/application.js [33m404 [0m1.450 ms - -[0m
-[0mGET /TeamCityApi/api/application.js [33m404 [0m0.261 ms - -[0m
-[0mGET /TeamCityApi/api [33m404 [0m0.318 ms - -[0m
-[0mGET /TeamCityApi/api [33m404 [0m0.298 ms - -[0m
-[0mGET /TeamCityApi/api [33m404 [0m0.458 ms - -[0m

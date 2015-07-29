@@ -6,13 +6,13 @@ var handlers = {
 };
 var htmlContentGeneratorHandlers = {
     agents : {
-        module : require('./handlers/agentHandler'),
+        module : require('./handlers/entityHandler'),
         restApiPath : '/agents',
         configOptionName :'teamCityAgents',
         pageHtmlTemplatePath : '\\..\\..\\public\\pages\\agent-information-panel.html'
     },
     build : {
-        module : require('../handlers/handlers/buildHandler'),
+        module : require('./handlers/entityHandler'),
         restApiPath : '/builds',
         configOptionName : 'teamCityBuilds',
         pageHtmlTemplatePath : '\\..\\..\\public\\pages\\build-information-panel.html'

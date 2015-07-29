@@ -1,5 +1,0 @@
-[0mGET /TeamCityApi/api/builds [36m304 [0m10.714 ms - -[0m
-[0mGET /TeamCityApi/api/builds [36m304 [0m1.784 ms - -[0m
-[0mGET /TeamCityApi/api/builds [36m304 [0m1.773 ms - -[0m
-[0mGET /TeamCityApi/api/builds [36m304 [0m1.398 ms - -[0m
-[0mGET /TeamCityApi/api/builds [36m304 [0m0.528 ms - -[0m
