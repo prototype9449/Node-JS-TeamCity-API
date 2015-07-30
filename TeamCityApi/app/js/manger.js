@@ -42,7 +42,14 @@ $(function () {
         parent.append(data);
     }
 
-    var socket = io.connect(url);
+    var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
+   // var socket = io.connect('http://localhost:8080', { 'path': '/socket.io'}); //WebStorm
+    socket.on('response', function (msg) {
+        console.log("Message received:",msg);
+    });
+    socket.emit('message','hi');
+
+ //   var socket = io.connect(url);//WEB Storm
 
     socket.on('newBuilds', function (data) {
         addNewElements(data, 'builds-panel');

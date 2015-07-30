@@ -4,7 +4,8 @@ function SocketManager(server, time) {
 
 SocketManager.prototype.init = function (server, time) {
     this.time = time || 4000;
-    this.io = require('socket.io')(server);
+    this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
+   // this.io = require('socket.io')(server, { path:  '/socket.io' });//WebStorm
     var helper = require('./teamCityHelper').teamCityHelper;
     this.buildsHelper = new helper("teamCityBuilds");
     this.agentsHelper = new helper("teamCityAgents");
@@ -33,8 +34,10 @@ SocketManager.prototype.sendInfo = function (socket) {
 
 SocketManager.prototype.start = function () {
     function begin(instance) {
-        instance.io.on('connection', function (socket) {
+         instance.io.on('connection', function (socket) {
+            console.log("New Connection");
             instance.interval = setTimeout(function send() {
+                console.log("timer started");
                 instance.sendInfo(socket);
                 instance.interval = setTimeout(send, instance.time);
             }, 0);
