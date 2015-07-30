@@ -3,18 +3,21 @@ var methodOverride = require('method-override');
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var fs = require('fs');
 
 var app = express();
+var server = require('http').createServer(app);
+var sockets = require('./libs/socketManager').socketManager;
+var socketManager = new sockets(server);
+socketManager.start();
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-var handlers = require('./handlers/handlerProvider').handlers;
-var htmlContentGeneratorHandlers = require('./handlers/handlerProvider').htmlContentGeneratorHandlers;
-
-routes.setup(app, handlers, htmlContentGeneratorHandlers);
+var handlers = require('./requestHandlers/handlerProvider').handlers;
+routes.setup(app, handlers);
 
 var port = process.env.PORT || 8080;
-app.listen(port);
+server.listen(port);
