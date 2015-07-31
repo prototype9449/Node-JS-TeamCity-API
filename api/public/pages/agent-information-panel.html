@@ -1,10 +1,6 @@
-{% for currentAgent in agent %}
-<div class="panel panel-info">
-    <div class="panel-heading">Agent ID #{{ currentAgent.id|capitalize }}</div>
+<div id="{{ id }}" class="panel panel-info">
+    <div class="panel-heading">Agent ID #{{ name|capitalize }}</div>
     <div class="panel-body">
-        <li>AgentID: {{ currentAgent.id|capitalize }}</li>
-        <li>Agent Name: {{ currentAgent.name|capitalize }}</li>
-        <li>Agent TypeID: {{ currentAgent.typeId|capitalize }}</li>
+        <li>Agent TypeID: {{ typeId|capitalize }}</li>
     </div>
 </div>
-{% endfor %}

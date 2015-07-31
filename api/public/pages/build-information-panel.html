@@ -1,11 +1,9 @@
-{% for currentBuild in build %}
-<div class="panel panel-info">
-    <div class="panel-heading">Build ID #{{ currentBuild.id|capitalize }}</div>
+<div id="{{ id }}" class="panel panel-info">
+    <div class="panel-heading">Build ID #{{ id|capitalize }}</div>
     <div class="panel-body">
-        <li>BuildID: {{ currentBuild.id|capitalize }}</li>
-        <li>Build State: {{ currentBuild.state|capitalize }}</li>
-        <li>Build Status: {{ currentBuild.state|capitalize }}</li>
-        <li>Build Type ID: {{ currentBuild.buildTypeId|capitalize }}</li>
+        <li>BuildID: {{ id|capitalize }}</li>
+        <li>Build State: {{ state|capitalize }}</li>
+        <li>Build Status: {{ state|capitalize }}</li>
+        <li>Build Type ID: {{ buildTypeId|capitalize }}</li>
     </div>
 </div>
-{% endfor %}

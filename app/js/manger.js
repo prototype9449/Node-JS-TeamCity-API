@@ -1,6 +1,6 @@
 $(function () {
-   // var url = 'http://localhost:8080/';
-    var url = 'http://localhost:80/api/';
+    var url = 'http://localhost:8080/';
+    //var url = 'http://localhost:80/api/';
     function getHtmlContent(path, elementId) {
         var element = document.getElementById(elementId);
         var xhr = new XMLHttpRequest();
@@ -38,12 +38,17 @@ $(function () {
     }
 
     function updateElements(data, parentElementId) {
+        var element = $("#" + data.id);
+        element.remove();
         var parent = $("#" + parentElementId);
-        parent.append(data);
+        var newElement = $.parseHTML(data.htmlContent);
+        parent.append(newElement);
+        $(newElement).fadeIn(300, function() {  });
+        $(newElement).fadeIn();
     }
 
-    var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
-   // var socket = io.connect('http://localhost:8080', { 'path': '/socket.io'}); //WebStorm
+    //var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
+    var socket = io.connect('http://localhost:8080', { 'path': '/socket.io'}); //WebStorm
     socket.on('response', function (msg) {
         console.log("Message received:",msg);
     });
@@ -52,18 +57,30 @@ $(function () {
  //   var socket = io.connect(url);//WEB Storm
 
     socket.on('newBuilds', function (data) {
-        addNewElements(data, 'builds-panel');
+        var newBuilds = JSON.parse(data);
+        for(var i = 0; i < newBuilds.length; i++){
+            addNewElements(newBuilds[i], 'builds-panel');
+        }
     });
 
     socket.on('buildsUpdate', function (data) {
-        updateElements(data, 'builds-panel');
+        var updatingBuilds = JSON.parse(data);
+        for(var i = 0; i < updatingBuilds.length; i++){
+            updateElements( updatingBuilds[i], 'builds-panel');
+        }
     });
 
     socket.on('newAgents', function (data) {
-        addNewElements(data, 'agents-panel');
+        var newAgents = JSON.parse(data);
+        for(var i = 0; i < newAgents.length; i++){
+            addNewElements(newAgents[i].htmlContent, 'agents-panel');
+        }
     });
 
     socket.on('agentsUpdate', function (data) {
-        updateElements(data, 'agents-panel');
+        var updatingAgents = JSON.parse(data);
+        for(var i = 0; i < updatingAgents.length; i++){
+            updateElements(newAgents[i].htmlContent, 'agents-panel');
+        }
     });
  });

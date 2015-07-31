@@ -13,9 +13,25 @@ var generatorHelper = {
     generateHtmlFromJson: function (jsonData, currentPageTemplateSubdirectoryPath, callback) {
         var pathDirectory = __dirname + currentPageTemplateSubdirectoryPath;
         var swig = require('swig');
-        var template = swig.compileFile(pathDirectory);
-        var renderedHtml = template(jsonData);
-        callback(renderedHtml);
+        var finalHtml = "";
+        var jsonItems;
+        if(jsonData.agent != undefined){
+            jsonItems = jsonData.agent;
+        }
+        else if (jsonData.build != undefined){
+            jsonItems = jsonData.build;
+        }
+        var controlsWrapperJson = [];
+        for(var i = 0; i < jsonItems.length; i++){
+            var jsonItem = jsonItems[i];
+            var template = swig.compileFile(pathDirectory);
+            var currentHtmlControl = template(jsonItem);
+            controlsWrapperJson.push({ id : jsonItem.id, htmlContent : currentHtmlControl});
+            finalHtml += currentHtmlControl;
+        }
+        //var renderedHtml = template(jsonData);
+        //callback(finalHtml);
+        callback(JSON.stringify(controlsWrapperJson));
     }
 };
 
