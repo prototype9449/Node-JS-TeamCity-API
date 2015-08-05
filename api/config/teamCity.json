@@ -1,9 +1,33 @@
 {
+  "teamCityBuild": {
+    "connection": {
+      "url": "http://localhost:8111/httpAuth/app/rest/builds/id:",
+      "auth": {
+        "user": "Unknow",
+        "pass": "termit"
+      },
+      "headers": {
+        "Accept": "application/json"
+      }
+    }
+  },
+  "teamCityVSC": {
+  "connection": {
+    "url": "http://localhost:8111/httpAuth/app/rest/vcs-root-instances/id:",
+    "auth": {
+      "user": "Unknow",
+      "pass": "termit"
+    },
+    "headers": {
+      "Accept": "application/json"
+    }
+  }
+},
   "teamCityAgents": {
     "connection": {
       "url": "http://localhost:8111/httpAuth/app/rest/agents",
       "auth": {
-        "user": "prototype9449",
+        "user": "Unknow",
         "pass": "termit"
       },
       "headers": {
@@ -20,7 +44,7 @@
     "connection": {
       "url": "http://localhost:8111/httpAuth/app/rest/builds",
       "auth": {
-        "user": "prototype9449",
+        "user": "Unknow",
         "pass": "termit"
       },
       "headers": {

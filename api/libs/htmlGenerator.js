@@ -1,14 +1,29 @@
+var request = require('request');
+var config = require('./config');
+var getBuild = require('./jsonObjectProvider').getBuild;
+
 var generatorHelper = {
     getJson: function (options, callback) {
-        var request = require('request');
-
         request.get(options, function (err, response) {
             if (err) throw err;
 
             var bindingJson = JSON.parse(response.body);
 
-            callback(bindingJson);
-        })
+            if(bindingJson.build)
+            {
+                var jsonBuilds = [];
+                for(var i = 0; i < bindingJson.build.length; i++)
+                {
+                    var currentBuild = bindingJson.build[i];
+                    getBuild(currentBuild.id, function(build){
+                        jsonBuilds.push(build);
+                        if(jsonBuilds.length == bindingJson.build.length) {
+                            callback({build : jsonBuilds});
+                        }
+                    })
+                }
+            }
+        });
     },
     generateHtmlFromJson: function (jsonData, currentPageTemplateSubdirectoryPath, callback) {
         var pathDirectory = __dirname + currentPageTemplateSubdirectoryPath;

@@ -13,8 +13,9 @@ SocketManager.prototype.init = function (server, time) {
 };
 
 
-SocketManager.prototype.sendInfo = function (socket) {
-    this.buildsHelper.getNew(function (newData) {
+SocketManager.prototype.sendInfo = function (socket){
+
+    this.buildsHelper.getNew(function (newData){
         socket.emit('newBuilds', newData);
     });
 
