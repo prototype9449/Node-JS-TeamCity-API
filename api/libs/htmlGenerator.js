@@ -3,6 +3,32 @@ var config = require('./config');
 var getBuild = require('./jsonObjectProvider').getBuild;
 
 var generatorHelper = {
+    generateBuilds : function(builds, callback)
+    {
+        var jsonBuilds = [];
+        for(var i = 0; i < builds.length; i++)
+        {
+            var currentBuild = builds[i];
+            getBuild(currentBuild.id, function(build){
+                jsonBuilds.push(build);
+                if(jsonBuilds.length == builds.length) {
+                    callback({build : jsonBuilds});
+                }
+            })
+        }
+    },
+    generateAgents : function(agents,options, callback)
+    {
+        var request = require('request');
+
+        request.get(options, function (err, response) {
+            if (err) throw err;
+
+            var bindingJson = JSON.parse(response.body);
+
+            callback(bindingJson);
+        })
+    },
     getJson: function (options, callback) {
         request.get(options, function (err, response) {
             if (err) throw err;
@@ -11,19 +37,13 @@ var generatorHelper = {
 
             if(bindingJson.build)
             {
-                var jsonBuilds = [];
-                for(var i = 0; i < bindingJson.build.length; i++)
-                {
-                    var currentBuild = bindingJson.build[i];
-                    getBuild(currentBuild.id, function(build){
-                        jsonBuilds.push(build);
-                        if(jsonBuilds.length == bindingJson.build.length) {
-                            callback({build : jsonBuilds});
-                        }
-                    })
-                }
+                generatorHelper.generateBuilds (bindingJson.build, callback);
             }
-        });
+            else
+            {
+                generatorHelper.generateAgents(bindingJson.agent,options, callback);
+            }
+        })
     },
     generateHtmlFromJson: function (jsonData, currentPageTemplateSubdirectoryPath, callback) {
         var pathDirectory = __dirname + currentPageTemplateSubdirectoryPath;

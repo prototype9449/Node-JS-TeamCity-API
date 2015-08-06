@@ -3,7 +3,7 @@
     "connection": {
       "url": "http://localhost:8111/httpAuth/app/rest/builds/id:",
       "auth": {
-        "user": "Unknow",
+        "user": "prototype9449",
         "pass": "termit"
       },
       "headers": {
@@ -15,7 +15,7 @@
   "connection": {
     "url": "http://localhost:8111/httpAuth/app/rest/vcs-root-instances/id:",
     "auth": {
-      "user": "Unknow",
+      "user": "prototype9449",
       "pass": "termit"
     },
     "headers": {
@@ -27,7 +27,7 @@
     "connection": {
       "url": "http://localhost:8111/httpAuth/app/rest/agents",
       "auth": {
-        "user": "Unknow",
+        "user": "prototype9449",
         "pass": "termit"
       },
       "headers": {
@@ -44,7 +44,7 @@
     "connection": {
       "url": "http://localhost:8111/httpAuth/app/rest/builds",
       "auth": {
-        "user": "Unknow",
+        "user": "prototype9449",
         "pass": "termit"
       },
       "headers": {
