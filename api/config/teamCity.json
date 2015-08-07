@@ -23,7 +23,7 @@
       }
     },
     "options": {
-      "restApiPath": "/agents",
+      "restApiPath": "/api/agents",
       "configOptionName": "teamCityAgents",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-information-panel.html"
     }
@@ -40,7 +40,7 @@
       }
     },
     "options": {
-      "restApiPath": "/builds",
+      "restApiPath": "/api/buildTypes",
       "configOptionName": "teamCityBuildTypes",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\build-information-panel.html"
     }

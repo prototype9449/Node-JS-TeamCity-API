@@ -1,30 +1,18 @@
-function SocketManager(server, time) {
-    this.init(server, time);
-}
+var teamCityHelper = require('./teamCityHelper');
 
-SocketManager.prototype.init = function (server, time) {
+function SocketManager(server, time) {
     this.time = time || 4000;
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, { path:  '/socket.io' });//WebStorm
-    var helper = require('./teamCityHelper').teamCityHelper;
-    this.buildsHelper = new helper("teamCityBuildTypes");
-    this.agentsHelper = new helper("teamCityAgents");
+    this.buildsHelper = new teamCityHelper("teamCityBuildTypes");
+    this.agentsHelper = new teamCityHelper("teamCityAgents");
     this.interval = {};
 };
 
-
 SocketManager.prototype.sendInfo = function (socket){
-
-    this.buildsHelper.getNew(function (newData){
-        socket.emit('newBuilds', newData);
-    });
 
     this.buildsHelper.getUpdate(function (newData) {
         socket.emit('buildsUpdate', newData);
-    });
-
-    this.agentsHelper.getNew(function (newData) {
-        socket.emit('newAgents', newData);
     });
 
     this.agentsHelper.getUpdate(function (newData) {
@@ -32,15 +20,26 @@ SocketManager.prototype.sendInfo = function (socket){
     });
 };
 
-
 SocketManager.prototype.start = function () {
-    function begin(instance) {
-         instance.io.on('connection', function (socket) {
-            console.log("New Connection");
-            instance.interval = setTimeout(function send() {
+    function begin(self) {
+         self.io.on('connection', function (socket) {
+
+             console.log('New connection');
+
+             self.buildsHelper.getNew(function (newData){
+                 socket.emit('newBuilds', newData);
+             });
+
+             self.agentsHelper.getNew(function (newData) {
+                 socket.emit('newAgents', newData);
+             });
+
+            self.interval = setTimeout(function send() {
+
                 console.log("timer started");
-                instance.sendInfo(socket);
-                instance.interval = setTimeout(send, instance.time);
+                self.sendInfo(socket);
+                self.interval = setTimeout(send, self.time);
+
             }, 0);
         });
     }
@@ -52,4 +51,4 @@ SocketManager.prototype.stop = function () {
     clearInterval(this.interval);
 };
 
-exports.socketManager = SocketManager;
+module.exports = SocketManager;
