@@ -78,7 +78,7 @@ $(function () {
     socket.on('agentsUpdate', function (data) {
         var updatingAgents = JSON.parse(data);
         for(var i = 0; i < updatingAgents.length; i++){
-            updateElements(newAgents[i].htmlContent, 'agents-panel');
+            updateElements(updatingAgents[i].htmlContent, 'agents-panel');
         }
     });
  });

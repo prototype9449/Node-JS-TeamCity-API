@@ -1,7 +1,7 @@
 {
-  "teamCityBuild": {
+  "teamCityGeneral": {
     "connection": {
-      "url": "http://localhost:8111/httpAuth/app/rest/builds/id:",
+      "url": "http://localhost:8111",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"
@@ -10,18 +10,6 @@
         "Accept": "application/json"
       }
     }
-  },
-  "teamCityVSC": {
-  "connection": {
-    "url": "http://localhost:8111/httpAuth/app/rest/vcs-root-instances/id:",
-    "auth": {
-      "user": "prototype9449",
-      "pass": "termit"
-    },
-    "headers": {
-      "Accept": "application/json"
-    }
-  }
 },
   "teamCityAgents": {
     "connection": {
@@ -35,14 +23,14 @@
       }
     },
     "options": {
-      "restApiPath": "/agents",
+      "restApiPath": "/api/agents",
       "configOptionName": "teamCityAgents",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-information-panel.html"
     }
   },
-  "teamCityBuilds": {
+  "teamCityBuildTypes": {
     "connection": {
-      "url": "http://localhost:8111/httpAuth/app/rest/builds",
+      "url": "http://localhost:8111/httpAuth/app/rest/buildTypes",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"
@@ -52,8 +40,8 @@
       }
     },
     "options": {
-      "restApiPath": "/builds",
-      "configOptionName": "teamCityBuilds",
+      "restApiPath": "/api/buildTypes",
+      "configOptionName": "teamCityBuildTypes",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\build-information-panel.html"
     }
   }

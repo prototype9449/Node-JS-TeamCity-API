@@ -10,14 +10,8 @@ TeamCityHelper.prototype.getNew = function (callback) {
     var instance = this;
 
     instance.generator.generatorHelper.getJson(options, function (jsonData) {
-        //TODO разобрать json и оставить только новое
-        if(instance.currentData == null){
-            instance.currentData = jsonData;
-            var templatePath = instance.config.options.pageHtmlTemplatePath;
-            instance.generator.generatorHelper.generateHtmlFromJson(jsonData, templatePath, function (htmlData) {
-                callback(htmlData);
-            });
-        }
+        var templatePath = instance.config.options.pageHtmlTemplatePath;
+        instance.generator.generatorHelper.generateHtmlFromJson(jsonData, templatePath, callback);
     });
 };
 
@@ -60,12 +54,10 @@ TeamCityHelper.prototype.getUpdate = function (callback) {
                 }
                 var newBuildsInfoJson = {"count": newBuildsInfo.length,"href":"/rest/agents","build": newBuildsInfo};
                 var templatePath = instance.config.options.pageHtmlTemplatePath;
-                instance.generator.generatorHelper.generateHtmlFromJson(newBuildsInfoJson, templatePath, function (htmlData) {
-                    callback(htmlData);
-                });
+                instance.generator.generatorHelper.generateHtmlFromJson(newBuildsInfoJson, templatePath, callback);
             }
         }
     });
 };
 
-exports.teamCityHelper = TeamCityHelper;
+module.exports = TeamCityHelper;
