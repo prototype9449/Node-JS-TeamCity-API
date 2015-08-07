@@ -3,37 +3,32 @@ var config = require('./config');
 var getBuild = require('./providers/jsonBuildTypeProvider').getBuild;
 
 var generatorHelper = {
-    generateBuildTypes : function(buildTypes, callback)
-    {
+    generateBuildTypes: function (buildTypes, callback) {
         var jsonBuildTypes = [];
-        for(var i = 0; i < buildTypes.length; i++)
-        {
+        for (var i = 0; i < buildTypes.length; i++) {
             var currentBuildType = buildTypes[i];
-            getBuild(currentBuildType.id, currentBuildType.href, function(buildType){
+            getBuild(currentBuildType.id, currentBuildType.href, function (buildType) {
                 jsonBuildTypes.push(buildType);
-                if(jsonBuildTypes.length == buildTypes.length) {
-                    callback({buildTypes : jsonBuildTypes});
+                if (jsonBuildTypes.length == buildTypes.length) {
+                    callback({buildTypes: jsonBuildTypes});
                 }
             })
         }
     },
-    generateAgents : function(jsonAgents,callback)
-    {
-
-       callback({agents: jsonAgents});
+    generateAgents: function (jsonAgents, callback) {
+        callback({agents: jsonAgents});
     },
+
     getJson: function (options, callback) {
         request.get(options, function (err, response) {
             if (err) throw err;
 
             var bindingJson = JSON.parse(response.body);
 
-            if(bindingJson.buildType)
-            {
+            if (bindingJson.buildType) {
                 generatorHelper.generateBuildTypes(bindingJson.buildType, callback);
             }
-            else
-            {
+            else {
                 generatorHelper.generateAgents(bindingJson.agent, callback);
             }
         })
@@ -43,18 +38,18 @@ var generatorHelper = {
         var swig = require('swig');
         var finalHtml = "";
         var jsonItems;
-        if(jsonData.agents != undefined){
+        if (jsonData.agents != undefined) {
             jsonItems = jsonData.agents;
         }
-        else if (jsonData.buildTypes != undefined){
+        else if (jsonData.buildTypes != undefined) {
             jsonItems = jsonData.buildTypes;
         }
         var controlsWrapperJson = [];
-        for(var i = 0; i < jsonItems.length; i++){
+        for (var i = 0; i < jsonItems.length; i++) {
             var jsonItem = jsonItems[i];
             var template = swig.compileFile(pathDirectory);
             var currentHtmlControl = template(jsonItem);
-            controlsWrapperJson.push({ id : jsonItem.id, htmlContent : currentHtmlControl});
+            controlsWrapperJson.push({id: jsonItem.id, htmlContent: currentHtmlControl});
             finalHtml += currentHtmlControl;
         }
         //var renderedHtml = template(jsonData);

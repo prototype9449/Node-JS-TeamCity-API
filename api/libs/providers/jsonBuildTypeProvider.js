@@ -11,7 +11,7 @@ var getBuildTypeJson = function (buildTypeId, buildTypeHref, callback) {
         callback(buildTypeJson);
     });
     optionTeamCity.url = backUpUrl;
-}
+};
 
 var getVSCInstance = function (vscHref, callback) {
 
