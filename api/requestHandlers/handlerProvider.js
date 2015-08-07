@@ -4,21 +4,21 @@ var handlers = {
     //    module: require('./handlers/testHandler'),
     //    options: null
     //},
-    fullBuildsInformation: {
-        module: require('./handlers/fullBuildsInformationHandler'),
-        options: null
-    },
+    //fullBuildsInformation: {
+    //    module: require('./handlers/fullBuildsInformationHandler'),
+    //    options: null
+    //},
     //error: {
     //    module: require('./handlers/errorHandler'),
     //    options: null
     //},
-    agents: {
-        module: require('./handlers/entityHandler'),
-        options: config.get("teamCityAgents").options
-    },
+    //agents: {
+    //    module: require('./handlers/entityHandler'),
+    //    options: config.get("teamCityAgents").options
+    //},
     build: {
         module: require('./handlers/entityHandler'),
-        options: config.get("teamCityBuilds").options
+        options: config.get("teamCityBuildTypes").options
     }
 };
 

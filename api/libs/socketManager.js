@@ -7,7 +7,7 @@ SocketManager.prototype.init = function (server, time) {
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, { path:  '/socket.io' });//WebStorm
     var helper = require('./teamCityHelper').teamCityHelper;
-    this.buildsHelper = new helper("teamCityBuilds");
+    this.buildsHelper = new helper("teamCityBuildTypes");
     this.agentsHelper = new helper("teamCityAgents");
     this.interval = {};
 };

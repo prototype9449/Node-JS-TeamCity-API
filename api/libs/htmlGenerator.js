@@ -3,16 +3,16 @@ var config = require('./config');
 var getBuild = require('./jsonObjectProvider').getBuild;
 
 var generatorHelper = {
-    generateBuilds : function(builds, callback)
+    generateBuildTypes : function(buildTypes, callback)
     {
-        var jsonBuilds = [];
-        for(var i = 0; i < builds.length; i++)
+        var jsonBuildTypes = [];
+        for(var i = 0; i < buildTypes.length; i++)
         {
-            var currentBuild = builds[i];
-            getBuild(currentBuild.id, function(build){
-                jsonBuilds.push(build);
-                if(jsonBuilds.length == builds.length) {
-                    callback({build : jsonBuilds});
+            var currentBuildType = buildTypes[i];
+            getBuild(currentBuildType.id, currentBuildType.href, function(buildType){
+                jsonBuildTypes.push(buildType);
+                if(jsonBuildTypes.length == buildTypes.length) {
+                    callback({buildType : jsonBuildTypes});
                 }
             })
         }
@@ -20,12 +20,10 @@ var generatorHelper = {
     generateAgents : function(agents,options, callback)
     {
         var request = require('request');
-
         request.get(options, function (err, response) {
             if (err) throw err;
 
             var bindingJson = JSON.parse(response.body);
-
             callback(bindingJson);
         })
     },
@@ -35,9 +33,9 @@ var generatorHelper = {
 
             var bindingJson = JSON.parse(response.body);
 
-            if(bindingJson.build)
+            if(bindingJson.buildType)
             {
-                generatorHelper.generateBuilds (bindingJson.build, callback);
+                generatorHelper.generateBuildTypes(bindingJson.buildType, callback);
             }
             else
             {
@@ -53,8 +51,8 @@ var generatorHelper = {
         if(jsonData.agent != undefined){
             jsonItems = jsonData.agent;
         }
-        else if (jsonData.build != undefined){
-            jsonItems = jsonData.build;
+        else if (jsonData.buildType != undefined){
+            jsonItems = jsonData.buildType;
         }
         var controlsWrapperJson = [];
         for(var i = 0; i < jsonItems.length; i++){

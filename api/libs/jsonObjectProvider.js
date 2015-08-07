@@ -1,45 +1,59 @@
 var request = require('request');
 var config = require('./config');
-var optionTeamCityBuild = config.get('teamCityBuild').connection;
-var optionTeamCityVSC = config.get('teamCityVSC').connection;
+var optionTeamCity = config.get('teamCityGeneral').connection;
 
-var getBuildJson = function (buildID, callback) {
-    var backUpUrl = optionTeamCityBuild.url;
-    optionTeamCityBuild.url += buildID;
-    request.get(optionTeamCityBuild, function (err, response) {
+var getBuildTypeJson = function (buildTypeId, buildTypeHref, callback) {
+    var backUpUrl = optionTeamCity.url;
+    optionTeamCity.url += buildTypeHref;
+    request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
-        var buildJson = JSON.parse(response.body);
-        callback(buildJson);
+        var buildTypeJson = JSON.parse(response.body);
+        callback(buildTypeJson);
     });
-    optionTeamCityBuild.url = backUpUrl;
+    optionTeamCity.url = backUpUrl;
 }
 
-var getVSCInstance = function (vscId, callback) {
-    var backUpUrl = optionTeamCityVSC.url;
-    optionTeamCityVSC.url += vscId;
-    request.get(optionTeamCityVSC, function (err, response) {
+var getVSCInstance = function (vscHref, callback) {
+
+    if(vscHref == undefined) {
+        callback(undefined);
+        return;
+    }
+
+    var backUpUrl = optionTeamCity.url;
+    optionTeamCity.url += vscHref;
+    request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
         var vscJson = JSON.parse(response.body);
         callback(vscJson);
     });
-    optionTeamCityVSC.url = backUpUrl;
+    optionTeamCity.url = backUpUrl;
 }
 
-var getFinalBuildJson = function (buildId, callback) {
-    getBuildJson(buildId, function(jsonBuild){
-        var agentName = jsonBuild.agent.name;
-        var buildStatus = jsonBuild.status;
-        var buildName = jsonBuild.buildTypeId;
-        var vscId = jsonBuild.revisions.revision[0]['vcs-root-instance'].id;
-        getVSCInstance(vscId, function (vscJson) {
-            var branchName = vscJson.properties.property[3].value;
+var getFinalBuildJson = function (buildTypeId, buildTypeHref, callback) {
+    getBuildTypeJson(buildTypeId, buildTypeHref, function(jsonBuild){
+        var buildTypeName = jsonBuild.name;
+        var buildTypeProjectName = jsonBuild.projectName;
+        var vscHref
+        try {
+            vscHref = jsonBuild['vcs-root-entries']['vcs-root-entry'][0]['vcs-root'].href;
+        }
+        catch(error) {
+            vscHref = undefined;
+        }
+        getVSCInstance(vscHref, function (vscJson) {
+            var branchName
+            if(vscJson == undefined){
+                branchName = 'unknown';
+            }else {
+                branchName = vscJson.properties.property[3].value;
+            }
             var finalJsonBuild =
             {
-                id : buildId,
-                buildName : buildName,
-                buildStatus : buildStatus,
-                buildAgentName : agentName,
-                buildBranchName : branchName
+                id : buildTypeId,
+                name : buildTypeName,
+                projectName : buildTypeProjectName,
+                branchName : branchName
             };
 
             callback(finalJsonBuild);
