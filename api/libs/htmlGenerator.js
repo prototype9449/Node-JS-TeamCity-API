@@ -15,8 +15,19 @@ var generatorHelper = {
             })
         }
     },
-    generateAgents: function (jsonAgents, callback) {
-        callback({agents: jsonAgents});
+    generateAgents: function (agents, callback) {
+        var generateAgent = require('./providers/agentProviders/jsonAgentProvider').generateAgent;
+        var jsonAgents = [];
+        for (var i = 0; i < agents.length; i++) {
+            var currentAgent = agents[i];
+
+            generateAgent (currentAgent.id, currentAgent.href, function (buildType) {
+                jsonAgents.push(buildType);
+                if (jsonAgents.length == agents.length) {
+                    callback({agents: jsonAgents});
+                }
+            })
+        }
     },
 
     getJson: function (options, callback) {
@@ -55,18 +66,18 @@ var generatorHelper = {
         //var renderedHtml = template(jsonData);
         //callback(finalHtml);
         callback(JSON.stringify(controlsWrapperJson));
+    },
+
+    generateHtml : function(options, currentPageTemplateSubdirectoryPath, callback) {
+        generatorHelper.getJson(options, function (jsonData) {
+            generatorHelper.generateHtmlFromJson(jsonData, currentPageTemplateSubdirectoryPath, callback)
+        });
     }
 };
 
-function generateHtml(options, currentPageTemplateSubdirectoryPath, callback) {
-    generatorHelper.getJson(options, function (jsonData) {
-        generatorHelper.generateHtmlFromJson(jsonData, currentPageTemplateSubdirectoryPath, callback)
-    });
-}
 
 
-module.exports.generateHtml = generateHtml;
-module.exports.generatorHelper = generatorHelper;
+module.exports = generatorHelper;
 
 
 

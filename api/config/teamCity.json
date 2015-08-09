@@ -10,38 +10,18 @@
         "Accept": "application/json"
       }
     }
-},
+  },
   "teamCityAgents": {
-    "connection": {
-      "url": "http://localhost:8111/httpAuth/app/rest/agents",
-      "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
-      },
-      "headers": {
-        "Accept": "application/json"
-      }
-    },
+    "url": "/httpAuth/app/rest/agents",
     "options": {
       "restApiPath": "/api/agents",
-      "configOptionName": "teamCityAgents",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-information-panel.html"
     }
   },
   "teamCityBuildTypes": {
-    "connection": {
-      "url": "http://localhost:8111/httpAuth/app/rest/buildTypes",
-      "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
-      },
-      "headers": {
-        "Accept": "application/json"
-      }
-    },
+    "url": "/httpAuth/app/rest/buildTypes",
     "options": {
       "restApiPath": "/api/buildTypes",
-      "configOptionName": "teamCityBuildTypes",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\build-information-panel.html"
     }
   }

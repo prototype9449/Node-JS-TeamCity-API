@@ -1,16 +1,14 @@
 var request = require('request');
-var config = require('./../config');
-var optionTeamCity = config.get('teamCityGeneral').connection;
+var config = require('./../helpers/connectionOptionsHelper');
 
 var getBuildTypeJson = function (buildTypeId, buildTypeHref, callback) {
-    var backUpUrl = optionTeamCity.url;
+    var optionTeamCity = config.getGeneralOptions().connection;
     optionTeamCity.url += buildTypeHref;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
         var buildTypeJson = JSON.parse(response.body);
         callback(buildTypeJson);
     });
-    optionTeamCity.url = backUpUrl;
 };
 
 var getVSCInstance = function (vscHref, callback) {
@@ -20,14 +18,13 @@ var getVSCInstance = function (vscHref, callback) {
         return;
     }
 
-    var backUpUrl = optionTeamCity.url;
+    var optionTeamCity = config.getGeneralOptions().connection;
     optionTeamCity.url += vscHref;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
         var vscJson = JSON.parse(response.body);
         callback(vscJson);
     });
-    optionTeamCity.url = backUpUrl;
 }
 
 var getFinalBuildJson = function (buildTypeId, buildTypeHref, callback) {
