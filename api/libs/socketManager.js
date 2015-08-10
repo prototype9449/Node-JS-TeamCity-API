@@ -1,6 +1,6 @@
 function SocketManager(server, time) {
     this.time = time || 4000;
-    this.helper = require('./helpers/objectHelper');
+    this.objectHelper = require('./helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, {path: '/socket.io'});//WebStorm
     this.buildHelper = {};
@@ -46,8 +46,8 @@ function SocketManager(server, time) {
             self.io.on('connection', function (socket) {
                 var optionHelper = require('./helpers/connectionOptionsHelper');
                 this.config = optionHelper.getAgentOptions();
-                self.buildHelper = self.helper('builds', optionHelper.getBuildOptions());
-                self.agentHelper = self.helper('agents', optionHelper.getAgentOptions());
+                self.buildHelper = self.objectHelper('builds', optionHelper.getBuildOptions());
+                self.agentHelper = self.objectHelper('agents', optionHelper.getAgentOptions());
                 console.log('New connection');
                 SetTimer(self, socket);
             });

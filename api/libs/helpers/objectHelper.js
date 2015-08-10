@@ -8,12 +8,12 @@ function ObjectHelper(name, config) {
     this.name = name;
 
 
-    this.getNew = function (callback) {
-        var options = this.config.connection;
+    this.getNew = function (callback, number) {
+        var connection = this.config.connection;
         var instance = this;
         var htmlGenerator = instance.htmlGenerator;
 
-        generateObjects(options, function (data) {
+        generateObjects(number, connection, function (data) {
             var objects = data[instance.name];
 
             if (instance.count === objects.length)
@@ -34,13 +34,13 @@ function ObjectHelper(name, config) {
         });
     };
 
-    this.getUpdate = function (callback) {
+    this.getUpdate = function (callback, number) {
         var jsondiff = require('jsondiffpatch');
-        var options = this.config.connection;
+        var connection = this.config.connection;
         var instance = this;
         var htmlGenerator = instance.htmlGenerator;
 
-        generateObjects(options, function (jsonData) {
+        generateObjects(number, connection, function (jsonData) {
                 var objects = jsonData[instance.name];
                 if (instance.count === 0)
                     return;

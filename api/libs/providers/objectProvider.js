@@ -29,17 +29,30 @@ var generateAgents = function(agents, callback) {
     }
 };
 
-var generateObjects = function(options, callback) {
-    request.get(options, function (err, response) {
+var generateObjects = function(number, connection, callback) {
+    request.get(connection, function (err, response) {
         if (err) throw err;
 
         var bindingJson = JSON.parse(response.body);
 
+        var getSpliceArray = function(array, number) {
+            if(!number) return array;
+
+            if(array.length > number) {
+                return array.splice(0, number);
+            }
+        };
+
         if (bindingJson.build) {
-            generateBuilds(bindingJson.build, callback);
+            var builds = getSpliceArray(bindingJson.build, number);
+            generateBuilds(builds, callback);
         }
-        else {
-            generateAgents(bindingJson.agent, callback);
+        else if(bindingJson.agent) {
+            var agents = getSpliceArray(bindingJson.agent, number);
+            generateAgents(agents, callback);
+        }
+        else{
+            throw new Error('Unknown type')
         }
     })
 };
