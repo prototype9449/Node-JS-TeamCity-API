@@ -1,5 +1,6 @@
 var request = require('request');
 var config = require('./../../helpers/connectionOptionsHelper');
+var generateBuildsByAgent = require('./../buildProviders/jsonBuildByAgentProvider').generateBuildsByAgent;
 
 function getMainInfo(agentHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
@@ -12,15 +13,7 @@ function getMainInfo(agentHref, callback) {
     });
 }
 
-function getAgentBuildHistory(agentName, callback) {
-    var buildProvider =  require('./../buildProviders/jsonBuildByAgentProvider');
-
-    var history = {};
-   // history = buildProvider(agentName);
-    callback(history);
-}
-
-function getAgenFreeSpace(jsonAgent) {
+function getAgentFreeSpace(jsonAgent) {
     var properties = jsonAgent.properties.property;
     for(var i = 0; i < properties.length; i++){
         if(properties[i].name == 'teamcity.agent.work.dir.freeSpaceMb'){
@@ -33,13 +26,13 @@ function getFinalAgentJson(agentId, agentHref, callback) {
 
     getMainInfo(agentHref, function (jsonAgent) {
         var agentName = jsonAgent.name;
-        var agentFreeSpace = getAgenFreeSpace(jsonAgent);
+        var agentFreeSpace = getAgentFreeSpace(jsonAgent);
         var agentStatus = {
             connected: jsonAgent.connected,
             authorized: jsonAgent.authorized,
             enabled: jsonAgent.enabled
         };
-        getAgentBuildHistory(agentName, function (agentHistory) {
+        //generateBuildsByAgent(agentName, function (agentBuilds) {
 
             var finalJsonAgent =
             {
@@ -48,11 +41,11 @@ function getFinalAgentJson(agentId, agentHref, callback) {
                 name: agentName,
                 status: agentStatus,
                 freeSpace: agentFreeSpace,
-                history: agentHistory
+                //builds: agentBuilds.builds
             };
 
             callback(finalJsonAgent);
-        })
+        //})
     })
 }
 
