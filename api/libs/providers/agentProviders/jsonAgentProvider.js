@@ -56,4 +56,4 @@ function getFinalAgentJson(agentId, agentHref, callback) {
     })
 }
 
-module.exports.generateAgent = getFinalAgentJson;
+module.exports.generateAgentJson = getFinalAgentJson;

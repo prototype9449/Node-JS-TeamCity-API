@@ -1,3 +1,5 @@
+var generateObjects = require('./../providers/objectProvider').generateObjects;
+
 function ObjectHelper(name, config) {
     this.htmlGenerator = require('./../htmlGenerator');
     this.config = config;
@@ -11,7 +13,7 @@ function ObjectHelper(name, config) {
         var instance = this;
         var htmlGenerator = instance.htmlGenerator;
 
-        htmlGenerator.getJson(options, function (data) {
+        generateObjects(options, function (data) {
             var objects = data[instance.name];
 
             if (instance.count === objects.length)
@@ -38,7 +40,7 @@ function ObjectHelper(name, config) {
         var instance = this;
         var htmlGenerator = instance.htmlGenerator;
 
-        htmlGenerator.getJson(options, function (jsonData) {
+        generateObjects(options, function (jsonData) {
                 var objects = jsonData[instance.name];
                 if (instance.count === 0)
                     return;

@@ -1,3 +1,4 @@
-/**
- * Created by SergeyPo on 8/7/2015.
- */
+var request = require('request');
+var config = require('./../../helpers/connectionOptionsHelper');
+var getBuilds = require('./jsonBuildProvider').generateBuildJson;
+
