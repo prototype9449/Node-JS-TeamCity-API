@@ -1,26 +1,26 @@
 var request = require('request');
 var config = require('./config');
-var getBuild = require('./providers/jsonBuildTypeProvider').getBuild;
+var generateBuild = require('./providers/buildProviders/jsonBuildProvider').generateBuildJson;
+var generateAgent = require('./providers/agentProviders/jsonAgentProvider').generateAgent;
 
 var generatorHelper = {
-    generateBuildTypes: function (buildTypes, callback) {
-        var jsonBuildTypes = [];
-        for (var i = 0; i < buildTypes.length; i++) {
-            var currentBuildType = buildTypes[i];
-            getBuild(currentBuildType.id, currentBuildType.href, function (buildType) {
-                jsonBuildTypes.push(buildType);
-                if (jsonBuildTypes.length == buildTypes.length) {
-                    callback({buildTypes: jsonBuildTypes});
+    generateBuilds: function (builds, callback) {
+        var jsonBuilds = [];
+        for (var i = 0; i < builds.length; i++) {
+            var currentBuild = builds[i];
+            generateBuild(currentBuild.id, currentBuild.href, function (build) {
+                jsonBuilds.push(build)
+                if (jsonBuilds.length == builds.length) {
+                    callback({builds: jsonBuilds});
                 }
             })
         }
     },
     generateAgents: function (agents, callback) {
-        var generateAgent = require('./providers/agentProviders/jsonAgentProvider').generateAgent;
+
         var jsonAgents = [];
         for (var i = 0; i < agents.length; i++) {
             var currentAgent = agents[i];
-
             generateAgent (currentAgent.id, currentAgent.href, function (buildType) {
                 jsonAgents.push(buildType);
                 if (jsonAgents.length == agents.length) {
@@ -36,8 +36,8 @@ var generatorHelper = {
 
             var bindingJson = JSON.parse(response.body);
 
-            if (bindingJson.buildType) {
-                generatorHelper.generateBuildTypes(bindingJson.buildType, callback);
+            if (bindingJson.build) {
+                generatorHelper.generateBuilds(bindingJson.build, callback);
             }
             else {
                 generatorHelper.generateAgents(bindingJson.agent, callback);
@@ -52,8 +52,8 @@ var generatorHelper = {
         if (jsonData.agents != undefined) {
             jsonItems = jsonData.agents;
         }
-        else if (jsonData.buildTypes != undefined) {
-            jsonItems = jsonData.buildTypes;
+        else if (jsonData.builds != undefined) {
+            jsonItems = jsonData.builds;
         }
         var controlsWrapperJson = [];
         for (var i = 0; i < jsonItems.length; i++) {

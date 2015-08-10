@@ -1,7 +1,6 @@
 var request = require('request');
 var config = require('./../../helpers/connectionOptionsHelper');
 
-
 function getMainInfo(agentHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
     optionTeamCity.url += agentHref;
@@ -21,14 +20,20 @@ function getAgentBuildHistory(agentName, callback) {
     callback(history);
 }
 
-function getAgenFreeSpace(agentName, callback) {
-
+function getAgenFreeSpace(jsonAgent) {
+    var properties = jsonAgent.properties.property;
+    for(var i = 0; i < properties.length; i++){
+        if(properties[i].name == 'teamcity.agent.work.dir.freeSpaceMb'){
+            return properties[i].value;
+        }
+    }
 }
 
 function getFinalAgentJson(agentId, agentHref, callback) {
 
     getMainInfo(agentHref, function (jsonAgent) {
         var agentName = jsonAgent.name;
+        var agentFreeSpace = getAgenFreeSpace(jsonAgent);
         var agentStatus = {
             connected: jsonAgent.connected,
             authorized: jsonAgent.authorized,
@@ -42,7 +47,7 @@ function getFinalAgentJson(agentId, agentHref, callback) {
                 id: agentId,
                 name: agentName,
                 status: agentStatus,
-                //freeSpace: agentFreeSpace,
+                freeSpace: agentFreeSpace,
                 history: agentHistory
             };
 
