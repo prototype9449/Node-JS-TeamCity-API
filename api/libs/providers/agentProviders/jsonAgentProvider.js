@@ -36,7 +36,7 @@ function getFinalAgentJson(agentId, agentHref, callback) {
 
             var finalJsonAgent =
             {
-                href: agentHref,
+                href: 'agentInfo.html?id=' + agentId,
                 id: agentId,
                 name: agentName,
                 status: agentStatus,

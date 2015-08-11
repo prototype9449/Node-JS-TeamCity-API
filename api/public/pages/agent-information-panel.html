@@ -1,5 +1,7 @@
 <div id="{{ id }}" class="panel panel-info">
-    <div class="panel-heading">Agent Name: {{ name|capitalize }}</div>
+    <div class="panel-heading">
+        <a href="{{ href }}">Agent Name: {{ name|capitalize }}</a>
+    </div>
     <div class="panel-body">
         <li>Status</li>
             <ol>
@@ -7,7 +9,7 @@
                 <li>Authorized: {{ status.authorized|capitalize }}</li>
                 <li>Enabled: {{ status.enabled|capitalize }}</li>
             </ol>
-        <li>Disc Usage: {{freeSpace|capitalize }}</li>
+        <li>Free Space: {{freeSpace|capitalize }}</li>
         <li>Current Tasks: -- </li>
     </div>
 </div>

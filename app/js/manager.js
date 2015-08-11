@@ -19,8 +19,10 @@ $(function () {
     //var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
     var socket = io.connect('http://localhost:8080', { 'path': '/socket.io'}); //WebStorm
 
-     //   var socket = io.connect(url);//WEB Storm
-    //socket.emit('newBuilds', id);
+    socket.on('connection start', function(){
+        socket.emit('main');
+    });
+
     socket.on('newBuilds', function (data) {
         var newBuilds = JSON.parse(data);
         for(var i = 0; i < newBuilds.length; i++){

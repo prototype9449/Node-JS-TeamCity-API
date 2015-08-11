@@ -1,7 +1,10 @@
 <div id="{{ id }}" class="panel panel-info">
-    <div class="panel-heading">Build Type Name #{{ name|capitalize }}</div>
+    <div class="panel-heading">
+    <a href="{{ href }}">
+        Build Configuration Name: {{ configuration.buildConfigurationName|capitalize }}
+    </a>
+    </div>
     <div class="panel-body">
-        <li>Configuration Name: {{ configuration.buildConfigurationId|capitalize }}</li>
         <li>Branch Name: {{ branchName|capitalize }}</li>
         <li>Status : {{ status|capitalize }}</li>
         <li>Agent Name : {{ agentName|capitalize }}</li>

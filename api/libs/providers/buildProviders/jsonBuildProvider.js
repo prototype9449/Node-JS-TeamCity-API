@@ -66,6 +66,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
             var finalJsonBuild =
             {
                 id : buildId,
+                href: 'buildInfo.html?id=' + buildId,
                 branchName : buildBranchName,
                 agentName : buildAgentName,
                 status : buildStatus,

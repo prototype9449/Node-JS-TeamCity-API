@@ -44,13 +44,24 @@ function SocketManager(server, time) {
 
         function begin(self) {
             self.io.on('connection', function (socket) {
-                var optionHelper = require('./helpers/connectionOptionsHelper');
-                this.config = optionHelper.getAgentOptions();
-                self.buildHelper = self.objectHelper('builds', optionHelper.getBuildOptions());
-                self.agentHelper = self.objectHelper('agents', optionHelper.getAgentOptions());
-                console.log('New connection');
-                SetTimer(self, socket);
-            });
+                socket.emit('connection start');
+                socket.on('main', function () {
+                    var optionHelper = require('./helpers/connectionOptionsHelper');
+                    this.config = optionHelper.getAgentOptions();
+                    self.buildHelper = self.objectHelper('builds', optionHelper.getBuildOptions());
+                    self.agentHelper = self.objectHelper('agents', optionHelper.getAgentOptions());
+                    console.log('New connection');
+                    SetTimer(self, socket);
+                });
+
+                socket.on('build', function (id) {
+
+                });
+
+                socket.on('agent', function (id) {
+
+                });
+            })
         }
 
         begin(this);
