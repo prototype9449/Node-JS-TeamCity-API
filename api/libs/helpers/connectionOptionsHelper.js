@@ -49,6 +49,15 @@ var optionsHelper =
         buildOptions.options = this.clone(buildOptionTeamCity.options);
 
         return buildOptions;
+    },
+
+    getBuildTypeByIdOptions: function (id) {
+        var generalOptionTeamCity = config.get('teamCityGeneral');
+        var buildOptionTeamCity = config.get('teamCityBuildTypes');
+        var buildOptions = this.clone(generalOptionTeamCity);
+        buildOptions.connection.url += buildOptionTeamCity.relativeUrl + '/id:' + id;
+
+        return buildOptions;
     }
 };
 

@@ -11,6 +11,7 @@
       }
     }
   },
+
   "teamCityAgents": {
     "relativeUrl": "/httpAuth/app/rest/agents",
     "options": {
@@ -19,6 +20,7 @@
       "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html"
     }
   },
+
   "teamCityBuilds": {
     "relativeUrl": "/httpAuth/app/rest/builds",
     "options": {
@@ -26,5 +28,9 @@
       "pageHtmlTemplatePath": "\\..\\public\\pages\\build-information-panel.html",
       "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html"
     }
+  },
+
+  "teamCityBuildTypes": {
+    "relativeUrl": "/httpAuth/app/rest/buildTypes"
   }
 }

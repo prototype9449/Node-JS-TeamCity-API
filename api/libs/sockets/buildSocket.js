@@ -1,5 +1,7 @@
 var config = require('./../helpers/connectionOptionsHelper');
 var htmlGenerator = require('./../htmlGenerator');
+var generateBuild = require('./../providers/buildProviders/jsonBuildProvider').generateBuildJson;
+var generateBuilds = require('../providers/buildProviders/jsonBuildsByConfigurationProvider').generateBuilds;
 
 function SocketManager(server, time) {
     this.time = time || 4000;
@@ -10,13 +12,16 @@ function SocketManager(server, time) {
 
 
     this.sendInfo = function (client) {
-        var generateBuild = require('./../providers/buildProviders/jsonBuildProvider').generateBuildJson;
+
 
         var optionTeamCity = config.getBuildByIdOptions(client.id);
-        generateBuild (client.id, optionTeamCity.connection.url, function (jsonBuild) {
-            htmlGenerator.generateHtmlFromJson({builds :[jsonBuild]}, optionTeamCity.options.pageFullHtmlTemplatePath, function(html){
-                client.socket.emit('build', html);
-            })
+        generateBuild(client.id, optionTeamCity.connection.url, function (jsonBuild) {
+            generateBuilds(jsonBuild.configuration.buildConfigurationId, function (buildInformation) {
+                jsonBuild.builds = buildInformation.builds;
+                htmlGenerator.generateHtmlFromJson({builds: [jsonBuild]}, optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
+                    client.socket.emit('build', html);
+                });
+            });
         });
     };
 
@@ -50,6 +55,7 @@ function SocketManager(server, time) {
 
             SetTimer(self);
         }
+
         begin(this);
     };
 
