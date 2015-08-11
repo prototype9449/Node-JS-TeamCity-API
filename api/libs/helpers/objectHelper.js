@@ -66,6 +66,4 @@ function ObjectHelper(name, config) {
     };
 }
 
-module.exports = function (name, config) {
-    return new ObjectHelper(name, config);
-};
+module.exports = ObjectHelper;

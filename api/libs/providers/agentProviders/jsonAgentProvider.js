@@ -1,6 +1,5 @@
 var request = require('request');
 var config = require('./../../helpers/connectionOptionsHelper');
-var generateBuildsByAgent = require('./../buildProviders/jsonBuildByAgentProvider').generateBuildsByAgent;
 
 function getMainInfo(agentHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
@@ -40,8 +39,7 @@ function getFinalAgentJson(agentId, agentHref, callback) {
                 id: agentId,
                 name: agentName,
                 status: agentStatus,
-                freeSpace: agentFreeSpace,
-                //builds: agentBuilds.builds
+                freeSpace: agentFreeSpace
             };
 
             callback(finalJsonAgent);

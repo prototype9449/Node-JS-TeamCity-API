@@ -1,0 +1,15 @@
+<div id="{{ id }}" class="panel panel-info">
+    <div class="panel-heading">
+        <a href="{{ href }}">
+            Build Configuration Name: {{ configuration.buildConfigurationName|capitalize }}
+        </a>
+    </div>
+    <div class="panel-body">
+        <li>Branch Name: {{ branchName|capitalize }}</li>
+        <li>Status : {{ status|capitalize }}</li>
+        <li>Agent Name : {{ agentName|capitalize }}</li>
+        <li>Project Name: {{ configuration.buildProjectName|capitalize }}</li>
+        <li>Launch date: {{ launchDate|capitalize }}</li>
+        <li>Duration: ----</li>
+    </div>
+</div>

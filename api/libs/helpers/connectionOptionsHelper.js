@@ -29,6 +29,26 @@ var optionsHelper =
         buildOptions.options = this.clone(buildOptionTeamCity.options);
 
         return buildOptions;
+    },
+
+    getAgentByIdOptions: function (id) {
+        var generalOptionTeamCity = config.get('teamCityGeneral');
+        var agentOptionTeamCity = config.get('teamCityAgents');
+        var agentOptions = this.clone(generalOptionTeamCity);
+        agentOptions.connection.url = agentOptionTeamCity.relativeUrl + '/id:' + id;
+        agentOptions.options = this.clone(agentOptionTeamCity.options);
+
+        return agentOptions;
+    },
+
+    getBuildByIdOptions: function (id) {
+        var generalOptionTeamCity = config.get('teamCityGeneral');
+        var buildOptionTeamCity = config.get('teamCityBuilds');
+        var buildOptions = this.clone(generalOptionTeamCity);
+        buildOptions.connection.url = buildOptionTeamCity.relativeUrl + '/id:' + id;
+        buildOptions.options = this.clone(buildOptionTeamCity.options);
+
+        return buildOptions;
     }
 };
 

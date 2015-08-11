@@ -15,14 +15,16 @@
     "relativeUrl": "/httpAuth/app/rest/agents",
     "options": {
       "restApiPath": "/api/agents",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-information-panel.html"
+      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-information-panel.html",
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html"
     }
   },
   "teamCityBuilds": {
     "relativeUrl": "/httpAuth/app/rest/builds",
     "options": {
       "restApiPath": "/api/builds",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-information-panel.html"
+      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-information-panel.html",
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html"
     }
   }
 }

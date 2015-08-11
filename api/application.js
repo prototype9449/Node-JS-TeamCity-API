@@ -7,9 +7,7 @@ var fs = require('fs');
 
 var app = express();
 var server = require('http').createServer(app);
-var sockets = require('./libs/socketManager');
-var socketManager = new sockets(server);
-socketManager.start();
+require('./libs/socketManager').RunSocket(server);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));

@@ -50,6 +50,8 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
             buildProjectName : jsonBuild.buildType.projectName
         };
         var buildAgentName = jsonBuild.agent.name;
+        var hrefAgent = jsonBuild.agent.href;
+        var agentId = jsonBuild.agent.id;
         var buildLaunchDate = jsonBuild.triggered.date;
         var buildFinishedDate = jsonBuild.finishDate;
         //var duration = the difference between launch and finish. Need parsing date
@@ -68,7 +70,11 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                 id : buildId,
                 href: 'buildInfo.html?id=' + buildId,
                 branchName : buildBranchName,
-                agentName : buildAgentName,
+                agent : {
+                    id : agentId,
+                    name :buildAgentName,
+                    href :'agentInfo.html?id=' + agentId
+                },
                 status : buildStatus,
                 configuration : buildConfiguration,
                 launchDate : buildLaunchDate

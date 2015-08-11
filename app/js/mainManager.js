@@ -17,7 +17,7 @@ $(function () {
     }
 
     //var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
-    var socket = io.connect('http://localhost:8080', { 'path': '/socket.io'}); //WebStorm
+    var socket = io.connect('http://localhost:8080', { 'path': '/main'}); //WebStorm
 
     socket.on('connection start', function(){
         socket.emit('main');

@@ -1,0 +1,43 @@
+<div id="{{ id }}" class="panel panel-info">
+    <div class="panel-heading">
+        <a href="{{ href }}">Agent Name: {{ name|capitalize }}</a>
+    </div>
+    <div class="panel-body">
+        <li>Status</li>
+        <ol>
+            <li>Connected : {{ status.connected|capitalize }}</li>
+            <li>Authorized: {{ status.authorized|capitalize }}</li>
+            <li>Enabled: {{ status.enabled|capitalize }}</li>
+        </ol>
+        <li>Free Space: {{freeSpace|capitalize }}</li>
+        <li>Current Tasks: --</li>
+        <li>History of builds: --</li>
+    </div>
+    <div>
+        <table class="table">
+            {% for build in builds %}
+            <tr>
+                <td>
+                    <a href="{{ build.href }}">{{ build.configuration.buildConfigurationName|capitalize }}</a>
+                </td>
+                <td>
+                    {{ build.configuration.buildProjectName|capitalize }}
+                </td>
+                <td>
+                    {{ build.configuration.buildConfigurationId|capitalize }}
+                </td>
+                <td>
+                    <a href="{{ build.agent.href }}"> {{ build.agent.name|capitalize }}</a>
+                </td>
+                <td>
+                    {{ build.status|capitalize }}
+                </td>
+                <td>
+                    {{ build.launchDate|capitalize }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
