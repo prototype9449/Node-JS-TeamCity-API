@@ -5,15 +5,36 @@
         </a>
     </div>
     <div class="panel-body">
-        <li>Branch Name: {{ branchName|capitalize }}</li>
-        <li>Status : {{ status|capitalize }}</li>
-        <li>Agent Name : {{ agentName|capitalize }}</li>
-        <li>Project Name: {{ configuration.buildProjectName|capitalize }}</li>
-        <li>Launch date: {{ launchDate|capitalize }}</li>
-        <li>Duration: ----</li>
-    </div>
-    <div>
+        <li><b>Branch Name:</b> {{ branchName|capitalize }}</li>
+        <li><b>Status:</b> {{ status|capitalize }}</li>
+        <li><b>Agent Name:</b> {{ agentName|capitalize }}</li>
+        <li><b>Project Name:</b> {{ configuration.buildProjectName|capitalize }}</li>
+        <li><b>Launch date:</b> {{ launchDate|capitalize }}</li>
+        <li><b>Duration:</b> ---- </li>
+
+        <h4 style="text-align: center; text-decoration: underline;">History of Builds:</h4>
+
         <table class="table">
+            <thead>
+                <th>
+                    Build Configuration Name
+                </th>
+                <th>
+                    Build Project Name
+                </th>
+                <th>
+                    Build Configuration ID
+                </th>
+                <th>
+                    Agent Name
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Launch Date
+                </th>
+            </thead>
             {% for build in builds %}
             <tr>
                 <td>
