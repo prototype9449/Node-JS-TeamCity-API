@@ -14,8 +14,8 @@ function getMainInfo(agentHref, callback) {
 
 function getAgentFreeSpace(jsonAgent) {
     var properties = jsonAgent.properties.property;
-    for(var i = 0; i < properties.length; i++){
-        if(properties[i].name == 'teamcity.agent.work.dir.freeSpaceMb'){
+    for (var i = 0; i < properties.length; i++) {
+        if (properties[i].name == 'teamcity.agent.work.dir.freeSpaceMb') {
             return properties[i].value;
         }
     }
@@ -24,26 +24,22 @@ function getAgentFreeSpace(jsonAgent) {
 function getFinalAgentJson(agentId, agentHref, callback) {
 
     getMainInfo(agentHref, function (jsonAgent) {
-        var agentName = jsonAgent.name;
-        var agentFreeSpace = getAgentFreeSpace(jsonAgent);
-        var agentStatus = {
-            connected: jsonAgent.connected,
-            authorized: jsonAgent.authorized,
-            enabled: jsonAgent.enabled
+
+        var finalJsonAgent =
+        {
+            id: agentId,
+            href: 'agentInfo.html?id=' + agentId,
+            name: jsonAgent.name,
+            freeSpace: getAgentFreeSpace(jsonAgent),
+            status: {
+                connected: jsonAgent.connected,
+                authorized: jsonAgent.authorized,
+                enabled: jsonAgent.enabled
+            }
         };
-        //generateBuildsByAgent(agentName, function (agentBuilds) {
 
-            var finalJsonAgent =
-            {
-                href: 'agentInfo.html?id=' + agentId,
-                id: agentId,
-                name: agentName,
-                status: agentStatus,
-                freeSpace: agentFreeSpace
-            };
+        callback(finalJsonAgent);
 
-            callback(finalJsonAgent);
-        //})
     })
 }
 

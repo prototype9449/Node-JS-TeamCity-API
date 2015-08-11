@@ -1,10 +1,10 @@
 var config = require('./../helpers/connectionOptionsHelper');
 var htmlGenerator = require('./../htmlGenerator');
 var generateBuild = require('./../providers/buildProviders/jsonBuildProvider').generateBuildJson;
-var generateBuilds = require('../providers/buildProviders/jsonBuildsByConfigurationProvider').generateBuilds;
+var generateBuilds = require('../providers/buildProviders/jsonBuildsByBuildTypeId').generateBuilds;
 
 function SocketManager(server, time) {
-    this.time = time || 4000;
+    this.time = time;
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, {path: '/build'});//WebStorm
@@ -12,11 +12,9 @@ function SocketManager(server, time) {
 
 
     this.sendInfo = function (client) {
-
-
         var optionTeamCity = config.getBuildByIdOptions(client.id);
         generateBuild(client.id, optionTeamCity.connection.url, function (jsonBuild) {
-            generateBuilds(jsonBuild.configuration.buildConfigurationId, function (buildInformation) {
+            generateBuilds(jsonBuild.build.configuration.id, function (buildInformation) {
                 jsonBuild.builds = buildInformation.builds;
                 htmlGenerator.generateHtmlFromJson({builds: [jsonBuild]}, optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
                     client.socket.emit('build', html);

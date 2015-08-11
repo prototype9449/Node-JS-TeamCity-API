@@ -13,7 +13,7 @@ var generateBuildJson = function (buildHref, callback) {
 
 var generateVSCInstance = function (vscHref, callback) {
 
-    if(vscHref == undefined) {
+    if (vscHref == undefined) {
         callback(undefined);
         return;
     }
@@ -41,17 +41,7 @@ function getBuildBranchName(vscJson) {
     return buildBranchName;
 };
 var generateFinalBuildJson = function (buildId, buildHref, callback) {
-    generateBuildJson(buildHref, function(jsonBuild){
-        var buildStatus = jsonBuild.statusText;
-        var buildConfiguration =
-        {
-            buildConfigurationId: jsonBuild.buildTypeId,
-            buildConfigurationName: jsonBuild.buildType.name,
-            buildProjectName : jsonBuild.buildType.projectName
-        };
-        var buildAgentName = jsonBuild.agent.name;
-        var hrefAgent = jsonBuild.agent.href;
-        var agentId = jsonBuild.agent.id;
+    generateBuildJson(buildHref, function (jsonBuild) {
         var buildLaunchDate = jsonBuild.triggered.date;
         var buildFinishedDate = jsonBuild.finishDate;
         //var duration = the difference between launch and finish. Need parsing date
@@ -60,24 +50,30 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
         try {
             vscHref = jsonBuild.revisions.revision[0]['vcs-root-instance'].href;
         }
-        catch(error) {
+        catch (error) {
             vscHref = undefined;
         }
         generateVSCInstance(vscHref, function (vscJson) {
             var buildBranchName = getBuildBranchName(vscJson);
             var finalJsonBuild =
             {
-                id : buildId,
-                href: 'buildInfo.html?id=' + buildId,
-                branchName : buildBranchName,
-                agent : {
-                    id : agentId,
-                    name :buildAgentName,
-                    href :'agentInfo.html?id=' + agentId
+                build: {
+                    id: buildId,
+                    href: 'buildInfo.html?id=' + buildId,
+                    branchName: buildBranchName,
+                    status: jsonBuild.statusText,
+                    launchDate: jsonBuild.triggered.date,
+                    configuration: {
+                        id: jsonBuild.buildTypeId,
+                        name: jsonBuild.buildType.name,
+                        projectName: jsonBuild.buildType.projectName
+                    }
                 },
-                status : buildStatus,
-                configuration : buildConfiguration,
-                launchDate : buildLaunchDate
+                agent: {
+                    id: jsonBuild.agent.id,
+                    name: jsonBuild.agent.name,
+                    href: 'agentInfo.html?id=' + jsonBuild.agent.id
+                }
             };
 
             callback(finalJsonBuild);

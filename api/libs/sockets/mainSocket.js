@@ -1,5 +1,5 @@
 function SocketManager(server, time) {
-    this.time = time || 4000;
+    this.time = time;
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, {path: '/main'});//WebStorm

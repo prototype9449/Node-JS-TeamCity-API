@@ -1,15 +1,15 @@
-<div id="{{ id }}" class="panel panel-info">
+<div id="{{ build.id }}" class="panel panel-info">
     <div class="panel-heading">
-        <a href="{{ href }}">
-            Build Configuration Name: {{ configuration.buildConfigurationName|capitalize }}
+        <a href="{{ build.href }}">
+            Build Configuration Name: {{ build.configuration.name|capitalize }}
         </a>
     </div>
     <div class="panel-body">
-        <li>Branch Name: {{ branchName|capitalize }}</li>
-        <li>Status : {{ status|capitalize }}</li>
-        <li>Agent Name : {{ agentName|capitalize }}</li>
-        <li>Project Name: {{ configuration.buildProjectName|capitalize }}</li>
-        <li>Launch date: {{ launchDate|capitalize }}</li>
+        <li>Branch Name: {{ build.branchName|capitalize }}</li>
+        <li>Status : {{ build.status|capitalize }}</li>
+        <li>Agent Name : {{ agent.name|capitalize }}</li>
+        <li>Project Name: {{ build.configuration.projectName|capitalize }}</li>
+        <li>Launch date: {{ build.launchDate|capitalize }}</li>
         <li>Duration: ----</li>
     </div>
     <div>
@@ -17,22 +17,22 @@
             {% for build in builds %}
             <tr>
                 <td>
-                    <a href="{{ build.href }}">{{ build.configuration.buildConfigurationName|capitalize }}</a>
+                    <a href="{{ build.build.href }}">{{ build.build.configuration.name|capitalize }}</a>
                 </td>
                 <td>
-                    {{ build.configuration.buildProjectName|capitalize }}
+                    {{ build.build.configuration.projectName|capitalize }}
                 </td>
                 <td>
-                    {{ build.configuration.buildConfigurationId|capitalize }}
+                    {{ build.build.configuration.id|capitalize }}
                 </td>
                 <td>
                     <a href="{{ build.agent.href }}"> {{ build.agent.name|capitalize }}</a>
                 </td>
                 <td>
-                    {{ build.status|capitalize }}
+                    {{ build.build.status|capitalize }}
                 </td>
                 <td>
-                    {{ build.launchDate|capitalize }}
+                    {{ build.build.launchDate|capitalize }}
                 </td>
             </tr>
             {% endfor %}

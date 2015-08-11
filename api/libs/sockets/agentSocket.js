@@ -1,10 +1,10 @@
 var config = require('./../helpers/connectionOptionsHelper');
 var htmlGenerator = require('./../htmlGenerator');
 var generateAgent = require('./../providers/agentProviders/jsonAgentProvider').generateAgentJson;
-var generateBuilds = require('../providers/buildProviders/jsonBuildByAgentProvider').getBuildsByAgent;
+var generateBuilds = require('../providers/buildProviders/jsonBuildByAgentProvider').generateBuildsByAgent;
 
 function SocketManager(server, time) {
-    this.time = time || 4000;
+    this.time = time;
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, {path: '/agent'});//WebStorm
@@ -12,10 +12,7 @@ function SocketManager(server, time) {
 
 
     this.sendInfo = function (client) {
-
-
         var optionTeamCity = config.getAgentByIdOptions(client.id);
-
         generateAgent(client.id, optionTeamCity.connection.url, function (jsonAgent) {
             generateBuilds(jsonAgent.id, function (buildInformation) {
                 jsonAgent.builds = buildInformation.builds;

@@ -18,22 +18,22 @@
             {% for build in builds %}
             <tr>
                 <td>
-                    <a href="{{ build.href }}">{{ build.configuration.buildConfigurationName|capitalize }}</a>
+                    <a href="{{ build.build.href }}">{{ build.build.configuration.name|capitalize }}</a>
                 </td>
                 <td>
-                    {{ build.configuration.buildProjectName|capitalize }}
+                    {{ build.build.configuration.projectName|capitalize }}
                 </td>
                 <td>
-                    {{ build.configuration.buildConfigurationId|capitalize }}
+                    {{ build.build.configuration.id|capitalize }}
                 </td>
                 <td>
                     <a href="{{ build.agent.href }}"> {{ build.agent.name|capitalize }}</a>
                 </td>
                 <td>
-                    {{ build.status|capitalize }}
+                    {{ build.build.status|capitalize }}
                 </td>
                 <td>
-                    {{ build.launchDate|capitalize }}
+                    {{ build.build.launchDate|capitalize }}
                 </td>
             </tr>
             {% endfor %}
