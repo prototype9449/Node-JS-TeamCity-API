@@ -1,19 +1,42 @@
 <div id="{{ build.id }}" class="panel panel-info">
     <div class="panel-heading">
         <a href="{{ build.href }}">
-            Build Configuration Name: {{ build.configuration.name|capitalize }}
+            <b>Build Configuration Name: {{ build.configuration.name|capitalize }}</b>
         </a>
     </div>
     <div class="panel-body">
-        <li>Branch Name: {{ build.branchName|capitalize }}</li>
-        <li>Status : {{ build.status|capitalize }}</li>
-        <li>Agent Name : {{ agent.name|capitalize }}</li>
-        <li>Project Name: {{ build.configuration.projectName|capitalize }}</li>
-        <li>Launch date: {{ build.launchDate|capitalize }}</li>
-        <li>Duration:{{ build.duration }}</li>
+        <li><b>Branch Name:</b> {{ build.branchName|capitalize }}</li>
+        <li><b>Status:</b> {{ build.status|capitalize }}</li>
+        <li><b>Agent Name:</b> {{ agent.name|capitalize }}</li>
+        <li><b>Project Name:</b> {{ build.configuration.projectName|capitalize }}</li>
+        <li><b>Launch date:</b> {{ build.launchDate|capitalize }}</li>
+        <li><b>Duration:</b>{{ build.duration }}</li>
     </div>
+
+     <h4 style="text-align: center; text-decoration: underline;">History of Builds:</h4>
+    
     <div>
         <table class="table">
+            <thead>
+                <th>
+                    Build Configuration Name
+                </th>
+                <th>
+                    Build Project Name
+                </th>
+                <th>
+                    Build Configuration ID
+                </th>
+                <th>
+                    Agent Name
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Launch Date
+                </th>
+            </thead>
             {% for build in builds %}
             <tr>
                 <td>

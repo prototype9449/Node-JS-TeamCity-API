@@ -22,6 +22,7 @@ $(function () {
 
     socket.on('agent', function (data) {
         var agent = JSON.parse(data);
+        $("#progress-bar-animation").remove();
         updateElements(agent[0].htmlContent, 'Agent-panel');
     });
 });

@@ -1,20 +1,42 @@
 <div id="{{ id }}" class="panel panel-info">
     <div class="panel-heading">
-        <a href="{{ href }}">Agent Name: {{ name|capitalize }}</a>
+        <a href="{{ href }}"><b>Agent Name: {{ name|capitalize }}</b></a>
     </div>
     <div class="panel-body">
-        <li>Status</li>
+        <li><b>Status</b></li>
         <ol>
-            <li>Connected : {{ status.connected|capitalize }}</li>
-            <li>Authorized: {{ status.authorized|capitalize }}</li>
-            <li>Enabled: {{ status.enabled|capitalize }}</li>
+            <li><b>Connected:</b> {{ status.connected|capitalize }}</li>
+            <li><b>Authorized:</b> {{ status.authorized|capitalize }}</li>
+            <li><b>Enabled:</b> {{ status.enabled|capitalize }}</li>
         </ol>
-        <li>Free Space: {{freeSpace|capitalize }}</li>
-        <li>Current Tasks: --</li>
-        <li>History of builds: --</li>
+        <li><b>Free Space:</b> {{freeSpace|capitalize }}</li>
+        <li><b>Current Tasks:</b> -- </li>
     </div>
+
+    <h4 style="text-align: center; text-decoration: underline;">History of Builds:</h4>
+
     <div>
         <table class="table">
+            <thead>
+                <th>
+                    Build Configuration Name
+                </th>
+                <th>
+                    Build Project Name
+                </th>
+                <th>
+                    Build Configuration ID
+                </th>
+                <th>
+                    AgentName
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Launch Date
+                </th>
+            </thead>
             {% for build in builds %}
             <tr>
                 <td>

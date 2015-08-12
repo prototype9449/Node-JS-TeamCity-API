@@ -1,13 +1,13 @@
 <div id="{{ build.id }}" class="panel panel-info">
     <div class="panel-heading">
     <a href="{{ build.href }}">
-        Build Configuration Name: {{ build.configuration.name|capitalize }}
+        <b>Build Configuration Name: {{ build.configuration.name|capitalize }}</b>
     </a>
     </div>
     <div class="panel-body">
-        <li>Branch Name: {{ build.branchName|capitalize }}</li>
-        <li>Status : {{ build.status|capitalize }}</li>
-        <li>Agent Name : {{ agent.name|capitalize }}</li>
-        <li>Project Name: {{ build.configuration.projectName|capitalize }}</li>
+        <li><b>Branch Name:</b> {{ build.branchName|capitalize }}</li>
+        <li><b>Status:</b> {{ build.status|capitalize }}</li>
+        <li><b>Agent Name:</b> {{ agent.name|capitalize }}</li>
+        <li><b>Project Name:</b> {{ build.configuration.projectName|capitalize }}</li>
     </div>
 </div>
