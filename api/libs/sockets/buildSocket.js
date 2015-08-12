@@ -11,13 +11,14 @@ function SocketManager(server, time) {
     this.clients = {};
 
 
-    this.sendInfo = function (client) {
+    this.sendInfo = function (client, callback) {
         var optionTeamCity = config.getBuildByIdOptions(client.id);
         generateBuild(client.id, optionTeamCity.connection.url, function (jsonBuild) {
             generateBuilds(jsonBuild.build.configuration.id, function (buildInformation) {
                 jsonBuild.builds = buildInformation.builds;
                 htmlGenerator.generateHtmlFromJson({builds: [jsonBuild]}, optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
                     client.socket.emit('build', html);
+
                 });
             });
         });
@@ -46,12 +47,11 @@ function SocketManager(server, time) {
                     };
                     console.log('Clients online : ' + self.clients);
                 });
-                socket.on('disconnection', function () {
+                socket.on('disconnect', function () {
                     delete self.clients[socket.id];
                 });
+                SetTimer(self);
             });
-
-            SetTimer(self);
         }
 
         begin(this);

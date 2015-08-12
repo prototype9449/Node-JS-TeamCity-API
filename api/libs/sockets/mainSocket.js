@@ -33,9 +33,9 @@ function SocketManager(server, time) {
             console.log("timer started");
             self.interval = setTimeout(function send() {
 
-                for(var id in self.clients){
+                for (var id in self.clients) {
                     self.sendInfo(self.clients[id]);
-                };
+                }
                 self.interval = setTimeout(send, self.time);
             }, 0);
         }
@@ -51,17 +51,16 @@ function SocketManager(server, time) {
                         agentHelper: new self.objectHelper('agents', optionHelper.getAgentOptions()),
                         socket: socket
                     };
-                    self.clients[socket.id] =client;
+                    self.clients[socket.id] = client;
                     console.log('Clients online : ' + self.clients);
                 });
-                socket.on('disconnection', function () {
+                socket.on('disconnect', function () {
                     delete self.clients[socket.id];
                 });
+                SetTimer(self);
             });
-
-
-            SetTimer(self);
         }
+
         begin(this);
     };
 

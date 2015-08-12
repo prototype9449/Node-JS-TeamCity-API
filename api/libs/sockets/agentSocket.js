@@ -33,7 +33,6 @@ function SocketManager(server, time) {
                 for (var id in self.clients) {
                     self.sendInfo(self.clients[id]);
                 }
-                ;
                 self.interval = setTimeout(send, self.time);
             }, 0);
         }
@@ -49,12 +48,11 @@ function SocketManager(server, time) {
                     };
                     console.log('Clients online : ' + self.clients);
                 });
-                socket.on('disconnection', function () {
+                socket.on('disconnect', function () {
                     delete self.clients[socket.id];
                 });
+                SetTimer(self);
             });
-
-            SetTimer(self);
         }
 
         begin(this);
