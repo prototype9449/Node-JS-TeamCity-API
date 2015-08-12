@@ -16,9 +16,6 @@
                     Build Configuration ID
                 </th>
                 <th>
-                    AgentName
-                </th>
-                <th>
                     Status
                 </th>
                 <th>
@@ -38,9 +35,6 @@
                 </td>
                 <td>
                     {{ build.build.configuration.id|capitalize }}
-                </td>
-                <td>
-                    <a href="{{ build.agent.href }}"> {{ build.agent.name|capitalize }}</a>
                 </td>
                 <td>
                     {{ build.build.status|capitalize }}
