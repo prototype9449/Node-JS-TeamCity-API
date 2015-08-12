@@ -38,8 +38,7 @@ var getDateFromString = function (strDate) {
     return new Date(year, month, day, hour, minutes, seconds);
 };
 
-var getDuration = function (start, end)
-{
+var getDuration = function (start, end) {
     var timeDiff = Math.abs(start.getTime() - end.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     alert(diffDays);
@@ -63,7 +62,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
     generateBuildJson(buildHref, function (jsonBuild) {
         var buildLaunchDate = getDateFromString(jsonBuild.triggered.date);
         var buildFinishedDate = getDateFromString(jsonBuild.finishDate);
-        var duration =  Math.abs((buildLaunchDate.getTime() - buildFinishedDate.getTime() )/ 1000);
+        var duration =  Math.abs((buildLaunchDate.getTime() - buildFinishedDate.getTime() )/ 1000) + ' sec';
 
         var vscHref;
         try {
@@ -81,7 +80,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
                     status: jsonBuild.statusText,
-                    launchDate: buildLaunchDate.toDateString(),
+                    launchDate: buildLaunchDate.toLocaleString(),
                     duration : duration,
                     configuration: {
                         id: jsonBuild.buildTypeId,
