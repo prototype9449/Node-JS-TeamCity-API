@@ -1,0 +1,13 @@
+<div class="panel-heading">
+    <a href="{{ href }}"><b>Agent Name: {{ name|capitalize }}</b></a>
+</div>
+<div class="panel-body">
+    <li><b>Status</b></li>
+    <ol>
+        <li><b>Connected:</b> {{ status.connected|capitalize }}</li>
+        <li><b>Authorized:</b> {{ status.authorized|capitalize }}</li>
+        <li><b>Enabled:</b> {{ status.enabled|capitalize }}</li>
+    </ol>
+    <li><b>Free Space:</b> {{freeSpace|capitalize }}</li>
+    <li><b>Current Tasks:</b> -- </li>
+</div>

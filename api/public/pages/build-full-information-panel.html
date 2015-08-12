@@ -4,6 +4,7 @@
             <b>Build Configuration Name: {{ build.configuration.name|capitalize }}</b>
         </a>
     </div>
+
     <div class="panel-body">
         <li><b>Branch Name:</b> {{ build.branchName|capitalize }}</li>
         <li><b>Status:</b> {{ build.status|capitalize }}</li>
@@ -36,6 +37,9 @@
                 <th>
                     Launch Date
                 </th>
+                <th>
+                   Duration
+                </th>
             </thead>
             {% for build in builds %}
             <tr>
@@ -56,6 +60,9 @@
                 </td>
                 <td>
                     {{ build.build.launchDate|capitalize }}
+                </td>
+                <td>
+                    {{ build.build.duration|capitalize }}
                 </td>
             </tr>
             {% endfor %}
