@@ -13,6 +13,7 @@ function SocketManager(server, time) {
 
     this.sendInfo = function (client) {
         var optionTeamCity = config.getAgentByIdOptions(client.id);
+
         generateAgent(client.id, optionTeamCity.connection.url, function (jsonAgent) {
             generateBuilds(jsonAgent.id, function (buildInformation) {
                 jsonAgent.builds = buildInformation.builds;
@@ -21,8 +22,6 @@ function SocketManager(server, time) {
                 });
             });
         });
-
-
     };
 
     this.start = function () {
@@ -40,14 +39,15 @@ function SocketManager(server, time) {
         function begin(self) {
             self.io.on('connection', function (socket) {
                 socket.emit('connection start');
-                socket.on('agent', function (id) {
 
+                socket.on('agent', function (id) {
                     self.clients[socket.id] = {
                         id: id,
                         socket: socket
                     };
                     console.log('Clients online : ' + self.clients);
                 });
+
                 socket.on('disconnect', function () {
                     delete self.clients[socket.id];
                 });

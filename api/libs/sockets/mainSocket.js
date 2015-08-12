@@ -43,6 +43,7 @@ function SocketManager(server, time) {
         function begin(self) {
             self.io.on('connection', function (socket) {
                 socket.emit('connection start');
+
                 socket.on('main', function () {
                     var optionHelper = require('./../helpers/connectionOptionsHelper');
 
@@ -54,9 +55,11 @@ function SocketManager(server, time) {
                     self.clients[socket.id] = client;
                     console.log('Clients online : ' + self.clients);
                 });
+
                 socket.on('disconnect', function () {
                     delete self.clients[socket.id];
                 });
+
                 SetTimer(self);
             });
         }

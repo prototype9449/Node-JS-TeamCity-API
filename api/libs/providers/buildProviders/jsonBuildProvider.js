@@ -27,7 +27,25 @@ var generateVSCInstance = function (vscHref, callback) {
     });
 };
 
-function getBuildBranchName(vscJson) {
+var getDateFromString = function (strDate) {
+    var year = strDate.substring(0, 4);
+    var month = strDate.substring(4, 6) - 1;
+    var day = strDate.substring(6, 8);
+    var hour = strDate.substring(9, 11);
+    var minutes = strDate.substring(11, 13);
+    var seconds = strDate.substring(13, 15);
+
+    return new Date(year, month, day, hour, minutes, seconds);
+};
+
+var getDuration = function (start, end)
+{
+    var timeDiff = Math.abs(start.getTime() - end.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    alert(diffDays);
+};
+
+var getBuildBranchName = function (vscJson) {
     if (vscJson == undefined) {
         var buildBranchName = 'unknown';
     } else {
@@ -40,11 +58,12 @@ function getBuildBranchName(vscJson) {
     }
     return buildBranchName;
 };
+
 var generateFinalBuildJson = function (buildId, buildHref, callback) {
     generateBuildJson(buildHref, function (jsonBuild) {
-        var buildLaunchDate = jsonBuild.triggered.date;
-        var buildFinishedDate = jsonBuild.finishDate;
-        //var duration = the difference between launch and finish. Need parsing date
+        var buildLaunchDate = getDateFromString(jsonBuild.triggered.date);
+        var buildFinishedDate = getDateFromString(jsonBuild.finishDate);
+        var duration =  Math.abs((buildLaunchDate.getTime() - buildFinishedDate.getTime() )/ 1000);
 
         var vscHref;
         try {
@@ -62,7 +81,8 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
                     status: jsonBuild.statusText,
-                    launchDate: jsonBuild.triggered.date,
+                    launchDate: buildLaunchDate.toDateString(),
+                    duration : duration,
                     configuration: {
                         id: jsonBuild.buildTypeId,
                         name: jsonBuild.buildType.name,
