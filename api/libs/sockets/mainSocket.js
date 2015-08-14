@@ -1,33 +1,38 @@
-function SocketManager(server, time) {
+var optionHelper = require('./../helpers/connectionOptionsHelper');
+
+function MainSocket(server, storage, time) {
     this.time = time;
+    this.storage = storage;
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, {path: '/main'});//WebStorm
     this.clients = {};
 
     this.sendInfo = function (client) {
-        console.log('newBuilds emit');
+
         client.buildHelper.getNew(function (newData) {
             client.socket.emit('newBuilds', newData);
         });
 
-        console.log('newAgents emit');
+
         client.agentHelper.getNew(function (newData) {
             client.socket.emit('newAgents', newData);
         });
 
-        console.log('buildsUpdate emit');
+
         client.buildHelper.getUpdate(function (newData) {
             client.socket.emit('buildsUpdate', newData);
         });
 
-        console.log('agentsUpdate emit');
+
         client.agentHelper.getUpdate(function (newData) {
             client.socket.emit('agentsUpdate', newData);
         });
     };
 
     this.start = function () {
+
+        console.time('start');
 
         function SetTimer(self) {
             console.log("timer started");
@@ -42,19 +47,20 @@ function SocketManager(server, time) {
 
         function begin(self) {
             self.io.on('connection', function (socket) {
+                console.time("connection start");
                 socket.emit('connection start');
 
-                socket.on('main', function () {
-                    var optionHelper = require('./../helpers/connectionOptionsHelper');
+                console.time("main");
+                console.timeEnd("connection start");
 
-                    var client = {
-                        buildHelper: new self.objectHelper('builds', optionHelper.getBuildOptions()),
-                        agentHelper: new self.objectHelper('agents', optionHelper.getAgentOptions()),
-                        socket: socket
-                    };
-                    self.clients[socket.id] = client;
-                    console.log('Clients online : ' + self.clients);
-                });
+                var client = {
+                    buildHelper: new self.objectHelper('builds', self.storage.getBuilds, optionHelper.getBuildOptions()),
+                    agentHelper: new self.objectHelper('agents', self.storage.getAgents, optionHelper.getAgentOptions()),
+                    socket: socket
+                };
+                self.clients[socket.id] = client;
+                console.log('Clients online : ' + self.clients);
+                console.timeEnd("main");
 
                 socket.on('disconnect', function () {
                     delete self.clients[socket.id];
@@ -65,6 +71,7 @@ function SocketManager(server, time) {
         }
 
         begin(this);
+        console.timeEnd('start');
     };
 
     this.stop = function () {
@@ -72,4 +79,4 @@ function SocketManager(server, time) {
     };
 }
 
-module.exports = SocketManager;
+module.exports = MainSocket;

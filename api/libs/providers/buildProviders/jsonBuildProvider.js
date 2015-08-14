@@ -75,6 +75,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
             var buildBranchName = getBuildBranchName(vscJson);
             var finalJsonBuild =
             {
+                id: buildId,
                 build: {
                     id: buildId,
                     href: 'buildInfo.html?id=' + buildId,

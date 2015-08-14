@@ -4,6 +4,7 @@ var generateObjects = require('./providers/objectProvider').generateObjects;
 
 var generatorHelper = {
     generateHtmlFromJson: function (jsonData, currentPageTemplateSubdirectoryPath, callback) {
+        console.time('generateHtml')
         var pathDirectory = __dirname + currentPageTemplateSubdirectoryPath;
         var swig = require('swig');
         var finalHtml = "";
@@ -24,6 +25,7 @@ var generatorHelper = {
         }
         //var renderedHtml = template(jsonData);
         //callback(finalHtml);
+        console.timeEnd('generateHtml')
         callback(JSON.stringify(controlsWrapperJson));
     },
 

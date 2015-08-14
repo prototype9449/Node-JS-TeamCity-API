@@ -13,12 +13,13 @@ $(function () {
     }
 
     //var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
-    var socket = io.connect('http://localhost:8080', { 'path': '/agent'}); //WebStorm
+    var id = getParameterByName("id");
+    var socket = io.connect('http://localhost:8080', { 'path': '/agent', 'query' : 'id=' + id}); //WebStorm
 
-    socket.on('connection start', function(){
-        var id = getParameterByName("id");
-        socket.emit('agent', id);
-    });
+  //  socket.on('connection start', function(){
+        //var id = getParameterByName("id");
+     //   socket.emit('agent', id);
+   // });
 
     socket.on('agent', function (data) {
         var agent = JSON.parse(data);
