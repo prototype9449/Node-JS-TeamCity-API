@@ -16,12 +16,22 @@ var ObjectStorage = function () {
         self.builds = builds;
     };
 
-    this.getAgents = function () {
-        return {agents: self.agents};
+    var getSpliceArray = function (array, number) {
+        if (!number) return array;
+
+        if (array.length > number) {
+            return array.slice(0, number);
+        }
     };
 
-    this.getBuilds = function () {
-        return {builds: self.builds};
+    this.getAgents = function (number) {
+        var result = getSpliceArray(self.agents, number);
+        return {agents: result};
+    };
+
+    this.getBuilds = function (number) {
+        var result = getSpliceArray(self.builds, number);
+        return {builds: result};
     };
 
     function getObjectById(id, objectType) {

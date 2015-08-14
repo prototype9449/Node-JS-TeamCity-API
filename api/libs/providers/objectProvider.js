@@ -10,7 +10,7 @@ var generateBuilds = function (builds, callback) {
             jsonBuilds.push(build);
             if (jsonBuilds.length == builds.length) {
                 jsonBuilds.sort(function (build1, build2) {
-                    return build1.build.id - build2.build.id;
+                    return build2.build.id - build1.build.id;
                 });
                 callback({builds: jsonBuilds});
             }

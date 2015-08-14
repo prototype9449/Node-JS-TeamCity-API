@@ -12,7 +12,7 @@ function MainSocket(server, storage, time) {
 
         client.buildHelper.getNew(function (newData) {
             client.socket.emit('newBuilds', newData);
-        });
+        },5);
 
 
         client.agentHelper.getNew(function (newData) {

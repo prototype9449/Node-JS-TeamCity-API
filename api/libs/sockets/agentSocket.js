@@ -1,7 +1,6 @@
 var config = require('./../helpers/connectionOptionsHelper');
 var htmlGenerator = require('./../htmlGenerator');
 var generateAgent = require('./../providers/agentProviders/jsonAgentProvider').generateAgentJson;
-var generateBuilds = require('../providers/buildProviders/jsonBuildByAgentProvider').generateBuildsByAgent;
 var baseSocket = require('./baseSocket');
 
 var e = 1;

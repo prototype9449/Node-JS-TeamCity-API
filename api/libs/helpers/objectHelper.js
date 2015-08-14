@@ -15,7 +15,7 @@ function ObjectHelper(name, getObjects, config) {
         var instance = this;
         var htmlGenerator = instance.htmlGenerator;
 
-        var jsonData = instance.getObjects();
+        var jsonData = instance.getObjects(number);
         if(!jsonData) return;
 
         var objects = jsonData[instance.name];
@@ -38,7 +38,7 @@ function ObjectHelper(name, getObjects, config) {
         htmlGenerator.generateHtmlFromJson(result, templatePath, callback);
     };
 
-    this.getUpdate = function (callback, number) {
+    this.getUpdate = function (callback) {
         console.time('getUpdate');
 
         var instance = this;
