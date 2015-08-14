@@ -3,7 +3,7 @@ var agentSocket = require('./agentSocket');
 var buildSocket = require('./buildSocket');
 
 function RunSockets(server, storage, time) {
-    var timeTick = time || 4000;
+    var timeTick = time || 8000;
     var main = new mainSocket(server, storage, timeTick);
     var agent = new agentSocket(server, storage, timeTick, 'agent');
     var build = new buildSocket(server, storage, timeTick, 'build');

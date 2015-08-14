@@ -25,6 +25,9 @@ function getFinalAgentJson(agentId, agentHref, callback) {
 
     getMainInfo(agentHref, function (jsonAgent) {
 
+        var bitStatus = jsonAgent.connected && jsonAgent.authorized && jsonAgent.enabled;
+        var ready = bitStatus == true ? 'Yes' : 'No';
+
         var finalJsonAgent =
         {
             id: agentId,
@@ -34,7 +37,8 @@ function getFinalAgentJson(agentId, agentHref, callback) {
             status: {
                 connected: jsonAgent.connected,
                 authorized: jsonAgent.authorized,
-                enabled: jsonAgent.enabled
+                enabled: jsonAgent.enabled,
+                ready: ready
             }
         };
 

@@ -10,9 +10,9 @@ function MainSocket(server, storage, time) {
 
     this.sendInfo = function (client) {
 
-        client.buildHelper.getNew(function (newData) {
-            client.socket.emit('newBuilds', newData);
-        },5);
+        //client.buildHelper.getNew(function (newData) {
+        //    client.socket.emit('newBuilds', newData);
+        //},5);
 
 
         client.agentHelper.getNew(function (newData) {
@@ -20,9 +20,9 @@ function MainSocket(server, storage, time) {
         });
 
 
-        client.buildHelper.getUpdate(function (newData) {
-            client.socket.emit('buildsUpdate', newData);
-        });
+        //client.buildHelper.getUpdate(function (newData) {
+        //    client.socket.emit('buildsUpdate', newData);
+        //});
 
 
         client.agentHelper.getUpdate(function (newData) {
