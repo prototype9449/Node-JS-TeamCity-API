@@ -25,7 +25,7 @@ var optionsHelper =
         var generalOptionTeamCity = config.get('teamCityGeneral');
         var buildOptionTeamCity = config.get('teamCityBuilds');
         var buildOptions = this.clone(generalOptionTeamCity);
-        buildOptions.connection.url += buildOptionTeamCity.relativeUrl;
+        buildOptions.connection.url += buildOptionTeamCity.relativeUrlWithRunnedBuilds;
         buildOptions.options = this.clone(buildOptionTeamCity.options);
 
         return buildOptions;

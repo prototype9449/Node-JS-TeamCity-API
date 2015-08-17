@@ -5,6 +5,7 @@
     <div class="panel-body">
         <li><b>Branch Name:</b> {{ build.branchName|capitalize }}</li>
         <li><b>Status:</b> {{ build.status|capitalize }}</li>
+        <li><b>State:</b> {{ build.state|capitalize }}</li>
         <li><b>Agent Name: <a href="{{ agent.href }}">{{ agent.name|capitalize }}</a></b></li>
         <li><b>Project Name:</b> {{ build.configuration.projectName|capitalize }}</li>
     </div>

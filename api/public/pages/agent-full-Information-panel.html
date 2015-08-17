@@ -19,6 +19,9 @@
                     Status
                 </th>
                 <th>
+                    State
+                </th>
+                <th>
                     Launch Date
                 </th>
                 <th>
@@ -38,6 +41,9 @@
                 </td>
                 <td>
                     {{ build.build.status|capitalize }}
+                </td>
+                <td>
+                    {{ build.build.state|capitalize }}
                 </td>
                 <td>
                     {{ build.build.launchDate|capitalize }}
