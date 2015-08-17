@@ -14,19 +14,9 @@ function MainSocket(server, storage, time) {
             client.socket.emit('newBuilds', newData);
         },5);
 
-
         client.agentHelper.generateNewObjects(function (newData) {
             client.socket.emit('newAgents', newData);
         });
-
-        //client.buildHelper.getUpdate(function (newData) {
-        //    client.socket.emit('buildsUpdate', newData);
-        //});
-        //
-        //
-        //client.agentHelper.getUpdate(function (newData) {
-        //    client.socket.emit('agentsUpdate', newData);
-        //});
     };
 
     this.start = function () {

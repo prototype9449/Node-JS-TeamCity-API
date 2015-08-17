@@ -41,13 +41,10 @@ function ObjectHelper(name, getObjects, config) {
                 }
             }();
 
-
             for (var i = 0; i < objectsFromStorage.length; i++) {
                 if (stringObjectsFromMemory.indexOf(stringObjectsFromStorage[i]) == -1) {
                     addToArrayById(newObjects,objectsFromStorage[i])
                     addToArrayById(this.objectsFromMemory,objectsFromStorage[i])
-                    //newObjects.push(objectsFromStorage[i]);
-                    //this.objectsFromMemory.unshift(objectsFromStorage[i]);
                 }
             }
         }
