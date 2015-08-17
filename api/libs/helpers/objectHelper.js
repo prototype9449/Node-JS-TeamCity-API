@@ -3,7 +3,7 @@ function ObjectHelper(name, getObjects, config) {
     this.config = config;
     this.getObjects = getObjects;
     this.count = 0;
-    this.objects = null;
+    this.objectsFromMemory = null;
     this.name = name;
 
     this.generateNewObjects = function (callback, number) {
@@ -12,35 +12,59 @@ function ObjectHelper(name, getObjects, config) {
         if (!objectsFromStorage) return;
 
         var newObjects = [];
-        if (this.objects) {
-            var stringObjects = this.objects.map(function (item) {
+        if (this.objectsFromMemory) {
+            var stringObjectsFromMemory = this.objectsFromMemory.map(function (item) {
                 return JSON.stringify(item)
             });
             var stringObjectsFromStorage = objectsFromStorage.map(function (item) {
                 return JSON.stringify(item)
             });
 
+
+            var addToArrayById = function () {
+                return function (array, item) {
+                    var flag = {
+                        add: true,
+                        index: -1
+                    };
+                    for (var i = 0; i < array.length; i++) {
+                        if (array[i].id == item.id) {
+                            flag.add = false;
+                            flag.index = i;
+                        }
+                    }
+                    if (flag.add) {
+                        array.unshift(item);
+                    } else {
+                        array[flag.index] = item;
+                    }
+                }
+            }();
+
+
             for (var i = 0; i < objectsFromStorage.length; i++) {
-                if (stringObjects.indexOf(stringObjectsFromStorage[i]) == -1) {
-                    newObjects.push(objectsFromStorage[i]);
-                    this.objects.unshift(objectsFromStorage[i]);
+                if (stringObjectsFromMemory.indexOf(stringObjectsFromStorage[i]) == -1) {
+                    addToArrayById(newObjects,objectsFromStorage[i])
+                    addToArrayById(this.objectsFromMemory,objectsFromStorage[i])
+                    //newObjects.push(objectsFromStorage[i]);
+                    //this.objectsFromMemory.unshift(objectsFromStorage[i]);
                 }
             }
         }
         else {
             newObjects = objectsFromStorage;
-            this.objects = newObjects;
+            this.objectsFromMemory = newObjects;
         }
 
         newObjects.sort(function (item1, item2) {
             return item2.id - item1.id;
         });
-        this.objects.sort(function (item1, item2) {
+        this.objectsFromMemory.sort(function (item1, item2) {
             return item2.id - item1.id;
         });
 
         if (number)
-            this.objects.splice(number, this.objects.length);
+            this.objectsFromMemory.splice(number, this.objectsFromMemory.length);
 
         var templatePath = this.config.options.pageHtmlTemplatePath;
         var result = {};
