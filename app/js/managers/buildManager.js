@@ -16,11 +16,6 @@ $(function () {
     var id = getParameterByName("id");
     var socket = io.connect('http://localhost:8080', { 'path': '/build', 'query' : 'id=' + id}); //WebStorm
 
-  //  socket.on('connection start', function(){
-    //    var id = getParameterByName("id");
-    //    socket.emit('build', id);
- //   });
-
     socket.on('build', function (data) {
         var build = JSON.parse(data);
         $("#progress-bar-animation").remove();

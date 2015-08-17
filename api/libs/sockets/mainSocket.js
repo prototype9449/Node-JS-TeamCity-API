@@ -10,24 +10,23 @@ function MainSocket(server, storage, time) {
 
     this.sendInfo = function (client) {
 
-        client.buildHelper.getNew(function (newData) {
+        client.buildHelper.generateNewObjects(function (newData) {
             client.socket.emit('newBuilds', newData);
         },5);
 
 
-        client.agentHelper.getNew(function (newData) {
+        client.agentHelper.generateNewObjects(function (newData) {
             client.socket.emit('newAgents', newData);
         });
 
-
-        client.buildHelper.getUpdate(function (newData) {
-            client.socket.emit('buildsUpdate', newData);
-        });
-
-
-        client.agentHelper.getUpdate(function (newData) {
-            client.socket.emit('agentsUpdate', newData);
-        });
+        //client.buildHelper.getUpdate(function (newData) {
+        //    client.socket.emit('buildsUpdate', newData);
+        //});
+        //
+        //
+        //client.agentHelper.getUpdate(function (newData) {
+        //    client.socket.emit('agentsUpdate', newData);
+        //});
     };
 
     this.start = function () {

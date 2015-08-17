@@ -1,54 +1,33 @@
 $(function () {
 
     function addNewElements(data, parentElementId) {
-        var parent = $("#" + parentElementId);
-        parent.append(data);
-    }
+        if($('#' + data.id).length == 0){
+            var parent = $("#" + parentElementId);
+            parent.prepend(data.htmlContent);
+            $('#' + data.id).fadeIn(500);
+        } else {
+            $('#' + data.id).fadeOut(400);
+            $('#' + data.id).replaceWith(data.htmlContent);
+            $('#' + data.id).fadeIn(400);
 
-    function updateElements(data, parentElementId) {
-        var parent = $("#" + parentElementId);
-        var element = parent.find(data.id);
-        //$(parentElementId).find('#' + data.id).remove();
-     //   element.replaceWith();
-     //   var parent = $("#" + parentElementId);
-     //   var newElement = $.parseHTML(data.htmlContent);
-      //  parent.append(newElement);
-       // $(newElement).fadeIn(300, function() {  });
-       // $(newElement).fadeIn();
+        }
     }
 
     //var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
     var socket = io.connect('http://localhost:8080', { 'path': '/main'}); //WebStorm
 
-   // socket.on('connection start', function(){
-      //  socket.emit('main');
-   // });
-
     socket.on('newBuilds', function (data) {
         var newBuilds = JSON.parse(data);
         for(var i = 0; i < newBuilds.length; i++){
-            addNewElements(newBuilds[i].htmlContent, 'builds-panel');
-        }
-    });
-
-    socket.on('buildsUpdate', function (data) {
-        var updatingBuilds = JSON.parse(data);
-        for(var i = 0; i < updatingBuilds.length; i++){
-            updateElements( updatingBuilds[i], 'builds-panel');
+            addNewElements(newBuilds[i], 'builds-panel');
         }
     });
 
     socket.on('newAgents', function (data) {
         var newAgents = JSON.parse(data);
         for(var i = 0; i < newAgents.length; i++){
-            addNewElements(newAgents[i].htmlContent, 'agents-panel');
+            addNewElements(newAgents[i], 'agents-panel');
         }
     });
 
-    socket.on('agentsUpdate', function (data) {
-        var updatingAgents = JSON.parse(data);
-        for(var i = 0; i < updatingAgents.length; i++){
-            updateElements(updatingAgents[i], 'agents-panel');
-        }
-    });
  });

@@ -1,73 +1,51 @@
-var generateObjects = require('./../providers/objectProvider').generateObjects;
-var jsondiff = require('jsondiffpatch');
-
 function ObjectHelper(name, getObjects, config) {
     this.htmlGenerator = require('./../htmlGenerator');
     this.config = config;
     this.getObjects = getObjects;
     this.count = 0;
-    this.data = null;
+    this.objects = null;
     this.name = name;
 
+    this.generateNewObjects = function (callback, number) {
+        var dataFromStorage = this.getObjects(number);
+        var objectsFromStorage = dataFromStorage[this.name];
+        if (!objectsFromStorage) return;
 
-    this.getNew = function (callback, number) {
-        console.time('getNew');
-        var instance = this;
-        var htmlGenerator = instance.htmlGenerator;
+        var newObjects = [];
+        if (this.objects) {
+            var stringObjects = this.objects.map(function (item) {
+                return JSON.stringify(item)
+            });
+            var stringObjectsFromStorage = objectsFromStorage.map(function (item) {
+                return JSON.stringify(item)
+            });
 
-        var jsonData = instance.getObjects(number);
-        if(!jsonData) return;
-
-        var objects = jsonData[instance.name];
-
-        if (instance.count === objects.length)
-            return;
-        var i = instance.count;
-        instance.count = objects.length;
-        if (instance.data === null)
-            instance.data = objects;
-        var jsonObjects = [];
-        for (i; i < objects.length; i++) {
-            var currentObject = objects[i];
-            jsonObjects.push(currentObject);
+            for (var i = 0; i < objectsFromStorage.length; i++) {
+                if (stringObjects.indexOf(stringObjectsFromStorage[i]) == -1) {
+                    newObjects.push(objectsFromStorage[i]);
+                    this.objects.unshift(objectsFromStorage[i]);
+                }
+            }
         }
-        var templatePath = instance.config.options.pageHtmlTemplatePath;
-        var result = {};
-        result[instance.name] = jsonObjects;
-        console.timeEnd('getNew');
-        htmlGenerator.generateHtmlFromJson(result, templatePath, callback);
-    };
-
-    this.getUpdate = function (callback) {
-        console.time('getUpdate');
-
-        var instance = this;
-        var htmlGenerator = instance.htmlGenerator;
-
-        var jsonData = this.getObjects();
-        if(!jsonData) return;
-
-        var objects = jsonData[instance.name];
-        if (instance.count === 0)
-            return;
-
-        var jsonObjects = [];
-        for (var i = 0; i < instance.count; i++) {
-            var newObject = objects[i];
-            var oldObject = instance.data[i];
-            var delta = jsondiff.diff(oldObject, newObject);
-            if (delta != null)
-                jsonObjects.push(newObject);
+        else {
+            newObjects = objectsFromStorage;
+            this.objects = newObjects;
         }
 
-        instance.data = objects;
-        if (jsonObjects.length === 0)
-            return;
-        var templatePath = instance.config.options.pageHtmlTemplatePath;
+        newObjects.sort(function (item1, item2) {
+            return item2.id - item1.id;
+        });
+        this.objects.sort(function (item1, item2) {
+            return item2.id - item1.id;
+        });
+
+        if (number)
+            this.objects.splice(number, this.objects.length);
+
+        var templatePath = this.config.options.pageHtmlTemplatePath;
         var result = {};
-        result[instance.name] = jsonObjects;
-        console.timeEnd('getUpdate');
-        htmlGenerator.generateHtmlFromJson(result, templatePath, callback);
+        result[this.name] = newObjects;
+        this.htmlGenerator.generateHtmlFromJson(result, templatePath, callback);
     };
 }
 

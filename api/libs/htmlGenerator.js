@@ -15,6 +15,9 @@ var generatorHelper = {
         else if (jsonData.builds != undefined) {
             jsonItems = jsonData.builds;
         }
+        jsonItems.sort(function (item1, item2) {
+            return item1.id - item2.id;
+        })
         var controlsWrapperJson = [];
         for (var i = 0; i < jsonItems.length; i++) {
             var jsonItem = jsonItems[i];
