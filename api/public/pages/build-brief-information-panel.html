@@ -1,8 +1,8 @@
 <div id="{{ build.id }}" class="panel panel-info" style="display: none">
-    <div class="panel-heading">
-        <b><a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a> ({{ build.launchDate }})</b>
+    <div class="panel-heading" style="padding: 7px 15px;">
+        <b><a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a></b> [{{ build.launchDate }}]
     </div>
-    <div class="panel-body">
+    <div class="panel-body" style="padding: 6px;">
         <li><b>Branch Name:</b> {{ build.branchName|capitalize }}</li>
         <li><b>Status:</b> {{ build.status|capitalize }}</li>
         <li><b>State:</b> {{ build.state|capitalize }}</li>
