@@ -5,7 +5,8 @@
     <div class="panel-body" style="padding: 6px;">
         <li><b>Branch Name:</b> {{ build.branchName|capitalize }}</li>
         <li><b>Status:</b> {{ build.status|capitalize }}</li>
-        <li><b>State:</b> {{ build.state|capitalize }}</li>
+        {% if build.state.indexOf('running') !== -1 %} <li><b>State:</b> <span style="color: greenyellow;  text-decoration: underline;">{{ build.state|capitalize }}</span> <span class="glyphicon glyphicon-refresh" aria-hidden="true" style="color: greenyellow;"></span></li> {% endif %}
+        {% if build.state.indexOf('finished') !== -1 %} <li><b>State:</b> <span style="color: dodgerblue;">{{ build.state|capitalize }}</span> <span class="glyphicon glyphicon-ok-sign" aria-hidden="true" style="color: dodgerblue;"></span></li> {% endif %}
         <li><b>Agent Name: <a href="{{ agent.href }}">{{ agent.name|capitalize }}</a></b></li>
         <li><b>Project Name:</b> {{ build.configuration.projectName|capitalize }}</li>
     </div>
