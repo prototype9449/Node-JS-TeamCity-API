@@ -42,8 +42,10 @@ function MainSocket(server, storage, time) {
                 console.time("main");
                 console.timeEnd("connection start");
 
+                var buildCount = 5;
+
                 var client = {
-                    buildHelper: new self.objectHelper('builds', self.storage.getBuilds, optionHelper.getBuildOptions()),
+                    buildHelper: new self.objectHelper('builds', self.storage.getBuilds, optionHelper.getBuildOptions(buildCount)),
                     agentHelper: new self.objectHelper('agents', self.storage.getAgents, optionHelper.getAgentOptions()),
                     socket: socket
                 };

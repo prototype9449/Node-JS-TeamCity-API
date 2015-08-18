@@ -1,4 +1,5 @@
 $(function () {
+    $("#progress-bar-animation").remove();
 
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -18,7 +19,6 @@ $(function () {
 
     socket.on('build', function (data) {
         var build = JSON.parse(data);
-        $("#progress-bar-animation").remove();
         updateElements(build[0].htmlContent, 'Build-panel');
     });
 });

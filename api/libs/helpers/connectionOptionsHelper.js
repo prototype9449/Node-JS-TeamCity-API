@@ -21,11 +21,15 @@ var optionsHelper =
         return agentOptions;
     },
 
-    getBuildOptions: function () {
+    getBuildOptions: function (buildCount) {
         var generalOptionTeamCity = config.get('teamCityGeneral');
         var buildOptionTeamCity = config.get('teamCityBuilds');
         var buildOptions = this.clone(generalOptionTeamCity);
-        buildOptions.connection.url += buildOptionTeamCity.relativeUrlWithRunnedBuilds;
+        if(buildCount){
+            buildOptions.connection.url += buildOptionTeamCity.relativeUrllastNumberBuilds + buildCount;
+        } else{
+            buildOptions.connection.url += buildOptionTeamCity.relativeUrlWithRunnedBuilds;
+        }
         buildOptions.options = this.clone(buildOptionTeamCity.options);
 
         return buildOptions;

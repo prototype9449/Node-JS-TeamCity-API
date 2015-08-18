@@ -1,6 +1,5 @@
 var config = require('./../helpers/connectionOptionsHelper');
 var htmlGenerator = require('./../htmlGenerator');
-var generateBuild = require('./../providers/buildProviders/jsonBuildProvider').generateBuildJson;
 var baseSocket = require('./baseSocket');
 
 function SocketManager(server,storage, time, objectType) {
