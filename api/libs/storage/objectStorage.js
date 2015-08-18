@@ -50,6 +50,10 @@ var ObjectStorage = function () {
     }
 
     this.getBuildById = function (id) {
+        return {build: [clone(getObjectById(id, 'builds'))]};
+    };
+
+    this.getBuildHistoryById = function (id) {
         var mainBuild = clone(getObjectById(id, 'builds'));
         var buildsOfConfiguration = [];
         self.builds.map(function (build) {
@@ -58,19 +62,22 @@ var ObjectStorage = function () {
             }
 
         });
-        mainBuild.builds = buildsOfConfiguration;
-        return mainBuild;
+        return {builds: buildsOfConfiguration};
     };
+
     this.getAgentById = function (id) {
-        var agent = clone(getObjectById(id, 'agents'));
+        return {agent: [clone(getObjectById(id, 'agents'))]};
+    };
+
+    this.getAgentHistoryById = function (id) {
         var buildsOfAgent = [];
         self.builds.map(function (build) {
-            if (build.agent.id == agent.id) {
+            if (build.agent.id == id) {
                 buildsOfAgent.push(build);
             }
         });
-        agent.builds = buildsOfAgent;
-        return agent;
+
+        return {builds: buildsOfAgent};
     };
 };
 

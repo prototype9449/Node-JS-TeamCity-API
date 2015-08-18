@@ -3,7 +3,7 @@
     "connection": {
       "url": "http://localhost:8111",
       "auth": {
-        "user": "Unknow",
+        "user": "prototype9449",
         "pass": "termit"
       },
       "headers": {
@@ -23,7 +23,8 @@
     "options": {
       "restApiPath": "/api/agents",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html"
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html",
+      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\agent-history-panel.html"
     }
   },
 
@@ -34,7 +35,8 @@
     "options": {
       "restApiPath": "/api/builds",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html"
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html",
+      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\build-history-panel.html"
     }
   },
   "teamCityBuildTypes": {

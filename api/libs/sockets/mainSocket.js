@@ -1,72 +1,36 @@
-var optionHelper = require('./../helpers/connectionOptionsHelper');
+var config = require('./../helpers/connectionOptionsHelper');
+var htmlGenerator = require('./../htmlGenerator');
+var baseSocket = require('./baseSocket');
 
-function MainSocket(server, storage, time) {
-    this.time = time;
+function MainSocket(server, storage, time, objectType) {
     this.storage = storage;
-    this.objectHelper = require('./../helpers/objectHelper');
-    //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
-    this.io = require('socket.io')(server, {path: '/main'});//WebStorm
-    this.clients = {};
+    this.__proto__ = new baseSocket(server, time, objectType);
+    this.buildCount = 5;
 
     this.sendInfo = function (client) {
+        var buildCount = this.buildCount;
+        client.buildHelper.generateNewObjects(function (builds) {
+            var optionTeamCity = config.getBuildOptions(buildCount);
+            htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
+                client.socket.emit('newBuilds', html);
+            });
+        }, 5);
 
-        client.buildHelper.generateNewObjects(function (newData) {
-            client.socket.emit('newBuilds', newData);
-        },5);
-
-        client.agentHelper.generateNewObjects(function (newData) {
-            client.socket.emit('newAgents', newData);
+        client.agentHelper.generateNewObjects(function (agents) {
+            var optionTeamCity = config.getAgentOptions();
+            htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
+                client.socket.emit('newAgents', html);
+            });
         });
     };
 
-    this.start = function () {
+    this.createClient = function (socket) {
 
-        console.time('start');
-
-        function SetTimer(self) {
-            console.log("timer started");
-            self.interval = setTimeout(function send() {
-
-                for (var id in self.clients) {
-                    self.sendInfo(self.clients[id]);
-                }
-                self.interval = setTimeout(send, self.time);
-            }, 0);
-        }
-
-        function begin(self) {
-            self.io.on('connection', function (socket) {
-                console.time("connection start");
-                socket.emit('connection start');
-
-                console.time("main");
-                console.timeEnd("connection start");
-
-                var buildCount = 5;
-
-                var client = {
-                    buildHelper: new self.objectHelper('builds', self.storage.getBuilds, optionHelper.getBuildOptions(buildCount)),
-                    agentHelper: new self.objectHelper('agents', self.storage.getAgents, optionHelper.getAgentOptions()),
-                    socket: socket
-                };
-                self.clients[socket.id] = client;
-                console.log('Clients online : ' + self.clients);
-                console.timeEnd("main");
-
-                socket.on('disconnect', function () {
-                    delete self.clients[socket.id];
-                });
-
-                SetTimer(self);
-            });
-        }
-
-        begin(this);
-        console.timeEnd('start');
-    };
-
-    this.stop = function () {
-        clearInterval(this.interval);
+        this.clients[socket.id] = {
+            buildHelper: new this.objectHelper('builds', this.storage.getBuilds),
+            agentHelper: new this.objectHelper('agents', this.storage.getAgents),
+            socket: socket
+        };
     };
 }
 

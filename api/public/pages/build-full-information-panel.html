@@ -1,4 +1,4 @@
-<div id="{{ build.id }}" class="panel panel-info">
+<div id="build-{{ build.id }}" class="panel panel-info">
     <div class="panel-heading">
         <b>Build Name: <a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a></b>
     </div>
@@ -13,46 +13,17 @@
         <li><b>Duration:</b>{{ build.duration }}</li>
     </div>
 
-     <h4 style="text-align: center; text-decoration: underline;">History of Builds:</h4>
-    
+    <h4 style="text-align: center; text-decoration: underline;">History of Builds:</h4>
+
     <div>
-        <table class="table">
+        <table class="table" id="history-table-panel">
             <thead>
-                <th>
-                    Build Project Name
-                </th>
-                <th>
-                    Agent Name
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Launch Date
-                </th>
-                <th>
-                   Duration
-                </th>
+            <th>Build Project Name</th>
+            <th> Agent Name</th>
+            <th>Status</th>
+            <th>Launch Date</th>
+            <th>Duration</th>
             </thead>
-            {% for build in builds %}
-            <tr>               
-                <td>
-                    {{ build.build.configuration.projectName|capitalize }}
-                </td>
-                <td>
-                    <a href="{{ build.agent.href }}"> {{ build.agent.name|capitalize }}</a>
-                </td>
-                <td>
-                    {{ build.build.status|capitalize }}
-                </td>
-                <td>
-                    {{ build.build.launchDate|capitalize }}
-                </td>
-                <td>
-                    {{ build.build.duration|capitalize }}
-                </td>
-            </tr>
-            {% endfor %}
         </table>
     </div>
 </div>
