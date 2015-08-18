@@ -105,4 +105,13 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
     })
 };
 
+var launchBuildConfiguration = function(buildTypeId){
+    var optionTeamCity = config.getLaunchBuildsOptions(buildTypeId).connection;
+
+    request.post(optionTeamCity, function(error, response, body){
+        console.log('launch build ' +  buildTypeId);
+    });
+}
+
 module.exports.generateBuildJson = generateFinalBuildJson;
+module.exports.launchBuildConfiguration = launchBuildConfiguration;

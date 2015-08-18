@@ -11,7 +11,13 @@
       }
     }
   },
-
+  
+  "teamCityLaunchBuilds": {
+    "relativeUrl": "/httpAuth/app/rest/buildQueue",
+    "Content-Type": "application/xml",
+    "body" : "<build><buildType id='_id_'/></build>"
+  },
+  
   "teamCityAgents": {
     "relativeUrl": "/httpAuth/app/rest/agents",
     "options": {
@@ -24,14 +30,13 @@
   "teamCityBuilds": {
     "relativeUrl": "/httpAuth/app/rest/builds",
     "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any",
-    "relativeUrllastNumberBuilds" : "/httpAuth/app/rest/builds?locator=count:",
+    "relativeUrllastNumberBuilds": "/httpAuth/app/rest/builds?locator=count:",
     "options": {
       "restApiPath": "/api/builds",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information-panel.html",
       "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html"
     }
   },
-
   "teamCityBuildTypes": {
     "relativeUrl": "/httpAuth/app/rest/buildTypes"
   }
