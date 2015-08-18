@@ -1,8 +1,6 @@
 <div id="{{ build.id }}" class="panel panel-info">
     <div class="panel-heading">
-        <a href="{{ build.href }}">
-            <b>{{ build.configuration.name|capitalize }}</b>
-        </a>
+        <b>Build Name: <a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a></b>
     </div>
 
     <div class="panel-body">
@@ -21,13 +19,7 @@
         <table class="table">
             <thead>
                 <th>
-                    Build Configuration Name
-                </th>
-                <th>
                     Build Project Name
-                </th>
-                <th>
-                    Build Configuration ID
                 </th>
                 <th>
                     Agent Name
@@ -43,15 +35,9 @@
                 </th>
             </thead>
             {% for build in builds %}
-            <tr>
-                <td>
-                    <a href="{{ build.build.href }}">{{ build.build.configuration.name|capitalize }}</a>
-                </td>
+            <tr>               
                 <td>
                     {{ build.build.configuration.projectName|capitalize }}
-                </td>
-                <td>
-                    {{ build.build.configuration.id|capitalize }}
                 </td>
                 <td>
                     <a href="{{ build.agent.href }}"> {{ build.agent.name|capitalize }}</a>

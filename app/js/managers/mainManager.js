@@ -6,9 +6,9 @@ $(function () {
             parent.prepend(data.htmlContent);
             $('#' + data.id).fadeIn(500);
         } else {
-            $('#' + data.id).fadeOut(400);
+            $('#' + data.id).fadeOut(500);
             $('#' + data.id).replaceWith(data.htmlContent);
-            $('#' + data.id).fadeIn(400);
+            $('#' + data.id).fadeIn(500);
 
         }
     }

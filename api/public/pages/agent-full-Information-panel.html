@@ -1,32 +1,39 @@
 <div id="{{ id }}" class="panel panel-info">
-    {% include "agent-brief-information.html" %}
+    <div class="panel-heading">
+        <a href="{{ href }}"><b>Agent Name: {{ name|capitalize }}</b></a>
+    </div>
+    <div class="panel-body">
+        <ol>
+            <li><b>Connected:</b> {{ status.connected|capitalize }}</li>
+            <li><b>Authorized:</b> {{ status.authorized|capitalize }}</li>
+            <li><b>Enabled:</b> {{ status.enabled|capitalize }}</li>
+        </ol>
+        <li><b>Free Space:</b> {{freeSpace|capitalize }} Mb</li>
+    </div>
 
     <h4 style="text-align: center; text-decoration: underline;">History of Builds:</h4>
 
     <div>
         <table class="table">
             <thead>
-                <th>
-                    Build Configuration Name
-                </th>
-                <th>
-                    Build Project Name
-                </th>
-                <th>
-                    Build Configuration ID
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    State
-                </th>
-                <th>
-                    Launch Date
-                </th>
-                <th>
-                    Duration
-                </th>
+            <th>
+                Build Configuration Name
+            </th>
+            <th>
+                Build Project Name
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                Launch Date
+            </th>
+            <th>
+                Duration
+            </th>
             </thead>
             {% for build in builds %}
             <tr>
@@ -35,9 +42,6 @@
                 </td>
                 <td>
                     {{ build.build.configuration.projectName|capitalize }}
-                </td>
-                <td>
-                    {{ build.build.configuration.id|capitalize }}
                 </td>
                 <td>
                     {{ build.build.status|capitalize }}

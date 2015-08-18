@@ -1,0 +1,10 @@
+<div id="{{ id }}" class="panel panel-info" style="display: none">
+    <div class="panel-heading">
+        <b><a href="{{ href }}">{{ name|capitalize }}</a></b>
+    </div>
+    <div class="panel-body">
+        <li><b>Ready : {{ status.ready |capitalize}}</b></li>
+        <li><b>Free Space:</b> {{freeSpace|capitalize }} Mb</li>
+        <li><b>Current Tasks:</b> --</li>
+    </div>
+</div>

@@ -16,7 +16,7 @@
     "relativeUrl": "/httpAuth/app/rest/agents",
     "options": {
       "restApiPath": "/api/agents",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-information-panel.html",
+      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-brief-information-panel.html",
       "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html"
     }
   },
@@ -26,7 +26,7 @@
     "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any",
     "options": {
       "restApiPath": "/api/builds",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information.html",
+      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information-panel.html",
       "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html"
     }
   },
