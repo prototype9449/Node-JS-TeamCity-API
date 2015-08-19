@@ -7,15 +7,21 @@ function DataProvider(storage, time) {
     this.time = time || 4000;
 
     this.saveBuilds = function (self) {
-        var connection = optionHelper.getBuildOptions().connection;
-        generateObjects(undefined, connection, function (data) {
+        var builds = self.storage.getBuilds().builds;
+        var connection;
+        if (builds.length == 0) {
+            connection = optionHelper.getBuildOptions().connection;
+        } else {
+            connection = optionHelper.getBuildOptions(builds[0].id).connection;
+        }
+        generateObjects(connection, function (data) {
             self.storage.pushBuilds(data.builds);
         });
     };
 
     this.saveAgents = function (self) {
         var connection = optionHelper.getAgentOptions().connection;
-        generateObjects(undefined, connection, function (data) {
+        generateObjects(connection, function (data) {
             self.storage.pushAgents(data.agents);
         });
     };

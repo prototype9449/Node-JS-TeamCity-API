@@ -13,7 +13,7 @@ var ObjectStorage = function () {
     };
 
     this.pushBuilds = function (builds) {
-        self.builds = builds;
+        self.builds = [].concat(builds,self.builds);
     };
 
     var getSpliceArray = function (array, number) {

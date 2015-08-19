@@ -28,13 +28,13 @@ var optionsHelper =
         launchBuildsOptions.connection.body = launchBuildsOptionTeamCity.body.replace('_id_', buildTypeId);
         return launchBuildsOptions;
     },
-    getBuildOptions: function (buildCount) {
+    getBuildOptions: function (sinceBuildId) {
         var generalOptionTeamCity = config.get('teamCityGeneral');
         var buildOptionTeamCity = config.get('teamCityBuilds');
         var buildOptions = this.clone(generalOptionTeamCity);
-        if(buildCount){
-            buildOptions.connection.url += buildOptionTeamCity.relativeUrllastNumberBuilds + buildCount;
-        } else{
+        if (sinceBuildId) {
+            buildOptions.connection.url += buildOptionTeamCity.relativeUrlSinceIdBuilds + sinceBuildId;
+        } else {
             buildOptions.connection.url += buildOptionTeamCity.relativeUrlWithRunnedBuilds;
         }
         buildOptions.options = this.clone(buildOptionTeamCity.options);

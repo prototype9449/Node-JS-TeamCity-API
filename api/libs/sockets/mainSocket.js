@@ -8,13 +8,12 @@ function MainSocket(server, storage, time, objectType) {
     this.buildCount = 5;
 
     this.sendInfo = function (client) {
-        var buildCount = this.buildCount;
         client.buildHelper.generateNewObjects(function (builds) {
-            var optionTeamCity = config.getBuildOptions(buildCount);
+            var optionTeamCity = config.getBuildOptions();
             htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
                 client.socket.emit('newBuilds', html);
             });
-        }, 5);
+        }, this.buildCount);
 
         client.agentHelper.generateNewObjects(function (agents) {
             var optionTeamCity = config.getAgentOptions();
