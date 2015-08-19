@@ -9,10 +9,17 @@ function DataProvider(storage, time) {
     this.saveBuilds = function (self) {
         var builds = self.storage.getBuilds().builds;
         var connection;
-        if (builds.length == 0) {
+
+        var getFirstNotRunnedBuildId = function (builds) {
+            builds.map(function (item) {
+                if (item.build.state == 'Finished') return item.id;
+            });
+        };
+        var firstNotRunnedBuildId = getFirstNotRunnedBuildId(builds);
+        if (builds.length == 0 || !firstNotRunnedBuildId) {
             connection = optionHelper.getBuildOptions().connection;
         } else {
-            connection = optionHelper.getBuildOptions(builds[0].id).connection;
+            connection = optionHelper.getBuildOptions(firstNotRunnedBuildId).connection;
         }
         generateObjects(connection, function (data) {
             self.storage.pushBuilds(data.builds);
