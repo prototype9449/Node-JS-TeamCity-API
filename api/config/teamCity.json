@@ -3,7 +3,7 @@
     "connection": {
       "url": "http://localhost:8111",
       "auth": {
-        "user": "prototype9449",
+        "user": "Unknow",
         "pass": "termit"
       },
       "headers": {

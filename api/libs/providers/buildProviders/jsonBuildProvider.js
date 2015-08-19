@@ -39,12 +39,6 @@ var getDateFromString = function (strDate) {
     return new Date(year, month, day, hour, minutes, seconds);
 };
 
-var getDuration = function (start, end) {
-    var timeDiff = Math.abs(start.getTime() - end.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    alert(diffDays);
-};
-
 var getBuildBranchName = function (vscJson) {
     if (vscJson == undefined) {
         var buildBranchName = 'unknown';

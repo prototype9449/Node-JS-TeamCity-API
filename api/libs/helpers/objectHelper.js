@@ -7,12 +7,15 @@ function ObjectHelper(name, getObjects) {
     var selectNewObjects = function (self, objectsFromStorage) {
         var newObjects = [];
         if (self.objectsFromMemory) {
-            var stringObjectsFromMemory = self.objectsFromMemory.map(function (item) {
-                return JSON.stringify(item)
-            });
-            var stringObjectsFromStorage = objectsFromStorage.map(function (item) {
-                return JSON.stringify(item)
-            });
+
+            var transformToString = function(array){
+                return array.map(function (item) {
+                    return JSON.stringify(item)
+                });
+            };
+
+            var stringObjectsFromMemory = transformToString(self.objectsFromMemory);
+            var stringObjectsFromStorage = transformToString(objectsFromStorage);
 
             var addToArrayById = function () {
                 return function (array, item) {
@@ -55,15 +58,17 @@ function ObjectHelper(name, getObjects) {
 
         var newObjects = selectNewObjects(this, objectsFromStorage);
 
-        if (newObjects.sort)
-            newObjects.sort(function (item1, item2) {
+        var sortObjectsById = function (array) {
+            if (!array) return;
+            array.sort(function (item1, item2) {
                 return item2.id - item1.id;
             });
-        if (this.objectsFromMemory.sort)
-            this.objectsFromMemory.sort(function (item1, item2) {
-                return item2.id - item1.id;
-            });
-        if(!newObjects.length) return;
+        };
+
+        sortObjectsById(newObjects);
+        sortObjectsById(this.objectsFromMemory);
+
+        if (!newObjects.length) return;
 
         if (number)
             this.objectsFromMemory.splice(number, this.objectsFromMemory.length);
