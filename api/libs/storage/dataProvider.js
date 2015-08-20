@@ -11,15 +11,16 @@ function DataProvider(storage, time) {
         var connection;
 
         var getFirstNotRunnedBuildId = function (builds) {
-            builds.map(function (item) {
-                if (item.build.state == 'Finished') return item.id;
-            });
+            for(var i = 0; i < builds.length; i++){
+                if (builds[i].build.state == 'finished') return builds[i].id;
+            }
         };
-        var firstNotRunnedBuildId = getFirstNotRunnedBuildId(builds);
-        if (builds.length == 0 || !firstNotRunnedBuildId) {
+
+        var firstFinishedBuildId = getFirstNotRunnedBuildId(builds);
+        if (builds.length == 0 || !firstFinishedBuildId) {
             connection = optionHelper.getBuildOptions().connection;
         } else {
-            connection = optionHelper.getBuildOptions(firstNotRunnedBuildId).connection;
+            connection = optionHelper.getBuildOptions(firstFinishedBuildId).connection;
         }
         generateObjects(connection, function (data) {
             self.storage.pushBuilds(data.builds);
