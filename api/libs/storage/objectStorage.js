@@ -17,7 +17,8 @@ var ObjectStorage = function () {
     };
 
     this.pushBuilds = function (builds) {
-        var buildIds = Enumerable.from(builds).select('$.id').toArray().sort(function(id1, id2) { return id2 - id1;});
+        var buildIds = Enumerable.from(builds).select('$.id').toArray();
+        buildIds .sort(function(id1, id2) { return id2 - id1;});
         var queryBuildsForChange = Enumerable.from(self.builds).where(function(item) { return buildIds.indexOf(item.id) != -1});
 
         var buildIdsForChange = queryBuildsForChange.select('$.id').toArray();
@@ -27,7 +28,7 @@ var ObjectStorage = function () {
 
         for(var i = 0; i < buildsForChange.length; i++){
             var index = buildIds.indexOf(buildsForChange[i].id);
-            buildsForChange[index] = builds[index];
+            buildsForChange[i] = builds[index];
         }
 
         var resultBuilds = [].concat(buildsForAdding, buildsForChange, notChangedBuilds);

@@ -10,7 +10,7 @@ function addNewElements(data, elemName, parentElementId) {
     if (elem.length == 0) {
         var parent = $("#" + parentElementId);
         parent.prepend(data.htmlContent);
-        $('#' + elemName + data.id).fadeIn(500);
+        $('#' + elemName + data.id).slideDown(500);
     } else {
         elem.fadeOut(500);
         elem.replaceWith(data.htmlContent);
