@@ -1,6 +1,7 @@
 var config = require('./../helpers/connectionOptionsHelper');
 var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
+var launchBuild = require('../providers/buildProviders/jsonBuildProvider').launchBuildConfiguration;
 
 function MainSocket(server, storage, time, objectType) {
     this.storage = storage;
@@ -24,6 +25,10 @@ function MainSocket(server, storage, time, objectType) {
     };
 
     this.createClient = function (socket) {
+
+        socket.on('launchBuild', function() {
+            launchBuild('MyRepozitoryGitHub_Build');
+        });
 
         this.clients[socket.id] = {
             buildHelper: new this.objectHelper('builds', this.storage.getBuilds),

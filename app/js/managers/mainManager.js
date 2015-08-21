@@ -15,6 +15,9 @@ $(function () {
         for (var i = 0; i < newAgents.length; i++) {
             addNewElements(newAgents[i], 'agent-', 'agents-panel');
         }
+        $('#launchBuildButton').click(function(){
+            socket.emit('launchBuild');
+        });
     });
 
 });
