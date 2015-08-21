@@ -1,5 +1,7 @@
 body {
-    width: 100%; font-family: 'Abel', sans-serif; font-size: 16px;
+    width: 100%;
+    font-family: 'Abel', sans-serif;
+    font-size: 16px;
 }
 
 th, td {
@@ -7,13 +9,27 @@ th, td {
 }
 
 .home-button {
-    margin-left: auto; margin-right: auto; width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
 }
 
 .table-header {
-    text-align: center; text-decoration: underline;
+    text-align: center;
+    text-decoration: underline;
 }
 
 #progress-bar-animation {
-    width: 400px; margin-left: auto; margin-right: auto; margin-top: 200px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.btn-info {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 80px;
+    height: 35px;
 }

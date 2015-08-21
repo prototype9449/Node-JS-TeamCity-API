@@ -1,5 +1,5 @@
 #main-container {
-    display: flex; margin-left: auto; margin-right: auto; width: 1090px;
+    display: flex; margin-left: auto; margin-right: auto; width: 760px;
 }
 
 .agent-column {
@@ -7,7 +7,7 @@
 }
 
 .builds-column {
-    margin-left: auto; margin-right: auto; margin-top: 5px; display: table; width: 700px;
+    margin-left: auto; margin-right: auto; margin-top: 5px; display: table; width: 350px;
 }
 
 .zero-padding-bottom {

@@ -10,13 +10,19 @@ function DataProvider(storage, time) {
         var builds = self.storage.getBuilds().builds;
         var connection;
 
-        var getFirstNotRunnedBuildId = function (builds) {
-            for(var i = 0; i < builds.length; i++){
-                if (builds[i].build.state == 'finished') return builds[i].id;
+        var getFirstFinishedBuildId = function (builds) {
+            var buildId;
+            for(var i = builds.length-1; i >= 0; i--){
+                if (builds[i].build.state == 'finished') {
+                    buildId =  builds[i].id;
+                } else {
+                    return buildId;
+                }
             }
+            return buildId;
         };
 
-        var firstFinishedBuildId = getFirstNotRunnedBuildId(builds);
+        var firstFinishedBuildId = getFirstFinishedBuildId(builds);
         if (builds.length == 0 || !firstFinishedBuildId) {
             connection = optionHelper.getBuildOptions().connection;
         } else {
