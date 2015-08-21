@@ -10,8 +10,8 @@ $(function () {
             addNewElements(newBuilds[i], 'build-', 'builds-panel');
         }
        
-        $( ".buildInfo:gt(4)").fadeOut(1000);
-        $( ".buildInfo:gt(4)").remove();
+        $( ".buildInfo:gt(7)").fadeOut(1000);
+        $( ".buildInfo:gt(7)").remove();
     });
 
     socket.on('newAgents', function (data) {

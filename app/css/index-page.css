@@ -7,7 +7,7 @@
 }
 
 .builds-column {
-    margin-left: auto; margin-right: auto; margin-top: 5px; display: table; width: 350px;
+    margin-left: auto; margin-right: auto; margin-top: 5px; display: table; width: 700px;
 }
 
 .zero-padding-bottom {
@@ -16,4 +16,10 @@
 
 #second-build-column, #builds-panel {
     width: 100%;
+}
+
+.buildInfo{
+    width:47%;
+    float:left;
+    margin: 10px;
 }
