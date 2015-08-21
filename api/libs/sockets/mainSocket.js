@@ -6,7 +6,7 @@ var launchBuild = require('../providers/buildProviders/jsonBuildProvider').launc
 function MainSocket(server, storage, time, objectType) {
     this.storage = storage;
     this.__proto__ = new baseSocket(server, time, objectType);
-    this.buildCount = 5;
+    this.buildCount = 10;
 
     this.sendInfo = function (client) {
         client.buildHelper.generateNewObjects(function (builds) {
@@ -26,8 +26,12 @@ function MainSocket(server, storage, time, objectType) {
 
     this.createClient = function (socket) {
 
-        socket.on('launchBuild', function() {
-            launchBuild('MyRepozitoryGitHub_Build');
+        socket.on('launchBuild', function(agentId) {
+            if(agentId == 2) {
+                launchBuild('Portal_PortalControls');
+            } else {
+                launchBuild('Portal_PortalCore');
+            }
         });
 
         this.clients[socket.id] = {
