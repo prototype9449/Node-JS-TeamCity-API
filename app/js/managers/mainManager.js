@@ -3,11 +3,15 @@ $(function () {
     //var socket = io.connect('http://localhost', { 'path': '/api/socket.io'}); //IIS
     var socket = io.connect('http://localhost:8080', {'path': '/main'}); //WebStorm
 
+
     socket.on('newBuilds', function (data) {
         var newBuilds = JSON.parse(data);
         for (var i = 0; i < newBuilds.length; i++) {
             addNewElements(newBuilds[i], 'build-', 'builds-panel');
         }
+       
+        $( ".buildInfo:gt(4)").fadeOut(1000);
+        $( ".buildInfo:gt(4)").remove();
     });
 
     socket.on('newAgents', function (data) {
