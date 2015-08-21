@@ -14,10 +14,14 @@ $(function () {
         var newAgents = JSON.parse(data);
         for (var i = 0; i < newAgents.length; i++) {
             addNewElements(newAgents[i], 'agent-', 'agents-panel');
+            var id = newAgents[i].id;
+            (function (id) {
+                $('#launchBuildButton-' + id).click(function () {
+                    socket.emit('launchBuild', id);
+                });
+            }(id));
+
         }
-        $('#launchBuildButton').click(function(){
-            socket.emit('launchBuild');
-        });
     });
 
 });

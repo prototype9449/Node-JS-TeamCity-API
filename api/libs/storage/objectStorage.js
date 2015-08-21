@@ -42,6 +42,8 @@ var ObjectStorage = function () {
 
         if (array.length > number) {
             return array.slice(0, number);
+        } else {
+            return array;
         }
     };
 
