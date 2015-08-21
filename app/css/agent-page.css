@@ -5,3 +5,11 @@
 #Agent-panel {
     margin-top: 5px; display: table; width: 960px; margin-left: auto; margin-right: auto;
 }
+
+#history-table-panel {
+    margin-left: auto; margin-right: auto;
+}
+
+.navbar-header {
+    width: 100%;
+}
