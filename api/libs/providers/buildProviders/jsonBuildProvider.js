@@ -39,12 +39,6 @@ var getDateFromString = function (strDate) {
     return new Date(year, month, day, hour, minutes, seconds);
 };
 
-var getDuration = function (start, end) {
-    var timeDiff = Math.abs(start.getTime() - end.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    alert(diffDays);
-};
-
 var getBuildBranchName = function (vscJson) {
     if (vscJson == undefined) {
         var buildBranchName = 'unknown';
@@ -105,4 +99,13 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
     })
 };
 
+var launchBuildConfiguration = function(buildTypeId){
+    var optionTeamCity = config.getLaunchBuildsOptions(buildTypeId).connection;
+
+    request.post(optionTeamCity, function(error, response, body){
+        console.log('launch build ' +  buildTypeId);
+    });
+}
+
 module.exports.generateBuildJson = generateFinalBuildJson;
+module.exports.launchBuildConfiguration = launchBuildConfiguration;

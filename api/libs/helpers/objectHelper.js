@@ -1,25 +1,21 @@
-function ObjectHelper(name, getObjects, config) {
-    this.htmlGenerator = require('./../htmlGenerator');
-    this.config = config;
+function ObjectHelper(name, getObjects) {
     this.getObjects = getObjects;
     this.count = 0;
     this.objectsFromMemory = null;
     this.name = name;
 
-    this.generateNewObjects = function (callback, number) {
-        var dataFromStorage = this.getObjects(number);
-        var objectsFromStorage = dataFromStorage[this.name];
-        if (!objectsFromStorage) return;
-
+    var selectNewObjects = function (self, objectsFromStorage) {
         var newObjects = [];
-        if (this.objectsFromMemory) {
-            var stringObjectsFromMemory = this.objectsFromMemory.map(function (item) {
-                return JSON.stringify(item)
-            });
-            var stringObjectsFromStorage = objectsFromStorage.map(function (item) {
-                return JSON.stringify(item)
-            });
+        if (self.objectsFromMemory) {
 
+            var transformToString = function(array){
+                return array.map(function (item) {
+                    return JSON.stringify(item)
+                });
+            };
+
+            var stringObjectsFromMemory = transformToString(self.objectsFromMemory);
+            var stringObjectsFromStorage = transformToString(objectsFromStorage);
 
             var addToArrayById = function () {
                 return function (array, item) {
@@ -43,30 +39,41 @@ function ObjectHelper(name, getObjects, config) {
 
             for (var i = 0; i < objectsFromStorage.length; i++) {
                 if (stringObjectsFromMemory.indexOf(stringObjectsFromStorage[i]) == -1) {
-                    addToArrayById(newObjects,objectsFromStorage[i])
-                    addToArrayById(this.objectsFromMemory,objectsFromStorage[i])
+                    addToArrayById(newObjects, objectsFromStorage[i]);
+                    addToArrayById(self.objectsFromMemory, objectsFromStorage[i])
                 }
             }
         }
         else {
             newObjects = objectsFromStorage;
-            this.objectsFromMemory = newObjects;
+            self.objectsFromMemory = newObjects;
         }
+        return newObjects;
+    };
 
-        newObjects.sort(function (item1, item2) {
-            return item2.id - item1.id;
-        });
-        this.objectsFromMemory.sort(function (item1, item2) {
-            return item2.id - item1.id;
-        });
+    this.generateNewObjects = function (callback, number) {
+        var dataFromStorage = this.getObjects(number);
+        var objectsFromStorage = dataFromStorage[this.name];
+        if (!objectsFromStorage) return;
+
+        var newObjects = selectNewObjects(this, objectsFromStorage);
+
+        var sortObjectsById = function (array) {
+            if (!array) return;
+            array.sort(function (item1, item2) {
+                return item2.id - item1.id;
+            });
+        };
+
+        sortObjectsById(newObjects);
+        sortObjectsById(this.objectsFromMemory);
+
+        if (!newObjects.length) return;
 
         if (number)
             this.objectsFromMemory.splice(number, this.objectsFromMemory.length);
 
-        var templatePath = this.config.options.pageHtmlTemplatePath;
-        var result = {};
-        result[this.name] = newObjects;
-        this.htmlGenerator.generateHtmlFromJson(result, templatePath, callback);
+        callback(newObjects);
     };
 }
 

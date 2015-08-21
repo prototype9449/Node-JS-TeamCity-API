@@ -1,3 +1,7 @@
+var Enumerable = require('../linq/linq.min');
+require("../linq/extensions/linq.qunit")({'Enumerable': Enumerable});
+
+//var ar = Enumerable.from([1,2,3,4,5]).where(function(item){ return item > 3 }).toArray();
 var ObjectStorage = function () {
     this.agents = [];
     this.builds = [];
@@ -13,7 +17,24 @@ var ObjectStorage = function () {
     };
 
     this.pushBuilds = function (builds) {
-        self.builds = builds;
+        var buildIds = Enumerable.from(builds).select('$.id').toArray();
+        buildIds .sort(function(id1, id2) { return id2 - id1;});
+        var queryBuildsForChange = Enumerable.from(self.builds).where(function(item) { return buildIds.indexOf(item.id) != -1});
+
+        var buildIdsForChange = queryBuildsForChange.select('$.id').toArray();
+        var buildsForChange = queryBuildsForChange.toArray();
+        var buildsForAdding = Enumerable.from(builds).where(function(item) { return buildIdsForChange.indexOf(item.id) == -1}).toArray();
+        var notChangedBuilds = Enumerable.from(self.builds).where(function(item) { return buildIds.indexOf(item.id) == -1}).toArray();
+
+        for(var i = 0; i < buildsForChange.length; i++){
+            var index = buildIds.indexOf(buildsForChange[i].id);
+            buildsForChange[i] = builds[index];
+        }
+
+        var resultBuilds = [].concat(buildsForAdding, buildsForChange, notChangedBuilds);
+
+        resultBuilds.sort(function(item1, item2) { return item2.id - item1.id;});
+        self.builds = resultBuilds;
     };
 
     var getSpliceArray = function (array, number) {
@@ -24,9 +45,30 @@ var ObjectStorage = function () {
         }
     };
 
+    var getRunningBuildByAgent = function (agentId, self) {
+        for (var i = 0; i < self.builds.length; i++) {
+            if (self.builds[i].build.state == 'running' && self.builds[i].agent.id == agentId) {
+                return self.builds[i];
+            }
+        }
+    };
+
     this.getAgents = function (number) {
-        var result = getSpliceArray(self.agents, number);
-        return {agents: result};
+        var agents = getSpliceArray(self.agents, number);
+        if (!agents) return {agents: []};
+
+        var resultAgents = [];
+        for (var i = 0; i < agents.length; i++) {
+            var agent = clone(agents[i]);
+            var currentRunningBuild = getRunningBuildByAgent(agent.id, self);
+            if (currentRunningBuild) {
+                agent.currentTask = currentRunningBuild.build.configuration.name;
+            } else {
+                agent.currentTask = 'empty';
+            }
+            resultAgents.push(agent);
+        }
+        return {agents: resultAgents};
     };
 
     this.getBuilds = function (number) {
@@ -50,6 +92,10 @@ var ObjectStorage = function () {
     }
 
     this.getBuildById = function (id) {
+        return {build: [clone(getObjectById(id, 'builds'))]};
+    };
+
+    this.getBuildHistoryById = function (id) {
         var mainBuild = clone(getObjectById(id, 'builds'));
         var buildsOfConfiguration = [];
         self.builds.map(function (build) {
@@ -58,20 +104,28 @@ var ObjectStorage = function () {
             }
 
         });
-        mainBuild.builds = buildsOfConfiguration;
-        return mainBuild;
+        return {builds: buildsOfConfiguration};
     };
+
     this.getAgentById = function (id) {
         var agent = clone(getObjectById(id, 'agents'));
+
+        return {agent: [agent]};
+    };
+
+    this.getAgentHistoryById = function (id) {
         var buildsOfAgent = [];
         self.builds.map(function (build) {
-            if (build.agent.id == agent.id) {
+            if (build.agent.id == id) {
                 buildsOfAgent.push(build);
             }
         });
-        agent.builds = buildsOfAgent;
-        return agent;
+
+        return {builds: buildsOfAgent};
     };
 };
+
+
+
 
 module.exports.ObjectStorage = ObjectStorage;

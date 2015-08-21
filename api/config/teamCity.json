@@ -1,9 +1,9 @@
 {
   "teamCityGeneral": {
     "connection": {
-      "url": "http://localhost:8111",
+      "url": "http://192.168.21.120:8111",
       "auth": {
-        "user": "Unknow",
+        "user": "prototype9449",
         "pass": "termit"
       },
       "headers": {
@@ -11,27 +11,34 @@
       }
     }
   },
-
+  
+  "teamCityLaunchBuilds": {
+    "relativeUrl": "/httpAuth/app/rest/buildQueue",
+    "Content-Type": "application/xml",
+    "body" : "<build><buildType id='_id_'/></build>"
+  },
+  
   "teamCityAgents": {
     "relativeUrl": "/httpAuth/app/rest/agents",
     "options": {
       "restApiPath": "/api/agents",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html"
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html",
+      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\agent-history-panel.html"
     }
   },
 
   "teamCityBuilds": {
     "relativeUrl": "/httpAuth/app/rest/builds",
     "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any",
-    "relativeUrllastNumberBuilds" : "/httpAuth/app/rest/builds?locator=count:",
+    "relativeUrlSinceIdBuilds": "/httpAuth/app/rest/builds?locator=running:any,sinceBuild:",
     "options": {
       "restApiPath": "/api/builds",
       "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html"
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html",
+      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\build-history-panel.html"
     }
   },
-
   "teamCityBuildTypes": {
     "relativeUrl": "/httpAuth/app/rest/buildTypes"
   }

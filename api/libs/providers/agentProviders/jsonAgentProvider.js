@@ -1,7 +1,7 @@
 var request = require('request');
 var config = require('./../../helpers/connectionOptionsHelper');
 
-function getMainInfo(agentHref, callback) {
+function generateMainInfo(agentHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
     optionTeamCity.url += agentHref;
 
@@ -12,7 +12,7 @@ function getMainInfo(agentHref, callback) {
     });
 }
 
-function getAgentFreeSpace(jsonAgent) {
+function generateAgentFreeSpace(jsonAgent) {
     var properties = jsonAgent.properties.property;
     for (var i = 0; i < properties.length; i++) {
         if (properties[i].name == 'teamcity.agent.work.dir.freeSpaceMb') {
@@ -21,9 +21,9 @@ function getAgentFreeSpace(jsonAgent) {
     }
 }
 
-function getFinalAgentJson(agentId, agentHref, callback) {
+function generateFinalAgentJson(agentId, agentHref, callback) {
 
-    getMainInfo(agentHref, function (jsonAgent) {
+    generateMainInfo(agentHref, function (jsonAgent) {
 
         var bitStatus = jsonAgent.connected && jsonAgent.authorized && jsonAgent.enabled;
         var ready = bitStatus == true ? 'Yes' : 'No';
@@ -33,7 +33,7 @@ function getFinalAgentJson(agentId, agentHref, callback) {
             id: agentId,
             href: 'agentInfo.html?id=' + agentId,
             name: jsonAgent.name,
-            freeSpace: getAgentFreeSpace(jsonAgent),
+            freeSpace: generateAgentFreeSpace(jsonAgent),
             status: {
                 connected: jsonAgent.connected,
                 authorized: jsonAgent.authorized,
@@ -47,4 +47,4 @@ function getFinalAgentJson(agentId, agentHref, callback) {
     })
 }
 
-module.exports.generateAgentJson = getFinalAgentJson;
+module.exports.generateAgentJson = generateFinalAgentJson;

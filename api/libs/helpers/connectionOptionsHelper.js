@@ -20,14 +20,21 @@ var optionsHelper =
 
         return agentOptions;
     },
-
-    getBuildOptions: function (buildCount) {
+    getLaunchBuildsOptions: function (buildTypeId) {
+        var launchBuildsOptionTeamCity = config.get('teamCityLaunchBuilds');
+        var launchBuildsOptions = this.clone(config.get('teamCityGeneral'));
+        launchBuildsOptions.connection.url += launchBuildsOptionTeamCity.relativeUrl;
+        launchBuildsOptions.connection.headers['Content-Type'] = launchBuildsOptionTeamCity['Content-Type'];
+        launchBuildsOptions.connection.body = launchBuildsOptionTeamCity.body.replace('_id_', buildTypeId);
+        return launchBuildsOptions;
+    },
+    getBuildOptions: function (sinceBuildId) {
         var generalOptionTeamCity = config.get('teamCityGeneral');
         var buildOptionTeamCity = config.get('teamCityBuilds');
         var buildOptions = this.clone(generalOptionTeamCity);
-        if(buildCount){
-            buildOptions.connection.url += buildOptionTeamCity.relativeUrllastNumberBuilds + buildCount;
-        } else{
+        if (sinceBuildId) {
+            buildOptions.connection.url += buildOptionTeamCity.relativeUrlSinceIdBuilds + sinceBuildId;
+        } else {
             buildOptions.connection.url += buildOptionTeamCity.relativeUrlWithRunnedBuilds;
         }
         buildOptions.options = this.clone(buildOptionTeamCity.options);

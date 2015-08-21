@@ -22,12 +22,8 @@ function GeneralSocket(server, time, objectType) {
 
         function begin(self) {
             self.io.on('connection', function (socket) {
+                self.createClient(socket);
 
-                var id = socket.handshake.query.id;
-                self.clients[socket.id] = {
-                    objectId: id,
-                    socket: socket
-                };
                 console.log('Clients online : ' + self.clients);
 
                 socket.on('disconnect', function () {

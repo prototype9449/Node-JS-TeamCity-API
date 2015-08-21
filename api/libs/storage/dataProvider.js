@@ -7,15 +7,29 @@ function DataProvider(storage, time) {
     this.time = time || 4000;
 
     this.saveBuilds = function (self) {
-        var connection = optionHelper.getBuildOptions().connection;
-        generateObjects(undefined, connection, function (data) {
+        var builds = self.storage.getBuilds().builds;
+        var connection;
+
+        var getFirstNotRunnedBuildId = function (builds) {
+            for(var i = 0; i < builds.length; i++){
+                if (builds[i].build.state == 'finished') return builds[i].id;
+            }
+        };
+
+        var firstFinishedBuildId = getFirstNotRunnedBuildId(builds);
+        if (builds.length == 0 || !firstFinishedBuildId) {
+            connection = optionHelper.getBuildOptions().connection;
+        } else {
+            connection = optionHelper.getBuildOptions(firstFinishedBuildId).connection;
+        }
+        generateObjects(connection, function (data) {
             self.storage.pushBuilds(data.builds);
         });
     };
 
     this.saveAgents = function (self) {
         var connection = optionHelper.getAgentOptions().connection;
-        generateObjects(undefined, connection, function (data) {
+        generateObjects(connection, function (data) {
             self.storage.pushAgents(data.agents);
         });
     };

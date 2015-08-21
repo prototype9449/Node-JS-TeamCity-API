@@ -31,30 +31,17 @@ var generateAgents = function (agents, callback) {
     }
 };
 
-var generateObjects = function (number, connection, callback) {
+var generateObjects = function (connection, callback) {
     request.get(connection, function (err, response) {
         if (err) throw err;
 
         var bindingJson = JSON.parse(response.body);
 
-        var getSpliceArray = function (array, number) {
-            if (!number) return array;
-
-            if (array.length > number) {
-                return array.splice(0, number);
-            }
-        };
-
         if (bindingJson.build) {
-            var builds = getSpliceArray(bindingJson.build, number);
-            generateBuilds(builds, callback);
+            generateBuilds(bindingJson.build, callback);
         }
         else if (bindingJson.agent) {
-            var agents = getSpliceArray(bindingJson.agent, number);
-            generateAgents(agents, callback);
-        }
-        else {
-            throw new Error('Unknown type')
+            generateAgents(bindingJson.agent, callback);
         }
     })
 };
