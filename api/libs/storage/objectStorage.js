@@ -1,7 +1,6 @@
 var Enumerable = require('../linq/linq.min');
 require("../linq/extensions/linq.qunit")({'Enumerable': Enumerable});
 
-//var ar = Enumerable.from([1,2,3,4,5]).where(function(item){ return item > 3 }).toArray();
 var ObjectStorage = function () {
     this.agents = [];
     this.builds = [];

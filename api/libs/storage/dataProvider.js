@@ -4,7 +4,7 @@ var optionHelper = require('./../helpers/connectionOptionsHelper');
 function DataProvider(storage, time) {
     this.storage = storage;
     this.interval = {};
-    this.time = time || 4000;
+    this.time = time || 5000;
 
     this.saveBuilds = function (self) {
         var builds = self.storage.getBuilds().builds;
