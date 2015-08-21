@@ -1,24 +1,12 @@
-var config = require('../libs/config');
+var config = require('../libs/helpers/connectionOptionsHelper');
 var handlers = {
-    //test: {
-    //    module: require('./handlers/testHandler'),
-    //    options: null
-    //},
-    fullBuildsInformation: {
-        module: require('./handlers/fullBuildsInformationHandler'),
-        options: null
-    },
-    //error: {
-    //    module: require('./handlers/errorHandler'),
-    //    options: null
-    //},
     agents: {
         module: require('./handlers/entityHandler'),
-        options: config.get("teamCityAgents").options
+        options: config.getAgentOptions()
     },
     build: {
         module: require('./handlers/entityHandler'),
-        options: config.get("teamCityBuilds").options
+        options: config.getBuildOptions()
     }
 };
 

@@ -1,7 +1,7 @@
 {
-  "teamCityBuild": {
+  "teamCityGeneral": {
     "connection": {
-      "url": "http://localhost:8111/httpAuth/app/rest/builds/id:",
+      "url": "http://192.168.21.120:8111",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"
@@ -11,50 +11,35 @@
       }
     }
   },
-  "teamCityVSC": {
-  "connection": {
-    "url": "http://localhost:8111/httpAuth/app/rest/vcs-root-instances/id:",
-    "auth": {
-      "user": "prototype9449",
-      "pass": "termit"
-    },
-    "headers": {
-      "Accept": "application/json"
-    }
-  }
-},
+  
+  "teamCityLaunchBuilds": {
+    "relativeUrl": "/httpAuth/app/rest/buildQueue",
+    "Content-Type": "application/xml",
+    "body" : "<build><buildType id='_id_'/></build>"
+  },
+  
   "teamCityAgents": {
-    "connection": {
-      "url": "http://localhost:8111/httpAuth/app/rest/agents",
-      "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
-      },
-      "headers": {
-        "Accept": "application/json"
-      }
-    },
+    "relativeUrl": "/httpAuth/app/rest/agents",
     "options": {
-      "restApiPath": "/agents",
-      "configOptionName": "teamCityAgents",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-information-panel.html"
+      "restApiPath": "/api/agents",
+      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-brief-information-panel.html",
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html",
+      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\agent-history-panel.html"
     }
   },
+
   "teamCityBuilds": {
-    "connection": {
-      "url": "http://localhost:8111/httpAuth/app/rest/builds",
-      "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
-      },
-      "headers": {
-        "Accept": "application/json"
-      }
-    },
+    "relativeUrl": "/httpAuth/app/rest/builds",
+    "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any",
+    "relativeUrlSinceIdBuilds": "/httpAuth/app/rest/builds?locator=running:any,sinceBuild:",
     "options": {
-      "restApiPath": "/builds",
-      "configOptionName": "teamCityBuilds",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-information-panel.html"
+      "restApiPath": "/api/builds",
+      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information-panel.html",
+      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html",
+      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\build-history-panel.html"
     }
+  },
+  "teamCityBuildTypes": {
+    "relativeUrl": "/httpAuth/app/rest/buildTypes"
   }
 }
