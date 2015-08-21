@@ -1,11 +1,12 @@
 <div id="build-{{ build.id }}" class="panel panel-info buildInfo" style="display: none">
-    <div class="panel-heading">
-        <b><a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a> ({{ build.launchDate }})</b>
+    <div class="panel-heading" style="padding: 7px 15px;">
+        <b><a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a></b> [{{ build.launchDate }}]
     </div>
-    <div class="panel-body">
+    <div class="panel-body" style="padding: 6px;">
         <li><b>Branch Name:</b> {{ build.branchName|capitalize }}</li>
         <li><b>Status:</b> {{ build.status|capitalize }}</li>
-        <li><b>State:</b> {{ build.state|capitalize }}</li>
+        {% if build.state.indexOf('running') !== -1 %} <li><b>State:</b> <span style="color: greenyellow;  text-decoration: underline;">{{ build.state|capitalize }}</span> <span class="glyphicon glyphicon-refresh" aria-hidden="true" style="color: greenyellow;"></span></li> {% endif %}
+        {% if build.state.indexOf('finished') !== -1 %} <li><b>State:</b> <span style="color: dodgerblue;">{{ build.state|capitalize }}</span> <span class="glyphicon glyphicon-ok-sign" aria-hidden="true" style="color: dodgerblue;"></span></li> {% endif %}
         <li><b>Agent Name: <a href="{{ agent.href }}">{{ agent.name|capitalize }}</a></b></li>
         <li><b>Project Name:</b> {{ build.configuration.projectName|capitalize }}</li>
     </div>
