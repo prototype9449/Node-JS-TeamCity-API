@@ -1,4 +1,4 @@
-var routes = require('./libs/routes');
+var routes = require('./requestHandlers/routes');
 var methodOverride = require('method-override');
 var express = require('express');
 var bodyParser = require('body-parser');
