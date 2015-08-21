@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/agent-page.css">
     <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/libs/socket.io-1.3.5.js"></script>
     <script type="text/JavaScript" src="js/libs/jquery-1.10.2.min.js"></script>
@@ -11,17 +13,16 @@
     <script type="text/JavaScript" src="js/helpers/managerHelper.js"></script>
     <title>Agent Information</title>
 </head>
-<body style="font-family: 'Abel', sans-serif; font-size: 16px;">
-<div id="progress-bar-animation" class="progress"
-     style="width: 400px; margin-left: auto; margin-right: auto; margin-top: 200px;">
+<body>
+<div id="progress-bar-animation" class="progress">
     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0"
          aria-valuemax="100" style="width: 400px">
     </div>
 </div>
-<div id="Agent-panel" style="margin-top: 5px; display: table; width: 960px; margin-left: auto; margin-right: auto;">
-    <h4 style="text-align: center; text-decoration: underline;">History of Builds:</h4>
+<div id="Agent-panel">
+    <h4 class="table-header">History of Builds:</h4>
 
-    <nav class="navbar navbar-default" style="width: 900px; margin-left: auto; margin-right: auto;">
+    <nav class="navbar navbar-default agent-history-control">
         <div class="container-fluid">
             <div class="navbar-header">
                 <table class="table" id="history-table-panel">
@@ -39,7 +40,7 @@
     </nav>
 </div>
 
-<nav style="margin-left: auto; margin-right: auto; width: 80px;">
+<nav class="home-button">
     <ul class="pager">
         <li class="next"><a href="/NodeServer/app/index.html"><span aria-hidden="true">&larr;</span>Home</a></li>
     </ul>

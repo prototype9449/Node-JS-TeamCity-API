@@ -7,5 +7,9 @@
         <li><b>Free Space:</b> {{freeSpace|capitalize }} Mb</li>
         <li><b>Current Tasks:</b>{{currentTask|capitalize }}</li>
     </div>
-    <button id="launchBuildButton-{{ id }}" type="button">Launch build</button>
+    <div style="width: 100%; display: flex;">
+        <button type="button" class="btn btn-default btn btn-info" aria-label="Left Align" id="launchBuildButton-{{ id }}" style="margin-left: auto; margin-right: auto; margin-bottom: 5px; width: 110px;">
+            <span class="glyphicon glyphicon-play" aria-hidden="true" ></span>
+        </button>
+    </div>
 </div>

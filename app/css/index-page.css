@@ -1,0 +1,19 @@
+#main-container {
+    display: flex; margin-left: auto; margin-right: auto; width: 1090px;
+}
+
+.agent-column {
+    margin-left: auto; margin-right: auto; margin-top: 5px; display: table; width: 350px;
+}
+
+.builds-column {
+    margin-left: auto; margin-right: auto; margin-top: 5px; display: table; width: 700px;
+}
+
+.zero-padding-bottom {
+    padding-bottom: 0;
+}
+
+#second-build-column, #builds-panel {
+    width: 50%;
+}
