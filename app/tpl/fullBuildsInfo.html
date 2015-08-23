@@ -1,9 +1,33 @@
-<div class="panel panel-default"
-     style="margin-left: auto; margin-right: auto; margin-top: 5px; display: table; width: 350px;">
-    <div class="panel-heading">
-        <h3 class="panel-title">Full Build Information:</h3>
-    </div>
-    <div class="panel-body" id="build-panel">
-        Test full build Info
+<div id="progress-bar-animation" class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+         aria-valuemax="100" style="width: 400px">
     </div>
 </div>
+<div id="Build-panel">
+
+</div>
+<div>
+    <h4 class="table-header">History of Builds:</h4>
+
+    <nav class="navbar navbar-default build-history-control">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <table class="table" id="history-table-panel">
+                    <thead>
+                    <th> Build Project Name</th>
+                    <th> Agent Name</th>
+                    <th> Status</th>
+                    <th> Launch Date</th>
+                    <th> Duration</th>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<nav class="home-button">
+    <ul class="pager">
+        <li class="next"><a href="/NodeServer/app/index.html"><span aria-hidden="true">&larr;</span>Home</a></li>
+    </ul>
+</nav>

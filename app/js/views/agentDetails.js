@@ -1,27 +1,32 @@
-window.AgentView = Backbone.View.extend({
+window.AgentPageView = Backbone.View.extend({
 
-    tagName: "div", // Not required since 'div' is the default if no el or tagName specified
+    tagName: "div",
 
     initialize: function () {
+        console.log('AgentPageView has been created');
         this.template = _.template(tpl.get('fullAgentInfo'));
-        this.model.bind("change", this.render, this);
+
+        this.agentView = {};
+        this.buildHistoryView = {};
     },
 
-    render: function (eventName) {
-        $(this.el).html(this.template(this.model.toJSON()));
+    render: function () {
+        var renderPanel = function (view) {
+            view.render();
+            view.delegateEvents();
+        };
+        $(this.el).html(this.template());
+
+        this.agentView = new ObjectListItemView({model: this.model.agent, router: this.options.router});
+        this.agentViewPanel = this.$('#Agent-panel');
+        this.agentViewPanel.prepend(this.agentView.render().el);
+        this.agentView.delegateEvents();
+        this.agentView.show();
+
+        this.buildHistoryView = new ObjectListView({model: this.model.buildList, router: this.options.router});
+        this.buildHistoryView.$el = this.$('#history-table-panel');
+        renderPanel(this.buildHistoryView);
+
         return this;
-    },
-
-    events: {
-        "change input": "change"
-    },
-
-    change: function (event) {
-        var target = event.target;
-        console.log('changing ' + target.id + ' from: ' + target.defaultValue + ' to: ' + target.value);
-        // You could change your model on the spot, like this:
-        // var change = {};
-        // change[target.name] = target.value;
-        // this.model.set(change);
     }
 });

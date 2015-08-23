@@ -1,8 +1,6 @@
-<tr id="agentHistory-{{ id }}">
-    <td><a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a></td>
-    <td> {{ build.configuration.projectName|capitalize }}</td>
-    <td> {{ build.status|capitalize }}</td>
-    <td> {{ build.state|capitalize }}</td>
-    <td> {{ build.launchDate|capitalize }}</td>
-    <td> {{ build.duration|capitalize }}</td>
-</tr>
+<td><a href="#/build/id:{{build.id}}">{{ build.configuration.name|capitalize }}</a></td>
+<td> {{ build.configuration.projectName|capitalize }}</td>
+<td> {{ build.status|capitalize }}</td>
+<td> {{ build.state|capitalize }}</td>
+<td> {{ build.launchDate|capitalize }}</td>
+<td> {{ build.duration|capitalize }}</td>

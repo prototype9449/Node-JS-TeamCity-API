@@ -1,6 +1,6 @@
-<div id="agent-{{ id }}" class="panel panel-info agentInfo" style="display: none">
+<div id="agent-{{ id }}" class="panel panel-info">
     <div class="panel-heading" style="padding: 7px 15px;">
-        <b><a href="{{ href }}">{{ name|capitalize }}</a></b>
+        <b><a href="#/agent/id:{{id}}">{{ name|capitalize }}</a></b>
     </div>
     <div class="panel-body" style="padding: 6px;">
         <li><b>Ready : {{ status.ready |capitalize}}</b></li>

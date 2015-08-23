@@ -22,4 +22,46 @@
     width:47%;
     float:left;
     margin: 10px;
+    visibility: hidden;
 }
+
+.agentInfo{
+    visibility: hidden;
+}
+
+.fullBuildInfo{
+    visibility: hidden;
+}
+
+.fullAgentInfo{
+    visibility: hidden;
+}
+
+.history{
+
+}
+
+#Build-panel {
+    margin-top: 5px; display: table; width: 960px; margin-left: auto; margin-right: auto;
+}
+
+.build-history-control {
+    width: 900px; margin-left: auto; margin-right: auto;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+#history-table-panel {
+    margin-left: auto; margin-right: auto;
+}
+
+.agent-history-control {
+    width: 900px; margin-left: auto; margin-right: auto;
+}
+
+#Agent-panel {
+    margin-top: 5px; display: table; width: 960px; margin-left: auto; margin-right: auto;
+}
+
