@@ -126,7 +126,4 @@ var ObjectStorage = function () {
     };
 };
 
-
-
-
 module.exports.ObjectStorage = ObjectStorage;

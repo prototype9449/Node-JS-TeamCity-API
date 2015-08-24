@@ -33,3 +33,30 @@ th, td {
     width: 80px;
     height: 35px;
 }
+
+#main-container {
+    display: flex; margin-left: auto; margin-right: auto; width: 1090px;
+}
+
+.agent-column, .builds-column {
+    margin-left: auto; margin-right: auto; margin-top: 5px; display: table;
+}
+
+.agent-column{
+    width: 350px
+}
+
+.builds-column {
+    width: 700px;
+}
+
+.buildInfo, .agentInfo{
+    margin: 5px;
+}
+
+.buildInfo{
+    height: 200px;
+    width:300px;
+    float:left;
+    margin-left: 20px;
+}

@@ -3,11 +3,9 @@
         <b>Agent Name: <a href="{{ href }}"> {{ name|capitalize }}</a></b>
     </div>
     <div class="panel-body">
-        <ol>
-            <li><b>Connected:</b> {{ status.connected|capitalize }}</li>
-            <li><b>Authorized:</b> {{ status.authorized|capitalize }}</li>
-            <li><b>Enabled:</b> {{ status.enabled|capitalize }}</li>
-        </ol>
+        <li><b>Connected:</b> {{ status.connected|capitalize }}</li>
+        <li><b>Authorized:</b> {{ status.authorized|capitalize }}</li>
+        <li><b>Enabled:</b> {{ status.enabled|capitalize }}</li>
         <li><b>Free Space:</b> {{freeSpace|capitalize }} Mb</li>
     </div>
 </div>
