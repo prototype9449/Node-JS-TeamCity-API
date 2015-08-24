@@ -1,20 +1,21 @@
 var generateObjects = require('./../providers/objectProvider').generateObjects;
 var optionHelper = require('./../helpers/connectionOptionsHelper');
 
-function DataProvider(storage, time) {
-    this.storage = storage;
+function DataProvider(storages, time) {
+    this.buildStorage = storages.buildStorage;
+    this.agentStorage = storages.agentStorage;
     this.interval = {};
     this.time = time || 5000;
 
     this.saveBuilds = function (self) {
-        var builds = self.storage.getBuilds().builds;
+        var builds = self.buildStorage.getBuilds().builds;
         var connection;
 
         var getFirstFinishedBuildId = function (builds) {
             var buildId;
-            for(var i = builds.length-1; i >= 0; i--){
+            for (var i = builds.length - 1; i >= 0; i--) {
                 if (builds[i].build.state == 'finished') {
-                    buildId =  builds[i].id;
+                    buildId = builds[i].id;
                 } else {
                     return buildId;
                 }
@@ -29,14 +30,14 @@ function DataProvider(storage, time) {
             connection = optionHelper.getBuildOptions(firstFinishedBuildId).connection;
         }
         generateObjects(connection, function (data) {
-            self.storage.pushBuilds(data.builds);
+            self.buildStorage.pushBuilds(data.builds);
         });
     };
 
     this.saveAgents = function (self) {
         var connection = optionHelper.getAgentOptions().connection;
         generateObjects(connection, function (data) {
-            self.storage.pushAgents(data.agents);
+            self.agentStorage.pushAgents(data.agents);
         });
     };
 

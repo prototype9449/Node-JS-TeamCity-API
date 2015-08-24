@@ -3,9 +3,10 @@ var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 var launchBuild = require('../providers/buildProviders/jsonBuildProvider').launchBuildConfiguration;
 
-function MainSocket(server, storage, time, objectType) {
-    this.storage = storage;
+function MainSocket(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
+    this.buildStorage = storages.buildStorage;
+    this.agentStorage = storages.agentStorage;
     this.buildCount = 10;
 
     this.sendInfo = function (client) {
@@ -35,8 +36,8 @@ function MainSocket(server, storage, time, objectType) {
         });
 
         this.clients[socket.id] = {
-            buildHelper: new this.objectHelper('builds', this.storage.getBuilds),
-            agentHelper: new this.objectHelper('agents', this.storage.getAgents),
+            buildHelper: new this.objectHelper('builds', this.buildStorage.getBuilds),
+            agentHelper: new this.objectHelper('agents', this.agentStorage.getAgents),
             socket: socket
         };
     };

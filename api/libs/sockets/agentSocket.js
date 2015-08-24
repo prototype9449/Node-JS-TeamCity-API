@@ -2,9 +2,11 @@ var config = require('./../helpers/connectionOptionsHelper');
 var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 
-function AgentSocket(server, storage, time, objectType) {
-    this.storage = storage;
+function AgentSocket(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
+    this.buildStorage = storages.buildStorage;
+    this.agentStorage = storages.agentStorage;
+
 
     this.sendInfo = function (client) {
         var optionTeamCity = config.getAgentByIdOptions(client.objectId);
@@ -24,18 +26,19 @@ function AgentSocket(server, storage, time, objectType) {
 
     this.createClient = function (socket) {
         var id = socket.handshake.query.id;
+        var self = this;
 
         var client = {
             objectId: id,
             socket: socket,
             getAgentById: function () {
-                return storage.getAgentById(client.objectId);
+                return self.agentStorage.getAgentById(client.objectId);
             },
             getAgentHistoryById: function () {
-                return storage.getAgentHistoryById(client.objectId);
+                return self.buildStorage.getAgentHistoryById(client.objectId);
             }
         };
-        client.agentHelper = new this.objectHelper('agent', client.getAgentById);
+        client.agentHelper = new this.objectHelper('agents', client.getAgentById);
         client.historyHelper = new this.objectHelper('builds', client.getAgentHistoryById);
 
         this.clients[socket.id] = client;
