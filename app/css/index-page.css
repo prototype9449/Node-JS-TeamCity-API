@@ -19,6 +19,7 @@
 }
 
 .buildInfo{
+    height: 200px;
     width:47%;
     float:left;
     margin: 10px;
