@@ -22,19 +22,18 @@
     width:47%;
     float:left;
     margin: 10px;
-    visibility: hidden;
 }
 
 .agentInfo{
-    visibility: hidden;
+
 }
 
 .fullBuildInfo{
-    visibility: hidden;
+
 }
 
 .fullAgentInfo{
-    visibility: hidden;
+
 }
 
 .history{

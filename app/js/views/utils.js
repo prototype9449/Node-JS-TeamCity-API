@@ -14,7 +14,6 @@ window.ObjectListView = Backbone.View.extend({
         this.model.bind("add", function (model) {
             var item = new ObjectListItemView({model: model, router: self.options.router});
             $(self.$el).prepend(item.render().el);
-            item.show();
         });
 
         this.model.bind("remove", function (model) {
@@ -35,31 +34,22 @@ window.ObjectListItemView = Backbone.View.extend({
 
     attributes: function () {
         return {
-            tagName: this.model.get('viewOptions')['tagName'],
-            id: this.model.get('viewOptions')['blockId'],
-            className: this.model.get('viewOptions')['className']
+            class: this.model.get('viewOptions')['className']
         };
     },
 
     _ensureElement: function () {
         if (!this.el) {
             var attrs = this.attributes() || {};
-            if (this.id) attrs.id = this.id;
-            if (this.className) {
-                attrs['class'] = this.className;
-            }
-            else{
-                attrs['class'] = attrs.className;
-            }
-            if(attrs.tagName)
-            {
-                this.tagName = attrs.tagName;
+            var tagName = this.model.get('viewOptions')['tagName'];
+            if(tagName){
+                this.tagName = tagName;
             }
             this.el = this.make(this.tagName, attrs);
         }
-        else if (_.isString(this.el)) {
-            this.el = $(this.el).get(0);
-        }
+        //else if (_.isString(this.el)) {
+        //    this.el = $(this.el).get(0);
+        //}
     },
 
     initialize: function () {
@@ -79,24 +69,16 @@ window.ObjectListItemView = Backbone.View.extend({
         return this;
     },
 
-    show: function () {
-        $(this.el).slideUp(0).css("visibility", "visible").slideDown(500);
-    },
-
     renderChange: function () {
         var html = this.model.get('body');
         if (html) {
-            $(this.el).fadeOut(500);
+            $(this.el).fadeOut(300);
             $(this.el).html(html);
-            $(this.el).fadeIn(500);
+            $(this.el).fadeIn(300);
         }
         else {
-            $(this.el).delay(500).fadeOut(500);
             var self = $(this.el);
-
-            setTimeout(function () {
-                self.remove()
-            }, 1000);
+            $(this.el).fadeOut(500, function(){ self.remove(); });
         }
 
         return this;

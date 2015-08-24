@@ -77,12 +77,12 @@ window.BuildHistory = Backbone.Model.extend({
 });
 
 var addElement = function (self, model) {
-    var duplicate = Backbone.Collection.prototype.find.call(self, function (agent) {
+    var duplicate =self.find(function (agent) {
         return agent.id == model.id;
     });
 
     if (duplicate) {
-        var index = Backbone.Collection.prototype.indexOf.call(self, duplicate);
+        var index = self.indexOf(duplicate);
         self.models[index].set(model);
     }
     else {
@@ -109,14 +109,14 @@ window.ObjectsCollection = Backbone.Collection.extend({
         addElement(this, model);
         if (this.maxElem)
             if (this.length > this.maxElem)
-                this.old();
+                this.removeOldElements();
     },
 
-    old: function () {
-        var old = Backbone.Collection.prototype.min.call(this, function (build) {
+    removeOldElements: function () {
+        var oldElement = this.min(function (build) {
             return build.get("id");
         });
 
-        Backbone.Collection.prototype.remove.call(this, old);
+        this.remove(oldElement);
     }
 });

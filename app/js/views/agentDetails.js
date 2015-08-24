@@ -21,7 +21,6 @@ window.AgentPageView = Backbone.View.extend({
         this.agentViewPanel = this.$('#Agent-panel');
         this.agentViewPanel.prepend(this.agentView.render().el);
         this.agentView.delegateEvents();
-        this.agentView.show();
 
         this.buildHistoryView = new ObjectListView({model: this.model.buildList, router: this.options.router});
         this.buildHistoryView.$el = this.$('#history-table-panel');

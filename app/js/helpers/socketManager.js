@@ -17,7 +17,7 @@ socketManager = {
             for (var i = 0; i < newAgents.length; i++) {
                 var id = newAgents[i].id;
                 var html = newAgents[i].htmlContent;
-                model.agentList.add({id: 2, body: html});
+                model.agentList.add({id: id, body: html});
 
                 (function (id) {
                     $('#launchBuildButton-' + id).click(function () {

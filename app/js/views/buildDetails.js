@@ -21,7 +21,6 @@ window.BuildPageView = Backbone.View.extend({
         this.buildViewPanel = this.$('#Build-panel');
         this.buildViewPanel.prepend(this.buildView.render().el);
         this.buildView.delegateEvents();
-        this.buildView.show();
 
         this.buildHistoryView =new ObjectListView({model: this.model.buildList,router: this.options.router});
         this.buildHistoryView.$el = this.$('#history-table-panel');
