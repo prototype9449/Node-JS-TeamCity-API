@@ -15,7 +15,7 @@
   "teamCityLaunchBuilds": {
     "relativeUrl": "/httpAuth/app/rest/buildQueue",
     "Content-Type": "application/xml",
-    "body" : "<build><buildType id='_id_'/></build>"
+    "body" : "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>"
   },
   
   "teamCityAgents": {

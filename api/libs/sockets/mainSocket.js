@@ -29,9 +29,9 @@ function MainSocket(server, storages, time, objectType) {
 
         socket.on('launchBuild', function(agentId) {
             if(agentId == 2) {
-                launchBuild('Portal_PortalControls');
+                launchBuild('Portal_PortalControls',agentId);
             } else {
-                launchBuild('Portal_PortalCore');
+                launchBuild('Portal_PortalCore',agentId);
             }
         });
 

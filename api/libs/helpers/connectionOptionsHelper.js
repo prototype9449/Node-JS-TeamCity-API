@@ -20,12 +20,12 @@ var optionsHelper =
 
         return agentOptions;
     },
-    getLaunchBuildsOptions: function (buildTypeId) {
+    getLaunchBuildsOptions: function (buildTypeId, agentId) {
         var launchBuildsOptionTeamCity = config.get('teamCityLaunchBuilds');
         var launchBuildsOptions = this.clone(config.get('teamCityGeneral'));
         launchBuildsOptions.connection.url += launchBuildsOptionTeamCity.relativeUrl;
         launchBuildsOptions.connection.headers['Content-Type'] = launchBuildsOptionTeamCity['Content-Type'];
-        launchBuildsOptions.connection.body = launchBuildsOptionTeamCity.body.replace('_id_', buildTypeId);
+        launchBuildsOptions.connection.body = launchBuildsOptionTeamCity.body.replace('_buildTypeId_', buildTypeId).replace('_agentId', agentId);
         return launchBuildsOptions;
     },
     getBuildOptions: function (sinceBuildId) {
