@@ -6,7 +6,7 @@ function SocketManager(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
     this.buildStorage = storages.buildStorage;
     this.agentStorage = storages.agentStorage;
-
+    var self = this;
     this.sendInfo = function (clients) {
         for (var id in clients) {
             var client = clients[id];
@@ -29,7 +29,7 @@ function SocketManager(server, storages, time, objectType) {
     };
 
     this.sendInitialData = function (socket) {
-
+        self.sendInfo(self.clients);
     };
 
     this.createClient = function (socket) {
