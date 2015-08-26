@@ -25,7 +25,7 @@ var optionsHelper =
         var launchBuildsOptions = this.clone(config.get('teamCityGeneral'));
         launchBuildsOptions.connection.url += launchBuildsOptionTeamCity.relativeUrl;
         launchBuildsOptions.connection.headers['Content-Type'] = launchBuildsOptionTeamCity['Content-Type'];
-        launchBuildsOptions.connection.body = launchBuildsOptionTeamCity.body.replace('_buildTypeId_', buildTypeId).replace('_agentId', agentId);
+        launchBuildsOptions.connection.body = launchBuildsOptionTeamCity.body.replace('_buildTypeId_', buildTypeId).replace('_agentId_', agentId);
         return launchBuildsOptions;
     },
     getBuildOptions: function (sinceBuildId) {
