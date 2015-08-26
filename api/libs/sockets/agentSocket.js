@@ -8,20 +8,29 @@ function AgentSocket(server, storages, time, objectType) {
     this.agentStorage = storages.agentStorage;
 
 
-    this.sendInfo = function (client) {
-        var optionTeamCity = config.getAgentByIdOptions(client.objectId);
+    this.sendInfo = function (clients) {
+        for (var id in clients) {
+            var client = clients[id];
 
-        client.agentHelper.generateNewObjects(function (agents) {
-            htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
-                client.socket.emit('agent', html);
-            });
-        });
+            (function (client) {
+                var optionTeamCity = config.getAgentByIdOptions(client.objectId);
+                client.agentHelper.generateNewObjects(function (agents) {
+                    htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
+                        client.socket.emit('agent', html);
+                    });
+                });
 
-        client.historyHelper.generateNewObjects(function (agentHistory) {
-            htmlGenerator.generateHtmlFromJson({agentHistory: agentHistory}, "agentHistory", optionTeamCity.options.pageHistoryHtmlTemplatePath, function (html) {
-                client.socket.emit('agentHistory', html);
-            });
-        });
+                client.historyHelper.generateNewObjects(function (agentHistory) {
+                    htmlGenerator.generateHtmlFromJson({agentHistory: agentHistory}, "agentHistory", optionTeamCity.options.pageHistoryHtmlTemplatePath, function (html) {
+                        client.socket.emit('agentHistory', html);
+                    });
+                });
+            })(client)
+        }
+    };
+
+    this.sendInitialData = function (socket) {
+
     };
 
     this.createClient = function (socket) {

@@ -11,18 +11,16 @@ function GeneralSocket(server, time, objectType) {
     this.start = function () {
         function SetTimer(self) {
             console.log("timer started");
-            self.interval = setTimeout(function send() {
-
-                for (var id in self.clients) {
-                    self.sendInfo(self.clients[id]);
-                }
-                self.interval = setTimeout(send, self.time);
-            }, 0);
+            self.interval = setInterval(function send() {
+                self.sendInfo(self.clients);
+            }, self.time);
         }
 
         function begin(self) {
             self.io.on('connection', function (socket) {
                 self.createClient(socket);
+
+                self.sendInitialData(socket);
 
                 console.log('Clients online : ' + self.clients);
 

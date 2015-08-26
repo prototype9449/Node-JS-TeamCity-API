@@ -7,20 +7,29 @@ function SocketManager(server, storages, time, objectType) {
     this.buildStorage = storages.buildStorage;
     this.agentStorage = storages.agentStorage;
 
-    this.sendInfo = function (client) {
-        var optionTeamCity = config.getBuildByIdOptions(client.objectId);
+    this.sendInfo = function (clients) {
+        for (var id in clients) {
+            var client = clients[id];
 
-        client.buildHelper.generateNewObjects(function (build) {
-            htmlGenerator.generateHtmlFromJson({builds: build}, "builds", optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
-                client.socket.emit('build', html);
-            });
-        });
+            (function (client) {
+                var optionTeamCity = config.getBuildByIdOptions(client.objectId);
+                client.buildHelper.generateNewObjects(function (build) {
+                    htmlGenerator.generateHtmlFromJson({builds: build}, "builds", optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
+                        client.socket.emit('build', html);
+                    });
+                });
 
-        client.historyHelper.generateNewObjects(function (buildHistory) {
-            htmlGenerator.generateHtmlFromJson({buildHistory: buildHistory}, "buildHistory", optionTeamCity.options.pageHistoryHtmlTemplatePath, function (html) {
-                client.socket.emit('buildHistory', html);
-            });
-        });
+                client.historyHelper.generateNewObjects(function (buildHistory) {
+                    htmlGenerator.generateHtmlFromJson({buildHistory: buildHistory}, "buildHistory", optionTeamCity.options.pageHistoryHtmlTemplatePath, function (html) {
+                        client.socket.emit('buildHistory', html);
+                    });
+                });
+            })(client)
+        }
+    };
+
+    this.sendInitialData = function (socket) {
+
     };
 
     this.createClient = function (socket) {
@@ -31,7 +40,7 @@ function SocketManager(server, storages, time, objectType) {
             objectId: id,
             socket: socket,
             getBuildById: function () {
-                return  self.buildStorage.getBuildById(client.objectId);
+                return self.buildStorage.getBuildById(client.objectId);
             },
             getBuildHistoryById: function () {
                 return self.buildStorage.getBuildHistoryById(client.objectId);
