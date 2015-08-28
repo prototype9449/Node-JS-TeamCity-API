@@ -77,7 +77,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     id: buildId,
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
-                    status: jsonBuild.statusText,
+                    status: jsonBuild.status,
                     state: jsonBuild.state,
                     launchDate: buildLaunchDate.toLocaleString(),
                     duration : duration,
@@ -99,8 +99,8 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
     })
 };
 
-var launchBuildConfiguration = function(buildTypeId){
-    var optionTeamCity = config.getLaunchBuildsOptions(buildTypeId).connection;
+var launchBuildConfiguration = function(buildTypeId, agentId){
+    var optionTeamCity = config.getLaunchBuildsOptions(buildTypeId,agentId).connection;
 
     request.post(optionTeamCity, function(error, response, body){
         console.log('launch build ' +  buildTypeId);

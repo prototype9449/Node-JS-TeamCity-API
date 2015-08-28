@@ -3,40 +3,62 @@ var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 var launchBuild = require('../providers/buildProviders/jsonBuildProvider').launchBuildConfiguration;
 
-function MainSocket(server, storage, time, objectType) {
-    this.storage = storage;
+function MainSocket(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
+    this.buildStorage = storages.buildStorage;
+    this.agentStorage = storages.agentStorage;
+
+    this.buildHelper = new this.objectHelper('builds', this.buildStorage.getBuilds);
+    this.agentHelper = new this.objectHelper('agents', this.agentStorage.getAgents);
     this.buildCount = 10;
 
-    this.sendInfo = function (client) {
-        client.buildHelper.generateNewObjects(function (builds) {
+    var self = this;
+
+    this.sendInfo = function (clients) {
+        self.buildHelper.generateNewObjects(function (builds) {
             var optionTeamCity = config.getBuildOptions();
             htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-                client.socket.emit('newBuilds', html);
+                for (var id in self.clients) {
+                    clients[id].socket.emit('newBuilds', html);
+                }
             });
         }, this.buildCount);
 
-        client.agentHelper.generateNewObjects(function (agents) {
+        self.agentHelper.generateNewObjects(function (agents) {
             var optionTeamCity = config.getAgentOptions();
             htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-                client.socket.emit('newAgents', html);
+                for (var id in self.clients) {
+                    clients[id].socket.emit('newAgents', html);
+                }
             });
+        });
+    };
+
+    this.sendInitialData = function (socket) {
+        var builds = self.buildStorage.getBuilds(this.buildCount)["builds"];
+        var optionTeamCity = config.getBuildOptions();
+        htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
+            socket.emit('newBuilds', html);
+        });
+
+        var agents = self.agentStorage.getAgents()["agents"];
+        optionTeamCity = config.getAgentOptions();
+        htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
+            socket.emit('newAgents', html);
         });
     };
 
     this.createClient = function (socket) {
 
-        socket.on('launchBuild', function(agentId) {
-            if(agentId == 2) {
-                launchBuild('Portal_PortalControls');
+        socket.on('launchBuild', function (agentId) {
+            if (agentId == 2) {
+                launchBuild('Portal_PortalControls', agentId);
             } else {
-                launchBuild('Portal_PortalCore');
+                launchBuild('Portal_PortalCore', agentId);
             }
         });
 
         this.clients[socket.id] = {
-            buildHelper: new this.objectHelper('builds', this.storage.getBuilds),
-            agentHelper: new this.objectHelper('agents', this.storage.getAgents),
             socket: socket
         };
     };

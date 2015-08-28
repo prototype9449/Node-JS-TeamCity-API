@@ -5,7 +5,6 @@ var swig = require('swig');
 
 var generatorHelper = {
     generateHtmlFromJson: function (jsonData, itemName, currentPageTemplateSubdirectoryPath, callback) {
-        console.time('generateHtml');
         var pathDirectory = __dirname + currentPageTemplateSubdirectoryPath;
         var finalHtml = "";
 
@@ -21,15 +20,7 @@ var generatorHelper = {
             controlsWrapperJson.push({id: jsonItem.id, htmlContent: currentHtmlControl});
             finalHtml += currentHtmlControl;
         }
-
-        console.timeEnd('generateHtml');
         callback(JSON.stringify(controlsWrapperJson));
-    },
-
-    generateHtml: function (options, currentPageTemplateSubdirectoryPath, callback) {
-        generateObjects(options, function (jsonData) {
-            generatorHelper.generateHtmlFromJson(jsonData, currentPageTemplateSubdirectoryPath, callback)
-        });
     }
 };
 

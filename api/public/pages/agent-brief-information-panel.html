@@ -1,11 +1,11 @@
-<div id="agent-{{ id }}" class="panel panel-info">
-    <div class="panel-heading" style="padding: 7px 15px;">
+<div id="agent-{{ id }}" class="panel panel-info agentInfo" style="display: none">
+    <div class="panel-heading">
         <b><a href="#/agent/id:{{id}}">{{ name|capitalize }}</a></b>
     </div>
-    <div class="panel-body" style="padding: 6px;">
-        <li><b>Ready : {{ status.ready |capitalize}}</b></li>
-        <li><b>Free Space:</b> {{freeSpace|capitalize }} Mb</li>
-        <li><b>Current Tasks:</b>{{currentTask|capitalize }}</li>
+    <div class="panel-body">
+        <li><b>Ready: {{ status.ready |capitalize}}</b></li>
+        <li><b>Free Space:</b> {{ freeSpace |capitalize }} Mb</li>
+        <li><b>Current Tasks:</b> {{ currentTask |capitalize }}</li>
     </div>
     <div style="width: 100%; display: flex;">
         <button type="button" class="btn btn-info" aria-label="Left Align" id="launchBuildButton-{{ id }}">

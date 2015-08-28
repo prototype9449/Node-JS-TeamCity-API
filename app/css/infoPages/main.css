@@ -1,0 +1,85 @@
+body {
+    width: 100%;
+    font-family: 'Abel', sans-serif;
+    font-size: 16px;
+}
+
+th, td {
+    text-align: center;
+}
+
+.home-button {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+}
+
+.table-header {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#progress-bar-animation {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.btn-info {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 80px;
+    height: 35px;
+}
+
+#main-container {
+    display: flex; margin-left: auto; margin-right: auto; width: 1090px;
+}
+
+.agent-column, .build-column {
+    margin-left: auto; margin-right: auto; margin-top: 5px; display: table;
+}
+
+.agent-column{
+    width: 350px
+}
+
+.build-column {
+    width: 700px;
+}
+
+.buildInfo, .agentInfo{
+    margin: 5px;
+}
+
+.buildInfo{
+    display: none;
+    height: 230px;
+    width:300px;
+    float:left;
+    margin-left: 20px;
+}
+
+.runningState{
+    color: orange;
+}
+
+.glyphicon-cog {
+    animation-name: spin;
+    animation-duration: 600ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    z-index: 100;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
