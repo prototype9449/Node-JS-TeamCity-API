@@ -53,6 +53,22 @@ var getBuildBranchName = function (vscJson) {
     return buildBranchName;
 };
 
+var getProperStatus = function(status,state){
+    var status = status.toLocaleLowerCase();
+    var state = state.toLocaleLowerCase();
+
+    if(state.toLocaleLowerCase() =='running'){
+        return 'running';
+    }
+    if(status == 'unknown'){
+        return 'cancelled';
+    } else if(status == 'failure') {
+        return 'failure';
+    } else {
+        return 'success';
+    }
+};
+
 var generateFinalBuildJson = function (buildId, buildHref, callback) {
     generateBuildJson(buildHref, function (jsonBuild) {
         var buildLaunchDate = getDateFromString(jsonBuild.triggered.date);
@@ -77,8 +93,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     id: buildId,
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
-                    status: jsonBuild.status,
-                    state: jsonBuild.state,
+                    status: getProperStatus(jsonBuild.status,jsonBuild.state),
                     launchDate: buildLaunchDate.toLocaleString(),
                     duration : duration,
                     configuration: {
@@ -93,7 +108,6 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     href: 'agentInfo.html?id=' + jsonBuild.agent.id
                 }
             };
-
             callback(finalJsonBuild);
         })
     })
