@@ -24,8 +24,10 @@ TeamcityController = Backbone.Router.extend({
     mainPage: function () {
         var model = {
             agentList: new ObjectsCollection([], {modelProvider: Agent}),
-            buildList: new ObjectsCollection([], {modelProvider: Build, maxElem : 10 })
+            buildList: new ObjectsCollection([], {modelProvider: Build, maxElem: 10})
         };
+
+        this.mainModel = model;
 
         this.showView('#content', new MainPageView({model: model, router: this}));
         this.socket = socketManager.setMainSocket(model);
@@ -33,9 +35,13 @@ TeamcityController = Backbone.Router.extend({
 
     buildDetails: function (stringId) {
         var id = stringId.split(":")[1];
+        var build = this.mainModel.buildList.find(function (item) {
+            return item.id == id
+        });
+
         var model = {
-            build: new FullBuild({id: id}),
-            buildList: new ObjectsCollection([], {modelProvider: BuildHistory })
+            build: new FullBuild({id: id, object: build.get("object")}),
+            buildList: new ObjectsCollection([], {modelProvider: BuildHistory})
         };
 
         this.showView('#content', new BuildPageView({model: model, router: this}));
@@ -45,10 +51,17 @@ TeamcityController = Backbone.Router.extend({
 
     agentDetails: function (stringId) {
         var id = stringId.split(":")[1];
+        var agent = this.mainModel.agentList.find(function (item) {
+            return item.id == id
+        });
+
         var model = {
-            agent: new FullAgent({id: id}),
-            buildList: new ObjectsCollection([], {modelProvider: AgentHistory })
+            agent: new FullAgent({id: id, object: agent.get("object")}),
+            buildList: new ObjectsCollection([], {modelProvider: AgentHistory})
         };
+
+        this.model = model;
+
 
         this.showView('#content', new AgentPageView({model: model, router: this}));
         this.socket = socketManager.setAgentSocket(model, id);

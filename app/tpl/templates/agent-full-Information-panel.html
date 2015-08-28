@@ -1,11 +1,11 @@
-<div id="agent-<%- data.id %>" class="panel panel-info">
+<div id="agent-<%- id %>" class="panel panel-info">
     <div class="panel-heading">
-        <b>Agent Name: <a href="#/agent/id:<%- data.id %>"> <%- data.name %></a></b>
+        <b>Agent Name: <a href="#/agent/id:<%- id %>"> <%- name %></a></b>
     </div>
     <div class="panel-body">
-        <li><b>Connected:</b> <%- data.status.connected %></li>
-        <li><b>Authorized:</b> <%- data.status.authorized %></li>
-        <li><b>Enabled:</b> <%- data.status.enabled %></li>
-        <li><b>Free Space:</b> <%- data.freeSpace %> Mb</li>
+        <li><b>Connected:</b> <%- status.connected %></li>
+        <li><b>Authorized:</b> <%- status.authorized %></li>
+        <li><b>Enabled:</b> <%- status.enabled %></li>
+        <li><b>Free Space:</b> <%- freeSpace %> Mb</li>
     </div>
 </div>

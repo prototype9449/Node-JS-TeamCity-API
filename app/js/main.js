@@ -16,4 +16,4 @@ $(function () {
     });
 });
 
-_.templateSettings.variable = "data";
+//_.templateSettings.variable = "data";
