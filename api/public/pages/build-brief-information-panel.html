@@ -1,4 +1,4 @@
-<div id="build-{{ build.id }}" class="panel panel-info buildInfo" style="display: none">
+<div id="build-{{ build.id }}" class="panel panel-info buildInfo">
     <div class="panel-heading">
         <b><a href="{{ build.href }}">{{ build.configuration.name|capitalize }}</a></b> [{{ build.launchDate }}]
     </div>
@@ -10,7 +10,7 @@
         <li>
             <b>State:</b>
             <span>{{ build.state|capitalize }}</span>
-            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </li> {% endif %}
 
         {% if build.state.indexOf('finished') !== -1 %}

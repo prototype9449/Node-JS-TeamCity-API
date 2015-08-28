@@ -55,8 +55,26 @@ th, td {
 }
 
 .buildInfo{
+    display: none;
     height: 230px;
     width:300px;
     float:left;
     margin-left: 20px;
+}
+.glyphicon-cog {
+    animation-name: spin;
+    animation-duration: 600ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    z-index: 100;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
