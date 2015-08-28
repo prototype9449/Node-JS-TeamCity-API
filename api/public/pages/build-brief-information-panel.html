@@ -9,7 +9,7 @@
         {% if build.state.indexOf('running') !== -1 %}
         <li>
             <b>State:</b>
-            <span>{{ build.state|capitalize }}</span>
+            <span class="runningState">{{ build.state|capitalize }}</span>
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </li> {% endif %}
 

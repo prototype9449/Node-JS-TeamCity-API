@@ -61,6 +61,11 @@ th, td {
     float:left;
     margin-left: 20px;
 }
+
+.runningState{
+    color: orange;
+}
+
 .glyphicon-cog {
     animation-name: spin;
     animation-duration: 600ms;
