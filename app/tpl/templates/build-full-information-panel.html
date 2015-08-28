@@ -1,0 +1,14 @@
+<div id="build-<%- data.build.id %>" class="panel panel-info">
+    <div class="panel-heading">
+        <b>Build Name: <a href="#/build/id:<%- data.build.id %>"><%- data.build.configuration.name %></a></b>
+    </div>
+    <div class="panel-body">
+        <li><b>Branch Name:</b> <%- data.build.branchName %></li>
+        <li><b>Status:</b> <%- data.build.status %></li>
+        <li><b>State:</b> <%- data.build.state %></li>
+        <li><b>Agent Name:</b> <%- data.agent.name %></li>
+        <li><b>Project Name:</b> <%- data.build.configuration.projectName %></li>
+        <li><b>Launch date:</b> <%- data.build.launchDate %></li>
+        <li><b>Duration:</b> <%- data.build.duration %></li>
+    </div>
+</div>

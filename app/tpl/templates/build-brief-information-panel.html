@@ -1,0 +1,28 @@
+<div id="build-<%- data.build.id %>" class="panel panel-info buildInfo">
+    <div class="panel-heading">
+        <b><a href="#/build/id:<%- data.build.id %>"><%- data.build.configuration.name %></a></b> [<%-
+        data.build.launchDate %>]
+    </div>
+    <div class="panel-body">
+        <li><b>Branch Name:</b> <%- data.build.branchName %></li>
+        <li><b>Status:</b> <%- data.build.status|capitalize %></li>
+
+        <% if (data.build.state.indexOf('running') !== -1) { %>
+        <li>
+            <b>State:</b>
+            <span class="runningState"><%- data.build.state %></span>
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </li>
+        <% } %>
+
+        <% if (data.build.state.indexOf('finished') !== -1) { %>
+        <li>
+            <b>State:</b>
+            <span><%- data.build.state %></span>
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+        </li>
+        <% } %>
+        <li><b>Agent Name: <a href="<%- data.agent.href %>"><%- data.agent.name %></a></b></li>
+        <li><b>Project Name:</b> <%- data.build.configuration.projectName %></li>
+    </div>
+</div>

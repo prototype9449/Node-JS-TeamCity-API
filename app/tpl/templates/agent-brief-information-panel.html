@@ -1,0 +1,15 @@
+<div id="agent-<%-data.id%>" class="panel panel-info agentInfo">
+    <div class="panel-heading">
+        <b><a href="#/agent/id:<%- data.id %>"><%- data.name %></a></b>
+    </div>
+    <div class="panel-body">
+        <li><b>Ready: <%- data.status.ready %></b></li>
+        <li><b>Free Space:</b> <%- data.freeSpace %> Mb</li>
+        <li><b>Current Tasks:</b> <%- data.currentTask %></li>
+    </div>
+    <div style="width: 100%; display: flex;">
+        <button type="button" class="btn btn-info" aria-label="Left Align" id="launchBuildButton- <%- data.id %>">
+            <span class="glyphicon glyphicon-play" aria-hidden="true" ></span>
+        </button>
+    </div>
+</div>
