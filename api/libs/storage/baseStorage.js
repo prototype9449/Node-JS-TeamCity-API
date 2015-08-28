@@ -44,8 +44,7 @@ var ObjectStorage = function (name) {
     };
 
     this.getById = function (id) {
-        var result = {};
-        result[this.name] = [this.clone(this.getObjectById(id, this))];
+        var result = this.clone(this.getObjectById(id, this));
 
         return result;
     };
