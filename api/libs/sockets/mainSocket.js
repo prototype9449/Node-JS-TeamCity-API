@@ -1,5 +1,4 @@
 var config = require('./../helpers/connectionOptionsHelper');
-var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 var launchBuild = require('../providers/buildProviders/jsonBuildProvider').launchBuildConfiguration;
 
@@ -16,36 +15,28 @@ function MainSocket(server, storages, time, objectType) {
 
     this.sendInfo = function (clients) {
         self.buildHelper.generateNewObjects(function (builds) {
-            var optionTeamCity = config.getBuildOptions();
-            htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-                for (var id in self.clients) {
-                    clients[id].socket.emit('newBuilds', html);
-                }
-            });
+            var buildsData = self.pushModels(builds);
+            for (var id in self.clients) {
+                clients[id].socket.emit('newBuilds', buildsData);
+            }
         }, this.buildCount);
 
         self.agentHelper.generateNewObjects(function (agents) {
-            var optionTeamCity = config.getAgentOptions();
-            htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-                for (var id in self.clients) {
-                    clients[id].socket.emit('newAgents', html);
-                }
-            });
+            var agentsData = self.pushModels(agents);
+            for (var id in self.clients) {
+                clients[id].socket.emit('newAgents', agentsData);
+            }
         });
     };
 
     this.sendInitialData = function (socket) {
         var builds = self.buildStorage.getBuilds(this.buildCount)["builds"];
-        var optionTeamCity = config.getBuildOptions();
-        htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-            socket.emit('newBuilds', html);
-        });
+        var buildsData = self.pushModels(builds);
+        socket.emit('newBuilds', buildsData);
 
         var agents = self.agentStorage.getAgents()["agents"];
-        optionTeamCity = config.getAgentOptions();
-        htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-            socket.emit('newAgents', html);
-        });
+        var agentsData = self.pushModels(agents);
+        socket.emit('newAgents', agentsData);
     };
 
     this.createClient = function (socket) {

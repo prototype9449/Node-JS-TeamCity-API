@@ -1,5 +1,4 @@
 var config = require('./../helpers/connectionOptionsHelper');
-var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 
 function AgentSocket(server, storages, time, objectType) {
@@ -13,17 +12,14 @@ function AgentSocket(server, storages, time, objectType) {
             var client = clients[id];
 
             (function (client) {
-                var optionTeamCity = config.getAgentByIdOptions(client.objectId);
                 client.agentHelper.generateNewObjects(function (agents) {
-                    htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
-                        client.socket.emit('agent', html);
-                    });
+                    var agentsData = self.pushModels(agents);
+                    client.socket.emit('agent', agentsData);
                 });
 
                 client.historyHelper.generateNewObjects(function (agentHistory) {
-                    htmlGenerator.generateHtmlFromJson({agentHistory: agentHistory}, "agentHistory", optionTeamCity.options.pageHistoryHtmlTemplatePath, function (html) {
-                        client.socket.emit('agentHistory', html);
-                    });
+                    var buildsData = self.pushModels(agentHistory);
+                    client.socket.emit('agentHistory', buildsData);
                 });
             })(client)
         }

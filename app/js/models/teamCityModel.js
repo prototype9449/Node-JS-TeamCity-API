@@ -1,7 +1,8 @@
 window.Agent = Backbone.Model.extend({
     defaults: {
         id: "0",
-        body: "",
+        object: {},
+        viewTemplate : "templates/agent-brief-information-panel",
         pathPart: "/agent/id:",
         viewOptions: {
             className: "agentInfo",
@@ -14,7 +15,8 @@ window.Agent = Backbone.Model.extend({
 window.Build = Backbone.Model.extend({
     defaults: {
         id: "0",
-        body: "",
+        object: {},
+        viewTemplate : "templates/build-brief-information-panel",
         pathPart: "/build/id:",
         viewOptions: {
             className: "buildInfo",
@@ -27,7 +29,8 @@ window.Build = Backbone.Model.extend({
 window.FullAgent = Backbone.Model.extend({
     defaults: {
         id: "0",
-        body: "",
+        object: {},
+        viewTemplate : "templates/agent-full-Information-panel",
         pathPart: "/agent/id:",
         viewOptions: {
             className: "fullAgentInfo",
@@ -40,7 +43,8 @@ window.FullAgent = Backbone.Model.extend({
 window.FullBuild = Backbone.Model.extend({
     defaults: {
         id: "0",
-        body: "",
+        object: {},
+        viewTemplate : "templates/build-full-information-panel",
         pathPart: "/agent/id:",
         viewOptions: {
             className: "fullBuildInfo",
@@ -53,7 +57,8 @@ window.FullBuild = Backbone.Model.extend({
 window.AgentHistory = Backbone.Model.extend({
     defaults: {
         id: "0",
-        body: "",
+        object: {},
+        viewTemplate : "templates/agent-history-panel",
         pathPart: "/build/id:",
         viewOptions: {
             className: "history",
@@ -66,7 +71,8 @@ window.AgentHistory = Backbone.Model.extend({
 window.BuildHistory = Backbone.Model.extend({
     defaults: {
         id: "0",
-        body: "",
+        object: {},
+        viewTemplate : "templates/build-history-panel",
         pathPart: "/agent/id:",
         viewOptions: {
             className: "history",
