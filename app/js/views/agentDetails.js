@@ -11,20 +11,15 @@ window.AgentPageView = Backbone.View.extend({
     },
 
     render: function () {
-        var renderPanel = function (view) {
-            view.render();
-            view.delegateEvents();
-        };
         $(this.el).html(this.template());
 
-        this.agentView = new ObjectListItemView({model: this.model.agent, router: this.options.router});
-        this.agentViewPanel = this.$('#Agent-panel');
-        this.agentViewPanel.prepend(this.agentView.render().el);
+        this.agentView = new ObjectView({model: this.model.agent, router: this.options.router});
+        this.$('#agent-info').html(this.agentView.render().el);
         this.agentView.delegateEvents();
 
-        this.buildHistoryView = new ObjectListView({model: this.model.buildList, router: this.options.router});
+        this.buildHistoryView = new ObjectCollectionView({model: this.model.buildList, router: this.options.router});
         this.buildHistoryView.$el = this.$('#history-table-panel');
-        renderPanel(this.buildHistoryView);
+        this.buildHistoryView.render();
 
         return this;
     }

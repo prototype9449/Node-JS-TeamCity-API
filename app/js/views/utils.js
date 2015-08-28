@@ -1,38 +1,37 @@
-window.ObjectListView = Backbone.View.extend({
+window.ObjectCollectionView = Backbone.View.extend({
 
     tagName: 'div',
 
     initialize: function () {
-        if (this.model)
-            this.bind(this.model);
+        this.bindEvents(this.model);
     },
 
-    bind: function (model) {
+    bindEvents: function (model) {
         this.model = model;
         this.model.bind("reset", this.render, this);
-        var self = this;
-        this.model.bind("add", function (model) {
-            var item = new ObjectListItemView({model: model, router: self.options.router});
-            $(self.$el).prepend(item.render().el);
-        });
-
+        this.model.bind("add", this.add, this);
         this.model.bind("remove", function (model) {
             model.clear();
         });
     },
 
+    add: function (model) {
+        var item = new ObjectView({model: model, router: this.options.router});
+        $(this.$el).prepend(item.render().el);
+    },
+
     render: function () {
         _.each(this.model.models, function (model) {
-            $(this.$el).prepend(new ObjectListItemView({model: model, router: this.options.router}).render().el);
+            this.add(model);
         }, this);
 
         return this;
     }
 });
 
-window.ObjectListItemView = Backbone.View.extend({
+window.ObjectView = Backbone.View.extend({
 
-    attributes: function () {
+    getAttributes: function () {
         return {
             class: this.model.get('viewOptions')['className']
         };
@@ -40,24 +39,20 @@ window.ObjectListItemView = Backbone.View.extend({
 
     _ensureElement: function () {
         if (!this.el) {
-            var attrs = this.attributes() || {};
+            var attrs = this.getAttributes() || {};
             var tagName = this.model.get('viewOptions')['tagName'];
-            if(tagName){
+            if (tagName) {
                 this.tagName = tagName;
             }
             this.el = this.make(this.tagName, attrs);
         }
-        //else if (_.isString(this.el)) {
-        //    this.el = $(this.el).get(0);
-        //}
     },
 
     initialize: function () {
-        if (this.model)
-            this.bind(this.model);
+        this.bindEvents(this.model);
     },
 
-    bind: function (model) {
+    bindEvents: function (model) {
         this.model = model;
         this.model.bind("change", this.renderChange, this);
     },
@@ -78,7 +73,9 @@ window.ObjectListItemView = Backbone.View.extend({
         }
         else {
             var self = $(this.el);
-            $(this.el).fadeOut(500, function(){ self.remove(); });
+            $(this.el).fadeOut(500, function () {
+                self.remove();
+            });
         }
 
         return this;

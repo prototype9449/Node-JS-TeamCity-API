@@ -76,20 +76,6 @@ window.BuildHistory = Backbone.Model.extend({
     }
 });
 
-var addElement = function (self, model) {
-    var duplicate =self.find(function (agent) {
-        return agent.id == model.id;
-    });
-
-    if (duplicate) {
-        var index = self.indexOf(duplicate);
-        self.models[index].set(model);
-    }
-    else {
-        Backbone.Collection.prototype.add.call(self, model);
-    }
-};
-
 window.ObjectsCollection = Backbone.Collection.extend({
     maxElem: null,
     initialize: function (models, options) {
@@ -106,10 +92,24 @@ window.ObjectsCollection = Backbone.Collection.extend({
     },
 
     add: function (model) {
-        addElement(this, model);
+        this.addElement(this, model);
         if (this.maxElem)
             if (this.length > this.maxElem)
                 this.removeOldElements();
+    },
+
+    addElement: function (self, model) {
+        var duplicate = self.find(function (modelFromStorage) {
+            return modelFromStorage.id == model.id;
+        });
+
+        if (duplicate) {
+            var index = self.indexOf(duplicate);
+            self.models[index].set(model);
+        }
+        else {
+            Backbone.Collection.prototype.add.call(self, model);
+        }
     },
 
     removeOldElements: function () {

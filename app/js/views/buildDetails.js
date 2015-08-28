@@ -11,20 +11,16 @@ window.BuildPageView = Backbone.View.extend({
     },
 
     render: function () {
-        var renderPanel = function (view) {
-            view.render();
-            view.delegateEvents();
-        };
+
         $(this.el).html(this.template());
 
-        this.buildView = new ObjectListItemView({model : this.model.build, router: this.options.router});
-        this.buildViewPanel = this.$('#Build-panel');
-        this.buildViewPanel.prepend(this.buildView.render().el);
+        this.buildView = new ObjectView({model : this.model.build, router: this.options.router});
+        this.$('#Build-panel').html(this.buildView.render().el);
         this.buildView.delegateEvents();
 
-        this.buildHistoryView =new ObjectListView({model: this.model.buildList,router: this.options.router});
+        this.buildHistoryView =new ObjectCollectionView({model: this.model.buildList,router: this.options.router});
         this.buildHistoryView.$el = this.$('#history-table-panel');
-        renderPanel(this.buildHistoryView);
+        this.buildHistoryView.render();
 
         return this;
     }
