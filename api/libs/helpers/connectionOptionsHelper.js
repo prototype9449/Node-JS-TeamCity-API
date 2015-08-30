@@ -62,11 +62,21 @@ var optionsHelper =
         return buildOptions;
     },
 
-    getBuildTypeByIdOptions: function (id) {
+    getOneBuildBybuildTypeIdOptions: function (id) {
+        var generalOptionTeamCity = config.get('teamCityGeneral');
+        var buildOptionTeamCity = config.get('teamCityBuilds');
+        var buildOptions = this.clone(generalOptionTeamCity);
+        buildOptions.connection.url += buildOptionTeamCity.relativeUrlOneBuildByBuildTypeId.replace('_buildTypeId_', id);
+
+        return buildOptions;
+    },
+
+    getBuildTypesOptions: function () {
         var generalOptionTeamCity = config.get('teamCityGeneral');
         var buildOptionTeamCity = config.get('teamCityBuildTypes');
         var buildOptions = this.clone(generalOptionTeamCity);
-        buildOptions.connection.url += buildOptionTeamCity.relativeUrl + '/id:' + id;
+        buildOptions.connection.url += buildOptionTeamCity.relativeUrl;
+        buildOptions.options = buildOptionTeamCity.options;
 
         return buildOptions;
     }
