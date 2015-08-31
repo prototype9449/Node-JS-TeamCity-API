@@ -7,14 +7,18 @@ var app = express();
 var server = require('http').createServer(app);
 
 var AgentStorage = require('./libs/storage/agentStorage').AgentStorage;
-var BuildStorage = require('./libs/storage/buildStorage').BuildStorage;
+var GeneralBuildStorage = require('./libs/storage/buildStorage').GeneralBuildStorage;
+var AdditionalBuildStorage = require('./libs/storage/additionalBuildStorage').AdditionalBuildStorage;
 
-var buildsStorage = new BuildStorage();
-var agentStorage = new AgentStorage(buildsStorage);
+var generalBuildStorage = new GeneralBuildStorage();
+var agentStorage = new AgentStorage(generalBuildStorage);
+var additionalBuildStorage = new AdditionalBuildStorage();
+
 
 var storages = {
-    buildStorage: buildsStorage,
-    agentStorage: agentStorage
+    generalBuildStorage: generalBuildStorage,
+    agentStorage: agentStorage,
+    additionalBuildStorage : additionalBuildStorage
 };
 
 var DataProvider = new require('./libs/storage/dataProvider');

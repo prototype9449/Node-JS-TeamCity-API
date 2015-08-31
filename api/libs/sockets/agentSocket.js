@@ -3,7 +3,7 @@ var baseSocket = require('./baseSocket');
 
 function AgentSocket(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
-    this.buildStorage = storages.buildStorage;
+    this.generalBuildStorage = storages.generalBuildStorage;
     this.agentStorage = storages.agentStorage;
     var self = this;
 
@@ -40,7 +40,7 @@ function AgentSocket(server, storages, time, objectType) {
                 return self.agentStorage.getAgentById(client.objectId);
             },
             getAgentHistoryById: function () {
-                return self.buildStorage.getAgentHistoryById(client.objectId);
+                return self.generalBuildStorage.getAgentHistoryById(client.objectId);
             }
         };
         client.agentHelper = new this.objectHelper('agents', client.getAgentById);

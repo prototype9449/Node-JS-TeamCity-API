@@ -14,7 +14,7 @@
 
   "additionalTeamCity": {
     "connection": {
-      "url": "192.168.21.112:8111",
+      "url": "http://localhost:8111",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"

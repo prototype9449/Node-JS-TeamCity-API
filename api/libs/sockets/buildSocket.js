@@ -2,7 +2,7 @@ var baseSocket = require('./baseSocket');
 
 function SocketManager(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
-    this.buildStorage = storages.buildStorage;
+    this.generalBuildStorage = storages.generalBuildStorage;
     this.agentStorage = storages.agentStorage;
     var self = this;
     this.sendInfo = function (clients) {
@@ -11,7 +11,7 @@ function SocketManager(server, storages, time, objectType) {
 
             (function (client) {
 
-                client.buildHelper.generateNewObjects(function (build) {
+                client.generalBuildHelper.generateNewObjects(function (build) {
                     var buildsData = self.pushModels(build);
                     client.socket.emit('build', buildsData);
                 });
@@ -36,14 +36,14 @@ function SocketManager(server, storages, time, objectType) {
             objectId: id,
             socket: socket,
             getBuildById: function () {
-                return self.buildStorage.getBuildById(client.objectId);
+                return self.generalBuildStorage.getBuildById(client.objectId);
             },
             getBuildHistoryById: function () {
-                return self.buildStorage.getBuildHistoryById(client.objectId);
+                return self.generalBuildStorage.getBuildHistoryById(client.objectId);
             }
         };
 
-        client.buildHelper = new this.objectHelper('builds', client.getBuildById);
+        client.generalBuildHelper = new this.objectHelper('builds', client.getBuildById);
         client.historyHelper = new this.objectHelper('builds', client.getBuildHistoryById);
         this.clients[socket.id] = client;
     };
