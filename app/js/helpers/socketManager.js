@@ -3,7 +3,7 @@ socketManager = {
 
         var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});
 
-        socket.on('newBuilds', function (newBuilds) {
+        socket.on('generalBuilds', function (newBuilds) {
             for (var i = 0; i < newBuilds.length; i++) {
                 var id = newBuilds[i].id;
                 var object = newBuilds[i].model;
@@ -11,7 +11,7 @@ socketManager = {
             }
         });
 
-        socket.on('newAgents', function (newAgents) {
+        socket.on('agents', function (newAgents) {
             for (var i = 0; i < newAgents.length; i++) {
                 var id = newAgents[i].id;
                 var object = newAgents[i].model;

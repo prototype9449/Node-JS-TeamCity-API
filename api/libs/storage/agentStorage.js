@@ -6,7 +6,7 @@ var AgentStorage = function (buildProvider) {
     var self = this;
 
     this.pushAgents = function (agents) {
-        self.push(agents);
+        self.pushObjects(agents);
     };
 
     var getRunningBuildByAgent = function (agentId, buildProvider) {

@@ -1,3 +1,4 @@
+var config = require('./../helpers/generalConnectionOptionHelper');
 var baseSocket = require('./baseSocket');
 var launchBuild = require('../providers/jsonBuildProvider').launchBuildConfiguration;
 
@@ -16,14 +17,14 @@ function MainSocket(server, storages, time, objectType) {
         self.buildHelper.generateNewObjects(function (builds) {
             var buildsData = self.pushModels(builds);
             for (var id in self.clients) {
-                clients[id].socket.emit('newBuilds', buildsData);
+                clients[id].socket.emit('generalBuilds', buildsData);
             }
         }, this.buildCount);
 
         self.agentHelper.generateNewObjects(function (agents) {
             var agentsData = self.pushModels(agents);
             for (var id in self.clients) {
-                clients[id].socket.emit('newAgents', agentsData);
+                clients[id].socket.emit('agents', agentsData);
             }
         });
     };
@@ -31,11 +32,11 @@ function MainSocket(server, storages, time, objectType) {
     this.sendInitialData = function (socket) {
         var builds = self.buildStorage.getBuilds(this.buildCount)["builds"];
         var buildsData = self.pushModels(builds);
-        socket.emit('newBuilds', buildsData);
+        socket.emit('generalBuilds', buildsData);
 
         var agents = self.agentStorage.getAgents()["agents"];
         var agentsData = self.pushModels(agents);
-        socket.emit('newAgents', agentsData);
+        socket.emit('agents', agentsData);
     };
 
     this.createClient = function (socket) {
