@@ -25,7 +25,8 @@ TeamcityController = Backbone.Router.extend({
         this.beforeView();
         var model = {
             agentList: new ObjectsCollection([], {modelProvider: Agent}),
-            buildList: new ObjectsCollection([], {modelProvider: Build, maxElem: 10})
+            generalBuildList: new ObjectsCollection([], {modelProvider: GeneralBuild, maxElem: 10}),
+            additionalBuildList: new ObjectsCollection([], {modelProvider: AdditionalBuild })
         };
 
         this.mainModel = model;

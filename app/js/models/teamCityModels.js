@@ -13,16 +13,30 @@ window.Agent = Backbone.Model.extend({
     }
 });
 
-window.Build = Backbone.Model.extend({
+window.GeneralBuild = Backbone.Model.extend({
     defaults: {
         id: "0",
         object: "",
         options: {
             path: "/build/id:",
             view: {
-                className: "buildInfo",
+                className: "general-buildInfo",
                 tagName: "div",
-                template: "templates/build-brief-information-panel"
+                template: "templates/general-build-brief-information-panel"
+            }
+        }
+    }
+});
+
+window.AdditionalBuild = Backbone.Model.extend({
+    defaults: {
+        id: "0",
+        object: "",
+        options: {
+            view: {
+                className: "additional-buildInfo",
+                tagName: "div",
+                template: "templates/additional-build-brief-information-panel"
             }
         }
     }
