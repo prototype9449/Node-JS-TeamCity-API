@@ -1,4 +1,3 @@
-var config = require('./../helpers/generalConnectionOptionHelper');
 var baseSocket = require('./baseSocket');
 var launchBuild = require('../providers/jsonBuildProvider').launchBuildConfiguration;
 

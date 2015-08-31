@@ -1,4 +1,3 @@
-var config = require('./../helpers/connectionOptionsHelper');
 var baseSocket = require('./baseSocket');
 
 function SocketManager(server, storages, time, objectType) {

@@ -4,23 +4,8 @@
     </div>
     <div class="panel-body">
         <li><b>Branch Name:</b> <%- build.branchName %></li>
-        <li><b>Status:</b> <%- build.status %></li>
+        <li><b>Status: </b><span><%- build.status %></span></li>
 
-        <% if (build.state.indexOf('running') !== -1) { %>
-        <li>
-            <b>State:</b>
-            <span class="runningState"><%- build.state %></span>
-            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-        </li>
-        <% } %>
-
-        <% if (build.state.indexOf('finished') !== -1) { %>
-        <li>
-            <b>State:</b>
-            <span><%- build.state %></span>
-            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-        </li>
-        <% } %>
         <li><b>Agent Name: <a href="#/agent/id:<%- agent.id %>"><%- agent.name %></a></b></li>
         <li><b>Project Name:</b> <%- build.configuration.projectName %></li>
     </div>
