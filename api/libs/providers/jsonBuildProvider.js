@@ -1,5 +1,8 @@
 var request = require('request');
-var config = require('./../../helpers/connectionOptionsHelper');
+var config = require('./../helpers/generalConnectionOptionHelper');
+ require('date-format-lite');
+
+Date.masks.default = 'YYYY-MM-DD hh:mm:ss';
 
 var generateBuildJson = function (buildHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
@@ -53,6 +56,22 @@ var getBuildBranchName = function (vscJson) {
     return buildBranchName;
 };
 
+var getProperStatus = function(status,state){
+    var status = status.toLocaleLowerCase();
+    var state = state.toLocaleLowerCase();
+
+    if(state.toLocaleLowerCase() =='running'){
+        return 'running';
+    }
+    if(status == 'unknown'){
+        return 'cancelled';
+    } else if(status == 'failure') {
+        return 'failure';
+    } else {
+        return 'success';
+    }
+};
+
 var generateFinalBuildJson = function (buildId, buildHref, callback) {
     generateBuildJson(buildHref, function (jsonBuild) {
         var buildLaunchDate = getDateFromString(jsonBuild.triggered.date);
@@ -77,9 +96,8 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     id: buildId,
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
-                    status: jsonBuild.status,
-                    state: jsonBuild.state,
-                    launchDate: buildLaunchDate.toLocaleString(),
+                    status: getProperStatus(jsonBuild.status,jsonBuild.state),
+                    launchDate: buildLaunchDate.format(),
                     duration : duration,
                     configuration: {
                         id: jsonBuild.buildTypeId,
@@ -93,7 +111,6 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     href: 'agentInfo.html?id=' + jsonBuild.agent.id
                 }
             };
-
             callback(finalJsonBuild);
         })
     })

@@ -1,5 +1,5 @@
 var request = require('request');
-var config = require('./../../helpers/connectionOptionsHelper');
+var config = require('./../helpers/generalConnectionOptionHelper');
 
 function generateMainInfo(agentHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
@@ -16,7 +16,7 @@ function generateAgentFreeSpace(jsonAgent) {
     var properties = jsonAgent.properties.property;
     for (var i = 0; i < properties.length; i++) {
         if (properties[i].name == 'teamcity.agent.work.dir.freeSpaceMb') {
-            return properties[i].value;
+            return (properties[i].value/1000).toFixed(1);
         }
     }
 }

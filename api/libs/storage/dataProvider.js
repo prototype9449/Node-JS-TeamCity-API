@@ -1,5 +1,5 @@
 var generateObjects = require('./../providers/objectProvider').generateObjects;
-var optionHelper = require('./../helpers/connectionOptionsHelper');
+var connectionOptionHelper = require('./../helpers/generalConnectionOptionHelper');
 
 function DataProvider(storages, time) {
     this.buildStorage = storages.buildStorage;
@@ -25,9 +25,9 @@ function DataProvider(storages, time) {
 
         var firstFinishedBuildId = getFirstFinishedBuildId(builds);
         if (builds.length == 0 || !firstFinishedBuildId) {
-            connection = optionHelper.getBuildOptions().connection;
+            connection = connectionOptionHelper.getBuildOptions().connection;
         } else {
-            connection = optionHelper.getBuildOptions(firstFinishedBuildId).connection;
+            connection = connectionOptionHelper.getBuildOptions(firstFinishedBuildId).connection;
         }
         generateObjects(connection, function (data) {
             self.buildStorage.pushBuilds(data.builds);
@@ -35,7 +35,7 @@ function DataProvider(storages, time) {
     };
 
     this.saveAgents = function (self) {
-        var connection = optionHelper.getAgentOptions().connection;
+        var connection = connectionOptionHelper.getAgentOptions().connection;
         generateObjects(connection, function (data) {
             self.agentStorage.pushAgents(data.agents);
         });

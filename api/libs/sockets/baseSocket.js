@@ -1,6 +1,4 @@
-var config = require('./../helpers/connectionOptionsHelper');
-
-function GeneralSocket(server, time, objectType) {
+function BaseSocket(server, time, objectType) {
     this.time = time;
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
@@ -50,4 +48,4 @@ function GeneralSocket(server, time, objectType) {
     };
 }
 
-module.exports = GeneralSocket;
+module.exports = BaseSocket;

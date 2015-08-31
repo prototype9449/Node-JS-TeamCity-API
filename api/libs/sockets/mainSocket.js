@@ -1,6 +1,6 @@
-var config = require('./../helpers/connectionOptionsHelper');
+var config = require('./../helpers/generalConnectionOptionHelper');
 var baseSocket = require('./baseSocket');
-var launchBuild = require('../providers/buildProviders/jsonBuildProvider').launchBuildConfiguration;
+var launchBuild = require('../providers/jsonBuildProvider').launchBuildConfiguration;
 
 function MainSocket(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
@@ -42,7 +42,7 @@ function MainSocket(server, storages, time, objectType) {
     this.createClient = function (socket) {
 
         socket.on('launchBuild', function (agentId) {
-            if (agentId == 2) {
+            if (agentId != 1) {
                 launchBuild('Portal_PortalControls', agentId);
             } else {
                 launchBuild('Portal_PortalCore', agentId);
