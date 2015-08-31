@@ -1,5 +1,5 @@
 {
-  "teamCityGeneral": {
+  "generalTeamCity": {
     "connection": {
       "url": "http://localhost:8111",
       "auth": {
@@ -11,11 +11,38 @@
       }
     }
   },
+
+  "additionalTeamCity": {
+    "connection": {
+      "url": "192.168.21.112:8111",
+      "auth": {
+        "user": "prototype9449",
+        "pass": "termit"
+      },
+      "headers": {
+        "Accept": "application/json"
+      }
+    },
+
+    "options": {
+      "projects": [
+        {
+          "projectName": "MyRepozitoryGitHub",
+          "buildTypeNames": [
+            "Some other build config",
+            "Tests for hashtebale"
+          ]
+        }
+      ]
+    }
+  },
+
   "teamCityLaunchBuilds": {
     "relativeUrl": "/httpAuth/app/rest/buildQueue",
     "Content-Type": "application/xml",
     "body": "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>"
   },
+
   "teamCityAgents": {
     "relativeUrl": "/httpAuth/app/rest/agents",
     "options": {
@@ -25,6 +52,7 @@
       "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\agent-history-panel.html"
     }
   },
+
   "teamCityBuilds": {
     "relativeUrl": "/httpAuth/app/rest/builds",
     "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any",
@@ -37,14 +65,8 @@
       "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\build-history-panel.html"
     }
   },
+
   "teamCityBuildTypes": {
-    "options": {
-      "projectName": "MyRepozitoryGitHub",
-      "buildTypeNames": [
-        "Some other build config",
-        "Tests for hashtebale"
-      ]
-    },
     "relativeUrl": "/httpAuth/app/rest/buildTypes"
   }
 }

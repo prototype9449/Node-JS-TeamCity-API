@@ -1,4 +1,4 @@
-var config = require('./../helpers/connectionOptionsHelper');
+var config = require('./../helpers/generalConnectionOptionHelper');
 var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 var launchBuild = require('../providers/jsonBuildProvider').launchBuildConfiguration;

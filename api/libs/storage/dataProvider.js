@@ -1,5 +1,5 @@
 var generateObjects = require('./../providers/objectProvider').generateObjects;
-var connectionOptionHelper = require('./../helpers/connectionOptionsHelper');
+var connectionOptionHelper = require('./../helpers/generalConnectionOptionHelper');
 
 function DataProvider(storages, time) {
     this.buildStorage = storages.buildStorage;

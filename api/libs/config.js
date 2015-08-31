@@ -1,8 +1,10 @@
 var nconf = require('nconf');
 nconf.argv().env();
 
-nconf.add('global', {type: 'file', file:  './config/teamCity.json'});
-nconf.add('user', {type: 'file', file: './config/main.json'});
+nconf.add('general', {type: 'file', file:  './config/generalTeamCity.json'});
+//nconf.add('additional', {type: 'file', file:  './config/additionalTeamCity.json'});
+//nconf.add('urlPaths', {type: 'file', file:  './config/urlPaths.json'});
+
 nconf.load();
 
 module.exports = nconf;

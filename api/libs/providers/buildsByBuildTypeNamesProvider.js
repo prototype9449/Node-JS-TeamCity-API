@@ -1,8 +1,8 @@
 var request = require('request');
-var config = require('./../helpers/connectionOptionsHelper');
+var config = require('./../helpers/additionalConnectionOptionHelper');
 
 var generateBuildByBuildTypeId = function (buildTypeId, callback) {
-    var optionTeamCity = config.getOneBuildBybuildTypeIdOptions(buildTypeId).connection;
+    var optionTeamCity = config.getOneBuildByBuildTypeIdOptions(buildTypeId).connection;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
         var json = JSON.parse(response.body);
