@@ -3,11 +3,19 @@ socketManager = {
 
         var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});
 
-        socket.on('generalBuilds', function (newBuilds) {
-            for (var i = 0; i < newBuilds.length; i++) {
-                var id = newBuilds[i].id;
-                var object = newBuilds[i].model;
-                model.buildList.add({id: id, object : object});
+        socket.on('generalBuilds', function (generalBuilds) {
+            for (var i = 0; i < generalBuilds.length; i++) {
+                var id = generalBuilds[i].id;
+                var object = generalBuilds[i].model;
+                model.generalBuildList.add({id: id, object : object});
+            }
+        });
+
+        socket.on('additionalBuilds', function (additionalBuilds) {
+            for (var i = 0; i < additionalBuilds.length; i++) {
+                var id = additionalBuilds[i].id;
+                var object = additionalBuilds[i].model;
+                model.additionalBuildList.add({id: id, object : object});
             }
         });
 

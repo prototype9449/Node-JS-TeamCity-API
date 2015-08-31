@@ -47,7 +47,7 @@ th, td {
 }
 
 .build-column {
-    width: 700px;
+    width: 350px;
 }
 
 .panel-heading {
@@ -56,11 +56,11 @@ th, td {
     white-space: nowrap;
 }
 
-.buildInfo, .agentInfo{
+.general-buildInfo, .additional-buildInfo, .agentInfo{
     margin: 5px;
 }
 
-.buildInfo{
+.buildInfo, .additional-buildInfo{
     height: 230px;
     width:300px;
     float:left;

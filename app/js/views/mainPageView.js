@@ -6,7 +6,8 @@ window.MainPageView = Backbone.View.extend({
         console.log('MainPageView has been created');
         this.template = _.template(tpl.get('mainPage'));
         this.agentListView = {};
-        this.buildListView = {};
+        this.generalBuildListView = {};
+        this.additionalBuildListView = {};
     },
 
     render: function () {
@@ -17,9 +18,13 @@ window.MainPageView = Backbone.View.extend({
         this.agentListView.$el = this.$('#agents-panel');
         this.agentListView.render();
 
-        this.buildListView = new ObjectCollectionView({model: this.model.buildList, router: this.options.router});
-        this.buildListView.$el = this.$('#builds-panel');
-        this.buildListView.render();
+        this.generalBuildListView = new ObjectCollectionView({model: this.model.generalBuildList, router: this.options.router});
+        this.generalBuildListView.$el = this.$('#general-builds-panel');
+        this.generalBuildListView.render();
+
+        this.additionalBuildListView = new ObjectCollectionView({model: this.model.additionalBuildList, router: this.options.router});
+        this.additionalBuildListView.$el = this.$('#additional-builds-panel');
+        this.additionalBuildListView.render();
 
         return this;
     }
