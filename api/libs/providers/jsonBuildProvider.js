@@ -1,5 +1,8 @@
 var request = require('request');
-var config = require('./../../helpers/connectionOptionsHelper');
+var config = require('./../helpers/connectionOptionsHelper');
+ require('date-format-lite');
+
+Date.masks.default = 'YYYY-MM-DD hh:mm:ss';
 
 var generateBuildJson = function (buildHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
@@ -94,7 +97,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
                     status: getProperStatus(jsonBuild.status,jsonBuild.state),
-                    launchDate: buildLaunchDate.toLocaleString(),
+                    launchDate: buildLaunchDate.format(),
                     duration : duration,
                     configuration: {
                         id: jsonBuild.buildTypeId,
