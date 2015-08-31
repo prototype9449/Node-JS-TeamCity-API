@@ -17,3 +17,10 @@ function addNewElements(data, elemName, parentElementId) {
         $('#' + elemName + data.id).fadeIn(300);
     }
 }
+
+$(
+    $(document).on('mouseover','.panel-heading',function(){
+        var innerText = $(this).text();
+        $(this).tooltip({title: innerText});
+    })
+);

@@ -50,6 +50,12 @@ th, td {
     width: 700px;
 }
 
+.panel-heading {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .buildInfo, .agentInfo{
     margin: 5px;
 }
