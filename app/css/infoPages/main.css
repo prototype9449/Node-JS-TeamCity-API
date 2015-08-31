@@ -50,6 +50,12 @@ th, td {
     width: 350px;
 }
 
+.panel-heading {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .general-buildInfo, .additional-buildInfo, .agentInfo{
     margin: 5px;
 }
@@ -65,6 +71,17 @@ th, td {
     color: orange;
 }
 
+.arrow-processing-icon {
+    background-image: url(../../images/arrow-processing-icon.png);
+    animation-name: spin;
+    animation-duration: 600ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
 .glyphicon-cog {
     animation-name: spin;
     animation-duration: 600ms;
@@ -76,9 +93,9 @@ th, td {
 
 @keyframes spin {
     from {
-        transform:rotate(0deg);
+        transform:rotate(360deg);
     }
     to {
-        transform:rotate(360deg);
+        transform:rotate(0deg);
     }
 }

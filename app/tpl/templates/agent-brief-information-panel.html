@@ -4,12 +4,12 @@
     </div>
     <div class="panel-body">
         <li><b>Ready: <%- status.ready %></b></li>
-        <li><b>Free Space:</b> <%- freeSpace %> Mb</li>
+        <li><b>Free Space:</b> <%- freeSpace %> Mb
+            <button type="button" class="btn btn-success launch-button" aria-label="Left Align" id="launchBuildButton-<%- id %>">
+                Fix
+                <span class="glyphicon glyphicon-play" aria-hidden="true" ></span>
+            </button>
+        </li>
         <li><b>Current Tasks:</b> <%- currentTask %></li>
-    </div>
-    <div style="width: 100%; display: flex;">
-        <button type="button" class="btn btn-info" aria-label="Left Align" id="launchBuildButton-<%- id %>">
-            <span class="glyphicon glyphicon-play" aria-hidden="true" ></span>
-        </button>
     </div>
 </div>

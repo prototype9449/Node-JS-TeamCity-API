@@ -20,3 +20,21 @@
 .navbar-header {
     width: 100%;
 }
+
+.launch-button {
+    padding: 0 0;
+    font-size: 13px;
+    width: 40px;
+}
+
+.glyphicon-ok {
+    color: lawngreen;
+}
+
+.glyphicon-remove {
+    color: red;
+}
+
+.glyphicon-ban-circle {
+    color: orange;
+}
