@@ -1,10 +1,9 @@
 var config = require('./../helpers/generalConnectionOptionHelper');
-var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 
 function AgentSocket(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
-    this.buildStorage = storages.buildStorage;
+    this.generalBuildStorage = storages.generalBuildStorage;
     this.agentStorage = storages.agentStorage;
     var self = this;
 
@@ -13,17 +12,14 @@ function AgentSocket(server, storages, time, objectType) {
             var client = clients[id];
 
             (function (client) {
-                var optionTeamCity = config.getAgentByIdOptions(client.objectId);
                 client.agentHelper.generateNewObjects(function (agents) {
-                    htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
-                        client.socket.emit('agent', html);
-                    });
+                    var agentsData = self.pushModels(agents);
+                    client.socket.emit('agent', agentsData);
                 });
 
                 client.historyHelper.generateNewObjects(function (agentHistory) {
-                    htmlGenerator.generateHtmlFromJson({agentHistory: agentHistory}, "agentHistory", optionTeamCity.options.pageHistoryHtmlTemplatePath, function (html) {
-                        client.socket.emit('agentHistory', html);
-                    });
+                    var buildsData = self.pushModels(agentHistory);
+                    client.socket.emit('agentHistory', buildsData);
                 });
             })(client)
         }
@@ -44,7 +40,7 @@ function AgentSocket(server, storages, time, objectType) {
                 return self.agentStorage.getAgentById(client.objectId);
             },
             getAgentHistoryById: function () {
-                return self.buildStorage.getAgentHistoryById(client.objectId);
+                return self.generalBuildStorage.getAgentHistoryById(client.objectId);
             }
         };
         client.agentHelper = new this.objectHelper('agents', client.getAgentById);

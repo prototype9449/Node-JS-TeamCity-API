@@ -1,10 +1,8 @@
-var config = require('./../helpers/generalConnectionOptionHelper');
-var htmlGenerator = require('./../htmlGenerator');
 var baseSocket = require('./baseSocket');
 
 function SocketManager(server, storages, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
-    this.buildStorage = storages.buildStorage;
+    this.generalBuildStorage = storages.generalBuildStorage;
     this.agentStorage = storages.agentStorage;
     var self = this;
     this.sendInfo = function (clients) {
@@ -12,17 +10,15 @@ function SocketManager(server, storages, time, objectType) {
             var client = clients[id];
 
             (function (client) {
-                var optionTeamCity = config.getBuildByIdOptions(client.objectId);
-                client.buildHelper.generateNewObjects(function (build) {
-                    htmlGenerator.generateHtmlFromJson({builds: build}, "builds", optionTeamCity.options.pageFullHtmlTemplatePath, function (html) {
-                        client.socket.emit('build', html);
-                    });
+
+                client.generalBuildHelper.generateNewObjects(function (build) {
+                    var buildsData = self.pushModels(build);
+                    client.socket.emit('build', buildsData);
                 });
 
                 client.historyHelper.generateNewObjects(function (buildHistory) {
-                    htmlGenerator.generateHtmlFromJson({buildHistory: buildHistory}, "buildHistory", optionTeamCity.options.pageHistoryHtmlTemplatePath, function (html) {
-                        client.socket.emit('buildHistory', html);
-                    });
+                    var buildsData = self.pushModels(buildHistory);
+                    client.socket.emit('buildHistory', buildsData);
                 });
             })(client)
         }
@@ -40,14 +36,14 @@ function SocketManager(server, storages, time, objectType) {
             objectId: id,
             socket: socket,
             getBuildById: function () {
-                return self.buildStorage.getBuildById(client.objectId);
+                return self.generalBuildStorage.getBuildById(client.objectId);
             },
             getBuildHistoryById: function () {
-                return self.buildStorage.getBuildHistoryById(client.objectId);
+                return self.generalBuildStorage.getBuildHistoryById(client.objectId);
             }
         };
 
-        client.buildHelper = new this.objectHelper('builds', client.getBuildById);
+        client.generalBuildHelper = new this.objectHelper('builds', client.getBuildById);
         client.historyHelper = new this.objectHelper('builds', client.getBuildHistoryById);
         this.clients[socket.id] = client;
     };

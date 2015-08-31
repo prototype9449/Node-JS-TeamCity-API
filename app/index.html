@@ -4,30 +4,35 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap/bootstrap-theme.min.css">
+
     <link rel="stylesheet" href="css/infoPages/main.css">
-    <link rel="stylesheet" href="css/infoPages/index-page.css">
+    <link rel="stylesheet" href="css/infoPages/agent-page.css">
+
     <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="js/libs/socket.io-1.3.5.js"></script>
-    <script type="text/JavaScript" src="js/libs/jquery-1.10.2.min.js"></script>
-    <script type="text/JavaScript" src="js/managers/mainManager.js"></script>
+
+
+    <script type="text/javascript" src="lib/socket.io-1.3.5.js"></script>
+    <script type="text/JavaScript" src="lib/jquery-1.10.2.min.js"></script>
+    <script type="text/JavaScript" src="lib/bootstrap.min.js"></script>
+    <script type="text/JavaScript" src="lib/underscore-min.js"></script>
+    <script type="text/JavaScript" src="lib/backbone-min.js"></script>
+
+    <script type="text/JavaScript" src="js/helpers/templateHelper.js"></script>
+    <script type="text/JavaScript" src="js/helpers/socketManager.js"></script>
     <script type="text/JavaScript" src="js/helpers/managerHelper.js"></script>
-    <script type="text/JavaScript" src="js/libs/bootstrap.min.js"></script>
+    <script type="text/JavaScript" src="js/controller/teamcityController.js"></script>
+
+    <script type="text/JavaScript" src="js/models/teamCityModels.js"></script>
+    <script type="text/JavaScript" src="js/views/ObjectCollectionView.js"></script>
+    <script type="text/JavaScript" src="js/views/ObjectView.js"></script>
+    <script type="text/JavaScript" src="js/views/agentPageView.js"></script>
+    <script type="text/JavaScript" src="js/views/buildPageView.js"></script>
+    <script type="text/JavaScript" src="js/views/mainPageView.js"></script>
+
+    <script type="text/JavaScript" src="js/main.js"></script>
     <title></title>
 </head>
 <body>
-<div id="main-container">
-    <div class="panel panel-default build-column">
-        <div class="panel-heading">
-            <h3 class="panel-title">Builds:</h3>
-        </div>
-        <div id="builds-panel" class="panel-body zero-padding-bottom"></div>
-    </div>
-    <div class="panel panel-default agent-column">
-        <div class="panel-heading">
-            <h3 class="panel-title">Agents:</h3>
-        </div>
-        <div id="agents-panel" class="panel-body zero-padding-bottom"></div>
-    </div>
-</div>
+     <div id="content"></div>
 </body>
 </html>

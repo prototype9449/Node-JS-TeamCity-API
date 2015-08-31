@@ -6,7 +6,7 @@ var AgentStorage = function (buildProvider) {
     var self = this;
 
     this.pushAgents = function (agents) {
-        self.push(agents);
+        self.pushObjects(agents);
     };
 
     var getRunningBuildByAgent = function (agentId, buildProvider) {
@@ -36,7 +36,15 @@ var AgentStorage = function (buildProvider) {
     };
 
     this.getAgentById = function (id) {
-        return self.getById(id);
+        var objects = self.getById(id);
+        var agent = objects.agents[0];
+        var currentRunningBuild = getRunningBuildByAgent(agent.id, self.buildProvider);
+        if (currentRunningBuild) {
+            agent.currentTask = currentRunningBuild.build.configuration.name;
+        } else {
+            agent.currentTask = 'empty';
+        }
+        return objects;
     };
 
 };

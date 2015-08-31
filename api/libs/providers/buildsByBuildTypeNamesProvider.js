@@ -1,8 +1,8 @@
 var request = require('request');
-var config = require('./../helpers/additionalConnectionOptionHelper');
+var additionalConnectionOptionHelper = require('./../helpers/additionalConnectionOptionHelper');
 
 var generateBuildByBuildTypeId = function (buildTypeId, callback) {
-    var optionTeamCity = config.getOneBuildByBuildTypeIdOptions(buildTypeId).connection;
+    var optionTeamCity = additionalConnectionOptionHelper.getOneBuildByBuildTypeIdOptions(buildTypeId).connection;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
         var json = JSON.parse(response.body);
@@ -28,14 +28,17 @@ var generateBuilds = function (buildTypeIds, callback) {
 };
 
 var generateBuildsByBuildTypeNames = function (options, callback) {
-    var optionTeamCity = config.getBuildTypesOptions().connection;
+
+    var option = options.projects[0];
+
+    var optionTeamCity = additionalConnectionOptionHelper.getBuildTypesOptions().connection;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
         var json = JSON.parse(response.body);
         var buildTypes = json.buildType;
         var result = [];
         for (var i = 0; i < buildTypes.length; i++) {
-            if (options.buildTypeNames.indexOf(buildTypes[i].name) != -1 && options.projectName== buildTypes[i].projectName)
+            if (option.buildTypeNames.indexOf(buildTypes[i].name) != -1 && option.projectName== buildTypes[i].projectName)
                 result.push(buildTypes[i].id);
         }
         generateBuilds(result, callback);

@@ -1,14 +1,18 @@
 var generateObjects = require('./../providers/objectProvider').generateObjects;
 var connectionOptionHelper = require('./../helpers/generalConnectionOptionHelper');
+var generateBuildsByBuildTypeNames = require('../providers/buildsByBuildTypeNamesProvider');
+var additionalConnectionHelper = require('../helpers/additionalConnectionOptionHelper');
 
 function DataProvider(storages, time) {
-    this.buildStorage = storages.buildStorage;
+    this.generalBuildStorage = storages.generalBuildStorage;
+    this.additionalBuildStorage = storages.additionalBuildStorage;
     this.agentStorage = storages.agentStorage;
+    this.additionalBuildStorage = storages.additionalBuildStorage;
     this.interval = {};
     this.time = time || 5000;
 
-    this.saveBuilds = function (self) {
-        var builds = self.buildStorage.getBuilds().builds;
+    this.saveGeneralBuilds = function (self) {
+        var builds = self.generalBuildStorage.getGeneralBuilds().generalBuilds;
         var connection;
 
         var getFirstFinishedBuildId = function (builds) {
@@ -30,7 +34,14 @@ function DataProvider(storages, time) {
             connection = connectionOptionHelper.getBuildOptions(firstFinishedBuildId).connection;
         }
         generateObjects(connection, function (data) {
-            self.buildStorage.pushBuilds(data.builds);
+            self.generalBuildStorage.pushBuilds(data.builds);
+        });
+    };
+
+    this.saveAdditionalBuilds = function(self){
+        var options = additionalConnectionHelper.getGeneralOptions().options;
+       generateBuildsByBuildTypeNames(options, function(builds){
+           self.additionalBuildStorage.pushBuilds(builds);
         });
     };
 
@@ -45,7 +56,8 @@ function DataProvider(storages, time) {
         var self = this;
         self.interval = setInterval(function send() {
             self.saveAgents(self);
-            self.saveBuilds(self);
+            self.saveGeneralBuilds(self);
+            self.saveAdditionalBuilds(self);
         }, this.time);
     }
 }

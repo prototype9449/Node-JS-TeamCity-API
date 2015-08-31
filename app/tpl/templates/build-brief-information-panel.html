@@ -1,0 +1,12 @@
+<div id="build-<%- build.id %>" class="panel panel-info buildInfo">
+    <div class="panel-heading" data-placement="right" data-toggle="tooltip">
+        <b><a href="#/build/id:<%- build.id %>"><%- build.configuration.name %></a></b> [<%- build.launchDate %>]
+    </div>
+    <div class="panel-body">
+        <li><b>Branch Name:</b> <%- build.branchName %></li>
+        <li><b>Status: </b><span><%- build.status %></span></li>
+
+        <li><b>Agent Name: <a href="#/agent/id:<%- agent.id %>"><%- agent.name %></a></b></li>
+        <li><b>Project Name:</b> <%- build.configuration.projectName %></li>
+    </div>
+</div>

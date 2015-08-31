@@ -61,11 +61,10 @@ th, td {
 }
 
 .buildInfo{
-    display: none;
     height: 230px;
     width:300px;
     float:left;
-    margin-left: 20px;
+    margin-left: 12px;
 }
 
 .runningState{

@@ -1,7 +1,7 @@
 {
   "generalTeamCity": {
     "connection": {
-      "url": "http://localhost:8111",
+      "url": "http://192.168.21.100:8111",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"
@@ -14,7 +14,7 @@
 
   "additionalTeamCity": {
     "connection": {
-      "url": "192.168.21.112:8111",
+      "url": "http://localhost:8111",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"
@@ -27,10 +27,10 @@
     "options": {
       "projects": [
         {
-          "projectName": "MyRepozitoryGitHub",
+          "projectName": "Portal",
           "buildTypeNames": [
-            "Some other build config",
-            "Tests for hashtebale"
+            "Portal UIPPocess",
+            "Portal Core"
           ]
         }
       ]
@@ -44,26 +44,13 @@
   },
 
   "teamCityAgents": {
-    "relativeUrl": "/httpAuth/app/rest/agents",
-    "options": {
-      "restApiPath": "/api/agents",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html",
-      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\agent-history-panel.html"
-    }
+    "relativeUrl": "/httpAuth/app/rest/agents"
   },
-
   "teamCityBuilds": {
     "relativeUrl": "/httpAuth/app/rest/builds",
     "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any",
     "relativeUrlSinceIdBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any,sinceBuild:",
-    "relativeUrlOneBuildByBuildTypeId": "/httpAuth/app/rest/buildTypes/id:_buildTypeId_/builds/?locator=running:any,canceled:any,count:1",
-    "options": {
-      "restApiPath": "/api/builds",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html",
-      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\build-history-panel.html"
-    }
+    "relativeUrlOneBuildByBuildTypeId": "/httpAuth/app/rest/buildTypes/id:_buildTypeId_/builds/?locator=running:any,canceled:any,count:1"
   },
 
   "teamCityBuildTypes": {

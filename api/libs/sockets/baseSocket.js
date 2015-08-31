@@ -6,6 +6,17 @@ function BaseSocket(server, time, objectType) {
     this.objectType = objectType;
     this.clients = {};
 
+    this.pushModels = function (models) {
+        var result = [];
+        for (var id in models)
+            result.push({id: models[id].id, model: models[id]});
+
+        result.sort(function (item1, item2) {
+            return item1.id - item2.id;
+        });
+        return result;
+    };
+
     this.start = function () {
         function SetTimer(self) {
             console.log("timer started");
