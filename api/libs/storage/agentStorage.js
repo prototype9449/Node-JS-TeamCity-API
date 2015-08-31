@@ -36,14 +36,15 @@ var AgentStorage = function (buildProvider) {
     };
 
     this.getAgentById = function (id) {
-        var agent = self.getById(id);
+        var objects = self.getById(id);
+        var agent = objects.agents[0];
         var currentRunningBuild = getRunningBuildByAgent(agent.id, self.buildProvider);
         if (currentRunningBuild) {
             agent.currentTask = currentRunningBuild.build.configuration.name;
         } else {
             agent.currentTask = 'empty';
         }
-        return agent;
+        return objects;
     };
 
 };

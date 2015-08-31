@@ -3,8 +3,7 @@ socketManager = {
 
         var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});
 
-        socket.on('newBuilds', function (data) {
-            var newBuilds = data;
+        socket.on('newBuilds', function (newBuilds) {
             for (var i = 0; i < newBuilds.length; i++) {
                 var id = newBuilds[i].id;
                 var object = newBuilds[i].model;
@@ -12,8 +11,7 @@ socketManager = {
             }
         });
 
-        socket.on('newAgents', function (data) {
-            var newAgents = data;
+        socket.on('newAgents', function (newAgents) {
             for (var i = 0; i < newAgents.length; i++) {
                 var id = newAgents[i].id;
                 var object = newAgents[i].model;
@@ -39,14 +37,12 @@ socketManager = {
             'force new connection': true
         });
 
-        socket.on('build', function (data) {
-            var build = data;
+        socket.on('build', function (build) {
             var object = build[0].model;
             model.build.set({object: object});
         });
 
-        socket.on('buildHistory', function (data) {
-            var newBuilds = data;
+        socket.on('buildHistory', function (newBuilds) {
             for (var i = 0; i < newBuilds.length; i++) {
                 var id = newBuilds[i].id;
                 var object = newBuilds[i].model;
@@ -65,15 +61,12 @@ socketManager = {
             'force new connection': true
         });
 
-        socket.on('agent', function (data) {
-            var agent = data;
-            var id = agent[0].id;
+        socket.on('agent', function (agent) {
             var object = agent[0].model;
-            model.agent.set({id: id, object: object});
+            model.agent.set({object: object});
         });
 
-        socket.on('agentHistory', function (data) {
-            var newBuilds = data;
+        socket.on('agentHistory', function (newBuilds) {
             for (var i = 0; i < newBuilds.length; i++) {
                 var id = newBuilds[i].id;
                 var object = newBuilds[i].model;

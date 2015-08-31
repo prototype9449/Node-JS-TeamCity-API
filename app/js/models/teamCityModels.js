@@ -1,13 +1,14 @@
 window.Agent = Backbone.Model.extend({
     defaults: {
         id: "0",
-        object: {},
-        viewTemplate : "templates/agent-brief-information-panel",
-        pathPart: "/agent/id:",
-        viewOptions: {
-            className: "agentInfo",
-            blockId: "",
-            tagName: "div"
+        object: "",
+        options: {
+            path: "/agent/id:",
+            view: {
+                className: "agentInfo",
+                tagName: "div",
+                template: "templates/agent-brief-information-panel"
+            }
         }
     }
 });
@@ -15,13 +16,14 @@ window.Agent = Backbone.Model.extend({
 window.Build = Backbone.Model.extend({
     defaults: {
         id: "0",
-        object: {},
-        viewTemplate : "templates/build-brief-information-panel",
-        pathPart: "/build/id:",
-        viewOptions: {
-            className: "buildInfo",
-            blockId: "",
-            tagName: "div"
+        object: "",
+        options: {
+            path: "/build/id:",
+            view: {
+                className: "buildInfo",
+                tagName: "div",
+                template: "templates/build-brief-information-panel"
+            }
         }
     }
 });
@@ -29,13 +31,14 @@ window.Build = Backbone.Model.extend({
 window.FullAgent = Backbone.Model.extend({
     defaults: {
         id: "0",
-        object: {},
-        viewTemplate : "templates/agent-full-Information-panel",
-        pathPart: "/agent/id:",
-        viewOptions: {
-            className: "fullAgentInfo",
-            blockId: "",
-            tagName: "div"
+        object: "",
+        options: {
+            path: "/agent/id:",
+            view: {
+                className: "fullAgentInfo",
+                tagName: "div",
+                template: "templates/agent-full-Information-panel"
+            }
         }
     }
 });
@@ -43,13 +46,14 @@ window.FullAgent = Backbone.Model.extend({
 window.FullBuild = Backbone.Model.extend({
     defaults: {
         id: "0",
-        object: {},
-        viewTemplate : "templates/build-full-information-panel",
-        pathPart: "/agent/id:",
-        viewOptions: {
-            className: "fullBuildInfo",
-            blockId: "",
-            tagName: "div"
+        object: "",
+        options: {
+            path: "/agent/id:",
+            view: {
+                className: "fullBuildInfo",
+                tagName: "div",
+                template: "templates/build-full-information-panel"
+            }
         }
     }
 });
@@ -57,13 +61,14 @@ window.FullBuild = Backbone.Model.extend({
 window.AgentHistory = Backbone.Model.extend({
     defaults: {
         id: "0",
-        object: {},
-        viewTemplate : "templates/agent-history-panel",
-        pathPart: "/build/id:",
-        viewOptions: {
-            className: "history",
-            blockId: "",
-            tagName: "tr"
+        object: "",
+        options: {
+            path: "/build/id:",
+            view: {
+                className: "history",
+                tagName: "tr",
+                template: "templates/agent-history-panel"
+            }
         }
     }
 });
@@ -71,13 +76,14 @@ window.AgentHistory = Backbone.Model.extend({
 window.BuildHistory = Backbone.Model.extend({
     defaults: {
         id: "0",
-        object: {},
-        viewTemplate : "templates/build-history-panel",
-        pathPart: "/agent/id:",
-        viewOptions: {
-            className: "history",
-            blockId: "",
-            tagName: "tr"
+        object: "",
+        options: {
+            path: "/agent/id:",
+            view: {
+                className: "history",
+                tagName: "tr",
+                template: "templates/build-history-panel"
+            }
         }
     }
 });

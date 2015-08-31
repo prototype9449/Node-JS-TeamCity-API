@@ -2,14 +2,14 @@ window.ObjectView = Backbone.View.extend({
 
     getAttributes: function () {
         return {
-            class: this.model.get('viewOptions')['className']
+            class: this.model.get('options')['className']
         };
     },
 
     _ensureElement: function () {
         if (!this.el) {
             var attrs = this.getAttributes() || {};
-            var tagName = this.model.get('viewOptions')['tagName'];
+            var tagName = this.model.get('options')["view"]['tagName'];
             if (tagName) {
                 this.tagName = tagName;
             }
@@ -18,7 +18,7 @@ window.ObjectView = Backbone.View.extend({
     },
 
     initialize: function () {
-        var templateName = this.model.get("viewTemplate");
+        var templateName = this.model.get("options")["view"]["template"];
         var template = tpl.get(templateName);
         this.template = _.template(template);
         this.bindEvents(this.model);
@@ -31,7 +31,11 @@ window.ObjectView = Backbone.View.extend({
 
     render: function () {
 
-        var html = this.template(this.model.get("object"));
+        var model = this.model.get("object");
+        var html = "";
+        if (model)
+            html = this.template(model);
+
         $(this.el).html(html);
 
         return this;
