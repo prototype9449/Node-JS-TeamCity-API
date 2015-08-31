@@ -28,6 +28,9 @@ var generateBuilds = function (buildTypeIds, callback) {
 };
 
 var generateBuildsByBuildTypeNames = function (options, callback) {
+
+    var option = options.projects[0];
+
     var optionTeamCity = additionalConnectionOptionHelper.getBuildTypesOptions().connection;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
@@ -35,7 +38,7 @@ var generateBuildsByBuildTypeNames = function (options, callback) {
         var buildTypes = json.buildType;
         var result = [];
         for (var i = 0; i < buildTypes.length; i++) {
-            if (options.projects[0].buildTypeNames.indexOf(buildTypes[i].name) != -1 && options.projects[0].projectName== buildTypes[i].projectName)
+            if (option.buildTypeNames.indexOf(buildTypes[i].name) != -1 && option.projectName== buildTypes[i].projectName)
                 result.push(buildTypes[i].id);
         }
         generateBuilds(result, callback);

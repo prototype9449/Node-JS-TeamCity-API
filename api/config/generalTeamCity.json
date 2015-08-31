@@ -27,10 +27,10 @@
     "options": {
       "projects": [
         {
-          "projectName": "MyRepozitoryGitHub",
+          "projectName": "Portal",
           "buildTypeNames": [
-            "Some other build config",
-            "Tests for hashtebale"
+            "Portal UIPPocess",
+            "Portal Core"
           ]
         }
       ]
