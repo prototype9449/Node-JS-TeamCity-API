@@ -4,8 +4,13 @@
     </div>
     <div class="panel-body">
         <li><b>Branch Name:</b> <%- build.branchName %></li>
-        <li><b>Status: </b><span><%- build.status %></span></li>
-
+        <li>
+            <b>Status: </b><span><%- build.status %></span>
+            <% if (build.status.toLowerCase().indexOf('running') != -1) { %><div class="arrow-processing-icon"></div><% }  %>
+            <% if (build.status.toLowerCase().indexOf('failure') != -1) { %><span class="glyphicon glyphicon-remove" aria-hidden="true" ></span><% }  %>
+            <% if (build.status.toLowerCase().indexOf('success') != -1) { %><span class="glyphicon glyphicon-ok" aria-hidden="true" ></span><% }  %>
+            <% if (build.status.toLowerCase().indexOf('cancelled') != -1) { %><span class="glyphicon glyphicon-ban-circle" aria-hidden="true" ></span><% }  %>
+        </li>
         <li><b>Agent Name: <a href="#/agent/id:<%- agent.id %>"><%- agent.name %></a></b></li>
         <li><b>Project Name:</b> <%- build.configuration.projectName %></li>
     </div>

@@ -26,3 +26,15 @@
     font-size: 13px;
     width: 40px;
 }
+
+.glyphicon-ok {
+    color: lawngreen;
+}
+
+.glyphicon-remove {
+    color: red;
+}
+
+.glyphicon-ban-circle {
+    color: orange;
+}
