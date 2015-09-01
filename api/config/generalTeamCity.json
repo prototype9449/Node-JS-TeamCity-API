@@ -1,7 +1,7 @@
 {
   "generalTeamCity": {
     "connection": {
-      "url": "http://192.168.21.100:8111",
+      "url": "http://localhost:8111",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"
@@ -30,7 +30,9 @@
           "projectName": "Portal",
           "buildTypeNames": [
             "Portal UIPPocess",
-            "Portal Core"
+            "Portal Core",
+            "Portal with Rules-2 with Long Name",
+            "PortalLib"
           ]
         }
       ]

@@ -35,7 +35,7 @@ window.AdditionalBuild = Backbone.Model.extend({
         options: {
             view: {
                 className: "additional-buildInfo",
-                tagName: "div",
+                tagName: "tr",
                 template: "templates/additional-build-brief-information-panel"
             }
         }
