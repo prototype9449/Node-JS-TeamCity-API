@@ -61,10 +61,8 @@ th, td {
 }
 
 
-.vert-panel {
-    height: 730px;
-    width:300px;
-    float:left;
+.second-column {
+    margin-top: 5px;
 }
 .buildInfo{
     height: 180px;
