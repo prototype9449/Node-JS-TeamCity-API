@@ -47,7 +47,7 @@ th, td {
 }
 
 .build-column {
-    width: 350px;
+    width: 660px;
 }
 
 .panel-heading {
@@ -60,8 +60,14 @@ th, td {
     margin: 5px;
 }
 
-.buildInfo, .additional-buildInfo{
-    height: 230px;
+
+.vert-panel {
+    height: 730px;
+    width:300px;
+    float:left;
+}
+.buildInfo{
+    height: 180px;
     width:300px;
     float:left;
     margin-left: 12px;
@@ -98,4 +104,45 @@ th, td {
     to {
         transform:rotate(0deg);
     }
+}
+
+.agent-history-control, .build-history-control {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Agent-panel, #Build-panel {
+    margin-top: 5px;
+    display: table;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#history-table-panel {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+.launch-button {
+    padding: 0 0;
+    font-size: 13px;
+    width: 40px;
+}
+
+.glyphicon-ok {
+    color: lawngreen;
+}
+
+.glyphicon-remove {
+    color: red;
+}
+
+.glyphicon-ban-circle {
+    color: orange;
 }
