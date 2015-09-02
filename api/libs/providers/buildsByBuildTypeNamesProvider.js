@@ -82,7 +82,7 @@ var generateBuildsByBuildTypeNames = function (options, callback) {
             var buildTypesFromMemory = projectsFromMemory[projectsFromConfig[i].projectName];
             if (buildTypesFromMemory) {
                 var projectName = projectsFromConfig[i].projectName;
-                resultObjects = Enumerable.from(buildTypesFromMemory).where(function (item) {
+                var result = Enumerable.from(buildTypesFromMemory).where(function (item) {
                     return projectsFromConfig[i].buildTypeNames.indexOf(item.name) != -1;
                 }).select(function (item) {
                     return {
@@ -91,6 +91,7 @@ var generateBuildsByBuildTypeNames = function (options, callback) {
                         projectName: projectName
                     }
                 }).toArray();
+                resultObjects = resultObjects.concat(result);
             }
         }
 
