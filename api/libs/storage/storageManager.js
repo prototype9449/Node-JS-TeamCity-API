@@ -5,7 +5,7 @@ var AdditionalBuildStorage = require('./buildStorage').BuildStorage;
 var connectionOptionHelper = require('./../config/generalOptionHelper');
 var additionalConnectionHelper = require('../config/additionalOptionHelper');
 
-var generateBuildsByBuildTypeNames = require('../providers/buildsByBuildTypeNamesProvider');
+var generateBuildsByBuildTypeNames = require('../providers/additionalBuildProvider');
 var generateObjects = require('./../providers/objectProvider').generateObjects;
 
 function StorageManager() {

@@ -45,6 +45,11 @@ var generalConnectionOptionHelper =
         }
 
         return buildOptions;
+    },
+
+    getAgentFixBuildsOptions: function () {
+        var generalOption = config.general().get('agentFixBuilds');
+        return this.clone(generalOption);
     }
 };
 

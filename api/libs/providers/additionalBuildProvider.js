@@ -57,6 +57,8 @@ var generateBuildsByBuildTypeNames = function (options, callback) {
 
     var projectsFromConfig = options.projects;
 
+    if(!projectsFromConfig) return;
+
     var optionTeamCity = additionalConnectionOptionHelper.getBuildTypesOptions().connection;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;

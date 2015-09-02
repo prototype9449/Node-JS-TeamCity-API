@@ -1,5 +1,6 @@
 window.Agent = Backbone.Model.extend({
     defaults: {
+        needToUpdate: false,
         id: "0",
         object: "",
         options: {
@@ -15,6 +16,7 @@ window.Agent = Backbone.Model.extend({
 
 window.GeneralBuild = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {
@@ -30,6 +32,7 @@ window.GeneralBuild = Backbone.Model.extend({
 
 window.AdditionalBuild = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {
@@ -44,6 +47,7 @@ window.AdditionalBuild = Backbone.Model.extend({
 
 window.FullAgent = Backbone.Model.extend({
     defaults: {
+        needToUpdate: false,
         id: "0",
         object: "",
         options: {
@@ -59,6 +63,7 @@ window.FullAgent = Backbone.Model.extend({
 
 window.FullBuild = Backbone.Model.extend({
     defaults: {
+        needToUpdate: false,
         id: "0",
         object: "",
         options: {
@@ -74,6 +79,7 @@ window.FullBuild = Backbone.Model.extend({
 
 window.AgentHistory = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {
@@ -89,6 +95,7 @@ window.AgentHistory = Backbone.Model.extend({
 
 window.BuildHistory = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {

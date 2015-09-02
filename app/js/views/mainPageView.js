@@ -25,6 +25,8 @@ window.MainPageView = Backbone.View.extend({
         this.additionalBuildListView = new ObjectCollectionView({model: this.model.additionalBuildList, router: this.options.router});
         this.additionalBuildListView.$el = this.$('#additional-builds-panel');
         this.additionalBuildListView.render();
+        this.additionalBuildListView.panel = this.$('#additional-build-panel');
+        this.additionalBuildListView.panel.hide();
 
         return this;
     }

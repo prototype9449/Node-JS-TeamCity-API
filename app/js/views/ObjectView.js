@@ -27,6 +27,7 @@ window.ObjectView = Backbone.View.extend({
     bindEvents: function (model) {
         this.model = model;
         this.model.bind("change", this.renderChange, this);
+        this.model.bind("destroy", this.renderDestroy, this);
     },
 
     render: function () {
@@ -36,24 +37,34 @@ window.ObjectView = Backbone.View.extend({
         if (model)
             html = this.template(model);
 
-        $(this.el).html(html);
+        $(this.el)
+            .fadeOut(300)
+            .html(html)
+            .fadeIn(300);
 
         return this;
     },
 
     renderChange: function () {
+        var needToUpdate = this.model.get("needToUpdate");
         var html = this.template(this.model.get("object"));
-        if (html) {
-            $(this.el).fadeOut(300);
-            $(this.el).html(html);
-            $(this.el).fadeIn(300);
+        if (!html)  return this;
+
+        if (needToUpdate) {
+            $(this.el)
+                .fadeOut(300)
+                .html(html)
+                .fadeIn(300);
         }
         else {
-            var self = $(this.el);
-            $(this.el).fadeOut(500, function () {
-                self.remove();
-            });
+            $(this.el).html(html);
         }
+
+        return this;
+    },
+
+    renderDestroy: function () {
+        $(this.el).remove();
 
         return this;
     }

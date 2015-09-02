@@ -7,7 +7,8 @@ function DataProvider(storages, time) {
     this.saveElements = function (storageDetails) {
         var connection = storageDetails.getOptions();
         storageDetails.getObjecs(connection, function (data) {
-            storageDetails.storage.pushObjects(data);
+            if(data)
+                storageDetails.storage.pushObjects(data);
         });
     };
 
