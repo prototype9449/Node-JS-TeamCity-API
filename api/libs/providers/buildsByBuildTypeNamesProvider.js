@@ -1,16 +1,18 @@
 var request = require('request');
 var additionalConnectionOptionHelper = require('./../config/additionalConnectionOptionHelper');
+var Enumerable = require('../linq/linq.min');
+require("../linq/extensions/linq.qunit")({'Enumerable': Enumerable});
 
-var getProperStatus = function(status,state){
+var getProperStatus = function (status, state) {
     var status = status.toLocaleLowerCase();
     var state = state.toLocaleLowerCase();
 
-    if(state.toLocaleLowerCase() =='running'){
+    if (state.toLocaleLowerCase() == 'running') {
         return 'running';
     }
-    if(status == 'unknown'){
+    if (status == 'unknown') {
         return 'cancelled';
-    } else if(status == 'failure') {
+    } else if (status == 'failure') {
         return 'failure';
     } else {
         return 'success';
@@ -25,10 +27,10 @@ var generateBuildByBuildTypeId = function (buildType, callback) {
         var json = JSON.parse(response.body);
         var build =
         {
-            id : buildType.id,
-            status : getProperStatus(json.build[0].status, json.build[0].state),
-            projectName : buildType.projectName,
-            buildTypeName : buildType.buildTypeName
+            id: buildType.id,
+            status: getProperStatus(json.build[0].status, json.build[0].state),
+            projectName: buildType.projectName,
+            buildTypeName: buildType.buildTypeName
         };
 
         callback(build);
@@ -36,7 +38,7 @@ var generateBuildByBuildTypeId = function (buildType, callback) {
 };
 
 var generateBuilds = function (buildTypes, callback) {
-    if(!buildTypes && buildTypes.length ==0)
+    if (!buildTypes && buildTypes.length == 0)
         throw new Error('buildTypeIds');
 
     var resultBuilds = [];
@@ -53,27 +55,46 @@ var generateBuilds = function (buildTypes, callback) {
 
 var generateBuildsByBuildTypeNames = function (options, callback) {
 
-    var option = options.projects[0];
+    var projectsFromConfig = options.projects;
 
     var optionTeamCity = additionalConnectionOptionHelper.getBuildTypesOptions().connection;
     request.get(optionTeamCity, function (err, response) {
         if (err) throw err;
         var json = JSON.parse(response.body);
         var buildTypes = json.buildType;
-        var result = [];
-        for (var i = 0; i < buildTypes.length; i++) {
-            if (option.buildTypeNames.indexOf(buildTypes[i].name) != -1 && option.projectName== buildTypes[i].projectName){
-                var buildType = {
-                    id : buildTypes[i].id,
-                    buildTypeName : buildTypes[i].name,
-                    projectName : buildTypes[i].projectName
-                };
+        var resultObjects = [];
 
-                result.push(buildType);
+        var groupsByProject = Enumerable.from(buildTypes).groupBy('$.projectName').select(function (item) {
+
+            return {
+                projectName: item.key(),
+                builds: item.getSource()
+            };
+        }).toArray();
+
+
+        var projectsFromMemory = {};
+        groupsByProject.map(function (item) {
+            projectsFromMemory[item.projectName] = item.builds;
+        });
+
+        for (var i = 0; i < projectsFromConfig.length; i++) {
+            var buildTypesFromMemory = projectsFromMemory[projectsFromConfig[i].projectName];
+            if (buildTypesFromMemory) {
+                var projectName = projectsFromConfig[i].projectName;
+                resultObjects = Enumerable.from(buildTypesFromMemory).where(function (item) {
+                    return projectsFromConfig[i].buildTypeNames.indexOf(item.name) != -1;
+                }).select(function (item) {
+                    return {
+                        id: item.id,
+                        buildTypeName: item.name,
+                        projectName: projectName
+                    }
+                }).toArray();
             }
-
         }
-        generateBuilds(result, callback);
+
+        generateBuilds(resultObjects, callback);
     });
 };
 
