@@ -1,4 +1,4 @@
-var config = require('./../config/generalConnectionOptionHelper');
+var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
 
 function AgentSocket(server, storagesDetail, time, objectType) {

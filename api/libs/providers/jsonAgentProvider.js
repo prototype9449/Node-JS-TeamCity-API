@@ -1,5 +1,5 @@
 var request = require('request');
-var config = require('./../config/generalConnectionOptionHelper');
+var config = require('./../config/generalOptionHelper');
 
 function generateMainInfo(agentHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
