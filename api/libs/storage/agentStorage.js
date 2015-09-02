@@ -11,7 +11,7 @@ var AgentStorage = function (buildProvider) {
 
     var getRunningBuildByAgent = function (agentId, buildProvider) {
         for (var i = 0; i < buildProvider.objects.length; i++) {
-            if (buildProvider.objects[i].build.state == 'running' && buildProvider.objects[i].agent.id == agentId) {
+            if (buildProvider.objects[i].build.status == 'running' && buildProvider.objects[i].agent.id == agentId) {
                 return buildProvider.objects[i];
             }
         }
