@@ -1,5 +1,5 @@
-var generateBuild = require('./jsonBuildProvider').generateBuildJson;
-var generateAgent = require('./jsonAgentProvider').generateAgentJson;
+var generateBuild = require('./generalBuildProvider').generateBuildJson;
+var generateAgent = require('./agentProvider').generateAgentJson;
 var request = require('request');
 
 var generateBuilds = function (builds, callback) {

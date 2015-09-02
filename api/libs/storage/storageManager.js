@@ -2,11 +2,11 @@ var AgentStorage = require('./agentStorage').AgentStorage;
 var GeneralBuildStorage = require('./buildStorage').BuildStorage;
 var AdditionalBuildStorage = require('./buildStorage').BuildStorage;
 
-var generateObjects = require('./../providers/objectProvider').generateObjects;
-var connectionOptionHelper = require('./../config/generalConnectionOptionHelper');
-var generateBuildsByBuildTypeNames = require('../providers/buildsByBuildTypeNamesProvider');
-var additionalConnectionHelper = require('../config/additionalConnectionOptionHelper');
+var connectionOptionHelper = require('./../config/generalOptionHelper');
+var additionalConnectionHelper = require('../config/additionalOptionHelper');
 
+var generateBuildsByBuildTypeNames = require('../providers/additionalBuildProvider');
+var generateObjects = require('./../providers/objectProvider').generateObjects;
 
 function StorageManager() {
 

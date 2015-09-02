@@ -9,13 +9,15 @@ window.ObjectCollectionView = Backbone.View.extend({
     bindEvents: function (model) {
         this.model = model;
         this.model.bind("reset", this.render, this);
-        this.model.bind("add", this.add, this);
+        this.model.bind("add", this.renderAdd, this);
         this.model.bind("remove", function (model) {
-            model.clear();
+            model.trigger('destroy');
         });
     },
 
-    add: function (model) {
+    renderAdd: function (model) {
+        if (this.panel)
+            this.panel.show();
         var item = new ObjectView({model: model, router: this.options.router});
         $(this.$el).prepend(item.render().el);
     },

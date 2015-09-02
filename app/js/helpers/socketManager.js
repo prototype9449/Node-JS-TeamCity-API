@@ -25,11 +25,16 @@ socketManager = {
                 var object = newAgents[i].model;
                 model.agentList.add({id: id, object: object});
 
-                (function (id) {
-                    $('#launchBuildButton-' + id).click(function () {
-                        socket.emit('launchBuild', id);
+                var agent = {
+                    id : id,
+                    name :  newAgents[i].model.name
+                };
+
+                (function (agent) {
+                    $('#launchBuildButton-' + agent.id).click(function () {
+                        socket.emit('launchBuild', agent);
                     });
-                }(id));
+                }(agent));
             }
         });
 

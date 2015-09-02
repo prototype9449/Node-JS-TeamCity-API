@@ -1,12 +1,3 @@
-Backbone.View.prototype.close = function () {
-    console.log('Closing view ' + this);
-    //if (this.beforeClose) {
-    //    this.beforeClose();
-    //}
-    //this.remove();
-    //this.unbind();
-};
-
 TeamcityController = Backbone.Router.extend({
 
     initialize: function () {
@@ -99,10 +90,7 @@ TeamcityController = Backbone.Router.extend({
     },
 
     showView: function (selector, view) {
-        if (this.currentView)
-            this.currentView.close();
         $(selector).html(view.render().el);
-        this.currentView = view;
         return view;
     }
 });

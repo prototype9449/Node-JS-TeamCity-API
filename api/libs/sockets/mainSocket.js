@@ -1,6 +1,6 @@
-var config = require('./../config/generalConnectionOptionHelper');
+var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
-var launchBuild = require('../providers/jsonBuildProvider').launchBuildConfiguration;
+var launchBuild = require('../providers/generalBuildProvider').launchBuildConfiguration;
 
 function MainSocket(server, storagesDetail, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
@@ -54,12 +54,19 @@ function MainSocket(server, storagesDetail, time, objectType) {
 
     this.createClient = function (socket) {
 
-        socket.on('launchBuild', function (agentId) {
-            if (agentId != 1) {
-                launchBuild('Portal_PortalControls', agentId);
-            } else {
-                launchBuild('Portal_PortalCore', agentId);
-            }
+        socket.on('launchBuild', function (agent) {
+            var agentFixBuilds = config.getAgentFixBuildsOptions();
+
+            var buildTypeName;
+            agentFixBuilds.map(function (item) {
+                if (item.agentName == agent.name) {
+                    buildTypeName = item.buildTypeName;
+                }
+            });
+
+            if(!buildTypeName) return;
+
+            launchBuild(buildTypeName, agent.id);
         });
 
         this.clients[socket.id] = {

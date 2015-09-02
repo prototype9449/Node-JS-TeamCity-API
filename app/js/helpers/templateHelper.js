@@ -1,17 +1,18 @@
 tpl = {
     templates: {},
 
-    loadTemplates: function (names, callback) {
+    loadTemplates: function (templateDetails, callback) {
 
         var that = this;
 
         var loadTemplate = function (index) {
-            var name = names[index];
+            var name = templateDetails[index].name;
+            var path = templateDetails[index].path;
             console.log('Loading template: ' + name);
-            $.get('tpl/' + name + '.html', function (data) {
+            $.get(path + '.html', function (data) {
                 that.templates[name] = data;
                 index++;
-                if (index < names.length) {
+                if (index < templateDetails.length) {
                     loadTemplate(index);
                 } else {
                     callback();

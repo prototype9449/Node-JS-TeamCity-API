@@ -1,10 +1,10 @@
 {
-  "generalTeamCity": {
+  "generalOptions": {
     "connection": {
-      "url": "http://localhost:8111",
+      "url": "http://co-osl-devb97:85",
       "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
+        "user": "SergeyPo",
+        "pass": "qwerty12345!"
       },
       "headers": {
         "Accept": "application/json"
@@ -12,50 +12,14 @@
     }
   },
 
-  "additionalTeamCity": {
-    "connection": {
-      "url": "http://localhost:8111",
-      "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
-      },
-      "headers": {
-        "Accept": "application/json"
-      }
+  "agentFixBuilds": [
+    {
+      "agentName": "CO-YAR-WS152",
+      "buildTypeName": "Portal_PortalControls"
     },
-
-    "options": {
-      "projects": [
-        {
-          "projectName": "Portal",
-          "buildTypeNames": [
-            "Portal UIPPocess",
-            "Portal Core",
-            "Portal with Rules-2 with Long Name",
-            "PortalLib"
-          ]
-        }
-      ]
+    {
+      "agentName": "CO-YAR-WS132",
+      "buildTypeName": "Portal_PortalPortalLib"
     }
-  },
-
-  "teamCityLaunchBuilds": {
-    "relativeUrl": "/httpAuth/app/rest/buildQueue",
-    "Content-Type": "application/xml",
-    "body": "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>"
-  },
-
-  "teamCityAgents": {
-    "relativeUrl": "/httpAuth/app/rest/agents"
-  },
-  "teamCityBuilds": {
-    "relativeUrl": "/httpAuth/app/rest/builds",
-    "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any",
-    "relativeUrlSinceIdBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any,sinceBuild:",
-    "relativeUrlOneBuildByBuildTypeId": "/httpAuth/app/rest/buildTypes/id:_buildTypeId_/builds/?locator=running:any,canceled:any,count:1"
-  },
-
-  "teamCityBuildTypes": {
-    "relativeUrl": "/httpAuth/app/rest/buildTypes"
-  }
+  ]
 }

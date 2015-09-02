@@ -1,5 +1,6 @@
 window.Agent = Backbone.Model.extend({
     defaults: {
+        needToUpdate: false,
         id: "0",
         object: "",
         options: {
@@ -7,7 +8,7 @@ window.Agent = Backbone.Model.extend({
             view: {
                 className: "agentInfo",
                 tagName: "div",
-                template: "templates/agent-brief-information-panel"
+                template: "briefAgent"
             }
         }
     }
@@ -15,6 +16,7 @@ window.Agent = Backbone.Model.extend({
 
 window.GeneralBuild = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {
@@ -22,7 +24,7 @@ window.GeneralBuild = Backbone.Model.extend({
             view: {
                 className: "general-buildInfo",
                 tagName: "div",
-                template: "templates/general-build-brief-information-panel"
+                template: "briefGeneralBuild"
             }
         }
     }
@@ -30,13 +32,14 @@ window.GeneralBuild = Backbone.Model.extend({
 
 window.AdditionalBuild = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {
             view: {
                 className: "additional-buildInfo",
                 tagName: "tr",
-                template: "templates/additional-build-brief-information-panel"
+                template: "briefAdditionalBuild"
             }
         }
     }
@@ -44,6 +47,7 @@ window.AdditionalBuild = Backbone.Model.extend({
 
 window.FullAgent = Backbone.Model.extend({
     defaults: {
+        needToUpdate: false,
         id: "0",
         object: "",
         options: {
@@ -51,7 +55,7 @@ window.FullAgent = Backbone.Model.extend({
             view: {
                 className: "fullAgentInfo",
                 tagName: "div",
-                template: "templates/agent-full-Information-panel"
+                template: "fullAgent"
             }
         }
     }
@@ -59,6 +63,7 @@ window.FullAgent = Backbone.Model.extend({
 
 window.FullBuild = Backbone.Model.extend({
     defaults: {
+        needToUpdate: false,
         id: "0",
         object: "",
         options: {
@@ -66,7 +71,7 @@ window.FullBuild = Backbone.Model.extend({
             view: {
                 className: "fullBuildInfo",
                 tagName: "div",
-                template: "templates/build-full-information-panel"
+                template: "fullBuild"
             }
         }
     }
@@ -74,6 +79,7 @@ window.FullBuild = Backbone.Model.extend({
 
 window.AgentHistory = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {
@@ -81,7 +87,7 @@ window.AgentHistory = Backbone.Model.extend({
             view: {
                 className: "history",
                 tagName: "tr",
-                template: "templates/agent-history-panel"
+                template: "agentHistory"
             }
         }
     }
@@ -89,6 +95,7 @@ window.AgentHistory = Backbone.Model.extend({
 
 window.BuildHistory = Backbone.Model.extend({
     defaults: {
+        needToUpdate: true,
         id: "0",
         object: "",
         options: {
@@ -96,7 +103,7 @@ window.BuildHistory = Backbone.Model.extend({
             view: {
                 className: "history",
                 tagName: "tr",
-                template: "templates/build-history-panel"
+                template: "buildHistory"
             }
         }
     }

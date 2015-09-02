@@ -4,7 +4,7 @@ window.AgentPageView = Backbone.View.extend({
 
     initialize: function () {
         console.log('AgentPageView has been created');
-        this.template = _.template(tpl.get('fullAgentInfo'));
+        this.template = _.template(tpl.get('agentInfoPage'));
 
         this.agentView = {};
         this.buildHistoryView = {};
