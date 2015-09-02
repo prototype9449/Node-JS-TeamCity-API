@@ -1,0 +1,27 @@
+{
+  "additionalTeamCity": {
+    "connection": {
+      "url": "http://localhost:8111",
+      "auth": {
+        "user": "prototype9449",
+        "pass": "termit"
+      },
+      "headers": {
+        "Accept": "application/json"
+      }
+    },
+    "options": {
+      "projects": [
+        {
+          "projectName": "Portal",
+          "buildTypeNames": [
+            "Portal UIPPocess",
+            "Portal Core",
+            "Portal with Rules-2 with Long Name",
+            "PortalLib"
+          ]
+        }
+      ]
+    }
+  }
+}

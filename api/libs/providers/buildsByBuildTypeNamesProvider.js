@@ -1,5 +1,5 @@
 var request = require('request');
-var additionalConnectionOptionHelper = require('./../config/additionalConnectionOptionHelper');
+var additionalConnectionOptionHelper = require('./../config/additionalOptionHelper');
 var Enumerable = require('../linq/linq.min');
 require("../linq/extensions/linq.qunit")({'Enumerable': Enumerable});
 

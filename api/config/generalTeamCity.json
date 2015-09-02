@@ -10,58 +10,5 @@
         "Accept": "application/json"
       }
     }
-  },
-
-  "additionalTeamCity": {
-    "connection": {
-      "url": "http://localhost:8111",
-      "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
-      },
-      "headers": {
-        "Accept": "application/json"
-      }
-    },
-
-    "options": {
-      "projects": [
-        {
-          "projectName": "Portal",
-          "buildTypeNames": [
-            "Portal UIPPocess",
-            "Portal Core",
-            "Portal with Rules-2 with Long Name",
-            "PortalLib"
-          ]
-        },
-        {
-          "projectName": "Other Project",
-          "buildTypeNames": [
-            "Portal Core"
-          ]
-        }
-      ]
-    }
-  },
-
-  "teamCityLaunchBuilds": {
-    "relativeUrl": "/httpAuth/app/rest/buildQueue",
-    "Content-Type": "application/xml",
-    "body": "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>"
-  },
-
-  "teamCityAgents": {
-    "relativeUrl": "/httpAuth/app/rest/agents"
-  },
-  "teamCityBuilds": {
-    "relativeUrl": "/httpAuth/app/rest/builds",
-    "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any",
-    "relativeUrlSinceIdBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any,sinceBuild:",
-    "relativeUrlOneBuildByBuildTypeId": "/httpAuth/app/rest/buildTypes/id:_buildTypeId_/builds/?locator=running:any,canceled:any,count:1"
-  },
-
-  "teamCityBuildTypes": {
-    "relativeUrl": "/httpAuth/app/rest/buildTypes"
   }
 }
