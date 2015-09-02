@@ -7,15 +7,13 @@ var additionalConnectionOptionHelper =
         return JSON.parse(copy);
     },
     getGeneralOptions: function () {
-        var generalOption = config.additional().get('additionalTeamCity');
-
+        var generalOption = config.additional().get('additionalOptions');
         return this.clone(generalOption);
     },
 
     getOneBuildByBuildTypeIdOptions: function (id) {
-        var generalOption = config.additional().get('additionalTeamCity');
-        var buildPaths = config.get('teamCityBuilds');
-
+        var generalOption = config.additional().get('additionalOptions');
+        var buildPaths = config.get('buildOptions');
         var buildOptions = this.clone(generalOption);
         buildOptions.connection.url += buildPaths.relativeUrlOneBuildByBuildTypeId.replace('_buildTypeId_', id);
 
@@ -23,8 +21,8 @@ var additionalConnectionOptionHelper =
     },
 
     getBuildTypesOptions: function () {
-        var generalOption = config.get('additionalTeamCity');
-        var buildTypesPaths = config.get('teamCityBuildTypes');
+        var generalOption = config.get('additionalOptions');
+        var buildTypesPaths = config.get('buildTypeOptions');
 
         var buildOptions = this.clone(generalOption);
         buildOptions.connection.url += buildTypesPaths.relativeUrl;

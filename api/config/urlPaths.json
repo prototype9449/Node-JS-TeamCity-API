@@ -1,22 +1,22 @@
 {
-  "teamCityLaunchBuilds": {
+  "launchBuildOptions": {
     "relativeUrl": "/httpAuth/app/rest/buildQueue",
     "Content-Type": "application/xml",
     "body": "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>"
   },
 
-  "teamCityAgents": {
+  "agentOptions": {
     "relativeUrl": "/httpAuth/app/rest/agents"
   },
 
-  "teamCityBuilds": {
+  "buildOptions": {
     "relativeUrl": "/httpAuth/app/rest/builds",
     "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any",
     "relativeUrlSinceIdBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any,sinceBuild:",
     "relativeUrlOneBuildByBuildTypeId": "/httpAuth/app/rest/buildTypes/id:_buildTypeId_/builds/?locator=running:any,canceled:any,count:1"
   },
 
-  "teamCityBuildTypes": {
+  "buildTypeOptions": {
     "relativeUrl": "/httpAuth/app/rest/buildTypes"
   }
 }

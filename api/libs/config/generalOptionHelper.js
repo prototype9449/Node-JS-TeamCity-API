@@ -7,14 +7,14 @@ var generalConnectionOptionHelper =
         return JSON.parse(copy);
     },
     getGeneralOptions: function () {
-        var generalOption = config.general().get('generalTeamCity');
+        var generalOption = config.general().get('generalOptions');
 
         return this.clone(generalOption);
     },
 
     getAgentOptions: function () {
-        var generalOption = config.general().get('generalTeamCity');
-        var agentPaths = config.urlPaths().get('teamCityAgents');
+        var generalOption = config.general().get('generalOptions');
+        var agentPaths = config.urlPaths().get('agentOptions');
 
         var agentOptions = this.clone(generalOption);
         agentOptions.connection.url += agentPaths.relativeUrl;
@@ -22,8 +22,8 @@ var generalConnectionOptionHelper =
         return agentOptions;
     },
     getLaunchBuildsOptions: function (buildTypeId, agentId) {
-        var generalOption = config.general().get('generalTeamCity');
-        var launchBuildsOption = config.urlPaths().get('teamCityLaunchBuilds');
+        var generalOption = config.general().get('generalOptions');
+        var launchBuildsOption = config.urlPaths().get('launchBuildOptions');
 
         var launchBuildsOptions = this.clone(generalOption);
         launchBuildsOptions.connection.url += launchBuildsOption.relativeUrl;
@@ -34,8 +34,8 @@ var generalConnectionOptionHelper =
     },
 
     getBuildOptions: function (sinceBuildId) {
-        var generalOption = config.general().get('generalTeamCity');
-        var buildPaths = config.urlPaths().get('teamCityBuilds');
+        var generalOption = config.general().get('generalOptions');
+        var buildPaths = config.urlPaths().get('buildOptions');
 
         var buildOptions = this.clone(generalOption);
         if (sinceBuildId) {

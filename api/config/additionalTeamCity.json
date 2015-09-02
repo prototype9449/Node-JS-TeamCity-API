@@ -1,5 +1,5 @@
 {
-  "additionalTeamCity": {
+  "additionalOptions": {
     "connection": {
       "url": "http://localhost:8111",
       "auth": {
