@@ -10,6 +10,7 @@
         "Accept": "application/json"
       }
     },
+
     "options": {
       "projects": [
         {
@@ -19,6 +20,12 @@
             "Portal Core",
             "Portal with Rules-2 with Long Name",
             "PortalLib"
+          ]
+        },
+        {
+          "projectName": "Other Project",
+          "buildTypeNames": [
+            "Portal Core"
           ]
         }
       ]
