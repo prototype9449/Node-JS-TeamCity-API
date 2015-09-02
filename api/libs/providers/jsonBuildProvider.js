@@ -1,5 +1,5 @@
 var request = require('request');
-var config = require('./../helpers/generalConnectionOptionHelper');
+var config = require('./../config/generalConnectionOptionHelper');
  require('date-format-lite');
 
 Date.masks.default = 'YYYY-MM-DD hh:mm:ss';

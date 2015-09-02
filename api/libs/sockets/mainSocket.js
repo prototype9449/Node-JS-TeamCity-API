@@ -1,15 +1,15 @@
-var config = require('./../helpers/generalConnectionOptionHelper');
+var config = require('./../config/generalConnectionOptionHelper');
 var baseSocket = require('./baseSocket');
 var launchBuild = require('../providers/jsonBuildProvider').launchBuildConfiguration;
 
-function MainSocket(server, storages, time, objectType) {
+function MainSocket(server, storagesDetail, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
-    this.generalBuildStorage = storages.generalBuildStorage;
-    this.additionalBuildStorage = storages.additionalBuildStorage;
-    this.agentStorage = storages.agentStorage;
+    this.generalBuildStorage = storagesDetail.generalBuildStorage.storage;
+    this.additionalBuildStorage = storagesDetail.additionalBuildStorage.storage;
+    this.agentStorage = storagesDetail.agentStorage.storage;
 
-    this.generalBuildHelper = new this.objectHelper('generalBuilds', this.generalBuildStorage.getGeneralBuilds);
-    this.additionalBuildHelper = new this.objectHelper('additionalBuilds', this.additionalBuildStorage.getAdditionalBuilds);
+    this.generalBuildHelper = new this.objectHelper('builds', this.generalBuildStorage.getBuilds);
+    this.additionalBuildHelper = new this.objectHelper('builds', this.additionalBuildStorage.getBuilds);
     this.agentHelper = new this.objectHelper('agents', this.agentStorage.getAgents);
     this.buildCount = 10;
 
@@ -39,11 +39,11 @@ function MainSocket(server, storages, time, objectType) {
     };
 
     this.sendInitialData = function (socket) {
-        var generalBuilds = self.generalBuildStorage.getGeneralBuilds(this.buildCount)["generalBuilds"];
+        var generalBuilds = self.generalBuildStorage.getBuilds(this.buildCount)["builds"];
         var generalBuildsData = self.pushModels(generalBuilds);
         socket.emit('generalBuilds', generalBuildsData);
 
-        var additionalBuilds = self.additionalBuildStorage.getAdditionalBuilds()["additionalBuilds"];
+        var additionalBuilds = self.additionalBuildStorage.getBuilds()["builds"];
         var additionalBuildsData = self.pushModels(additionalBuilds);
         socket.emit('additionalBuilds', additionalBuildsData);
 

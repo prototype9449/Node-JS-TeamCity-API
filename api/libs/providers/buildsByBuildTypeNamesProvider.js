@@ -1,5 +1,5 @@
 var request = require('request');
-var additionalConnectionOptionHelper = require('./../helpers/additionalConnectionOptionHelper');
+var additionalConnectionOptionHelper = require('./../config/additionalConnectionOptionHelper');
 
 var getProperStatus = function(status,state){
     var status = status.toLocaleLowerCase();
