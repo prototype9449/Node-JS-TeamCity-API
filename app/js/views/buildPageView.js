@@ -4,7 +4,7 @@ window.BuildPageView = Backbone.View.extend({
 
     initialize: function () {
         console.log('BuildMainView has been created');
-        this.template = _.template(tpl.get('fullBuildsInfo'));
+        this.template = _.template(tpl.get('buildsInfoPage'));
 
         this.buildView = {};
         this.buildHistoryView ={};
