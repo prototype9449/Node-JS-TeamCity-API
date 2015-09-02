@@ -14,18 +14,15 @@
     "options": {
       "projects": [
         {
-          "projectName": "Portal",
+          "projectName": "PortalProject",
           "buildTypeNames": [
-            "Portal UIPPocess",
-            "Portal Core",
-            "Portal with Rules-2 with Long Name",
-            "PortalLib"
+            "PortalBuildConfiguration"
           ]
         },
         {
-          "projectName": "Other Project",
+          "projectName": "TeamCityTestingProject",
           "buildTypeNames": [
-            "Portal Core"
+            "TeamCityTestingBuildConfiguration"
           ]
         }
       ]

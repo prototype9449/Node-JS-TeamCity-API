@@ -144,3 +144,8 @@ th, td {
 .glyphicon-ban-circle {
     color: orange;
 }
+
+#additional-builds-panel td{
+    text-align: center;
+    vertical-align: middle;
+}
