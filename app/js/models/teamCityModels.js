@@ -7,7 +7,7 @@ window.Agent = Backbone.Model.extend({
             view: {
                 className: "agentInfo",
                 tagName: "div",
-                template: "templates/agent-brief-information-panel"
+                template: "briefAgent"
             }
         }
     }
@@ -22,7 +22,7 @@ window.GeneralBuild = Backbone.Model.extend({
             view: {
                 className: "general-buildInfo",
                 tagName: "div",
-                template: "templates/general-build-brief-information-panel"
+                template: "briefGeneralBuild"
             }
         }
     }
@@ -36,7 +36,7 @@ window.AdditionalBuild = Backbone.Model.extend({
             view: {
                 className: "additional-buildInfo",
                 tagName: "tr",
-                template: "templates/additional-build-brief-information-panel"
+                template: "briefAdditionalBuild"
             }
         }
     }
@@ -51,7 +51,7 @@ window.FullAgent = Backbone.Model.extend({
             view: {
                 className: "fullAgentInfo",
                 tagName: "div",
-                template: "templates/agent-full-Information-panel"
+                template: "fullAgent"
             }
         }
     }
@@ -66,7 +66,7 @@ window.FullBuild = Backbone.Model.extend({
             view: {
                 className: "fullBuildInfo",
                 tagName: "div",
-                template: "templates/build-full-information-panel"
+                template: "fullBuild"
             }
         }
     }
@@ -81,7 +81,7 @@ window.AgentHistory = Backbone.Model.extend({
             view: {
                 className: "history",
                 tagName: "tr",
-                template: "templates/agent-history-panel"
+                template: "agentHistory"
             }
         }
     }
@@ -96,7 +96,7 @@ window.BuildHistory = Backbone.Model.extend({
             view: {
                 className: "history",
                 tagName: "tr",
-                template: "templates/build-history-panel"
+                template: "buildHistory"
             }
         }
     }
