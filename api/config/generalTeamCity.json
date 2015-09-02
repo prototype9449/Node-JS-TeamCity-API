@@ -1,10 +1,10 @@
 {
   "generalOptions": {
     "connection": {
-      "url": "http://192.168.21.99:8111",
+      "url": "http://co-osl-devb97:85",
       "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
+        "user": "SergeyPo",
+        "pass": "qwerty12345!"
       },
       "headers": {
         "Accept": "application/json"
