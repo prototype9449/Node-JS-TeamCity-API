@@ -1,10 +1,11 @@
 var baseSocket = require('./baseSocket');
 
-function SocketManager(server, storages, time, objectType) {
+function SocketManager(server, storagesDetail, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
-    this.generalBuildStorage = storages.generalBuildStorage;
-    this.agentStorage = storages.agentStorage;
+    this.generalBuildStorage = storagesDetail.generalBuildStorage.storage;
+    this.agentStorage = storagesDetail.agentStorage.storage;
     var self = this;
+
     this.sendInfo = function (clients) {
         for (var id in clients) {
             var client = clients[id];

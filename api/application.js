@@ -6,22 +6,10 @@ var morgan = require('morgan');
 var app = express();
 var server = require('http').createServer(app);
 
-var AgentStorage = require('./libs/storage/agentStorage').AgentStorage;
-var GeneralBuildStorage = require('./libs/storage/buildStorage').GeneralBuildStorage;
-var AdditionalBuildStorage = require('./libs/storage/additionalBuildStorage').AdditionalBuildStorage;
+var StorageManager = require('./libs/storage/storageManager');
+var storages = new StorageManager().getStorages();
 
-var generalBuildStorage = new GeneralBuildStorage();
-var agentStorage = new AgentStorage(generalBuildStorage);
-var additionalBuildStorage = new AdditionalBuildStorage();
-
-
-var storages = {
-    generalBuildStorage: generalBuildStorage,
-    agentStorage: agentStorage,
-    additionalBuildStorage : additionalBuildStorage
-};
-
-var DataProvider = new require('./libs/storage/dataProvider');
+var DataProvider = require('./libs/storage/dataProvider');
 var dataProvider = new DataProvider(storages, 4000);
 dataProvider.start();
 

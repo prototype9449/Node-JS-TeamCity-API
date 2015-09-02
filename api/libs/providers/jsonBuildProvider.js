@@ -1,5 +1,5 @@
 var request = require('request');
-var config = require('./../helpers/generalConnectionOptionHelper');
+var config = require('./../config/generalConnectionOptionHelper');
  require('date-format-lite');
 
 Date.masks.default = 'YYYY-MM-DD hh:mm:ss';
@@ -96,6 +96,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     id: buildId,
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
+                    state : jsonBuild.state,
                     status: getProperStatus(jsonBuild.status,jsonBuild.state),
                     launchDate: buildLaunchDate.format(),
                     duration : duration,

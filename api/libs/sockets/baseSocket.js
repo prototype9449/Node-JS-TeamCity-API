@@ -18,6 +18,7 @@ function BaseSocket(server, time, objectType) {
     };
 
     this.start = function () {
+
         function SetTimer(self) {
             console.log("timer started");
             self.interval = setInterval(function send() {

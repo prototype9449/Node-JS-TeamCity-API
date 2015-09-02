@@ -12,7 +12,7 @@ var generateBuilds = function (builds, callback) {
                 jsonBuilds.sort(function (build1, build2) {
                     return build2.build.id - build1.build.id;
                 });
-                callback({builds: jsonBuilds});
+                callback(jsonBuilds);
             }
         })
     }
@@ -25,7 +25,7 @@ var generateAgents = function (agents, callback) {
         generateAgent(currentAgent.id, currentAgent.href, function (buildType) {
             jsonAgents.push(buildType);
             if (jsonAgents.length == agents.length) {
-                callback({agents: jsonAgents});
+                callback(jsonAgents);
             }
         })
     }

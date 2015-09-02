@@ -41,7 +41,7 @@ TeamcityController = Backbone.Router.extend({
 
         var build = {};
         try {
-            var buildModel = this.mainModel.buildList.find(function (item) {
+            var buildModel = this.mainModel.generalBuildList.find(function (item) {
                 return item.id == id
             });
             build = new FullBuild({id: id, object: buildModel.get("object")});

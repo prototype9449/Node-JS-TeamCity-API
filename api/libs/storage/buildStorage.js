@@ -1,15 +1,15 @@
 var baseStorage = require('./baseStorage').ObjectStorage;
 
-var GeneralBuildStorage = function () {
-    this.__proto__ = new baseStorage("generalBuilds");
+var BuildStorage = function () {
+    this.__proto__ = new baseStorage("builds");
     var self = this;
 
     this.pushBuilds = function (builds) {
         self.pushObjects(builds);
     };
 
-    this.getGeneralBuilds = function (number) {
-        return self.get(number);
+    this.getBuilds = function (number) {
+        return self.getObjects(number);
     };
 
     this.getBuildById = function (id) {
@@ -40,4 +40,4 @@ var GeneralBuildStorage = function () {
     };
 };
 
-module.exports.GeneralBuildStorage = GeneralBuildStorage;
+module.exports.BuildStorage = BuildStorage;

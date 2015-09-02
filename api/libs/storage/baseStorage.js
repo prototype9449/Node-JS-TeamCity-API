@@ -67,7 +67,7 @@ var ObjectStorage = function (name) {
         self.objects = resultObjects;
     };
 
-    this.get = function (number) {
+    this.getObjects = function (number) {
         var result = {};
         result[this.name] = this.getSpliceArray(this.objects, number);
 
