@@ -3,15 +3,15 @@ $(function () {
         [
             {
                 name: 'agentInfoPage',
-                path: 'tpl/agentInfoPage'
+                path: 'tpl/agent-information-page'
             },
             {
                 name: 'buildsInfoPage',
-                path: 'tpl/buildsInfoPage'
+                path: 'tpl/build-information-page'
             },
             {
                 name: 'mainPage',
-                path: 'tpl/mainPage'
+                path: 'tpl/main-information-page'
             },
             {
                 name: 'briefAgent',
