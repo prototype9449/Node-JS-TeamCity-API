@@ -133,11 +133,11 @@ th, td {
     width: 40px;
 }
 
-.glyphicon-ok {
+.glyphicon-ok-circle {
     color: lawngreen;
 }
 
-.glyphicon-remove {
+.glyphicon-remove-circle {
     color: red;
 }
 
