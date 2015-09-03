@@ -76,7 +76,9 @@ th, td {
 }
 
 .arrow-processing-icon {
-    background-image: url(../../images/arrow-processing-icon.png);
+    /*background-image: url(../../images/arrow-processing-icon.png);*/
+    background-image: url(../../images/arrow-processing-icon-black.png);
+    /*background-image: url(../../images/cow.png);*/
     animation-name: spin;
     animation-duration: 600ms;
     animation-iteration-count: infinite;
@@ -134,7 +136,7 @@ th, td {
 }
 
 .glyphicon-ok-circle {
-    color: lawngreen;
+    color: #00D800;
 }
 
 .glyphicon-remove-circle {
@@ -142,7 +144,7 @@ th, td {
 }
 
 .glyphicon-ban-circle {
-    color: orange;
+    color: #FF9B1A;
 }
 
 #additional-builds-panel td{
