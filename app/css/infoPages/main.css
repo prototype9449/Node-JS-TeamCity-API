@@ -130,9 +130,8 @@ th, td {
 }
 
 .launch-button {
-    padding: 0 0;
+    padding: 0px 7px 0px 7px;
     font-size: 13px;
-    width: 40px;
 }
 
 .glyphicon-ok-circle {
