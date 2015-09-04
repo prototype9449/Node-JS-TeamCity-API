@@ -105,6 +105,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     id: buildId,
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
+                    authorName : jsonBuild.triggered.user.username,
                     state : jsonBuild.state,
                     status: getProperStatus(jsonBuild.status,jsonBuild.state),
                     launchDate: buildLaunchDate.format(),

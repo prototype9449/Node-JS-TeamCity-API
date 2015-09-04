@@ -33,6 +33,8 @@ function AgentSocket(server, storagesDetail, time, objectType) {
         var id = socket.handshake.query.id;
         var self = this;
 
+        socket.on('launchBuild', self.launchBuildByAgent);
+
         var client = {
             objectId: id,
             socket: socket,

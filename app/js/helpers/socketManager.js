@@ -80,6 +80,10 @@ socketManager = {
         socket.on('agent', function (agent) {
             var object = agent[0].model;
             model.agent.set({object: object});
+            var agent = {
+                id : id,
+                name :  object.name
+            };
             socketManager.bindLaunchingBuild(agent,socket);
         });
 
