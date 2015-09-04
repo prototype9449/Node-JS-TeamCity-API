@@ -1,5 +1,8 @@
 <td><a href="#/build/id:<%- build.id %>"><%- build.configuration.name %></a></td>
 <td> <%- build.configuration.projectName %></td>
-<td> <%- build.status %></td>
+<td>
+    <%- build.status %>
+    <span name="status-span" class="<%-getClassesByStatus(build.status)%>" aria-hidden="true"></span>
+</td>
 <td> <%- build.launchDate %></td>
 <td> <%- build.duration %></td>

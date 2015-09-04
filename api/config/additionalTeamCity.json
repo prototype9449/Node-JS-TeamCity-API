@@ -16,10 +16,8 @@
         {
           "projectName": "Portal",
           "buildTypeNames": [
-            "Portal UIPPocess",
             "Portal Core",
-            "Portal with Rules-2 with Long Name",
-            "PortalLib"
+            "Portal UIPPocess"
           ]
         },
         {

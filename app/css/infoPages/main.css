@@ -76,7 +76,9 @@ th, td {
 }
 
 .arrow-processing-icon {
-    background-image: url(../../images/arrow-processing-icon.png);
+    /*background-image: url(../../images/arrow-processing-icon.png);*/
+    background-image: url(../../images/arrow-processing-icon-black.png);
+    /*background-image: url(../../images/cow.png);*/
     animation-name: spin;
     animation-duration: 600ms;
     animation-iteration-count: infinite;
@@ -128,19 +130,27 @@ th, td {
 }
 
 .launch-button {
-    padding: 0 0;
+    padding: 0px 7px 0px 7px;
     font-size: 13px;
-    width: 40px;
 }
 
-.glyphicon-ok {
-    color: lawngreen;
+.glyphicon-ok-circle {
+    color: #00D800;
 }
 
-.glyphicon-remove {
+.glyphicon-remove-circle {
     color: red;
 }
 
 .glyphicon-ban-circle {
-    color: orange;
+    color: #FF9B1A;
+}
+
+#additional-builds-panel td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+#wrapper-builds-panel {
+    padding-left: 11px;
 }
