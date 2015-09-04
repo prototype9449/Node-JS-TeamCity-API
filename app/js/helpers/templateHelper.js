@@ -27,3 +27,19 @@ tpl = {
         return this.templates[name];
     }
 };
+
+
+var getClassesByStatus = function(status) {
+    switch (status) {
+        case 'running':
+            return "arrow-processing-icon";
+        case 'failure':
+            return "glyphicon glyphicon-remove-circle";
+        case 'success':
+            return "glyphicon glyphicon-ok-circle";
+        case 'cancelled':
+            return "glyphicon glyphicon-ban-circle";
+        default:
+            throw new Error('There is not that status');
+    }
+};

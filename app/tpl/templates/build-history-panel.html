@@ -2,10 +2,7 @@
 <td><a href="#/agent/id:<%- agent.id %>"> <%- agent.name %></a></td>
 <td>
     <%- build.status %>
-    <% if (build.status.toLowerCase().indexOf('running') != -1) { %><span class="arrow-processing-icon"></span><% }  %>
-    <% if (build.status.toLowerCase().indexOf('failure') != -1) { %><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ></span><% }  %>
-    <% if (build.status.toLowerCase().indexOf('success') != -1) { %><span class="glyphicon glyphicon-ok-circle" aria-hidden="true" ></span><% }  %>
-    <% if (build.status.toLowerCase().indexOf('cancelled') != -1) { %><span class="glyphicon glyphicon-ban-circle" aria-hidden="true" ></span><% }  %>
+    <span name="status-span" class="<%-getClassesByStatus(build.status)%>" aria-hidden="true"></span>
 </td>
 <td> <%- build.launchDate %></td>
 <td> <%- build.duration %></td>
