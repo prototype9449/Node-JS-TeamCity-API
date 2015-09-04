@@ -6,6 +6,12 @@
         <li><b>Connected:</b> <%- status.connected %></li>
         <li><b>Authorized:</b> <%- status.authorized %></li>
         <li><b>Enabled:</b> <%- status.enabled %></li>
-        <li><b>Free Space:</b> <%- freeSpace %> Gb</li>
+        <li><b>Free Space:</b> <%- freeSpace %> Gb
+            <button type="button" class="btn btn-success launch-button" aria-label="Left Align"
+                    id="launchBuildButton-<%- id %>">
+                Fix
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            </button>
+        </li>
     </div>
 </div>

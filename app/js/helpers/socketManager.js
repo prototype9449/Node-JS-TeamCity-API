@@ -1,4 +1,12 @@
 socketManager = {
+    bindLaunchingBuild : function(agent, socket){
+        (function (agent, socket) {
+            $('#launchBuildButton-' + agent.id).click(function () {
+                socket.emit('launchBuild', agent);
+            });
+        })(agent, socket);
+    },
+
     setMainSocket: function (model) {
 
         var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});
@@ -29,12 +37,7 @@ socketManager = {
                     id : id,
                     name :  newAgents[i].model.name
                 };
-
-                (function (agent) {
-                    $('#launchBuildButton-' + agent.id).click(function () {
-                        socket.emit('launchBuild', agent);
-                    });
-                }(agent));
+                socketManager.bindLaunchingBuild(agent,socket);
             }
         });
 
@@ -77,6 +80,7 @@ socketManager = {
         socket.on('agent', function (agent) {
             var object = agent[0].model;
             model.agent.set({object: object});
+            socketManager.bindLaunchingBuild(agent,socket);
         });
 
         socket.on('agentHistory', function (newBuilds) {
