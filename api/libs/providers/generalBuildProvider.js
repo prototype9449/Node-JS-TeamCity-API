@@ -47,7 +47,7 @@ var getProperDuration = function(duration) {
 
     var hours = Math.floor(duration/3600);
     var minutes = (duration/60) - hours*60;
-    var hoursString = hours == 0 ? '' : hours + 'h';
+    var hoursString = hours == 0 ? '' : hours + 'h :';
     return hoursString + ' ' + Math.floor(minutes) + 'm';
 };
 
