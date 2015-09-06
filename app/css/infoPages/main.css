@@ -56,13 +56,17 @@ th, td {
     white-space: nowrap;
 }
 
+.panel {
+    margin-bottom: 10px;
+}
+
 .general-buildInfo, .additional-buildInfo, .agentInfo{
     margin: 5px;
 }
 
-
 .second-column {
     margin-top: 5px;
+    display: block;
 }
 .buildInfo{
     height: 210px;
@@ -135,6 +139,10 @@ th, td {
     color: #FF9B1A;
 }
 
+#additional-build-panel {
+    display: inline-block;
+}
+
 #additional-builds-panel td{
     text-align: center;
     vertical-align: middle;
@@ -142,4 +150,9 @@ th, td {
 
 #wrapper-builds-panel {
     padding-left: 11px;
+}
+
+#settings-page-button {
+    float: right;
+    margin-bottom: 5px;
 }
