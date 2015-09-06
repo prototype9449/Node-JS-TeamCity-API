@@ -4,6 +4,7 @@
     </div>
     <div class="panel-body">
         <li><b>Branch Name:</b> <%- build.branchName %></li>
+        <li><b>Author Name:</b> <%- build.authorName %></li>
         <li><b>Status:</b>
             <%- build.status %>
             <span name="status-span" class="<%-getClassesByStatus(build.status)%>" aria-hidden="true"></span>

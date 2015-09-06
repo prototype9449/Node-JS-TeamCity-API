@@ -1,3 +1,6 @@
+var config = require('./../config/generalOptionHelper');
+var launchBuild = require('../providers/generalBuildProvider').launchBuildConfiguration;
+
 function BaseSocket(server, time, objectType) {
     this.time = time;
     this.objectHelper = require('./../helpers/objectHelper');
@@ -46,6 +49,21 @@ function BaseSocket(server, time, objectType) {
 
     this.stop = function () {
         clearInterval(this.interval);
+    };
+
+    this.launchBuildByAgent = function (agent) {
+        var agentFixBuilds = config.getAgentFixBuildsOptions();
+
+        var buildTypeName;
+        agentFixBuilds.map(function (item) {
+            if (item.agentName == agent.name) {
+                buildTypeName = item.buildTypeName;
+            }
+        });
+
+        if(!buildTypeName) return;
+
+        launchBuild(buildTypeName, agent.id);
     };
 }
 

@@ -65,7 +65,7 @@ th, td {
     margin-top: 5px;
 }
 .buildInfo{
-    height: 180px;
+    height: 210px;
     width:300px;
     float:left;
     margin-left: 12px;
@@ -76,9 +76,7 @@ th, td {
 }
 
 .arrow-processing-icon {
-    /*background-image: url(../../images/arrow-processing-icon.png);*/
     background-image: url(../../images/arrow-processing-icon-black.png);
-    /*background-image: url(../../images/cow.png);*/
     animation-name: spin;
     animation-duration: 600ms;
     animation-iteration-count: infinite;
@@ -86,15 +84,6 @@ th, td {
     width: 16px;
     height: 16px;
     display: inline-block;
-}
-
-.glyphicon-cog {
-    animation-name: spin;
-    animation-duration: 600ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-
-    z-index: 100;
 }
 
 @keyframes spin {
