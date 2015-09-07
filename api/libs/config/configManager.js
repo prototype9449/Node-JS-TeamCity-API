@@ -15,7 +15,7 @@ var ConfigManager = function () {
         })(config);
     }
 
-    this.AddNewTeamCity = function (options) {
+    this.addNewTeamCity = function (options) {
         var baseOptions = clone(config.general().get('generalOptions'));
         baseOptions.connection.url = options.url;
         baseOptions.connection.auth = options.auth;
@@ -43,6 +43,22 @@ var ConfigManager = function () {
                 return;
             }
         }
+    };
+
+    this.chooseGeneralTeamCity = function (id) {
+        var objects = config.otherOptions().get('teamCityObjects');
+        var getObjectById = function (id) {
+            for (var i = 0; i < objects.length; i++) {
+                if (objects[i].id == id) {
+                    return objects[i];
+                }
+            }
+        };
+
+        var teamCity = getObjectById(id);
+        if (!teamCity) throw new Error('There is not that id');
+        config.set("generalOptions", clone(teamCity));
+        saveConfig(config);
     };
 };
 

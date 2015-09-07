@@ -9,16 +9,17 @@
       "headers": {
         "Accept": "application/json"
       }
-    }
-  },
-  "agentFixBuilds": [
-    {
-      "agentName": "CO-YAR-WS152",
-      "buildTypeName": "Portal_PortalControls"
     },
-    {
-      "agentName": "CO-YAR-WS132",
-      "buildTypeName": "Portal_PortalPortalLib"
-    }
-  ]
+    "agentFixBuilds": [
+      {
+        "agentName": "CO-YAR-WS152",
+        "buildTypeName": "Portal_PortalControls"
+      },
+      {
+        "agentName": "CO-YAR-WS132",
+        "buildTypeName": "Portal_PortalPortalLib"
+      }
+    ],
+    "id": 1
+  }
 }
