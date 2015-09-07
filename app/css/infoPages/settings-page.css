@@ -56,6 +56,10 @@ th {
     text-align: center;
 }
 
+td {
+    padding: 3px;
+}
+
 #new-teamcity-connection-settings-panel {
     width: 250px;
     margin-right: auto;
