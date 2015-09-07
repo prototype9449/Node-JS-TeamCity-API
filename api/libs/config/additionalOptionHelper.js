@@ -1,4 +1,29 @@
-var config = require('./configManager');
+var config = require('./nconfSetting');
+var ConfigManager = require('./ConfigManager');
+
+var object = {
+    "url": "http://co-osl-devb97:85",
+    "auth": {
+        "user": "SergeyPo",
+        "pass": "qwerty12345!"
+    },
+    "agentFixBuilds": [
+        {
+            "agentName": "CO-hkhj-WS152",
+            "buildTypeName": "khjk"
+        },
+        {
+            "agentName": "CO-YAR-hjk",
+            "buildTypeName": "khjk"
+        }
+    ]
+
+};
+var configManager = new ConfigManager();
+configManager.AddNewTeamCity(object);
+configManager.removeTeamCityById(0);
+
+
 
 var additionalConnectionOptionHelper =
 {

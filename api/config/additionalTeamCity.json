@@ -10,7 +10,6 @@
         "Accept": "application/json"
       }
     },
-
     "options": {
       "projects": [
         {

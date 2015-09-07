@@ -1,0 +1,50 @@
+{
+  "teamCityObjects": [
+    {
+      "connection": {
+        "url": "http://co-osl-devb97:85",
+        "auth": {
+          "user": "SergeyPo",
+          "pass": "qwerty12345!"
+        },
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "agentFixBuilds": [
+        {
+          "agentName": "CO-hkhj-WS152",
+          "buildTypeName": "khjk"
+        },
+        {
+          "agentName": "CO-YAR-hjk",
+          "buildTypeName": "khjk"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "connection": {
+        "url": "http://co-osl-devb97:85",
+        "auth": {
+          "user": "SergeyPo",
+          "pass": "qwerty12345!"
+        },
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "agentFixBuilds": [
+        {
+          "agentName": "CO-hkhj-WS152",
+          "buildTypeName": "khjk"
+        },
+        {
+          "agentName": "CO-YAR-hjk",
+          "buildTypeName": "khjk"
+        }
+      ],
+      "id": 2
+    }
+  ]
+}

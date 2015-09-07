@@ -8,7 +8,10 @@ var generateBuildJson = function (buildHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
     optionTeamCity.url += buildHref;
     request.get(optionTeamCity, function (err, response) {
-        if (err) throw err;
+        if (err) {
+            console.log(err);
+            return;
+        }
         var buildJson = JSON.parse(response.body);
         callback(buildJson);
     });

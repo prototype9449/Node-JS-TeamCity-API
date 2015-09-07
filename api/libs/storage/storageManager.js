@@ -1,6 +1,7 @@
 var AgentStorage = require('./agentStorage').AgentStorage;
 var GeneralBuildStorage = require('./buildStorage').BuildStorage;
 var AdditionalBuildStorage = require('./buildStorage').BuildStorage;
+var BuildTypeStorage = require('./buildTypeStorage').BuildTypeStorage;
 
 var connectionOptionHelper = require('./../config/generalOptionHelper');
 var additionalConnectionHelper = require('../config/additionalOptionHelper');
@@ -44,6 +45,10 @@ function StorageManager() {
         return  connectionOptionHelper.getAgentOptions().connection;
     };
 
+    var getConnectionForBuildTypeStorage = function () {
+        return  connectionOptionHelper.getBuildTypeOptions().connection;
+    };
+
     var getConnectionForAdditionalBuildStorage = function () {
         return additionalConnectionHelper.getGeneralOptions().options;
     };
@@ -52,6 +57,7 @@ function StorageManager() {
         var generalBuildStorage = new GeneralBuildStorage();
         var agentStorage = new AgentStorage(generalBuildStorage);
         var additionalBuildStorage = new AdditionalBuildStorage();
+        var buildTypeStorage = new BuildTypeStorage();
 
         return {
             agentStorage: {
@@ -68,6 +74,11 @@ function StorageManager() {
                 storage: additionalBuildStorage,
                 getOptions: getConnectionForAdditionalBuildStorage,
                 getObjecs: generateBuildsByBuildTypeNames
+            },
+            buildTypeStorage : {
+                storage : buildTypeStorage,
+                getOptions : getConnectionForBuildTypeStorage,
+                getObjecs : generateObjects
             }
         };
     }

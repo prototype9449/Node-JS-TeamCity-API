@@ -11,7 +11,6 @@
       }
     }
   },
-
   "agentFixBuilds": [
     {
       "agentName": "CO-YAR-WS152",

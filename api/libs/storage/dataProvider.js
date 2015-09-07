@@ -19,7 +19,7 @@ function DataProvider(storages, time) {
                 self.saveElements(self.storages[id]);
             }
         }, this.time);
-    }.bind(this);
+    };
 }
 
 module.exports = DataProvider;
