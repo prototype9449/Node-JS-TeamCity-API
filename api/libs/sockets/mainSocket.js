@@ -1,7 +1,6 @@
 var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
 
-
 function MainSocket(server, storagesDetail, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
     this.generalBuildStorage = storagesDetail.generalBuildStorage.storage;
@@ -13,24 +12,25 @@ function MainSocket(server, storagesDetail, time, objectType) {
     this.agentHelper = new this.objectHelper('agents', this.agentStorage.getAgents);
     this.buildCount = 10;
 
-    var self = this;
-
     this.sendInfo = function (clients) {
-        self.generalBuildHelper.generateNewObjects(function (builds) {
+
+        var self = this;
+
+        this.generalBuildHelper.generateNewObjects(function (builds) {
             var buildsData = self.pushModels(builds);
             for (var id in self.clients) {
                 clients[id].socket.emit('generalBuilds', buildsData);
             }
         }, this.buildCount);
 
-        self.additionalBuildHelper.generateNewObjects(function (builds) {
+        this.additionalBuildHelper.generateNewObjects(function (builds) {
             var buildsData = self.pushModels(builds);
             for (var id in self.clients) {
                 clients[id].socket.emit('additionalBuilds', buildsData);
             }
         });
 
-        self.agentHelper.generateNewObjects(function (agents) {
+        this.agentHelper.generateNewObjects(function (agents) {
             var agentsData = self.pushModels(agents);
             for (var id in self.clients) {
                 clients[id].socket.emit('agents', agentsData);
@@ -39,23 +39,23 @@ function MainSocket(server, storagesDetail, time, objectType) {
     };
 
     this.sendInitialData = function (socket) {
-        var generalBuilds = self.generalBuildStorage.getBuilds(this.buildCount)["builds"];
-        var generalBuildsData = self.pushModels(generalBuilds);
+
+        var generalBuilds = this.generalBuildStorage.getBuilds(this.buildCount)["builds"];
+        var generalBuildsData = this.pushModels(generalBuilds);
         socket.emit('generalBuilds', generalBuildsData);
 
-        var additionalBuilds = self.additionalBuildStorage.getBuilds()["builds"];
-        var additionalBuildsData = self.pushModels(additionalBuilds);
+        var additionalBuilds = this.additionalBuildStorage.getBuilds()["builds"];
+        var additionalBuildsData = this.pushModels(additionalBuilds);
         socket.emit('additionalBuilds', additionalBuildsData);
 
-        var agents = self.agentStorage.getAgents()["agents"];
-        var agentsData = self.pushModels(agents);
+        var agents = this.agentStorage.getAgents()["agents"];
+        var agentsData = this.pushModels(agents);
         socket.emit('agents', agentsData);
     };
 
     this.createClient = function (socket) {
 
-        socket.on('launchBuild', self.launchBuildByAgent);
-
+        socket.on('launchBuild', this.launchBuildByAgent);
         this.clients[socket.id] = {
             socket: socket
         };

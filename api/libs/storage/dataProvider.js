@@ -14,12 +14,12 @@ function DataProvider(storages, time) {
 
     this.start = function () {
         var self = this;
-        self.interval = setInterval(function send() {
+        this.interval = setInterval(function send() {
             for (var id in self.storages) {
                 self.saveElements(self.storages[id]);
             }
         }, this.time);
-    }
+    }.bind(this);
 }
 
 module.exports = DataProvider;

@@ -5,10 +5,6 @@ var AgentStorage = function (buildProvider) {
     this.__proto__ = new baseStorage("agents");
     var self = this;
 
-    this.pushAgents = function (agents) {
-        self.pushObjects(agents);
-    };
-
     var getRunningBuildByAgent = function (agentId, buildProvider) {
         for (var i = 0; i < buildProvider.objects.length; i++) {
             if (buildProvider.objects[i].build.status == 'running' && buildProvider.objects[i].agent.id == agentId) {

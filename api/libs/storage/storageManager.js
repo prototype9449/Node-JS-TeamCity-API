@@ -12,7 +12,7 @@ function StorageManager() {
 
     var getConnectionForGeneralBuildStorage = function (generalBuildStorage) {
         function getConnection() {
-            var getFirstFinishedBuildId = function (builds) {
+            function getFirstFinishedBuildId(builds) {
                 var buildId = "";
                 for (var i = builds.length - 1; i >= 0; i--) {
                     if (builds[i].build.state == 'finished') {
