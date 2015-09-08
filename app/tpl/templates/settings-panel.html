@@ -4,11 +4,7 @@
         Addresses of Available TeamCities
         <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <% _.each(items, function(item) { %>
-        <li><a href="#"><%= item.url %></a></li>
-        <% }); %>
-    </ul>
+
 </div>
 
 <nav id="current-agent-settings-control" class="navbar navbar-default">
@@ -27,41 +23,30 @@
                 </th>
                 </thead>
                 <tbody>
-                <% _.each(items, function(item) { %>
-                <% _.each(item.agents, function(agent) { %>
+                <% _.each(agents, function(agent) { %>
                 <tr>
                     <td>
-                        <%= agent.agentName %>
+                        <%= agent.name %>
                     </td>
                     <td>
                         <div class="dropdown dropdown-left-offset">
                             <button class="btn btn-default dropdown-toggle" type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <%= agent.agentName %>
+                                <%= agent.name %>
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <% _.each(item.builds, function(build) { %>
-                                <li><a href="#"><%= build.buildName %></a></li>
+                                <% _.each(buildTypes, function(buildType) { %>
+                                <li><a href="#/settings"><%= buildType.buildTypeName %></a></li>
                                 <% }); %>
                             </ul>
                         </div>
                     </td>
                 </tr>
                 <% }); %>
-                <% }); %>
 
 
-                <% _.each(items.agents, function(agent) { %>
-                <tr>
-                    <td>
-                        <h4><%- agent.agentName %></h4>
-                    </td>
-                    <td>
 
-                    </td>
-                </tr>
-                <% }); %>
                 </tbody>
             </table>
 

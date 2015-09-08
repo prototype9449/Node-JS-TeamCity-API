@@ -18,7 +18,7 @@ TeamcityController = Backbone.Router.extend({
         var model = {
             agentList: new ObjectsCollection([], {modelProvider: Agent}),
             generalBuildList: new ObjectsCollection([], {modelProvider: GeneralBuild, maxElem: 10}),
-            additionalBuildList: new ObjectsCollection([], {modelProvider: AdditionalBuild })
+            additionalBuildList: new ObjectsCollection([], {modelProvider: AdditionalBuild})
         };
 
         this.mainModel = model;
@@ -27,12 +27,12 @@ TeamcityController = Backbone.Router.extend({
         this.socket = socketManager.setMainSocket(model);
     },
 
-    settings : function(){
-        //var model = {
-        //
-        //};
-        //this.showView('#')
-        this.socket = socketManager.setSettingsSocket();
+    settings: function () {
+        var model = {
+            settings: new SettingsPanel()
+        };
+        this.showView('#content', new SettingsPageView({model: model, router: this}));
+        this.socket = socketManager.setSettingsSocket(model);
     },
 
     buildDetails: function (stringId) {
@@ -57,7 +57,8 @@ TeamcityController = Backbone.Router.extend({
         this.showView('#content', new BuildPageView({model: model, router: this}));
         this.socket = socketManager.setBuildSocket(model, id);
 
-    },
+    }
+    ,
 
     agentDetails: function (stringId) {
         this.doBeforeShowingView();
@@ -83,11 +84,13 @@ TeamcityController = Backbone.Router.extend({
 
         this.showView('#content', new AgentPageView({model: model, router: this}));
         this.socket = socketManager.setAgentSocket(model, id);
-    },
+    }
+    ,
 
     doBeforeShowingView: function () {
         this.disconnectOldConnection();
-    },
+    }
+    ,
 
     disconnectOldConnection: function () {
         if (this.socket) {
@@ -96,10 +99,12 @@ TeamcityController = Backbone.Router.extend({
             if (this.socket.close)
                 this.socket.close();
         }
-    },
+    }
+    ,
 
     showView: function (selector, view) {
         $(selector).html(view.render().el);
         return view;
     }
-});
+})
+;

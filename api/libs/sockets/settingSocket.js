@@ -20,7 +20,7 @@ function SettingSocket(server, storagesDetail, time, objectType) {
                 {
                     agents: agentsData,
                     buildTypes: buildTypesData,
-                    currentSettings : settings
+                    currentSettings: settings
                 };
                 callback(bunch);
             });
@@ -36,11 +36,18 @@ function SettingSocket(server, storagesDetail, time, objectType) {
     };
 
     this.sendInitialData = function (socket) {
-        generateData(function (bunch) {
-            for (var id in self.clients) {
-                socket.emit('settings', bunch);
-            }
-        });
+        var buildTypes = self.buildTypeStorage.getBuildTypes();
+        var agents = self.agentStorage.getAgents();
+        var settings = config.getGeneralOptions();
+
+        var bunch =
+        {
+            agents: agents.agents,
+            buildTypes: buildTypes.buildTypes,
+            currentSettings: settings
+        };
+
+        socket.emit('settings', bunch);
     };
 
     this.createClient = function (socket) {

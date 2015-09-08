@@ -49,12 +49,7 @@ socketManager = {
         var socket = io.connect('http://localhost:8080', {'path': '/settings', 'force new connection': true});
 
         socket.on('settings', function (settings) {
-            //for (var i = 0; i < generalBuilds.length; i++) {
-            //    var id = generalBuilds[i].id;
-            //    var object = generalBuilds[i].model;
-            //    model.generalBuildList.add({id: id, object : object});
-            //}
-            var r = settings;
+           model.settings.set({object: settings});
         });
 
         return socket;

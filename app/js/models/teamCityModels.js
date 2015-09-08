@@ -77,7 +77,7 @@ window.FullBuild = Backbone.Model.extend({
     }
 });
 
-window.settingsPage = Backbone.Model.extend({
+window.SettingsPanel = Backbone.Model.extend({
     defaults: {
         needToUpdate: false,
         id: "0",
@@ -85,25 +85,9 @@ window.settingsPage = Backbone.Model.extend({
         options: {
             path: "/settings",
             view: {
-                className: "settingsPage",
+                className: "SettingsPanel",
                 tagName: "div",
-                template: "settingsPage"
-            }
-        }
-    }
-});
-
-window.settingsPanel = Backbone.Model.extend({
-    defaults: {
-        needToUpdate: false,
-        id: "0",
-        object: "",
-        options: {
-            path: "/settings",
-            view: {
-                className: "settingsPanel",
-                tagName: "div",
-                template: "settingsPanel"
+                template: "SettingsPanel"
             }
         }
     }

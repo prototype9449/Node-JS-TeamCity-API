@@ -18,7 +18,7 @@ $(function () {
                 path: 'tpl/settings-information-page'
             },
             {
-                name: 'settingsPanel',
+                name: 'SettingsPanel',
                 path: 'tpl/templates/settings-panel'
             },
             {
