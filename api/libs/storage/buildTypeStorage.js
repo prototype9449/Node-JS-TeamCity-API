@@ -8,6 +8,10 @@ var BuildTypeStorage = function () {
         return self.getObjects(number);
     };
 
+    this.pushObjects = function(buildTypes){
+        self.objects = buildTypes;
+    };
+    
     this.getBuildTypeById = function (id) {
         return self.getById(id);
     };

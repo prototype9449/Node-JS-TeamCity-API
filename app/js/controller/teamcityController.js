@@ -14,7 +14,7 @@ TeamcityController = Backbone.Router.extend({
     },
 
     mainPage: function () {
-        this.beforeView();
+        this.doBeforeShowingView();
         var model = {
             agentList: new ObjectsCollection([], {modelProvider: Agent}),
             generalBuildList: new ObjectsCollection([], {modelProvider: GeneralBuild, maxElem: 10}),
@@ -28,11 +28,15 @@ TeamcityController = Backbone.Router.extend({
     },
 
     settings : function(){
-        this.socket = socketManager.setSettingsSocket(null);
+        //var model = {
+        //
+        //};
+        //this.showView('#')
+        this.socket = socketManager.setSettingsSocket();
     },
 
     buildDetails: function (stringId) {
-        this.beforeView();
+        this.doBeforeShowingView();
         var id = stringId.split(":")[1];
 
         var build = {};
@@ -56,7 +60,7 @@ TeamcityController = Backbone.Router.extend({
     },
 
     agentDetails: function (stringId) {
-        this.beforeView();
+        this.doBeforeShowingView();
         var id = stringId.split(":")[1];
 
         var agent = {};
@@ -81,7 +85,7 @@ TeamcityController = Backbone.Router.extend({
         this.socket = socketManager.setAgentSocket(model, id);
     },
 
-    beforeView: function () {
+    doBeforeShowingView: function () {
         this.disconnectOldConnection();
     },
 
