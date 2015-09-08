@@ -27,7 +27,7 @@ function BaseSocket(server, time, objectType) {
             console.log("timer started");
             this.interval = setInterval(function () {
                 self.sendInfo(self.clients);
-            }, this.time);
+            }, self.time);
         };
 
         this.io.on('connection', function (socket) {
@@ -38,6 +38,7 @@ function BaseSocket(server, time, objectType) {
 
             socket.on('disconnect', function () {
                 delete self.clients[socket.id];
+                self.stop();
             });
             setTimer.apply(self);
         });
