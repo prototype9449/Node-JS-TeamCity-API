@@ -26,7 +26,7 @@ function AgentSocket(server, storagesDetail, time, objectType) {
     };
 
     this.sendInitialData = function (socket) {
-        self.sendInfo(self.clients);
+        this.sendInfo(self.clients);
     };
 
     this.createClient = function (socket) {

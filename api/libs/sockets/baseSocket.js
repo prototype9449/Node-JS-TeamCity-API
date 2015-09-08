@@ -21,30 +21,27 @@ function BaseSocket(server, time, objectType) {
     };
 
     this.start = function () {
+        var self = this;
 
-        function SetTimer(self) {
+        var setTimer = function () {
             console.log("timer started");
-            self.interval = setInterval(function send() {
+            this.interval = setInterval(function () {
                 self.sendInfo(self.clients);
             }, self.time);
-        }
+        };
 
-        function begin(self) {
-            self.io.on('connection', function (socket) {
-                self.createClient(socket);
+        this.io.on('connection', function (socket) {
+            self.createClient(socket);
+            self.sendInitialData(socket);
 
-                self.sendInitialData(socket);
+            console.log('Clients online : ' + self.clients);
 
-                console.log('Clients online : ' + self.clients);
-
-                socket.on('disconnect', function () {
-                    delete self.clients[socket.id];
-                });
-                SetTimer(self);
+            socket.on('disconnect', function () {
+                delete self.clients[socket.id];
+                self.stop();
             });
-        }
-
-        begin(this);
+            setTimer.apply(self);
+        });
     };
 
     this.stop = function () {
@@ -61,7 +58,7 @@ function BaseSocket(server, time, objectType) {
             }
         });
 
-        if(!buildTypeName) return;
+        if (!buildTypeName) return;
 
         launchBuild(buildTypeName, agent.id);
     };

@@ -8,7 +8,10 @@ var generateBuildJson = function (buildHref, callback) {
     var optionTeamCity = config.getGeneralOptions().connection;
     optionTeamCity.url += buildHref;
     request.get(optionTeamCity, function (err, response) {
-        if (err) throw err;
+        if (err) {
+            console.log(err);
+            return;
+        }
         var buildJson = JSON.parse(response.body);
         callback(buildJson);
     });
@@ -81,6 +84,27 @@ var getProperStatus = function(status,state){
     }
 };
 
+var getValidateBscHref = function(jsonBuild){
+    var vscHref;
+    try {
+        vscHref = jsonBuild.revisions.revision[0]['vcs-root-instance'].href;
+    }
+    catch (error) {
+        vscHref = undefined;
+    }
+    return vscHref;
+};
+
+var getValidateUserName = function(jsonBuild){
+    var userName;
+    try {
+        userName = jsonBuild.triggered.user.username;
+    } catch(error) {
+        userName = '---';
+    }
+    return userName;
+};
+
 var generateFinalBuildJson = function (buildId, buildHref, callback) {
     generateBuildJson(buildHref, function (jsonBuild) {
         var buildLaunchDate = getDateFromString(jsonBuild.triggered.date);
@@ -88,14 +112,9 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
         if(buildFinishedDate){
             var duration =  Math.abs((buildLaunchDate.getTime() - buildFinishedDate.getTime() )/ 1000);
         }
+        var vscHref = getValidateBscHref(jsonBuild);
+        var userName = getValidateUserName(jsonBuild);
 
-        var vscHref;
-        try {
-            vscHref = jsonBuild.revisions.revision[0]['vcs-root-instance'].href;
-        }
-        catch (error) {
-            vscHref = undefined;
-        }
         generateVSCInstance(vscHref, function (vscJson) {
             var buildBranchName = getBuildBranchName(vscJson);
             var finalJsonBuild =
@@ -105,7 +124,7 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
                     id: buildId,
                     href: 'buildInfo.html?id=' + buildId,
                     branchName: buildBranchName,
-                    authorName : jsonBuild.triggered.user.username,
+                    authorName : userName,
                     state : jsonBuild.state,
                     status: getProperStatus(jsonBuild.status,jsonBuild.state),
                     launchDate: buildLaunchDate.format(),

@@ -1,4 +1,4 @@
-var config = require('./configManager');
+var config = require('./nconfSetting');
 
 var generalConnectionOptionHelper =
 {
@@ -47,9 +47,16 @@ var generalConnectionOptionHelper =
         return buildOptions;
     },
 
+    getBuildTypeOptions: function () {
+        var generalOption = generalConnectionOptionHelper.getGeneralOptions();
+        var buildPaths = config.urlPaths().get('buildTypeOptions');
+       generalOption.connection.url += buildPaths.relativeUrl;
+        return generalOption;
+    },
+
     getAgentFixBuildsOptions: function () {
-        var generalOption = config.general().get('agentFixBuilds');
-        return this.clone(generalOption);
+        var generalOption = config.general().get('generalOptions');
+        return this.clone(generalOption.agentFixBuilds);
     }
 };
 

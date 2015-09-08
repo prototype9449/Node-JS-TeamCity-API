@@ -26,12 +26,11 @@ function SocketManager(server, storagesDetail, time, objectType) {
     };
 
     this.sendInitialData = function (socket) {
-        self.sendInfo(self.clients);
+        this.sendInfo(this.clients);
     };
 
     this.createClient = function (socket) {
         var id = socket.handshake.query.id;
-        var self = this;
 
         var client = {
             objectId: id,

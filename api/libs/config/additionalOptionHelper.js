@@ -1,4 +1,5 @@
-var config = require('./configManager');
+var config = require('./nconfSetting');
+var ConfigManager = require('./ConfigManager');
 
 var additionalConnectionOptionHelper =
 {

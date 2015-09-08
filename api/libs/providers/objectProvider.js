@@ -31,6 +31,19 @@ var generateAgents = function (agents, callback) {
     }
 };
 
+var generateBuildTypes = function (buildTypes, callback) {
+    var jsonBuildTypes = [];
+    for (var i = 0; i < buildTypes.length; i++) {
+        jsonBuildTypes.push({
+            id : buildTypes[0].id,
+            buildTypeName : buildTypes[0].name,
+            projectName : buildTypes[0].projectName,
+        })
+    }
+
+    callback(jsonBuildTypes);
+};
+
 var generateObjects = function (connection, callback) {
     request.get(connection, function (err, response) {
         if (err) throw err;
@@ -39,9 +52,10 @@ var generateObjects = function (connection, callback) {
 
         if (bindingJson.build) {
             generateBuilds(bindingJson.build, callback);
-        }
-        else if (bindingJson.agent) {
+        } else if (bindingJson.agent) {
             generateAgents(bindingJson.agent, callback);
+        } else if(bindingJson.buildType){
+            generateBuildTypes(bindingJson.buildType, callback);
         }
     })
 };

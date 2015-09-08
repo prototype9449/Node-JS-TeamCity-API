@@ -4,10 +4,6 @@ var BuildStorage = function () {
     this.__proto__ = new baseStorage("builds");
     var self = this;
 
-    this.pushBuilds = function (builds) {
-        self.pushObjects(builds);
-    };
-
     this.getBuilds = function (number) {
         return self.getObjects(number);
     };
