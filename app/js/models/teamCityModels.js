@@ -77,6 +77,38 @@ window.FullBuild = Backbone.Model.extend({
     }
 });
 
+window.settingsPage = Backbone.Model.extend({
+    defaults: {
+        needToUpdate: false,
+        id: "0",
+        object: "",
+        options: {
+            path: "/settings",
+            view: {
+                className: "settingsPage",
+                tagName: "div",
+                template: "settingsPage"
+            }
+        }
+    }
+});
+
+window.settingsPanel = Backbone.Model.extend({
+    defaults: {
+        needToUpdate: false,
+        id: "0",
+        object: "",
+        options: {
+            path: "/settings",
+            view: {
+                className: "settingsPanel",
+                tagName: "div",
+                template: "settingsPanel"
+            }
+        }
+    }
+});
+
 window.AgentHistory = Backbone.Model.extend({
     defaults: {
         needToUpdate: true,
