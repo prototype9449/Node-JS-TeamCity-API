@@ -12,28 +12,28 @@ function MainSocket(server, storagesDetail, time, objectType) {
     this.agentHelper = new this.objectHelper('agents', this.agentStorage.getAgents);
     this.buildCount = 10;
 
-    this.sendInfo = function (clients) {
+    this.sendInfo = function () {
 
         var self = this;
 
         this.generalBuildHelper.generateNewObjects(function (builds) {
             var buildsData = self.pushModels(builds);
             for (var id in self.clients) {
-                clients[id].socket.emit('generalBuilds', buildsData);
+                self.clients[id].socket.emit('generalBuilds', buildsData);
             }
         }, this.buildCount);
 
         this.additionalBuildHelper.generateNewObjects(function (builds) {
             var buildsData = self.pushModels(builds);
             for (var id in self.clients) {
-                clients[id].socket.emit('additionalBuilds', buildsData);
+                self.clients[id].socket.emit('additionalBuilds', buildsData);
             }
         });
 
         this.agentHelper.generateNewObjects(function (agents) {
             var agentsData = self.pushModels(agents);
             for (var id in self.clients) {
-                clients[id].socket.emit('agents', agentsData);
+                self.clients[id].socket.emit('agents', agentsData);
             }
         });
     };

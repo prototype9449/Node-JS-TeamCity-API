@@ -9,7 +9,8 @@ TeamcityController = Backbone.Router.extend({
         "": "mainPage",
         "/": "mainPage",
         "/build/:id": "buildDetails",
-        "/agent/:id": "agentDetails"
+        "/agent/:id": "agentDetails",
+        "/settings": "settings"
     },
 
     mainPage: function () {
@@ -24,6 +25,10 @@ TeamcityController = Backbone.Router.extend({
 
         this.showView('#content', new MainPageView({model: model, router: this}));
         this.socket = socketManager.setMainSocket(model);
+    },
+
+    settings : function(){
+        this.socket = socketManager.setSettingsSocket(null);
     },
 
     buildDetails: function (stringId) {

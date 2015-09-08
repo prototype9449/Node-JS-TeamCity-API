@@ -27,10 +27,10 @@ function SettingSocket(server, storagesDetail, time, objectType) {
         });
     }.bind(this);
 
-    this.sendInfo = function (clients) {
+    this.sendInfo = function () {
         generateData(function (bunch) {
             for (var id in self.clients) {
-                clients[id].socket.emit('settings', bunch);
+                self.clients[id].socket.emit('settings', bunch);
             }
         });
     };

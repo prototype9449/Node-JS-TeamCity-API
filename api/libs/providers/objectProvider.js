@@ -35,9 +35,9 @@ var generateBuildTypes = function (buildTypes, callback) {
     var jsonBuildTypes = [];
     for (var i = 0; i < buildTypes.length; i++) {
         jsonBuildTypes.push({
-            id : buildTypes[0].id,
-            buildTypeName : buildTypes[0].name,
-            projectName : buildTypes[0].projectName,
+            id : buildTypes[i].id,
+            buildTypeName : buildTypes[i].name,
+            projectName : buildTypes[i].projectName
         })
     }
 
