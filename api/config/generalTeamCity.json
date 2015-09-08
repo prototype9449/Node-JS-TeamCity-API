@@ -14,11 +14,13 @@
     "agentFixBuilds": [
       {
         "agentName": "CO-YAR-WS152",
-        "buildTypeName": "Portal_PortalControls"
+        "buildTypeName": "Portal Controls",
+        "id": "Portal_PortalControls"
       },
       {
         "agentName": "CO-YAR-WS132",
-        "buildTypeName": "Portal_PortalPortalLib"
+        "buildTypeName": "PortalLib",
+        "id": "Portal_PortalPortalLib"
       }
     ],
     "id": 1

@@ -1,11 +1,8 @@
-<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Addresses of Available TeamCities
-        <span class="caret"></span>
-    </button>
-
-</div>
+<select class="selectpicker show-tick" name="url">
+    <% _.each(otherSettings, function(setting) { %>
+    <option><%= setting.connection.url %></option>
+    <% }); %>
+</select>
 
 <nav id="current-agent-settings-control" class="navbar navbar-default">
     <div class="container-fluid">
@@ -29,22 +26,15 @@
                         <%= agent.name %>
                     </td>
                     <td>
-                        <div class="dropdown dropdown-left-offset">
-                            <button class="btn btn-default dropdown-toggle" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <%= agent.name %>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <% _.each(buildTypes, function(buildType) { %>
-                                <li><a href="#/settings"><%= buildType.buildTypeName %></a></li>
-                                <% }); %>
-                            </ul>
-                        </div>
+                        <select class="selectpicker show-tick" name="<%= agent.name %>">
+                            <% _.each(buildTypes, function(buildType) { %>
+                            <option><%= buildType.buildTypeName %></option>
+                            <% }); %>
+                        </select>
+
                     </td>
                 </tr>
                 <% }); %>
-
 
 
                 </tbody>

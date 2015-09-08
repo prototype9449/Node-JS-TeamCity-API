@@ -12,6 +12,12 @@ var generalConnectionOptionHelper =
         return this.clone(generalOption);
     },
 
+    getOtherOptions: function () {
+        var otherOptions = config.otherOptions().get('teamCityObjects');
+
+        return this.clone(otherOptions);
+    },
+
     getAgentOptions: function () {
         var generalOption = config.general().get('generalOptions');
         var agentPaths = config.urlPaths().get('agentOptions');

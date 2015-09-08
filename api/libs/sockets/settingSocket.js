@@ -15,12 +15,14 @@ function SettingSocket(server, storagesDetail, time, objectType) {
             var buildTypesData = self.pushModels(buildTypes);
             self.agentHelper.generateNewObjects(function (agents) {
                 var agentsData = self.pushModels(agents);
-                var settings = config.getGeneralOptions();
+                var selectedSettings = config.getGeneralOptions();
+                var otherSettings = config.getOtherOptions();
                 var bunch =
                 {
                     agents: agentsData,
                     buildTypes: buildTypesData,
-                    currentSettings: settings
+                    currentSettings: selectedSettings,
+                    otherSettings: otherSettings
                 };
                 callback(bunch);
             });
@@ -39,12 +41,13 @@ function SettingSocket(server, storagesDetail, time, objectType) {
         var buildTypes = self.buildTypeStorage.getBuildTypes();
         var agents = self.agentStorage.getAgents();
         var settings = config.getGeneralOptions();
-
+        var otherSettings = config.getOtherOptions();
         var bunch =
         {
             agents: agents.agents,
             buildTypes: buildTypes.buildTypes,
-            currentSettings: settings
+            currentSettings: settings,
+            otherSettings : otherSettings
         };
 
         socket.emit('settings', bunch);
