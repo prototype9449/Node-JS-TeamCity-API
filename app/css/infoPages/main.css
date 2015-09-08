@@ -75,6 +75,10 @@ th, td {
     margin-left: 12px;
 }
 
+#agents-panel-container {
+    display: inline-block;
+}
+
 .runningState{
     color: orange;
 }

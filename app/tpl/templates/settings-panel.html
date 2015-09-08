@@ -1,0 +1,74 @@
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Addresses of Available TeamCities
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <% _.each(items, function(item) { %>
+        <li><a href="#"><%= item.url %></a></li>
+        <% }); %>
+    </ul>
+</div>
+
+<nav id="current-agent-settings-control" class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <h3 id="agent-configuration-label">Agents' configuration:</h3>
+
+            <table>
+                <thead>
+                <th>
+                    Agent's Name
+                </th>
+                <th>
+                    Build for execution
+                </th>
+                </thead>
+                <tbody>
+                <% _.each(items, function(item) { %>
+                <% _.each(item.agents, function(agent) { %>
+                <tr>
+                    <td>
+                        <%= agent.agentName %>
+                    </td>
+                    <td>
+                        <div class="dropdown dropdown-left-offset">
+                            <button class="btn btn-default dropdown-toggle" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <%= agent.agentName %>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <% _.each(item.builds, function(build) { %>
+                                <li><a href="#"><%= build.buildName %></a></li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% }); %>
+                <% }); %>
+
+
+                <% _.each(items.agents, function(agent) { %>
+                <tr>
+                    <td>
+                        <h4><%- agent.agentName %></h4>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+
+            <button id="save-settings-current-teamcity-button" type="button" class="btn btn-success">
+                Save <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </button>
+
+        </div>
+    </div>
+</nav>

@@ -14,6 +14,14 @@ $(function () {
                 path: 'tpl/main-information-page'
             },
             {
+                name: 'settingsPage',
+                path: 'tpl/settings-information-page.html'
+            },
+            {
+                name: 'settingsPanel',
+                path: 'tpl/templates/settings-panel.html'
+            },
+            {
                 name: 'briefAgent',
                 path: 'tpl/templates/agent-brief-information-panel'
             },
