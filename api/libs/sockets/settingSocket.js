@@ -15,32 +15,42 @@ function SettingSocket(server, storagesDetail, time, objectType) {
             var buildTypesData = self.pushModels(buildTypes);
             self.agentHelper.generateNewObjects(function (agents) {
                 var agentsData = self.pushModels(agents);
-                var settings = config.getGeneralOptions();
+                var selectedSettings = config.getGeneralOptions();
+                var otherSettings = config.getOtherOptions();
                 var bunch =
                 {
                     agents: agentsData,
                     buildTypes: buildTypesData,
-                    currentSettings : settings
+                    currentSettings: selectedSettings,
+                    otherSettings: otherSettings
                 };
                 callback(bunch);
             });
         });
     }.bind(this);
 
-    this.sendInfo = function (clients) {
+    this.sendInfo = function () {
         generateData(function (bunch) {
             for (var id in self.clients) {
-                clients[id].socket.emit('settings', bunch);
+                self.clients[id].socket.emit('settings', bunch);
             }
         });
     };
 
     this.sendInitialData = function (socket) {
-        generateData(function (bunch) {
-            for (var id in self.clients) {
-                socket.emit('settings', bunch);
-            }
-        });
+        var buildTypes = self.buildTypeStorage.getBuildTypes();
+        var agents = self.agentStorage.getAgents();
+        var settings = config.getGeneralOptions();
+        var otherSettings = config.getOtherOptions();
+        var bunch =
+        {
+            agents: agents.agents,
+            buildTypes: buildTypes.buildTypes,
+            currentSettings: settings,
+            otherSettings : otherSettings
+        };
+
+        socket.emit('settings', bunch);
     };
 
     this.createClient = function (socket) {

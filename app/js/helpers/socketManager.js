@@ -44,6 +44,23 @@ socketManager = {
         return socket;
     },
 
+    setSettingsSocket: function (model) {
+
+        var socket = io.connect('http://localhost:8080', {'path': '/settings', 'force new connection': true});
+
+        socket.on('settings', function (settings) {
+           model.settings.set({object: settings});
+            $(".selectpicker").selectpicker();
+            $(".selectpicker[name='url']").selectpicker('val',settings.currentSettings.connection.url);
+            $.each(settings.currentSettings.agentFixBuilds, function(index,item){
+                var selector = ".selectpicker[name='" + item.agentName + "']";
+                $(selector).selectpicker('val',item.buildTypeName);
+            });
+        });
+
+        return socket;
+    },
+
     setBuildSocket: function (model, id) {
         $("#progress-bar-animation").remove();
 

@@ -9,7 +9,8 @@
         },
         "headers": {
           "Accept": "application/json"
-        }
+        },
+        "timeout" : 200000
       },
       "agentFixBuilds": [
         {
@@ -32,7 +33,8 @@
         },
         "headers": {
           "Accept": "application/json"
-        }
+        },
+        "timeout" : 200000
       },
       "agentFixBuilds": [
         {
@@ -45,6 +47,30 @@
         }
       ],
       "id": 2
+    },
+    {
+      "connection": {
+        "url": "http://localhost:8111",
+        "auth": {
+          "user": "prototype9449",
+          "pass": "termit"
+        },
+        "headers": {
+          "Accept": "application/json"
+        },
+        "timeout" : 200000
+      },
+      "agentFixBuilds": [
+        {
+          "agentName": "CO-YAR-WS152",
+          "buildTypeName": "Portal_PortalControls"
+        },
+        {
+          "agentName": "CO-YAR-WS132",
+          "buildTypeName": "Portal_PortalPortalLib"
+        }
+      ],
+      "id": 3
     }
   ]
 }

@@ -13,6 +13,10 @@ var AgentStorage = function (buildProvider) {
         }
     };
 
+    this.pushObjects = function(agents){
+        this.objects = agents;
+    };
+
     this.getAgents = function (number) {
         var agents = self.getSpliceArray(self.objects, number);
         if (!agents) return {agents: []};

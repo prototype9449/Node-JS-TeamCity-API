@@ -8,7 +8,7 @@ function RunSockets(server, storages, time) {
     var main = new mainSocket(server, storages, timeTick, 'main');
     var agent = new agentSocket(server, storages, timeTick, 'agent');
     var build = new buildSocket(server, storages, timeTick, 'build');
-    var setting = new settingSocket(server, storages, timeTick, 'setting');
+    var setting = new settingSocket(server, storages, timeTick, 'settings');
 
     main.start();
     agent.start();

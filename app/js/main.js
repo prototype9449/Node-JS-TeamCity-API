@@ -15,11 +15,11 @@ $(function () {
             },
             {
                 name: 'settingsPage',
-                path: 'tpl/settings-information-page.html'
+                path: 'tpl/settings-information-page'
             },
             {
-                name: 'settingsPanel',
-                path: 'tpl/templates/settings-panel.html'
+                name: 'SettingsPanel',
+                path: 'tpl/templates/settings-panel'
             },
             {
                 name: 'briefAgent',
