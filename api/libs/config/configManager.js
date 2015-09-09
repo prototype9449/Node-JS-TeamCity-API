@@ -33,13 +33,6 @@ var ConfigManager = function () {
         baseOptions.connection.auth = options.auth;
 
         var teamCityObjects = config.otherOptions().get('teamCityObjects');
-        var id;
-        if (teamCityObjects.length === 0) {
-            id = 0;
-        } else {
-            id = teamCityObjects[teamCityObjects.length - 1].id + 1;
-        }
-        baseOptions.id = id;
         teamCityObjects.push(baseOptions);
         config.otherOptions();
         saveConfig(config);

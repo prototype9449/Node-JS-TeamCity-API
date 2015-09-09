@@ -27,12 +27,12 @@
       },
       "agentFixBuilds": [
         {
-          "agentName": "CO-YAR-WS132",
+          "agentName": "CO-YAR-WS152",
           "buildTypeId": "Portal_PortalCore"
         },
         {
-          "agentName": "CO-YAR-WS152",
-          "buildTypeId": "Portal_PortalControls"
+          "agentName": "CO-YAR-WS132",
+          "buildTypeId": "Portal_PortalPortalLib"
         }
       ]
     },
