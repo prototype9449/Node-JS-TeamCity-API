@@ -66,6 +66,8 @@ th, td {
 
 .second-column {
     margin-top: 5px;
+    margin-left: 5px;
+    width: 566px;
     display: block;
 }
 .buildInfo{
@@ -159,4 +161,13 @@ th, td {
 #settings-page-button {
     float: right;
     margin-bottom: 5px;
+}
+
+#settings-page-button-container {
+    display: flex;
+}
+
+#third-column {
+    margin-top: 6px;
+    margin-left: 5px;
 }
