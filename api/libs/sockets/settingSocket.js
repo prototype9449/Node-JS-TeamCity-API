@@ -12,15 +12,13 @@ function SettingSocket(server, storagesDetail, time, objectType) {
     var self = this;
     var generateData = function (callback) {
         this.buildTypeHelper.generateNewObjects(function (buildTypes) {
-            var buildTypesData = self.pushModels(buildTypes);
             self.agentHelper.generateNewObjects(function (agents) {
-                var agentsData = self.pushModels(agents);
                 var selectedSettings = config.getGeneralOptions();
                 var otherSettings = config.getOtherOptions();
                 var bunch =
                 {
-                    agents: agentsData,
-                    buildTypes: buildTypesData,
+                    agents: agents,
+                    buildTypes: buildTypes,
                     currentSettings: selectedSettings,
                     otherSettings: otherSettings
                 };

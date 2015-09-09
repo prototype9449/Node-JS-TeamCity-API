@@ -1,49 +1,56 @@
-<select class="selectpicker show-tick" name="url">
-    <% _.each(otherSettings, function(setting) { %>
-    <option><%= setting.connection.url %></option>
-    <% }); %>
-</select>
+<form id="settings-form">
+    <fieldset>
+        <legend>URl dd:</legend>
+        <select class="selectpicker show-tick" name="url">
+            <% _.each(otherSettings, function(setting) { %>
+            <option><%= setting.connection.url %></option>
+            <% }); %>
+        </select>
+    </fieldset>
+    <fieldset>
+        <legend>Agents:</legend>
+        <nav id="current-agent-settings-control" class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
 
-<nav id="current-agent-settings-control" class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
+                    <h3 id="agent-configuration-label">Agents' configuration:</h3>
 
-            <h3 id="agent-configuration-label">Agents' configuration:</h3>
+                    <table>
+                        <thead>
+                        <th>
+                            Agent's Name
+                        </th>
+                        <th>
+                            Build for execution
+                        </th>
+                        </thead>
+                        <tbody>
+                        <% _.each(agents, function(agent) { %>
+                        <tr>
+                            <td>
+                                <%= agent.name %>
+                            </td>
+                            <td>
+                                <select class="selectpicker show-tick" name="<%= agent.name %>">
+                                    <% _.each(buildTypes, function(buildType) { %>
+                                    <option><%= buildType.buildTypeName %></option>
+                                    <% }); %>
+                                </select>
 
-            <table>
-                <thead>
-                <th>
-                    Agent's Name
-                </th>
-                <th>
-                    Build for execution
-                </th>
-                </thead>
-                <tbody>
-                <% _.each(agents, function(agent) { %>
-                <tr>
-                    <td>
-                        <%= agent.name %>
-                    </td>
-                    <td>
-                        <select class="selectpicker show-tick" name="<%= agent.name %>">
-                            <% _.each(buildTypes, function(buildType) { %>
-                            <option><%= buildType.buildTypeName %></option>
-                            <% }); %>
-                        </select>
-
-                    </td>
-                </tr>
-                <% }); %>
+                            </td>
+                        </tr>
+                        <% }); %>
 
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
 
-            <button id="save-settings-current-teamcity-button" type="button" class="btn btn-success">
-                Save <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            </button>
+                    <button id="save-settings-current-teamcity-button" type="submit" class="btn btn-success">
+                        Save <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
 
-        </div>
-    </div>
-</nav>
+                </div>
+            </div>
+        </nav>
+    </fieldset>
+</form>
