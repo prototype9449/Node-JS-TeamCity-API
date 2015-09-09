@@ -69,3 +69,8 @@ td {
 .panel-body {
     padding-bottom: 0px;
 }
+
+.settings-button {
+    font-size: 13px;
+    padding: 4px 6px 4px 6px;
+}
