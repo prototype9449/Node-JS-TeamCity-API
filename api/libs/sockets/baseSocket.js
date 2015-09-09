@@ -51,16 +51,16 @@ function BaseSocket(server, time, objectType) {
     this.launchBuildByAgent = function (agent) {
         var agentFixBuilds = config.getAgentFixBuildsOptions();
 
-        var buildTypeName;
+        var buildTypeId;
         agentFixBuilds.map(function (item) {
             if (item.agentName == agent.name) {
-                buildTypeName = item.buildTypeName;
+                buildTypeId = item.id;
             }
         });
 
-        if (!buildTypeName) return;
+        if (!buildTypeId) return;
 
-        launchBuild(buildTypeName, agent.id);
+        launchBuild(buildTypeId, agent.id);
     };
 }
 

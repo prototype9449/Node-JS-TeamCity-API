@@ -6,10 +6,8 @@ function generateMainInfo(agentHref, callback) {
     optionTeamCity.url += agentHref;
 
     request.get(optionTeamCity, function (err, response) {
-        if (err) {
-            console.log(err);
-            return;
-        }
+        if (err) throw err;
+
         var fullAgentInfo = JSON.parse(response.body);
         callback(fullAgentInfo);
     });

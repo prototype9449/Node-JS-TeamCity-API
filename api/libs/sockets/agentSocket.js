@@ -7,9 +7,9 @@ function AgentSocket(server, storagesDetail, time, objectType) {
     this.agentStorage = storagesDetail.agentStorage.storage;
     var self = this;
 
-    this.sendInfo = function (clients) {
-        for (var id in clients) {
-            var client = clients[id];
+    this.sendInfo = function () {
+        for (var id in self.clients) {
+            var client = self.clients[id];
 
             (function (client) {
                 client.agentHelper.generateNewObjects(function (agents) {

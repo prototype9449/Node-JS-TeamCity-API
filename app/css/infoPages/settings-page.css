@@ -19,6 +19,12 @@ body {
     margin: 5px 0px 5px 5px;
 }
 
+.SettingsPanel{
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto
+}
+
 #settings-block {
     margin-top: 5px;
 }

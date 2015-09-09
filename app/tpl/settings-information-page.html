@@ -1,46 +1,49 @@
-
-<div style="width: 900px; margin-left: auto; margin-right: auto;">
+<div class="SettingsPanel">
     <div id="settings-block" class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Settings:</h3>
         </div>
-        <div class="panel-body">
-            <div>
-                <div id="new-teamcity-connection-settings-panel" class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">New TeamCity Connection Settings</h3>
+        <div class="panel-body" >
+
+            <div id="new-teamcity-connection-settings-panel" class="panel panel-default" style="float: right">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New TeamCity Connection Settings</h3>
+                </div>
+                <form class="panel-body" id="connection-form">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"
+                                                              aria-hidden="true"></span></span>
+                        <input type="text" class="form-control" placeholder="TeamCity's Url"
+                               aria-describedby="sizing-addon3" name="url">
                     </div>
-                    <form class="panel-body" id="connection-form">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></span>
-                            <input type="text" class="form-control" placeholder="TeamCity's Url" aria-describedby="sizing-addon3" name="url">
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
-                            <input type="text" class="form-control" placeholder="TeamCity's Login" aria-describedby="sizing-addon3" name="user">
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></span>
-                            <input type="text" class="form-control" placeholder="TeamCity's Password" aria-describedby="sizing-addon3" name="pass">
-                        </div>
-                        <button id="save-teamcity-settings-button" type="submit" class="btn btn-success settings-button">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
-                        </button>
-                    </form>
-                </div>
-
-                <hr>
-
-                <div id="settings-info">
-
-                </div>
-
-                <nav class="home-button">
-                    <ul class="pager">
-                        <li class="next"><a href="/NodeServer/app/index.html"><span aria-hidden="true">&larr;</span>Home</a></li>
-                    </ul>
-                </nav>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"
+                                                              aria-hidden="true"></span></span>
+                        <input type="text" class="form-control" placeholder="TeamCity's Login"
+                               aria-describedby="sizing-addon3" name="user">
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-eye-open"
+                                                              aria-hidden="true"></span></span>
+                        <input type="text" class="form-control" placeholder="TeamCity's Password"
+                               aria-describedby="sizing-addon3" name="pass">
+                    </div>
+                    <button id="save-teamcity-settings-button" type="submit" class="btn btn-success settings-button">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+                    </button>
+                </form>
             </div>
+
+            <div id="settings-info" style="float: left">
+
+            </div>
+
+            <nav class="home-button">
+                <ul class="pager">
+                    <li class="next"><a href="/NodeServer/app/index.html"><span aria-hidden="true">&larr;</span>Home</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

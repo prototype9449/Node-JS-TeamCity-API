@@ -35,9 +35,9 @@ var generateBuildTypes = function (buildTypes, callback) {
     var jsonBuildTypes = [];
     for (var i = 0; i < buildTypes.length; i++) {
         jsonBuildTypes.push({
-            id : buildTypes[i].id,
-            buildTypeName : buildTypes[i].name,
-            projectName : buildTypes[i].projectName
+            id: buildTypes[i].id,
+            buildTypeName: buildTypes[i].name,
+            projectName: buildTypes[i].projectName
         })
     }
 
@@ -54,7 +54,7 @@ var generateObjects = function (connection, callback) {
             generateBuilds(bindingJson.build, callback);
         } else if (bindingJson.agent) {
             generateAgents(bindingJson.agent, callback);
-        } else if(bindingJson.buildType){
+        } else if (bindingJson.buildType) {
             generateBuildTypes(bindingJson.buildType, callback);
         }
     })
