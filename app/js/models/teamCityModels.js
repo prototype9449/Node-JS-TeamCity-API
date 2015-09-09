@@ -89,6 +89,24 @@ window.SettingsPanel = Backbone.Model.extend({
                 tagName: "div",
                 template: "SettingsPanel"
             }
+        },
+        renderFunction : function(settings, socket){
+            $(".selectpicker").selectpicker();
+            $(".selectpicker[name='url']").selectpicker('val',settings.currentSettings.connection.url + ' ' + settings.currentSettings.connection.auth.user);
+            $.each(settings.currentSettings.agentFixBuilds, function(index,item){
+                var selector = ".selectpicker[name='" + item.agentName + "']";
+                $(selector).selectpicker('val',item.buildTypeName);
+            });
+            $('select.selectpicker').on('change', function(){
+                var value= $(".selectpicker[name='url'] option:selected").val();
+                var objects = value.split(' ');
+                var result = {
+                    url : objects[0],
+                    user : objects[1]
+                };
+
+                socket.emit('change url', result);
+            });
         }
     }
 });

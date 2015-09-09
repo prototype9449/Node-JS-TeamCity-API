@@ -50,12 +50,7 @@ socketManager = {
 
         socket.on('settings', function (settings) {
            model.settings.set({object: settings});
-            $(".selectpicker").selectpicker();
-            $(".selectpicker[name='url']").selectpicker('val',settings.currentSettings.connection.url);
-            $.each(settings.currentSettings.agentFixBuilds, function(index,item){
-                var selector = ".selectpicker[name='" + item.agentName + "']";
-                $(selector).selectpicker('val',item.buildTypeName);
-            });
+
         });
 
         return socket;

@@ -1,5 +1,6 @@
 var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
+var configManager = new require('./../config/configManager');
 
 function SettingSocket(server, storagesDetail, time, objectType) {
     this.__proto__ = new baseSocket(server, time, objectType);
@@ -52,6 +53,14 @@ function SettingSocket(server, storagesDetail, time, objectType) {
     };
 
     this.createClient = function (socket) {
+        socket.on('new authentication', function(data){
+            //configManager.addNewTeamCity()
+        });
+
+        socket.on('change url', function(data){
+            //configManager.addNewTeamCity()
+        });
+
         this.clients[socket.id] = {
             socket: socket
         };
