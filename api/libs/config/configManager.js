@@ -15,11 +15,22 @@ var ConfigManager = function () {
         })(config);
     }
 
+    var getObjectByKey = function (url, userName) {
+        var objects = config.otherOptions().get('teamCityObjects');
+        for (var i = 0; i < objects.length; i++) {
+            if (objects[i].connection.url === url && objects[i].connection.auth.user === userName) {
+                return {
+                    object: objects[i],
+                    index: i
+                };
+            }
+        }
+    }.bind(this);
+
     this.addNewTeamCity = function (options) {
         var baseOptions = clone(config.general().get('generalOptions'));
         baseOptions.connection.url = options.url;
         baseOptions.connection.auth = options.auth;
-        baseOptions.agentFixBuilds = options.agentFixBuilds;
 
         var teamCityObjects = config.otherOptions().get('teamCityObjects');
         var id;
@@ -34,28 +45,31 @@ var ConfigManager = function () {
         saveConfig(config);
     };
 
-    this.removeTeamCityById = function (id) {
-        var objects = config.otherOptions().get('teamCityObjects');
-        for (var i = 0; i < objects.length; i++) {
-            if (objects[i].id == id) {
-                objects.splice(i, 1);
-                saveConfig(config);
-                return;
-            }
+    this.changeTeamCity = function (options) {
+        var baseOptions = clone(config.general().get('generalOptions'));
+        if (baseOptions.connection.url != options.url
+            || baseOptions.connection.auth.user != options.userName) {
+            throw new Error('Wrong authentication');
         }
+
+        baseOptions.agentFixBuilds = options.agentFixBuilds;
+        var teamCityObjects = config.otherOptions().get('teamCityObjects');
+        var index = getObjectByKey(options.url, options.userName).index;
+        teamCityObjects[index] = baseOptions;
+        config.otherOptions();
+        saveConfig(config);
+        this.chooseGeneralTeamCity(options.url, options.userName)
     };
 
-    this.chooseGeneralTeamCity = function (id) {
+    this.removeTeamCityByKey = function (url, userName) {
         var objects = config.otherOptions().get('teamCityObjects');
-        var getObjectById = function (id) {
-            for (var i = 0; i < objects.length; i++) {
-                if (objects[i].id == id) {
-                    return objects[i];
-                }
-            }
-        };
+        var index = getObjectByKey(url, userName).index;
+        objects.splice(index, 1);
+        saveConfig(config);
+    };
 
-        var teamCity = getObjectById(id);
+    this.chooseGeneralTeamCity = function (url, userName) {
+        var teamCity = getObjectByKey(url, userName).object;
         if (!teamCity) throw new Error('There is not that id');
         config.set("generalOptions", clone(teamCity));
         saveConfig(config);

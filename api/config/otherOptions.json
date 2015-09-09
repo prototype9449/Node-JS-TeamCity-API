@@ -10,43 +10,8 @@
         "headers": {
           "Accept": "application/json"
         },
-        "timeout" : 200000
-      },
-      "agentFixBuilds": [
-        {
-          "agentName": "CO-hkhj-WS152",
-          "buildTypeName": "khjk"
-        },
-        {
-          "agentName": "CO-YAR-hjk",
-          "buildTypeName": "khjk"
-        }
-      ],
-      "id": 1
-    },
-    {
-      "connection": {
-        "url": "http://co-osl-devb97:85",
-        "auth": {
-          "user": "SergeddddddyPo",
-          "pass": "qwerty12345!"
-        },
-        "headers": {
-          "Accept": "application/json"
-        },
-        "timeout" : 200000
-      },
-      "agentFixBuilds": [
-        {
-          "agentName": "CO-hkhj-WS152",
-          "buildTypeName": "khjk"
-        },
-        {
-          "agentName": "CO-YAR-hjk",
-          "buildTypeName": "khjk"
-        }
-      ],
-      "id": 2
+        "timeout": 200000
+      }
     },
     {
       "connection": {
@@ -58,19 +23,41 @@
         "headers": {
           "Accept": "application/json"
         },
-        "timeout" : 200000
+        "timeout": 200000
+      },
+      "agentFixBuilds": [
+        {
+          "agentName": "CO-YAR-WS132",
+          "buildTypeId": "Portal_PortalCore"
+        },
+        {
+          "agentName": "CO-YAR-WS152",
+          "buildTypeId": "Portal_PortalControls"
+        }
+      ]
+    },
+    {
+      "connection": {
+        "url": "fgh",
+        "auth": {
+          "user": "fgh",
+          "pass": "hfgh"
+        },
+        "headers": {
+          "Accept": "application/json"
+        },
+        "timeout": 200000
       },
       "agentFixBuilds": [
         {
           "agentName": "CO-YAR-WS152",
-          "buildTypeName": "Portal_PortalControls"
+          "buildTypeId": "Portal_PortalControls"
         },
         {
           "agentName": "CO-YAR-WS132",
-          "buildTypeName": "Portal_PortalPortalLib"
+          "buildTypeId": "Portal_PortalPortalLib"
         }
-      ],
-      "id": 3
+      ]
     }
   ]
 }

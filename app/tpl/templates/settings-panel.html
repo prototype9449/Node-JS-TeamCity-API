@@ -30,7 +30,7 @@
                         <td>
                             <select class="selectpicker show-tick" name="<%= agent.name %>">
                                 <% _.each(buildTypes, function(buildType) { %>
-                                <option><%= buildType.buildTypeName %></option>
+                                <option><%= buildType.id %></option>
                                 <% }); %>
                             </select>
 
@@ -41,8 +41,7 @@
                     </tbody>
                 </table>
 
-                <button id="save-settings-current-teamcity-button" type="submit"
-                        class="btn btn-success settings-button">
+                <button id="save-settings" type="submit" class="btn btn-success settings-button">
                     Save <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
             </div>

@@ -1,28 +1,25 @@
 {
   "generalOptions": {
     "connection": {
-      "url": "http://co-osl-devb97:85",
+      "url": "http://localhost:8111",
       "auth": {
-        "user": "SergeyPo",
-        "pass": "qwerty12345!"
+        "user": "prototype9449",
+        "pass": "termit"
       },
       "headers": {
         "Accept": "application/json"
       },
-      "timeout" : 200000
+      "timeout": 200000
     },
     "agentFixBuilds": [
       {
-        "agentName": "CO-YAR-WS152",
-        "buildTypeName": "Portal Controls",
-        "id": "Portal_PortalControls"
+        "agentName": "CO-YAR-WS132",
+        "buildTypeId": "Portal_PortalCore"
       },
       {
-        "agentName": "CO-YAR-WS132",
-        "buildTypeName": "PortalLib",
-        "id": "Portal_PortalPortalLib"
+        "agentName": "CO-YAR-WS152",
+        "buildTypeId": "Portal_PortalControls"
       }
-    ],
-    "id": 1
+    ]
   }
 }

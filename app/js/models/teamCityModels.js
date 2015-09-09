@@ -90,22 +90,46 @@ window.SettingsPanel = Backbone.Model.extend({
                 template: "SettingsPanel"
             }
         },
-        renderFunction : function(settings, socket){
+        renderFunction: function (settings, socket) {
             $(".selectpicker").selectpicker();
-            $(".selectpicker[name='url']").selectpicker('val',settings.currentSettings.connection.url + ' ' + settings.currentSettings.connection.auth.user);
-            $.each(settings.currentSettings.agentFixBuilds, function(index,item){
+            $(".selectpicker[name='url']").selectpicker('val', settings.currentSettings.connection.url + ' ' + settings.currentSettings.connection.auth.user);
+            $.each(settings.currentSettings.agentFixBuilds, function (index, item) {
                 var selector = ".selectpicker[name='" + item.agentName + "']";
-                $(selector).selectpicker('val',item.buildTypeName);
+                $(selector).selectpicker('val', item.buildTypeId);
             });
-            $('select.selectpicker').on('change', function(){
-                var value= $(".selectpicker[name='url'] option:selected").val();
+            $("select.selectpicker[name='url']").on('change', function () {
+                var value = $(".selectpicker[name='url'] option:selected").val();
                 var objects = value.split(' ');
                 var result = {
-                    url : objects[0],
-                    user : objects[1]
+                    url: objects[0],
+                    user: objects[1]
                 };
 
                 socket.emit('change url', result);
+            });
+            $('#settings-form').submit(function (event) {
+                var arrayData = $(this).serializeArray();
+                var urlWithUserName = arrayData[0].value.split(' ');
+                var key = {
+                    url: urlWithUserName[0],
+                    userName: urlWithUserName[1]
+                };
+                var agentFixBuilds = arrayData.slice(1, arrayData.length).map(function (value) {
+                    return {
+                        agentName: value.name,
+                        buildTypeId: value.value
+                    }
+                });
+
+                var result = {
+                    url: key.url,
+                    userName: key.userName,
+                    agentFixBuilds: agentFixBuilds
+                };
+
+
+                socket.emit('change configuration', result);
+                event.preventDefault();
             });
         }
     }
