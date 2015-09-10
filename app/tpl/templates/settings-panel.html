@@ -1,14 +1,7 @@
 <form id="settings-form">
-    <nav id="current-agent-settings-control" class="navbar navbar-default">
-    <div>
-        <label style="float: left">Url </label> &nbsp;
-        <select class="selectpicker show-tick" name="url" style="float: right">
-            <% _.each(otherSettings, function(setting) { %>
-            <option><%= setting.connection.url %> <%= setting.connection.auth.user %></option>
-            <% }); %>
-        </select>
-    </div>
 
+
+    <nav id="current-agent-settings-control" class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <h3 id="agent-configuration-label">TeamCity configuration:</h3>

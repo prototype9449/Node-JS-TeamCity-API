@@ -21,6 +21,11 @@ $(function () {
                 name: 'SettingsPanel',
                 path: 'tpl/templates/settings-panel'
             },
+
+            {
+                name: 'currentUrl',
+                path: 'tpl/templates/setting-selected-url'
+            },
             {
                 name: 'briefAgent',
                 path: 'tpl/templates/agent-brief-information-panel'

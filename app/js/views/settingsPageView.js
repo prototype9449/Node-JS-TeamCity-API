@@ -7,6 +7,7 @@ window.SettingsPageView = Backbone.View.extend({
         this.template = _.template(tpl.get('settingsPage'));
 
         this.settingsView = {};
+        this.currentUrlView = {};
     },
 
     render: function () {
@@ -16,6 +17,10 @@ window.SettingsPageView = Backbone.View.extend({
         this.settingsView = new ObjectView({model : this.model.settings, router: this.options.router});
         this.$('#settings-info').html(this.settingsView.render().el);
         this.settingsView.delegateEvents();
+
+        this.currentUrlView = new ObjectView({model : this.model.currentUrl, router: this.options.router});
+        this.$('#setting-selected-url-panel').html(this.currentUrlView.render().el);
+        this.currentUrlView.delegateEvents();
 
         return this;
     },
