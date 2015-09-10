@@ -1,5 +1,5 @@
-<select class="selectpicker show-tick" name="url">
+<select class="selectpicker show-tick" name="url" style="float: right">
     <% _.each(otherSettings, function(setting) { %>
-    <option><%= setting.connection.url %></option>
+    <option><%= setting.connection.url %> <%= setting.connection.auth.user %></option>
     <% }); %>
 </select>

@@ -9,7 +9,7 @@ socketManager = {
 
     setMainSocket: function (model) {
 
-        var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});
+        var socket = io.connect('http://192.168.21.132:80', {'path': '/api/main', 'force new connection': true});
 
         socket.on('generalBuilds', function (generalBuilds) {
             for (var i = 0; i < generalBuilds.length; i++) {
@@ -46,16 +46,15 @@ socketManager = {
 
     setSettingsSocket: function (model) {
 
-        var socket = io.connect('http://localhost:8080', {'path': '/settings', 'force new connection': true});
+        var socket = io.connect('http://192.168.21.132:80', {'path': '/api/settings', 'force new connection': true});
 
-        socket.on('agents', function (agents) {
-            var r = 1;
-        });
-        socket.on('buildTypes', function (buildTypes) {
-            var r = 1;
-        });
-        socket.on('urls', function (urls) {
-            var r = 1;
+        socket.on('settings', function (settings) {
+            //for (var i = 0; i < generalBuilds.length; i++) {
+            //    var id = generalBuilds[i].id;
+            //    var object = generalBuilds[i].model;
+            //    model.generalBuildList.add({id: id, object : object});
+            //}
+            var r = settings;
         });
 
         return socket;
@@ -64,8 +63,8 @@ socketManager = {
     setBuildSocket: function (model, id) {
         $("#progress-bar-animation").remove();
 
-        var socket = io.connect('http://localhost:8080', {
-            'path': '/build',
+        var socket = io.connect('http://192.168.21.132:80', {
+            'path': '/api/build',
             'query': 'id=' + id,
             'force new connection': true
         });
@@ -85,11 +84,12 @@ socketManager = {
 
         return socket;
     },
+
     setAgentSocket: function (model, id) {
         $("#progress-bar-animation").remove();
 
-        var socket = io.connect('http://localhost:8080', {
-            'path': '/agent',
+        var socket = io.connect('http://192.168.21.132:80', {
+            'path': '/api/agent',
             'query': 'id=' + id,
             'force new connection': true
         });
