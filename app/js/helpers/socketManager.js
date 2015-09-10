@@ -48,20 +48,15 @@ socketManager = {
 
         var socket = io.connect('http://localhost:8080', {'path': '/settings', 'force new connection': true});
 
-        socket.on('agents', function (agents) {
-            var r = 1;
-        });
-
-        socket.on('buildTypes', function (buildTypes) {
-            var r = 1;
-        });
-
-        socket.on('urls', function (urls) {
+         socket.on('urls', function (urls) {
             var object = {
                 urlsSetting : urls
             };
 
             model.urlSettings.set({object: object});
+        });
+        socket.on('settings', function (settings) {
+            var r = 1;
         });
 
         return socket;

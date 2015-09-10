@@ -38,10 +38,10 @@
     },
     {
       "connection": {
-        "url": "fgh",
+        "url": "http://192.168.21.113:8111",
         "auth": {
-          "user": "fgh",
-          "pass": "hfgh"
+          "user": "prototype9449",
+          "pass": "termit"
         },
         "headers": {
           "Accept": "application/json"
@@ -51,7 +51,7 @@
       "agentFixBuilds": [
         {
           "agentName": "CO-YAR-WS152",
-          "buildTypeId": "Portal_PortalControls"
+          "buildTypeId": "Portal_PortalCore"
         },
         {
           "agentName": "CO-YAR-WS132",
