@@ -77,7 +77,7 @@ window.FullBuild = Backbone.Model.extend({
     }
 });
 
-window.SettingsPanel = Backbone.Model.extend({
+window.SelectedUrl = Backbone.Model.extend({
     defaults: {
         needToUpdate: false,
         id: "0",
@@ -87,7 +87,7 @@ window.SettingsPanel = Backbone.Model.extend({
             view: {
                 className: "SettingsPanel",
                 tagName: "div",
-                template: "SettingsPanel"
+                template: "currentUrl"
             }
         },
         renderFunction: function (settings, socket) {
@@ -107,6 +107,25 @@ window.SettingsPanel = Backbone.Model.extend({
 
                 socket.emit('change url', result);
             });
+        }
+    }
+});
+
+window.SettingsPanel = Backbone.Model.extend({
+    defaults: {
+        needToUpdate: false,
+        id: "0",
+        object: "",
+        options: {
+            path: "/settings",
+            view: {
+                className: "SettingsPanel",
+                tagName: "div",
+                template: "SettingsPanel"
+            }
+        },
+        renderFunction: function (settings, socket) {
+            $(".selectpicker").selectpicker();
             $('#settings-form').submit(function (event) {
                 var arrayData = $(this).serializeArray();
                 var urlWithUserName = arrayData[0].value.split(' ');

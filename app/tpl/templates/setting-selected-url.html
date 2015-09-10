@@ -1,0 +1,5 @@
+<select class="selectpicker show-tick" name="url">
+    <% _.each(otherSettings, function(setting) { %>
+    <option><%= setting.connection.url %></option>
+    <% }); %>
+</select>
