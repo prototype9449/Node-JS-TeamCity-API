@@ -13,16 +13,49 @@ function SettingSocket(server, storagesDetail, time, objectType) {
 
     var self = this;
 
+    var getIndexOfBuildTypeByAgent = function(agentName, buildTypes){
+        var agentFixBuilds = config.getGeneralOptions().agentFixBuilds;
+        var agentNames = agentFixBuilds.map(function(value){ return value.agentName; });
+        var buildTypeIds = agentFixBuilds.map(function(value){ return value.buildTypeId; });
+        var agentIndex= agentNames.indexOf(agentName);
+        var currentBuildType = buildTypeIds[agentIndex];
+        var buildTypes = buildTypes.map(function(value){ return value.id; });
+        return  buildTypes.indexOf(currentBuildType);
+    }.bind(this);
+
     var sendBuildTypes = function () {
         this.buildTypeHelper.generateNewObjects(function (buildTypes) {
-            sendDataToAllClients('buildTypes', buildTypes);
+            var agents = self.agentStorage.getAgents().agents.map(function(value){
+                return {
+                    agentName: value.name,
+                    indexOfBuildType: getIndexOfBuildTypeByAgent(value.name, buildTypes)
+                }
+            });
+
+            var settings = {
+                agents : agents,
+                buildTypes : buildTypes
+            };
+            sendDataToAllClients('settings', settings);
         });
 
     }.bind(this);
 
     var sendAgents = function () {
         self.agentHelper.generateNewObjects(function (agents) {
-            sendDataToAllClients('agents', agents);
+            var buildTypes = self.buildTypeStorage.getBuildTypes().buildTypes;
+            var agents = agents.map(function(value){
+                return {
+                    agentName: value.name,
+                    indexOfBuildType: getIndexOfBuildTypeByAgent(value.name, buildTypes)
+                }
+            });
+            var settings = {
+                agents : agents,
+                buildTypes : buildTypes
+            };
+
+            sendDataToAllClients('settings', settings);
         });
     }.bind(this);
 
