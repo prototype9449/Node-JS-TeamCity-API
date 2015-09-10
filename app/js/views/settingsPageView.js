@@ -18,7 +18,7 @@ window.SettingsPageView = Backbone.View.extend({
         this.$('#settings-info').html(this.settingsView.render().el);
         this.settingsView.delegateEvents();
 
-        this.currentUrlView = new ObjectView({model : this.model.currentUrl, router: this.options.router});
+        this.currentUrlView = new ObjectView({model : this.model.urlSettings, router: this.options.router});
         this.$('#setting-selected-url-panel').html(this.currentUrlView.render().el);
         this.currentUrlView.delegateEvents();
 

@@ -77,7 +77,7 @@ window.FullBuild = Backbone.Model.extend({
     }
 });
 
-window.SelectedUrl = Backbone.Model.extend({
+window.UrlSettings = Backbone.Model.extend({
     defaults: {
         needToUpdate: false,
         id: "0",
@@ -90,13 +90,16 @@ window.SelectedUrl = Backbone.Model.extend({
                 template: "currentUrl"
             }
         },
+        events: {
+            "change #url-selector": "handler"
+        },
+
+        handlers: function (events) {
+            alert("You can procceed!!!");
+        },
+
         renderFunction: function (settings, socket) {
             $(".selectpicker").selectpicker();
-            $(".selectpicker[name='url']").selectpicker('val', settings.currentSettings.connection.url + ' ' + settings.currentSettings.connection.auth.user);
-            $.each(settings.currentSettings.agentFixBuilds, function (index, item) {
-                var selector = ".selectpicker[name='" + item.agentName + "']";
-                $(selector).selectpicker('val', item.buildTypeId);
-            });
             $("select.selectpicker[name='url']").on('change', function () {
                 var value = $(".selectpicker[name='url'] option:selected").val();
                 var objects = value.split(' ');
@@ -110,6 +113,7 @@ window.SelectedUrl = Backbone.Model.extend({
         }
     }
 });
+
 
 window.SettingsPanel = Backbone.Model.extend({
     defaults: {

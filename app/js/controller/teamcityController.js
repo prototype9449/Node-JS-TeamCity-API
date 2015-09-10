@@ -30,7 +30,7 @@ TeamcityController = Backbone.Router.extend({
     settings: function () {
         var model = {
             settings: new SettingsPanel(),
-            currentUrl : new SelectedUrl()
+            urlSettings : new UrlSettings()
         };
         this.showView('#content', new SettingsPageView({model: model, router: this}));
         this.socket = socketManager.setSettingsSocket(model);

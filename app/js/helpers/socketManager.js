@@ -51,18 +51,23 @@ socketManager = {
         socket.on('agents', function (agents) {
             var r = 1;
         });
+
         socket.on('buildTypes', function (buildTypes) {
             var r = 1;
         });
+
         socket.on('urls', function (urls) {
-            var r = 1;
+            var object = {
+                urlsSetting : urls
+            };
+
+            model.urlSettings.set({object: object});
         });
 
         return socket;
     },
 
     setBuildSocket: function (model, id) {
-        $("#progress-bar-animation").remove();
 
         var socket = io.connect('http://localhost:8080', {
             'path': '/build',
@@ -85,8 +90,8 @@ socketManager = {
 
         return socket;
     },
+
     setAgentSocket: function (model, id) {
-        $("#progress-bar-animation").remove();
 
         var socket = io.connect('http://localhost:8080', {
             'path': '/agent',
