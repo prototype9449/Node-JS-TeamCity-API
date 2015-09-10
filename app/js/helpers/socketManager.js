@@ -56,7 +56,7 @@ socketManager = {
             model.urlSettings.set({object: object});
         });
         socket.on('settings', function (settings) {
-            var r = 1;
+            model.settings.set({object: settings});
         });
 
         return socket;

@@ -18,12 +18,16 @@
                     <% _.each(agents, function(agent) { %>
                     <tr>
                         <td>
-                            <%= agent.name %>
+                            <%= agent.agentName %>
                         </td>
                         <td>
                             <select class="selectpicker show-tick" name="<%= agent.name %>">
-                                <% _.each(buildTypes, function(buildType) { %>
-                                <option><%= buildType.id %></option>
+                                <% _.each(buildTypes, function(buildType, index) { %>
+                                    <% if (agent.indexOfBuildType === index) { %>
+                                        <option selected><%= buildType.id %></option>
+                                    <% } else { %>
+                                        <option><%= buildType.id %></option>
+                                    <% } %>
                                 <% }); %>
                             </select>
 
