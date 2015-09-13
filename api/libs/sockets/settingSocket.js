@@ -23,39 +23,31 @@ function SettingSocket(server, storagesDetail, time, objectType) {
         return  buildTypes.indexOf(currentBuildType);
     }.bind(this);
 
+    var getSettings = function(buildTypes, agentsFromStorage){
+        var agents = agentsFromStorage.map(function(value){
+            return {
+                agentName: value.name,
+                indexOfBuildType: getIndexOfBuildTypeByAgent(value.name, buildTypes)
+            }
+        });
+        return {
+            agents : agents,
+            buildTypes : buildTypes
+        };
+    };
+
     var sendBuildTypes = function () {
         this.buildTypeHelper.generateNewObjects(function (buildTypes) {
-            var agents = self.agentStorage.getAgents().agents.map(function(value){
-                return {
-                    agentName: value.name,
-                    indexOfBuildType: getIndexOfBuildTypeByAgent(value.name, buildTypes)
-                }
-            });
-
-            var settings = {
-                agents : agents,
-                buildTypes : buildTypes
-            };
-            sendDataToAllClients('settings', settings);
+            var agentsFromStorage = self.agentStorage.getAgents().agents;
+            sendDataToAllClients('settings',getSettings(buildTypes,agentsFromStorage))
         });
 
     }.bind(this);
 
     var sendAgents = function () {
-        self.agentHelper.generateNewObjects(function (agents) {
+        self.agentHelper.generateNewObjects(function (agentsFromStorage) {
             var buildTypes = self.buildTypeStorage.getBuildTypes().buildTypes;
-            var agents = agents.map(function(value){
-                return {
-                    agentName: value.name,
-                    indexOfBuildType: getIndexOfBuildTypeByAgent(value.name, buildTypes)
-                }
-            });
-            var settings = {
-                agents : agents,
-                buildTypes : buildTypes
-            };
-
-            sendDataToAllClients('settings', settings);
+            sendDataToAllClients('settings',getSettings(buildTypes,agentsFromStorage))
         });
     }.bind(this);
 
@@ -92,13 +84,10 @@ function SettingSocket(server, storagesDetail, time, objectType) {
         sendUrls();
     };
 
-
     this.sendInitialData = function (socket) {
-        var buildTypes = self.buildTypeStorage.getBuildTypes();
-        sendDataToAllClients('buildTypes', buildTypes);
-        var agents = self.agentStorage.getAgents();
-        sendDataToAllClients('agents', agents);
-        sendUrls();
+        var buildTypes = self.buildTypeStorage.getBuildTypes().buildTypes;
+        var agentsFromStorage = self.agentStorage.getAgents().agents;
+        socket.emit('settings', getSettings(buildTypes,agentsFromStorage));
     };
 
     this.createClient = function (socket) {

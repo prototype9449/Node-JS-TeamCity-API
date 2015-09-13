@@ -21,7 +21,7 @@
                             <%= agent.agentName %>
                         </td>
                         <td>
-                            <select class="selectpicker show-tick" name="<%= agent.name %>">
+                            <select class="selectpicker show-tick" name="<%= agent.agentName %>">
                                 <% _.each(buildTypes, function(buildType, index) { %>
                                     <% if (agent.indexOfBuildType === index) { %>
                                         <option selected><%= buildType.id %></option>

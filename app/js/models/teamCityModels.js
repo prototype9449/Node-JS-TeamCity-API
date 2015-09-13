@@ -132,12 +132,12 @@ window.SettingsPanel = Backbone.Model.extend({
             $(".selectpicker").selectpicker();
             $('#settings-form').submit(function (event) {
                 var arrayData = $(this).serializeArray();
-                var urlWithUserName = arrayData[0].value.split(' ');
+                var urlData = $('#url-selector').val().split(' ');;
                 var key = {
-                    url: urlWithUserName[0],
-                    userName: urlWithUserName[1]
+                    url: urlData[0],
+                    userName: urlData[1]
                 };
-                var agentFixBuilds = arrayData.slice(1, arrayData.length).map(function (value) {
+                var agentFixBuilds = arrayData.map(function (value) {
                     return {
                         agentName: value.name,
                         buildTypeId: value.value
