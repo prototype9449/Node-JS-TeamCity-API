@@ -24,6 +24,8 @@ var start = function(){
 var stop = function(){
     dataProvider.stop();
     socketRunner.stop();
+    delete socketRunner;
+    delete dataProvider;
 };
 
 start();

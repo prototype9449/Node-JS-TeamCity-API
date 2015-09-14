@@ -62,7 +62,7 @@ window.ObjectView = Backbone.View.extend({
 
         var renderFunction = this.model.get("renderFunction");
         if (renderFunction)
-            renderFunction(this.model.get("object"), this.options.router.socket);
+            renderFunction(this.options.router.socket);
 
         return this;
     },

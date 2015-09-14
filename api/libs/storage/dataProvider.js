@@ -1,4 +1,3 @@
-
 function DataProvider(storages, time) {
     this.storages = storages;
     this.interval = {};

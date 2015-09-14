@@ -98,7 +98,7 @@ window.UrlSettings = Backbone.Model.extend({
             alert("You can procceed!!!");
         },
 
-        renderFunction: function (settings, socket) {
+        renderFunction: function () {
             $(".selectpicker").selectpicker();
             $("select.selectpicker[name='url']").on('change', function () {
                 var value = $(".selectpicker[name='url'] option:selected").val();
@@ -113,11 +113,11 @@ window.UrlSettings = Backbone.Model.extend({
                     data: result,
                     dataType: 'application/json'
                 });
+                location.reload();
             });
         }
     }
 });
-
 
 window.SettingsPanel = Backbone.Model.extend({
     defaults: {
@@ -132,7 +132,7 @@ window.SettingsPanel = Backbone.Model.extend({
                 template: "SettingsPanel"
             }
         },
-        renderFunction: function (settings, socket) {
+        renderFunction: function (socket) {
             $(".selectpicker").selectpicker();
             $('#settings-form').submit(function (event) {
                 var arrayData = $(this).serializeArray();
@@ -153,7 +153,6 @@ window.SettingsPanel = Backbone.Model.extend({
                     userName: key.userName,
                     agentFixBuilds: agentFixBuilds
                 };
-
 
                 socket.emit('change configuration', result);
                 event.preventDefault();

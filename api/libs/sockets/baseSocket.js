@@ -6,6 +6,7 @@ function BaseSocket(server, time, objectType) {
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     this.io = require('socket.io')(server, {path: '/' + objectType});//WebStorm
+
     this.objectType = objectType;
     this.clients = {};
 
@@ -54,7 +55,7 @@ function BaseSocket(server, time, objectType) {
         var buildTypeId;
         agentFixBuilds.map(function (item) {
             if (item.agentName == agent.name) {
-                buildTypeId = item.id;
+                buildTypeId = item.buildTypeId;
             }
         });
 

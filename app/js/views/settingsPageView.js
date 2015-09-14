@@ -33,6 +33,7 @@ window.SettingsPageView = Backbone.View.extend({
                 object[value.name] = value.value;
             });
             self.options.router.socket.emit('new authentication', object);
+            $(this).trigger('reset');
             event.preventDefault();
         });
     }
