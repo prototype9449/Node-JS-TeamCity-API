@@ -11,10 +11,8 @@ function MainSocket(server, storagesDetail, time, objectType) {
     this.additionalBuildHelper = new this.objectHelper('builds', this.additionalBuildStorage.getBuilds);
     this.agentHelper = new this.objectHelper('agents', this.agentStorage.getAgents);
     this.buildCount = 10;
-
+    var self = this;
     this.sendInfo = function () {
-
-        var self = this;
 
         this.generalBuildHelper.generateNewObjects(function (builds) {
             var buildsData = self.pushModels(builds);
@@ -55,7 +53,9 @@ function MainSocket(server, storagesDetail, time, objectType) {
 
     this.createClient = function (socket) {
 
-        socket.on('launchBuild', this.launchBuildByAgent);
+        socket.on('launchBuild', function(agent){
+            self.launchBuildByAgent(agent,socket);
+        });
         this.clients[socket.id] = {
             socket: socket
         };
