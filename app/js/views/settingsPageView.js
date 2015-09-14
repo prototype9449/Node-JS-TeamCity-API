@@ -29,8 +29,8 @@ window.SettingsPageView = Backbone.View.extend({
         var self = this;
         $(this.el).find('#connection-form').submit(function(event){
             var object = {};
-            $(this).find('input').each(function(index, value){
-                object[($(value).attr('name'))] = $(value).val();
+            $(this).serializeArray().map(function(value){
+                object[value.name] = value.value;
             });
             self.options.router.socket.emit('new authentication', object);
             event.preventDefault();

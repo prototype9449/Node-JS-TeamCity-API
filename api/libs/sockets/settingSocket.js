@@ -104,11 +104,6 @@ function SettingSocket(server, storagesDetail, time, objectType) {
             configManager.addNewTeamCity(options)
         });
 
-        socket.on('change url', function (data) {
-            //configManager.addNewTeamCity(
-            var r = 1;
-        });
-
         socket.on('change configuration', function (data) {
             configManager.changeTeamCity(data);
         });

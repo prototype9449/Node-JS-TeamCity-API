@@ -28,12 +28,12 @@ var ConfigManager = function () {
     }.bind(this);
 
     this.addNewTeamCity = function (options) {
-        var baseOptions = clone(config.general().get('generalOptions'));
-        baseOptions.connection.url = options.url;
-        baseOptions.connection.auth = options.auth;
+        var connection = clone(config.general().get('generalOptions').connection);
+        connection.url = options.url;
+        connection.auth = options.auth;
 
         var teamCityObjects = config.otherOptions().get('teamCityObjects');
-        teamCityObjects.push(baseOptions);
+        teamCityObjects.push({connection : connection});
         config.otherOptions();
         saveConfig(config);
     };

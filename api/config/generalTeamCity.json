@@ -10,20 +10,6 @@
         "Accept": "application/json"
       },
       "timeout": 200000
-    },
-    "agentFixBuilds": [
-      {
-        "agentName": "osl-devb35-sel",
-        "buildTypeId": "Huby_InstallUnitIntegration"
-      },
-      {
-        "agentName": "OSL-DEVB54-SEL",
-        "buildTypeId": "Huby_JasmineTests"
-      },
-      {
-        "agentName": "osl-devb97-sel",
-        "buildTypeId": "Huby_UninstallAndCleanSql"
-      }
-    ]
+    }
   }
 }

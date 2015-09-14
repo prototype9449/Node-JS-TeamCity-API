@@ -2,33 +2,6 @@
   "teamCityObjects": [
     {
       "connection": {
-        "url": "http://co-osl-devb97:85",
-        "auth": {
-          "user": "SergeyPo",
-          "pass": "qwerty12345!"
-        },
-        "headers": {
-          "Accept": "application/json"
-        },
-        "timeout": 200000
-      },
-      "agentFixBuilds": [
-        {
-          "agentName": "osl-devb35-sel",
-          "buildTypeId": "Huby_InstallUnitIntegration"
-        },
-        {
-          "agentName": "OSL-DEVB54-SEL",
-          "buildTypeId": "Huby_JasmineTests"
-        },
-        {
-          "agentName": "osl-devb97-sel",
-          "buildTypeId": "Huby_UninstallAndCleanSql"
-        }
-      ]
-    },
-    {
-      "connection": {
         "url": "http://localhost:8111",
         "auth": {
           "user": "prototype9449",
@@ -72,6 +45,19 @@
           "buildTypeId": "Portal_PortalPortalLib"
         }
       ]
+    },
+    {
+      "connection": {
+        "url": "http://co-osl-devb97:85",
+        "auth": {
+          "user": "SergeyPo",
+          "pass": "qwerty12345!"
+        },
+        "headers": {
+          "Accept": "application/json"
+        },
+        "timeout": 200000
+      }
     }
   ]
 }
