@@ -15,6 +15,7 @@ function SettingSocket(server, storagesDetail, time, objectType) {
 
     var getIndexOfBuildTypeByAgent = function(agentName, buildTypes){
         var agentFixBuilds = config.getGeneralOptions().agentFixBuilds;
+        if(!agentFixBuilds) return -1;
         var agentNames = agentFixBuilds.map(function(value){ return value.agentName; });
         var buildTypeIds = agentFixBuilds.map(function(value){ return value.buildTypeId; });
         var agentIndex= agentNames.indexOf(agentName);
@@ -88,6 +89,7 @@ function SettingSocket(server, storagesDetail, time, objectType) {
         var buildTypes = self.buildTypeStorage.getBuildTypes().buildTypes;
         var agentsFromStorage = self.agentStorage.getAgents().agents;
         socket.emit('settings', getSettings(buildTypes,agentsFromStorage));
+        sendUrls();
     };
 
     this.createClient = function (socket) {

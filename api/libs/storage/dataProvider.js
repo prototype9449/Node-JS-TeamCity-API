@@ -20,6 +20,10 @@ function DataProvider(storages, time) {
             }
         }, this.time);
     };
+
+    this.stop = function() {
+        clearInterval(this.interval);
+    };
 }
 
 module.exports = DataProvider;

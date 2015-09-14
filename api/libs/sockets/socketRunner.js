@@ -3,17 +3,26 @@ var agentSocket = require('./agentSocket');
 var buildSocket = require('./buildSocket');
 var settingSocket = require('./settingSocket');
 
-function RunSockets(server, storages, time) {
+function SocketRunner(server, storages, time) {
     var timeTick = time || 4000;
-    var main = new mainSocket(server, storages, timeTick, 'main');
-    var agent = new agentSocket(server, storages, timeTick, 'agent');
-    var build = new buildSocket(server, storages, timeTick, 'build');
-    var setting = new settingSocket(server, storages, timeTick, 'settings');
+    this.main = new mainSocket(server, storages, timeTick, 'main');
+    this.agent = new agentSocket(server, storages, timeTick, 'agent');
+    this.build = new buildSocket(server, storages, timeTick, 'build');
+    this.setting = new settingSocket(server, storages, timeTick, 'settings');
 
-    main.start();
-    agent.start();
-    build.start();
-    setting.start();
+    this.start = function() {
+        this.main.start();
+        this.agent.start();
+        this.build.start();
+        this.setting.start();
+    };
+
+    this.stop = function(){
+        this.main.stop();
+        this.agent.stop();
+        this.build.stop();
+        this.setting.stop();
+    }
 }
 
-module.exports.RunSocket = RunSockets;
+exports.SocketRunner = SocketRunner;

@@ -1,10 +1,10 @@
 {
   "generalOptions": {
     "connection": {
-      "url": "http://localhost:8111",
+      "url": "http://co-osl-devb97:85",
       "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
+        "user": "SergeyPo",
+        "pass": "qwerty12345!"
       },
       "headers": {
         "Accept": "application/json"
@@ -13,12 +13,16 @@
     },
     "agentFixBuilds": [
       {
-        "agentName": "CO-YAR-WS152",
-        "buildTypeId": "Portal_PortalCore"
+        "agentName": "osl-devb35-sel",
+        "buildTypeId": "Huby_InstallUnitIntegration"
       },
       {
-        "agentName": "CO-YAR-WS132",
-        "buildTypeId": "Portal_PortalPortalLib"
+        "agentName": "OSL-DEVB54-SEL",
+        "buildTypeId": "Huby_JasmineTests"
+      },
+      {
+        "agentName": "osl-devb97-sel",
+        "buildTypeId": "Huby_UninstallAndCleanSql"
       }
     ]
   }

@@ -107,8 +107,12 @@ window.UrlSettings = Backbone.Model.extend({
                     url: objects[0],
                     user: objects[1]
                 };
-
-                socket.emit('change url', result);
+                $.ajax({
+                    type: "POST",
+                    url: 'http://localhost:8080/changeUrl',
+                    data: result,
+                    dataType: 'application/json'
+                });
             });
         }
     }
@@ -132,7 +136,7 @@ window.SettingsPanel = Backbone.Model.extend({
             $(".selectpicker").selectpicker();
             $('#settings-form').submit(function (event) {
                 var arrayData = $(this).serializeArray();
-                var urlData = $('#url-selector').val().split(' ');;
+                var urlData = $('#url-selector').val().split(' ');
                 var key = {
                     url: urlData[0],
                     userName: urlData[1]
