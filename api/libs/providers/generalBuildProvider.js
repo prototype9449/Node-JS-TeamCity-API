@@ -146,10 +146,12 @@ var getValidateBuildData = function (jsonBuild) {
 };
 
 var generateFinalBuildJson = function (buildId, buildHref, callback) {
+    return new Promise(function(resolve, reject){
     generateBuildJson(buildHref)
         .then(getValidateBuildData)
         .then(generateBuildBranch)
-        .then(callback);
+        .then(resolve);
+    });
 };
 
 var launchBuildConfiguration = function (buildTypeId, agentId) {

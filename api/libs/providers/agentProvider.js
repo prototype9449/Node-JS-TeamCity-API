@@ -50,9 +50,10 @@ function buildFinalAgent(jsonAgent) {
     });
 }
 
-function generateFinalAgentJson(agentId, agentHref, callback) {
-
-    generateMainInfo(agentHref).then(buildFinalAgent).then(callback);
+function generateFinalAgentJson(agentHref) {
+    return new Promise(function (resolve, reject) {
+        generateMainInfo(agentHref).then(buildFinalAgent).then(resolve);
+    });
 }
 
 module.exports.generateAgentJson = generateFinalAgentJson;

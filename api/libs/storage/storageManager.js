@@ -1,6 +1,6 @@
 var AgentStorage = require('./agentStorage').AgentStorage;
-var GeneralBuildStorage = require('./buildStorage').BuildStorage;
-var AdditionalBuildStorage = require('./buildStorage').BuildStorage;
+var GeneralBuildStorage = require('./generalBuildStorage').BuildStorage;
+var AdditionalBuildStorage = require('./generalBuildStorage').BuildStorage;
 var BuildTypeStorage = require('./buildTypeStorage').BuildTypeStorage;
 
 var connectionOptionHelper = require('./../config/generalOptionHelper');
@@ -54,7 +54,7 @@ function StorageManager() {
     };
 
     this.getStorages = function () {
-        var generalBuildStorage = new GeneralBuildStorage();
+        var generalBuildStorage = new GeneralBuildStorage(60);
         var agentStorage = new AgentStorage(generalBuildStorage);
         var additionalBuildStorage = new AdditionalBuildStorage();
         var buildTypeStorage = new BuildTypeStorage();

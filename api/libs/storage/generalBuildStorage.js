@@ -1,7 +1,8 @@
 var baseStorage = require('./baseStorage').ObjectStorage;
 
-var BuildStorage = function () {
+var GeneralBuildStorage = function (maxCount) {
     this.__proto__ = new baseStorage("builds");
+    this.maxCount = maxCount;
     var self = this;
 
     this.getBuilds = function (number) {
@@ -10,6 +11,29 @@ var BuildStorage = function () {
 
     this.getBuildById = function (id) {
         return self.getById(id);
+    };
+
+    this.pushObjects = function (objects) {
+        var indexes = new Array(objects.length);
+
+        objects.forEach(function(object, index){
+            for(var i = 0; i < self.objects.length; i++){
+                if(self.objects[i].id == object.id){
+                    indexes[index] = objects[i];
+                }
+            }
+        });
+
+        for(var i =0; i < indexes.length; i++){
+            if(indexes[i]) {
+                self.objects[i] = indexes[i];
+            } else{
+                self.objects.push(objects[i])
+            }
+        }
+
+        self.objects.sort(function(first,second){ return second.id-first.id;});
+        self.objects = self.objects.slice(0,self.maxCount);
     };
 
     this.getBuildHistoryById = function (id) {
@@ -36,4 +60,4 @@ var BuildStorage = function () {
     };
 };
 
-module.exports.BuildStorage = BuildStorage;
+module.exports.BuildStorage = GeneralBuildStorage;

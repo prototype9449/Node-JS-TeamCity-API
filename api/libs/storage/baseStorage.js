@@ -35,38 +35,6 @@ var ObjectStorage = function (name) {
         }
     };
 
-    this.pushObjects = function (objects) {
-        var self = this;
-        var objectIds = Enumerable.from(objects).select('$.id').toArray();
-        objectIds.sort(function (id1, id2) {
-            return id2 - id1;
-        });
-        var queryBuildsForChange = Enumerable.from(self.objects).where(function (item) {
-            return objectIds.indexOf(item.id) != -1
-        });
-
-        var objectIdsForChange = queryBuildsForChange.select('$.id').toArray();
-        var objectsForChange = queryBuildsForChange.toArray();
-        var objectsForAdding = Enumerable.from(objects).where(function (item) {
-            return objectIdsForChange.indexOf(item.id) == -1
-        }).toArray();
-        var notChangedObjects = Enumerable.from(self.objects).where(function (item) {
-            return objectIds.indexOf(item.id) == -1
-        }).toArray();
-
-        for (var i = 0; i < objectsForChange.length; i++) {
-            var index = objectIds.indexOf(objectsForChange[i].id);
-            objectsForChange[i] = objects[index];
-        }
-
-        var resultObjects = [].concat(objectsForAdding, objectsForChange, notChangedObjects);
-
-        resultObjects.sort(function (item1, item2) {
-            return item2.id - item1.id;
-        });
-        self.objects = resultObjects;
-    };
-
     this.getObjects = function (number) {
         var result = {};
         result[this.name] = this.getSpliceArray(this.objects, number);

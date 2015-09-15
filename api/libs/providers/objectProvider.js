@@ -6,7 +6,7 @@ var generateBuilds = function (builds, callback) {
     var jsonBuilds = [];
     for (var i = 0; i < builds.length; i++) {
         var currentBuild = builds[i];
-        generateBuild(currentBuild.id, currentBuild.href, function (build) {
+        generateBuild(currentBuild.id, currentBuild.href).then(function (build) {
             jsonBuilds.push(build);
             if (jsonBuilds.length == builds.length) {
                 jsonBuilds.sort(function (build1, build2) {
@@ -22,12 +22,12 @@ var generateAgents = function (agents, callback) {
     var jsonAgents = [];
     for (var i = 0; i < agents.length; i++) {
         var currentAgent = agents[i];
-        generateAgent(currentAgent.id, currentAgent.href, function (buildType) {
-            jsonAgents.push(buildType);
+        generateAgent(currentAgent.href).then(function (jsonAgent) {
+            jsonAgents.push(jsonAgent);
             if (jsonAgents.length == agents.length) {
                 callback(jsonAgents);
             }
-        })
+        });
     }
 };
 
