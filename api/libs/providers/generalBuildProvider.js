@@ -5,33 +5,6 @@ require('date-format-lite');
 
 Date.masks.default = 'YYYY-MM-DD hh:mm:ss';
 
-var generateBuildJson = function (buildHref, callback) {
-    var optionTeamCity = config.getGeneralOptions().connection;
-    optionTeamCity.url += buildHref;
-    request.get(optionTeamCity, function (err, response) {
-        if (err) throw err;
-
-        var buildJson = JSON.parse(response.body);
-        callback(buildJson);
-    });
-};
-
-var generateVSCInstance = function (vscHref, callback) {
-
-    if (vscHref == undefined) {
-        callback(undefined);
-        return;
-    }
-
-    var optionTeamCity = config.getGeneralOptions().connection;
-    optionTeamCity.url += vscHref;
-    request.get(optionTeamCity, function (err, response) {
-        if (err) throw err;
-        var vscJson = JSON.parse(response.body);
-        callback(vscJson);
-    });
-};
-
 var getDateFromString = function (strDate) {
     if (!strDate) return undefined;
     var year = strDate.substring(0, 4);
@@ -104,45 +77,83 @@ var getValidateUserName = function (jsonBuild) {
     return userName;
 };
 
-var generateFinalBuildJson = function (buildId, buildHref, callback) {
-    generateBuildJson(buildHref, function (jsonBuild) {
+var generateBuildJson = function (buildHref) {
+    return new Promise(function (resolve, reject) {
+        var optionTeamCity = config.getGeneralOptions().connection;
+        optionTeamCity.url += buildHref;
+        request.get(optionTeamCity, function (err, response) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            var buildJson = JSON.parse(response.body);
+            resolve(buildJson);
+        });
+    });
+};
+
+var generateBuildBranch = function (data) {
+    return new Promise(function (resolve, reject) {
+        if (data.vscHref == undefined) {
+            data.jsonBuild.build.branchName = '---';
+            resolve(data.jsonBuild);
+            return;
+        }
+        var optionTeamCity = config.getGeneralOptions().connection;
+        optionTeamCity.url += data.vscHref;
+        request.get(optionTeamCity, function (err, response) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            var vscJson = JSON.parse(response.body);
+            data.jsonBuild.build.branchName = getBuildBranchName(vscJson);
+            resolve(data.jsonBuild);
+        });
+    });
+};
+
+var getValidateBuildData = function (jsonBuild) {
+    return new Promise(function (resolve, reject) {
         var buildLaunchDate = getDateFromString(jsonBuild.triggered.date);
         var buildFinishedDate = getDateFromString(jsonBuild.finishDate);
         if (buildFinishedDate) {
             var duration = Math.abs((buildLaunchDate.getTime() - buildFinishedDate.getTime() ) / 1000);
         }
         var vscHref = getValidateBscHref(jsonBuild);
-        var userName = getValidateUserName(jsonBuild);
-
-        generateVSCInstance(vscHref, function (vscJson) {
-            var buildBranchName = getBuildBranchName(vscJson);
-            var finalJsonBuild =
-            {
-                id: buildId,
-                build: {
-                    id: buildId,
-                    href: 'buildInfo.html?id=' + buildId,
-                    branchName: buildBranchName,
-                    authorName: userName,
-                    state: jsonBuild.state,
-                    status: getProperStatus(jsonBuild.status, jsonBuild.state),
-                    launchDate: buildLaunchDate.format(),
-                    duration: getProperDuration(duration),
-                    configuration: {
-                        id: jsonBuild.buildTypeId,
-                        name: jsonBuild.buildType.name,
-                        projectName: jsonBuild.buildType.projectName
-                    }
-                },
-                agent: {
-                    id: jsonBuild.agent.id,
-                    name: jsonBuild.agent.name,
-                    href: 'agentInfo.html?id=' + jsonBuild.agent.id
+        var finalJsonBuild =
+        {
+            id: jsonBuild.id,
+            build: {
+                id: jsonBuild.id,
+                href: 'buildInfo.html?id=' + jsonBuild.id,
+                branchName: '---',
+                authorName: getValidateUserName(jsonBuild),
+                state: jsonBuild.state,
+                status: getProperStatus(jsonBuild.status, jsonBuild.state),
+                launchDate: buildLaunchDate.format(),
+                duration: getProperDuration(duration),
+                configuration: {
+                    id: jsonBuild.buildTypeId,
+                    name: jsonBuild.buildType.name,
+                    projectName: jsonBuild.buildType.projectName
                 }
-            };
-            callback(finalJsonBuild);
-        })
-    })
+            },
+            agent: {
+                id: jsonBuild.agent.id,
+                name: jsonBuild.agent.name,
+                href: 'agentInfo.html?id=' + jsonBuild.agent.id
+            }
+        };
+        resolve({ vscHref : vscHref, jsonBuild :finalJsonBuild});
+    });
+};
+
+var generateFinalBuildJson = function (buildId, buildHref, callback) {
+    generateBuildJson(buildHref)
+        .then(getValidateBuildData)
+        .then(generateBuildBranch)
+        .then(callback);
 };
 
 var launchBuildConfiguration = function (buildTypeId, agentId) {
@@ -151,9 +162,9 @@ var launchBuildConfiguration = function (buildTypeId, agentId) {
         var optionTeamCity = config.getLaunchBuildsOptions(buildTypeId, agentId).connection;
 
         request.post(optionTeamCity, function (error) {
-            if(error) {
+            if (error) {
                 reject();
-            } else{
+            } else {
                 resolve();
             }
 

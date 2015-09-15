@@ -1,40 +1,44 @@
 var request = require('request');
 var config = require('./../config/generalOptionHelper');
+var Promise = require('promise');
 
-function generateMainInfo(agentHref, callback) {
-    var optionTeamCity = config.getGeneralOptions().connection;
-    optionTeamCity.url += agentHref;
+function generateMainInfo(agentHref) {
+    return new Promise(function (resolve, reject) {
+        var optionTeamCity = config.getGeneralOptions().connection;
+        optionTeamCity.url += agentHref;
 
-    request.get(optionTeamCity, function (err, response) {
-        if (err) throw err;
+        request.get(optionTeamCity, function (err, response) {
+            if (err) {
+                reject(err);
+            }
 
-        var fullAgentInfo = JSON.parse(response.body);
-        callback(fullAgentInfo);
+            var fullAgentInfo = JSON.parse(response.body);
+            resolve(fullAgentInfo);
+        });
     });
 }
 
-function generateAgentFreeSpace(jsonAgent) {
+function getFreeSpace(jsonAgent) {
     var properties = jsonAgent.properties.property;
     for (var i = 0; i < properties.length; i++) {
         if (properties[i].name == 'teamcity.agent.work.dir.freeSpaceMb') {
-            return (properties[i].value/1000).toFixed(1);
+            return (properties[i].value / 1000).toFixed(1);
         }
     }
 }
 
-function generateFinalAgentJson(agentId, agentHref, callback) {
-
-    generateMainInfo(agentHref, function (jsonAgent) {
+function buildFinalAgent(jsonAgent) {
+    return new Promise(function (resolve, reject) {
 
         var bitStatus = jsonAgent.connected && jsonAgent.authorized && jsonAgent.enabled;
         var ready = bitStatus == true ? 'Yes' : 'No';
 
         var finalJsonAgent =
         {
-            id: agentId,
-            href: 'agentInfo.html?id=' + agentId,
+            id: jsonAgent.id,
+            href: 'agentInfo.html?id=' + jsonAgent.id,
             name: jsonAgent.name,
-            freeSpace: generateAgentFreeSpace(jsonAgent),
+            freeSpace: getFreeSpace(jsonAgent),
             status: {
                 connected: jsonAgent.connected,
                 authorized: jsonAgent.authorized,
@@ -42,10 +46,13 @@ function generateFinalAgentJson(agentId, agentHref, callback) {
                 ready: ready
             }
         };
+        resolve(finalJsonAgent);
+    });
+}
 
-        callback(finalJsonAgent);
+function generateFinalAgentJson(agentId, agentHref, callback) {
 
-    })
+    generateMainInfo(agentHref).then(buildFinalAgent).then(callback);
 }
 
 module.exports.generateAgentJson = generateFinalAgentJson;
