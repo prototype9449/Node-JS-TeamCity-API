@@ -1,15 +1,22 @@
 {
   "generalOptions": {
     "connection": {
-      "url": "http://co-osl-devb97:85",
+      "url": "http://localhost:8111",
+      "method" : "GET",
       "auth": {
-        "user": "SergeyPo",
-        "pass": "qwerty12345!"
+        "user": "Unknow",
+        "pass": "termit"
       },
       "headers": {
         "Accept": "application/json"
       },
       "timeout": 200000
-    }
+    },
+    "agentFixBuilds": [
+      {
+        "agentName": "Home",
+        "buildTypeId": "MyRepozitoryGitHub_TestsForHashtebale"
+      }
+    ]
   }
 }

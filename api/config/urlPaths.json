@@ -2,7 +2,8 @@
   "launchBuildOptions": {
     "relativeUrl": "/httpAuth/app/rest/buildQueue",
     "Content-Type": "application/xml",
-    "body": "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>"
+    "body": "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>",
+    "method" :"POST"
   },
   "agentOptions": {
     "relativeUrl": "/httpAuth/app/rest/agents"

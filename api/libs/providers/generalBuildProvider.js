@@ -1,4 +1,4 @@
-var request = require('request');
+var requestp = require('request-promise');
 var Promise = require('promise');
 var config = require('./../config/generalOptionHelper');
 require('date-format-lite');
@@ -81,13 +81,11 @@ var generateBuildJson = function (buildHref) {
     return new Promise(function (resolve, reject) {
         var optionTeamCity = config.getGeneralOptions().connection;
         optionTeamCity.url += buildHref;
-        request.get(optionTeamCity, function (err, response) {
-            if (err) {
-                reject(err);
-                return;
-            }
-            var buildJson = JSON.parse(response.body);
+        requestp(optionTeamCity).then(function (body) {
+            var buildJson = JSON.parse(body);
             resolve(buildJson);
+        }, function (err) {
+            throw err;
         });
     });
 };
@@ -101,14 +99,12 @@ var generateBuildBranch = function (data) {
         }
         var optionTeamCity = config.getGeneralOptions().connection;
         optionTeamCity.url += data.vscHref;
-        request.get(optionTeamCity, function (err, response) {
-            if (err) {
-                reject(err);
-                return;
-            }
-            var vscJson = JSON.parse(response.body);
+        requestp(optionTeamCity).then(function (body) {
+            var vscJson = JSON.parse(body);
             data.jsonBuild.build.branchName = getBuildBranchName(vscJson);
             resolve(data.jsonBuild);
+        }, function (err) {
+            throw err;
         });
     });
 };
@@ -145,7 +141,7 @@ var getValidateBuildData = function (jsonBuild) {
                 href: 'agentInfo.html?id=' + jsonBuild.agent.id
             }
         };
-        resolve({ vscHref : vscHref, jsonBuild :finalJsonBuild});
+        resolve({vscHref: vscHref, jsonBuild: finalJsonBuild});
     });
 };
 
@@ -157,21 +153,12 @@ var generateFinalBuildJson = function (buildId, buildHref, callback) {
 };
 
 var launchBuildConfiguration = function (buildTypeId, agentId) {
-
     return new Promise(function (resolve, reject) {
         var optionTeamCity = config.getLaunchBuildsOptions(buildTypeId, agentId).connection;
-
-        request.post(optionTeamCity, function (error) {
-            if (error) {
-                reject();
-            } else {
-                resolve();
-            }
-
-            console.log('launch build ' + buildTypeId);
-        });
+        requestp(optionTeamCity).then(resolve, reject);
+        console.log('launch build ' + buildTypeId);
     });
-}
+};
 
 module.exports.generateBuildJson = generateFinalBuildJson;
 module.exports.launchBuildConfiguration = launchBuildConfiguration;

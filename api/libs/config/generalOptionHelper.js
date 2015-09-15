@@ -35,6 +35,7 @@ var generalConnectionOptionHelper =
         launchBuildsOptions.connection.url += launchBuildsOption.relativeUrl;
         launchBuildsOptions.connection.headers['Content-Type'] = launchBuildsOption['Content-Type'];
         launchBuildsOptions.connection.body = launchBuildsOption.body.replace('_buildTypeId_', buildTypeId).replace('_agentId_', agentId);
+        launchBuildsOptions.connection.method = launchBuildsOption.method;
 
         return launchBuildsOptions;
     },

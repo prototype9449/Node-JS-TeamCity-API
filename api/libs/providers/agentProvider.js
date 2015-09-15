@@ -1,4 +1,4 @@
-var request = require('request');
+var requestp = require('request-promise');
 var config = require('./../config/generalOptionHelper');
 var Promise = require('promise');
 
@@ -7,14 +7,14 @@ function generateMainInfo(agentHref) {
         var optionTeamCity = config.getGeneralOptions().connection;
         optionTeamCity.url += agentHref;
 
-        request.get(optionTeamCity, function (err, response) {
-            if (err) {
-                reject(err);
-            }
-
-            var fullAgentInfo = JSON.parse(response.body);
+        requestp(optionTeamCity).then(function (response) {
+            var fullAgentInfo = JSON.parse(response);
             resolve(fullAgentInfo);
+        }, function (err) {
+            throw err;
+            //reject(err);
         });
+
     });
 }
 
