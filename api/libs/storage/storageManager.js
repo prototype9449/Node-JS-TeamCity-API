@@ -23,7 +23,7 @@ function StorageManager() {
                     }
                 }
                 return buildId;
-            };
+            }
 
             var builds = generalBuildStorage.getBuilds().builds;
             var firstFinishedBuildId = getFirstFinishedBuildId(builds);
@@ -63,22 +63,22 @@ function StorageManager() {
             agentStorage: {
                 storage: agentStorage,
                 getOptions: getConnectionForAgentStorage,
-                getObjecs: generateObjects
+                generateObjects: generateObjects
             },
             generalBuildStorage: {
                 storage: generalBuildStorage,
                 getOptions: getConnectionForGeneralBuildStorage(generalBuildStorage),
-                getObjecs: generateObjects
+                generateObjects: generateObjects
             },
             additionalBuildStorage: {
                 storage: additionalBuildStorage,
                 getOptions: getConnectionForAdditionalBuildStorage,
-                getObjecs: generateBuildsByBuildTypeNames
+                generateObjects: generateBuildsByBuildTypeNames
             },
             buildTypeStorage : {
                 storage : buildTypeStorage,
                 getOptions : getConnectionForBuildTypeStorage,
-                getObjecs : generateObjects
+                generateObjects : generateObjects
             }
         };
     }

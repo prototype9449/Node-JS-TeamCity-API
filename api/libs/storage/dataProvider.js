@@ -5,7 +5,7 @@ function DataProvider(storages, time) {
 
     this.saveElements = function (storageDetails) {
         var connection = storageDetails.getOptions();
-        storageDetails.getObjecs(connection, function (data) {
+        storageDetails.generateObjects(connection).then(function (data) {
             if(data)
                 storageDetails.storage.pushObjects(data);
         });
