@@ -21,6 +21,12 @@ function BaseSocket(server, time, objectType) {
         return result;
     };
 
+    this.sendDataToAllClients = function (eventName, data) {
+        for (var id in this.clients) {
+            this.clients[id].socket.emit(eventName, data);
+        }
+    };
+
     this.start = function () {
         var self = this;
 

@@ -14,7 +14,6 @@ function generateMainInfo(agentHref) {
             throw err;
             //reject(err);
         });
-
     });
 }
 
@@ -27,7 +26,7 @@ function getFreeSpace(jsonAgent) {
     }
 }
 
-function buildFinalAgent(jsonAgent) {
+function  getValidateAgentData(jsonAgent) {
     return new Promise(function (resolve, reject) {
 
         var bitStatus = jsonAgent.connected && jsonAgent.authorized && jsonAgent.enabled;
@@ -52,7 +51,7 @@ function buildFinalAgent(jsonAgent) {
 
 function generateFinalAgentJson(agentHref) {
     return new Promise(function (resolve, reject) {
-        generateMainInfo(agentHref).then(buildFinalAgent).then(resolve);
+        generateMainInfo(agentHref).then( getValidateAgentData).then(resolve);
     });
 }
 

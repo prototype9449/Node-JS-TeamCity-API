@@ -17,7 +17,10 @@ var getDateFromString = function (strDate) {
     return new Date(year, month, day, hour, minutes, seconds);
 };
 
-var getProperDuration = function (duration) {
+var getProperDuration = function (buildLaunchDate, buildFinishedDate) {
+    if (buildFinishedDate) {
+        var duration = Math.abs((buildLaunchDate.getTime() - buildFinishedDate.getTime() ) / 1000);
+    }
     if (!duration) return '---';
 
     var hours = Math.floor(duration / 3600);
@@ -41,10 +44,10 @@ var getBuildBranchName = function (vscJson) {
 };
 
 var getProperStatus = function (status, state) {
-    var status = status.toLocaleLowerCase();
-    var state = state.toLocaleLowerCase();
+    status = status.toLocaleLowerCase();
+    state = state.toLocaleLowerCase();
 
-    if (state.toLocaleLowerCase() == 'running') {
+    if (state == 'running') {
         return 'running';
     }
     if (status == 'unknown') {
@@ -113,9 +116,7 @@ var getValidateBuildData = function (jsonBuild) {
     return new Promise(function (resolve, reject) {
         var buildLaunchDate = getDateFromString(jsonBuild.triggered.date);
         var buildFinishedDate = getDateFromString(jsonBuild.finishDate);
-        if (buildFinishedDate) {
-            var duration = Math.abs((buildLaunchDate.getTime() - buildFinishedDate.getTime() ) / 1000);
-        }
+
         var vscHref = getValidateBscHref(jsonBuild);
         var finalJsonBuild =
         {
@@ -128,7 +129,7 @@ var getValidateBuildData = function (jsonBuild) {
                 state: jsonBuild.state,
                 status: getProperStatus(jsonBuild.status, jsonBuild.state),
                 launchDate: buildLaunchDate.format(),
-                duration: getProperDuration(duration),
+                duration: getProperDuration(buildLaunchDate, buildFinishedDate),
                 configuration: {
                     id: jsonBuild.buildTypeId,
                     name: jsonBuild.buildType.name,

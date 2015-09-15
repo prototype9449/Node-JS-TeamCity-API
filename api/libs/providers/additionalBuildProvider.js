@@ -5,10 +5,10 @@ var Enumerable = require('../linq/linq.min');
 require("../linq/extensions/linq.qunit")({'Enumerable': Enumerable});
 
 var getProperStatus = function (status, state) {
-    var status = status.toLocaleLowerCase();
-    var state = state.toLocaleLowerCase();
+    status = status.toLocaleLowerCase();
+    state = state.toLocaleLowerCase();
 
-    if (state.toLocaleLowerCase() == 'running') {
+    if (state == 'running') {
         return 'running';
     }
     if (status == 'unknown') {
@@ -19,7 +19,6 @@ var getProperStatus = function (status, state) {
         return 'success';
     }
 };
-
 
 var generateBuildByBuildTypeId = function (buildType, callback) {
     var optionTeamCity = additionalConnectionOptionHelper.getOneBuildByBuildTypeIdOptions(buildType.id).connection;
@@ -57,6 +56,28 @@ var generateBuilds = function (buildTypes) {
     });
 };
 
+var getProjectsFromMemory = function(data)
+{
+    var json = JSON.parse(data);
+    var buildTypes = json.buildType;
+
+    var groupsByProject = Enumerable.from(buildTypes).groupBy('$.projectName').select(function (item) {
+
+        return {
+            projectName: item.key(),
+            builds: item.getSource()
+        };
+    }).toArray();
+
+
+    var projectsFromMemory = {};
+    groupsByProject.map(function (item) {
+        projectsFromMemory[item.projectName] = item.builds;
+    });
+
+    return projectsFromMemory;
+};
+
 var generateBuildsByBuildTypeNames = function (options) {
 
     return new Promise(function (resolve, reject) {
@@ -68,23 +89,9 @@ var generateBuildsByBuildTypeNames = function (options) {
         var optionTeamCity = additionalConnectionOptionHelper.getBuildTypesOptions().connection;
         request.get(optionTeamCity, function (err, response) {
             if (err) throw err;
-            var json = JSON.parse(response.body);
-            var buildTypes = json.buildType;
+
+            var projectsFromMemory = getProjectsFromMemory(response.body);
             var resultObjects = [];
-
-            var groupsByProject = Enumerable.from(buildTypes).groupBy('$.projectName').select(function (item) {
-
-                return {
-                    projectName: item.key(),
-                    builds: item.getSource()
-                };
-            }).toArray();
-
-
-            var projectsFromMemory = {};
-            groupsByProject.map(function (item) {
-                projectsFromMemory[item.projectName] = item.builds;
-            });
 
             for (var i = 0; i < projectsFromConfig.length; i++) {
                 var buildTypesFromMemory = projectsFromMemory[projectsFromConfig[i].projectName];
