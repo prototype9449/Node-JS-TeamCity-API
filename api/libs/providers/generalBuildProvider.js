@@ -146,21 +146,12 @@ var getValidateBuildData = function (jsonBuild) {
 };
 
 var generateFinalBuildJson = function (buildId, buildHref, callback) {
-    return new Promise(function(resolve, reject){
-    generateBuildJson(buildHref)
-        .then(getValidateBuildData)
-        .then(generateBuildBranch)
-        .then(resolve);
-    });
-};
-
-var launchBuildConfiguration = function (buildTypeId, agentId) {
     return new Promise(function (resolve, reject) {
-        var optionTeamCity = config.getLaunchBuildsOptions(buildTypeId, agentId).connection;
-        requestp(optionTeamCity).then(resolve, reject);
-        console.log('launch build ' + buildTypeId);
+        generateBuildJson(buildHref)
+            .then(getValidateBuildData)
+            .then(generateBuildBranch)
+            .then(resolve);
     });
 };
 
 module.exports.generateBuildJson = generateFinalBuildJson;
-module.exports.launchBuildConfiguration = launchBuildConfiguration;

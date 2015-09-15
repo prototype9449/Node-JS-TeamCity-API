@@ -48,25 +48,6 @@ function BaseSocket(server, time, objectType) {
     this.stop = function () {
         clearInterval(this.interval);
     };
-
-    this.launchBuildByAgent = function (agent, socket) {
-        var agentFixBuilds = config.getAgentFixBuildsOptions();
-
-        var buildTypeId;
-        agentFixBuilds.map(function (item) {
-            if (item.agentName == agent.name) {
-                buildTypeId = item.buildTypeId;
-            }
-        });
-
-        if (!buildTypeId) return;
-
-        launchBuild(buildTypeId, agent.id).then(function(){
-            socket.emit('launched build', true);
-        }, function(){
-            socket.emit("launched build", false);
-        });
-    };
 }
 
 module.exports = BaseSocket;

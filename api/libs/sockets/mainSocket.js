@@ -52,10 +52,6 @@ function MainSocket(server, storagesDetail, time, objectType) {
     };
 
     this.createClient = function (socket) {
-
-        socket.on('launchBuild', function(agent){
-            self.launchBuildByAgent(agent,socket);
-        });
         this.clients[socket.id] = {
             socket: socket
         };
