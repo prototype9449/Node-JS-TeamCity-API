@@ -90,36 +90,23 @@ window.UrlSettings = Backbone.Model.extend({
                 template: "currentUrl"
             }
         },
-        events: {
-            "change #url-selector": "handler"
-        },
-
-        handlers: function (events) {
-            alert("You can procceed!!!");
-        },
-
-        renderFunction: function () {
-            $(".selectpicker").selectpicker();
-            $("select.selectpicker[name='url']").on('change', function () {
-                var value = $(".selectpicker[name='url'] option:selected").val();
-                var objects = value.split(' ');
-                var result = {
-                    url: objects[0],
-                    user: objects[1]
-                };
-                $.ajax({
-                    type: "POST",
-                    url: 'http://localhost:8080/changeUrl',
-                    data: result,
-                    dataType: 'application/json'
-                });
-                location.reload();
-            });
+        sendUrlChanging : ""
+    },
+    handleUrlChanging: function (selectedUrl) {
+        var urlsSettins = this.get('object').urlsSetting;
+        for (var i in urlsSettins) {
+            urlsSettins[i].isCurrent = false;
+            if (urlsSettins[i].url == selectedUrl.url && urlsSettins[i].userName == selectedUrl.user) {
+                urlsSettins[i].isCurrent = true;
+            }
         }
+        var sendUrlChanging = this.get('sendUrlChanging');
+        if (sendUrlChanging)
+            sendUrlChanging(selectedUrl);
     }
 });
 
-window.SettingsPanel = Backbone.Model.extend({
+window.AgentsSettings = Backbone.Model.extend({
     defaults: {
         needToUpdate: false,
         id: "0",
@@ -132,32 +119,35 @@ window.SettingsPanel = Backbone.Model.extend({
                 template: "SettingsPanel"
             }
         },
-        renderFunction: function (socket) {
-            $(".selectpicker").selectpicker();
-            $('#settings-form').submit(function (event) {
-                var arrayData = $(this).serializeArray();
-                var urlData = $('#url-selector').val().split(' ');
-                var key = {
-                    url: urlData[0],
-                    userName: urlData[1]
-                };
-                var agentFixBuilds = arrayData.map(function (value) {
-                    return {
-                        agentName: value.name,
-                        buildTypeId: value.value
-                    }
-                });
+        sendSettingSubmit : ""
+    },
 
-                var result = {
-                    url: key.url,
-                    userName: key.userName,
-                    agentFixBuilds: agentFixBuilds
-                };
+    handleSettingSubmit: function (data) {
+        var sendSettingSubmit = this.get('sendSettingSubmit');
+        if (sendSettingSubmit)
+            sendSettingSubmit(data);
+    }
+});
 
-                socket.emit('change configuration', result);
-                event.preventDefault();
-            });
-        }
+window.NewConnectionSetting = Backbone.Model.extend({
+    defaults: {
+        needToUpdate: false,
+        id: "0",
+        object: "",
+        options: {
+            path: "/settings",
+            view: {
+                className: "SettingsPanel",
+                tagName: "div",
+                template: "newConnection"
+            }
+        },
+        sendConnectionSubmit : ""
+    },
+    handleConnectionSubmit: function (data) {
+        var sendConnectionSubmit = this.get('sendConnectionSubmit');
+        if (sendConnectionSubmit)
+            sendConnectionSubmit(data);
     }
 });
 

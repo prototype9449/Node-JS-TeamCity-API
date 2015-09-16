@@ -60,10 +60,6 @@ window.ObjectView = Backbone.View.extend({
             $(this.el).html(html);
         }
 
-        var renderFunction = this.model.get("renderFunction");
-        if (renderFunction)
-            renderFunction(this.options.router.socket);
-
         return this;
     },
 
@@ -71,23 +67,5 @@ window.ObjectView = Backbone.View.extend({
         $(this.el).remove();
 
         return this;
-    },
-
-    events: function(){
-        return this.model.get("events");
-    },
-
-    handler: function(events){
-        var handler = this.model.get("handlers");
-        handler(events);
     }
-    //events: {
-    //    "click a": "info"
-    //},
-    //
-    //info: function () {
-    //    var path = this.model.get("pathPart") + this.model.get("id");
-    //    this.options.router.navigate(path, true);
-    //    return false;
-    //}
 });

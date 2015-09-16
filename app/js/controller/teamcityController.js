@@ -29,8 +29,9 @@ TeamcityController = Backbone.Router.extend({
 
     settings: function () {
         var model = {
-            settings: new SettingsPanel(),
-            urlSettings : new UrlSettings()
+            settings: new AgentsSettings(),
+            urlSettings : new UrlSettings(),
+            connectionSetting : new NewConnectionSetting()
         };
         this.showView('#content', new SettingsPageView({model: model, router: this}));
         this.socket = socketManager.setSettingsSocket(model);
@@ -79,9 +80,6 @@ TeamcityController = Backbone.Router.extend({
             agent: agent,
             buildList: new ObjectsCollection([], {modelProvider: AgentHistory})
         };
-
-        this.model = model;
-
 
         this.showView('#content', new AgentPageView({model: model, router: this}));
         this.socket = socketManager.setAgentSocket(model, id);

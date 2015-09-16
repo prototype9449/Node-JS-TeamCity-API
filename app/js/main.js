@@ -19,40 +19,44 @@ $(function () {
             },
             {
                 name: 'SettingsPanel',
-                path: 'tpl/templates/settings-panel'
+                path: 'tpl/settingsPage/agent-settings-panel'
             },
 
             {
                 name: 'currentUrl',
-                path: 'tpl/templates/setting-selected-url'
+                path: 'tpl/settingsPage/current-url-panel'
+            },
+            {
+                name: 'newConnection',
+                path: 'tpl/settingsPage/new-connection-form-panel'
             },
             {
                 name: 'briefAgent',
-                path: 'tpl/templates/agent-brief-information-panel'
+                path: 'tpl/mainPage/agent-brief-information-panel'
             },
             {
                 name: 'briefGeneralBuild',
-                path: 'tpl/templates/general-build-brief-information-panel'
+                path: 'tpl/mainPage/general-build-brief-information-panel'
             },
             {
                 name: 'briefAdditionalBuild',
-                path: 'tpl/templates/additional-build-brief-information-panel'
+                path: 'tpl/mainPage/additional-build-brief-information-panel'
             },
             {
                 name: 'fullAgent',
-                path: 'tpl/templates/agent-full-Information-panel'
+                path: 'tpl/agentPage/agent-full-Information-panel'
             },
             {
                 name: 'agentHistory',
-                path: 'tpl/templates/agent-history-panel'
+                path: 'tpl/agentPage/agent-history-panel'
             },
             {
                 name: 'fullBuild',
-                path: 'tpl/templates/build-full-information-panel'
+                path: 'tpl/buildPage/build-full-information-panel'
             },
             {
                 name: 'buildHistory',
-                path: 'tpl/templates/build-history-panel'
+                path: 'tpl/buildPage/build-history-panel'
             }
 
         ], function () {

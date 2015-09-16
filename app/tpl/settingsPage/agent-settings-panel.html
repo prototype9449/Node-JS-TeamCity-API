@@ -7,30 +7,23 @@
                 <h3 id="agent-configuration-label">TeamCity configuration:</h3>
                 <table>
                     <thead>
-                    <th>
-                        Agent's Name
-                    </th>
-                    <th>
-                        Build for execution
-                    </th>
+                    <th>Agent's Name</th>
+                    <th>Build for execution</th>
                     </thead>
                     <tbody>
-                    <% _.each(agents, function(agent) { %>
+                    <% _.each(settings.agents, function(agent) { %>
                     <tr>
-                        <td>
-                            <%= agent.agentName %>
-                        </td>
+                        <td><%= agent.agentName %></td>
                         <td>
                             <select class="selectpicker show-tick" name="<%= agent.agentName %>">
-                                <% _.each(buildTypes, function(buildType, index) { %>
-                                    <% if (agent.indexOfBuildType === index) { %>
-                                        <option selected><%= buildType.id %></option>
-                                    <% } else { %>
-                                        <option><%= buildType.id %></option>
-                                    <% } %>
+                                <% _.each(settings.buildTypes, function(buildType, index) { %>
+                                <% if (agent.indexOfBuildType === index) { %>
+                                <option selected><%= buildType.id %></option>
+                                <% } else { %>
+                                <option><%= buildType.id %></option>
+                                <% } %>
                                 <% }); %>
                             </select>
-
                         </td>
                     </tr>
                     <% }); %>
