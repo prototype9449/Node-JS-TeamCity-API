@@ -6,14 +6,14 @@ TeamcityController = Backbone.Router.extend({
     },
 
     routes: {
-        "": "mainPage",
+        "": "showMainPage",
         "/": "mainPage",
-        "/build/:id": "buildDetails",
-        "/agent/:id": "agentDetails",
-        "/settings": "settings"
+        "/build/:id": "showBuildDetailsPage",
+        "/agent/:id": "showAgentDetailsPage",
+        "/settings": "showSettingsPage"
     },
 
-    mainPage: function () {
+    showMainPage: function () {
         this.doBeforeShowingView();
         var model = {
             agentList: new ObjectsCollection([], {modelProvider: Agent}),
@@ -27,7 +27,7 @@ TeamcityController = Backbone.Router.extend({
         this.socket = socketManager.setMainSocket(model);
     },
 
-    settings: function () {
+    showSettingsPage: function () {
         var model = {
             settings: new AgentsSettings(),
             urlSettings : new UrlSettings(),
@@ -37,7 +37,7 @@ TeamcityController = Backbone.Router.extend({
         this.socket = socketManager.setSettingsSocket(model);
     },
 
-    buildDetails: function (stringId) {
+    showBuildDetailsPage: function (stringId) {
         this.doBeforeShowingView();
         var id = stringId.split(":")[1];
 
@@ -62,7 +62,7 @@ TeamcityController = Backbone.Router.extend({
     }
     ,
 
-    agentDetails: function (stringId) {
+    showAgentDetailsPage: function (stringId) {
         this.doBeforeShowingView();
         var id = stringId.split(":")[1];
 
