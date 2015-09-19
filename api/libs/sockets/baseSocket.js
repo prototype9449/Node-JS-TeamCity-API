@@ -1,13 +1,17 @@
 var config = require('./../config/generalOptionHelper');
 var launchBuild = require('../providers/generalBuildProvider').launchBuildConfiguration;
+var globalHelper = require('./../config/globalHelper');
 
-function BaseSocket(server, time, objectType) {
-    this.time = time;
+function BaseSocket(server, objectType, ioInstance) {
+    this.time = globalHelper.timeTickSendingData;
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
-    this.io = require('socket.io')(server, {path: '/' + objectType});//WebStorm
+    if (ioInstance) {
+        this.io = ioInstance;
+    } else {
+        this.io = require('socket.io')(server, {path: '/' + objectType});//WebStorm
+    }
 
-    this.objectType = objectType;
     this.clients = {};
 
     this.pushModels = function (models) {
