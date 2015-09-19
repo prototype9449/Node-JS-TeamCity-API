@@ -31,7 +31,7 @@ function CustomApp () {
     });
 
     this.app.post('/launchBuild', function (req, res) {
-        var agent = req.body.agent;
+        var agent = req.body;
         launchBuild(agent).then(function () {
             res.end('success');
         }, function () {

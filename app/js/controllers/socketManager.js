@@ -7,11 +7,13 @@ var sendLaunchBuild = function (agent) {
             dataType: 'application/json',
             response: 'text',
             success: function () {
-                agent.set({state: 'success'})
+                agent.set({state: 'success'});
+                setTimeout(function(){ agent.set({state: 'default'})}, 12000);
             },
 
             error: function () {
-                agent.set({state: 'failure'})
+                agent.set({state: 'failure'});
+                setTimeout(function(){ agent.set({state: 'default'})}, 12000);
             }
         });
     }
