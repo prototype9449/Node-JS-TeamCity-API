@@ -11,6 +11,14 @@ window.Agent = Backbone.Model.extend({
                 template: "briefAgent"
             }
         }
+    },
+    handleUrlChanging: function (agent) {
+        $.ajax({
+            type: "POST",
+            url: 'http://localhost:8080/launchBuild',
+            data: agent,
+            dataType: 'application/json'
+        });
     }
 });
 

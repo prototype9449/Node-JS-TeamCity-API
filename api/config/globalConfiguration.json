@@ -1,0 +1,22 @@
+{
+  "application": {
+    "port": 8080,
+    "timeTickPullingData": 4000,
+    "timeTickSendingData": 4000
+  },
+  "events": {
+    "eventNameConnection": "connection",
+    "eventNameDisconnection": "disconnect",
+    "eventNameSendingAgent": "agent",
+    "eventNameSendingAgentHistory": "agentHistory",
+    "eventNameSendingGeneralBuilds": "generalBuilds",
+    "eventNameSendingBuildHistory": "buildHistory",
+    "eventNameSendingSettings": "settings"
+  },
+  "wrappers": {
+    "wrapperBuildsName": "builds",
+    "wrapperAgentsName": "agents",
+    "wrapperBuildTypesName": "buildTypes"
+  },
+  "dateMast": "YYYY-MM-DD hh:mm:ss"
+}

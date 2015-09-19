@@ -4,7 +4,7 @@ var buildSocket = require('./buildSocket');
 var settingSocket = require('./settingSocket');
 
 function SocketRunner(server, storages, time) {
-    var timeTick = time || 4000;
+    var timeTick = time;
     this.main = new mainSocket(server, storages, timeTick, 'main');
     this.agent = new agentSocket(server, storages, timeTick, 'agent');
     this.build = new buildSocket(server, storages, timeTick, 'build');
