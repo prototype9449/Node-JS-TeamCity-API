@@ -14,9 +14,9 @@ window.NewConnectionPanelView = ObjectView.extend({
             object[value.name] = value.value;
         });
 
-        var handler = this.model.settings.handleConnectionSubmit;
+        var handler = this.model.handleConnectionSubmit;
         if (handler)
-            handler.call(this.model.settings, object);
+            handler.call(this.model, object);
     },
 
     render: function () {

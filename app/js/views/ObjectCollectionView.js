@@ -18,7 +18,12 @@ window.ObjectCollectionView = Backbone.View.extend({
     renderAdd: function (model) {
         if (this.panel)
             this.panel.show();
-        var item = new ObjectView({model: model, router: this.options.router});
+        var item;
+        if (this.objectViewProvider)
+            item = new this.objectViewProvider({model: model, router: this.options.router});
+        else
+            item = new ObjectView({model: model, router: this.options.router});
+
         $(this.$el).prepend(item.render().el);
     },
 

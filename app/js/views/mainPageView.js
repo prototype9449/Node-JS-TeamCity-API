@@ -14,7 +14,7 @@ window.MainPageView = Backbone.View.extend({
 
         $(this.el).html(this.template());
 
-        this.agentListView = new ObjectCollectionView({model: this.model.agentList, router: this.options.router});
+        this.agentListView = new ObjectCollectionView({model: this.model.agentList, router: this.options.router, objectViewProvider : AgentView});
         this.agentListView.$el = this.$('#agents-panel');
         this.agentListView.render();
 
