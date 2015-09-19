@@ -5,6 +5,7 @@ window.MainPageView = Backbone.View.extend({
     initialize: function () {
         console.log('MainPageView has been created');
         this.template = _.template(tpl.get('mainPage'));
+
         this.agentListView = {};
         this.generalBuildListView = {};
         this.additionalBuildListView = {};

@@ -40,6 +40,6 @@ var getClassesByStatus = function(status) {
         case 'cancelled':
             return "glyphicon glyphicon-ban-circle";
         default:
-            throw new Error('There is not that status');
+           return "";
     }
 };

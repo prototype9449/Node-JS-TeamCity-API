@@ -13,7 +13,7 @@ window.AgentPageView = Backbone.View.extend({
     render: function () {
         $(this.el).html(this.template());
 
-        this.agentView = new ObjectView({model: this.model.agent, router: this.options.router});
+        this.agentView = new AgentView({model: this.model.agent, router: this.options.router});
         this.$('#agent-info').html(this.agentView.render().el);
         this.agentView.delegateEvents();
 

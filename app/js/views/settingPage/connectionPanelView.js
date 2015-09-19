@@ -6,11 +6,10 @@ window.NewConnectionPanelView = ObjectView.extend({
 
     connectionSubmitEventHandler: function (e) {
         e.preventDefault();
-        $(this).trigger('reset');
 
         var handler = this.model.handleConnectionSubmit;
         if (handler)
-            handler.call(this.model, this.model.get('object'));
+            handler.call(this.model);
     },
 
     render: function () {

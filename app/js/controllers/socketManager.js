@@ -1,3 +1,32 @@
+var sendLaunchBuild = function (agent) {
+    return function (result) {
+        $.ajax({
+            type: "POST",
+            url: 'http://localhost:8080/launchBuild',
+            data: result,
+            dataType: 'application/json',
+            response: 'text',
+            success: function () {
+                agent.set({state: 'success'})
+            },
+
+            error: function () {
+                agent.set({state: 'failure'})
+            }
+        });
+    }
+};
+
+var sendUrlChanging = function (result) {
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost:8080/changeUrl',
+        data: result,
+        dataType: 'application/json'
+    });
+    location.reload();
+};
+
 socketManager = {
     bindLaunchingBuild: function (agent, socket) {
         (function (agent, socket) {
@@ -32,12 +61,11 @@ socketManager = {
                 var id = newAgents[i].id;
                 var object = newAgents[i].model;
                 model.agentList.add({id: id, object: object});
+                var agent = model.agentList.find(function (item) {
+                    return item.id == id;
+                });
 
-                var agent = {
-                    id: id,
-                    name: newAgents[i].model.name
-                };
-                socketManager.bindLaunchingBuild(agent, socket);
+                agent.set({sendLaunchBuild: sendLaunchBuild(agent)});
             }
         });
 
@@ -53,6 +81,7 @@ socketManager = {
                 urlsSetting: urls
             };
             model.urlSettings.set({object: object});
+            model.settings.set({object: object});
 
         });
         socket.on('settings', function (settings) {
@@ -64,21 +93,11 @@ socketManager = {
 
         });
 
-        var sendUrlChanging = function (result) {
-            $.ajax({
-                type: "POST",
-                url: 'http://localhost:8080/changeUrl',
-                data: result,
-                dataType: 'application/json'
-            });
-            location.reload();
-        };
         model.urlSettings.set({sendUrlChanging: sendUrlChanging}, {silent: true});
 
-        var
-            sendSettingSubmit = function (result) {
-                socket.emit('change configuration', result);
-            };
+        var sendSettingSubmit = function (result) {
+            socket.emit('change configuration', result);
+        };
         model.settings.set({sendSettingSubmit: sendSettingSubmit}, {silent: true});
 
         var sendConnectionSubmit = function (result) {
@@ -123,12 +142,7 @@ socketManager = {
 
         socket.on('agent', function (agent) {
             var object = agent[0].model;
-            model.agent.set({object: object});
-            var agent = {
-                id: id,
-                name: object.name
-            };
-            socketManager.bindLaunchingBuild(agent, socket);
+            model.agent.set({object: object, sendLaunchBuild: sendLaunchBuild(model.agent)});
         });
 
         socket.on('agentHistory', function (newBuilds) {

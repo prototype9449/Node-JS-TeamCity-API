@@ -48,7 +48,7 @@ app.post('/changeUrl', function(req, res) {
 var launchBuild = require('./libs/helpers/buildLaunchHelper');
 
 app.post('/launchBuild', function(req, res){
-    var agent = req.body.agent;
+    var agent = req.body;
     launchBuild(agent).then(function(){
         res.end('success');
     }, function(){

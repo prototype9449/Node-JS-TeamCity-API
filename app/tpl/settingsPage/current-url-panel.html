@@ -1,4 +1,4 @@
-<select class="selectpicker show-tick" name="url" id="url-selector" style="float: right">
+<select class="selectpicker show-tick" name="url" id="url-selector"  rv-value="currentUrl.option" style="float: right">
     <% _.each(urlsSetting, function(urlSetting) { %>
         <% if (urlSetting.isCurrent) { %>
             <option selected><%=urlSetting.url %> <%= urlSetting.userName %></option>

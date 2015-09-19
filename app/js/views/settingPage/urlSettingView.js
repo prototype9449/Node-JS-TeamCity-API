@@ -4,17 +4,13 @@ window.UrlSettingView = ObjectView.extend({
         "change #url-selector": "urlChangeEventHandler"
     },
 
-    urlChangeEventHandler: function (event) {
+    urlChangeEventHandler: function (e) {
+        e.preventDefault();
+
         var handler = this.model.handleUrlChanging;
 
-        var objects = event.target.value.split(' ');
-        var result = {
-            url: objects[0],
-            user: objects[1]
-        };
-
         if (handler)
-            handler.call(this.model, result);
+            handler.call(this.model);
     },
 
     renderChange: function () {
@@ -24,6 +20,7 @@ window.UrlSettingView = ObjectView.extend({
         $(this.el).html(html);
         $(this.el).find('.selectpicker').selectpicker();
 
+        this.rivets = rivets.bind($(this.el).find("#url-selector"), {currentUrl: this.model.get('currentUrl')});
 
         return this;
     }

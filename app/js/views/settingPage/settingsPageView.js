@@ -8,6 +8,8 @@ window.SettingsPageView = Backbone.View.extend({
     toggleState : function()
     {
         $(this.newConnectionView.el).parent().toggle();
+        $('#hide-settings-page-button-container-text-show').toggle();
+        $('#hide-settings-page-button-container-text-hide').toggle();
     },
 
     initialize: function () {

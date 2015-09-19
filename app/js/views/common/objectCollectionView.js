@@ -18,9 +18,10 @@ window.ObjectCollectionView = Backbone.View.extend({
     renderAdd: function (model) {
         if (this.panel)
             this.panel.show();
+
         var item;
-        if (this.objectViewProvider)
-            item = new this.objectViewProvider({model: model, router: this.options.router});
+        if (this.options.objectViewProvider)
+            item = new this.options.objectViewProvider({model: model, router: this.options.router});
         else
             item = new ObjectView({model: model, router: this.options.router});
 
@@ -29,7 +30,7 @@ window.ObjectCollectionView = Backbone.View.extend({
 
     render: function () {
         _.each(this.model.models, function (model) {
-            this.add(model);
+            this.renderAdd(model);
         }, this);
 
         return this;
