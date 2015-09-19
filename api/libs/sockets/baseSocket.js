@@ -12,7 +12,6 @@ function BaseSocket(server, objectType, ioInstance) {
         this.io = require('socket.io')(server, {path: '/' + objectType});//WebStorm
     }
 
-    this.objectType = objectType;
     this.clients = {};
 
     this.pushModels = function (models) {

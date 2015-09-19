@@ -1,10 +1,10 @@
 var baseSocket = require('./baseSocket');
 var socketPathHelper= require('./../config/socketPathHelper');
 
-function SocketManager(server, storagesDetail, ioInstance) {
+function SocketManager(server, storageDetails, ioInstance) {
     this.__proto__ = new baseSocket(server, socketPathHelper.buildPath, ioInstance);
-    this.generalBuildStorage = storagesDetail.generalBuildStorage.storage;
-    this.agentStorage = storagesDetail.agentStorage.storage;
+    this.generalBuildStorage = storageDetails.generalBuildStorage.storage;
+    this.agentStorage = storageDetails.agentStorage.storage;
     var self = this;
 
     this.sendInfo = function () {

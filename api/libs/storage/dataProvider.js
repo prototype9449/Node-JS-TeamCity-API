@@ -1,7 +1,9 @@
-function DataProvider(storages, time) {
+var globalHelper = require('./../config/globalHelper');
+
+function DataProvider(storages) {
     this.storages = storages;
     this.interval = {};
-    this.time = time || 5000;
+    this.time = globalHelper.timeTickPullingData;
 
     this.saveElements = function (storageDetails) {
         var connection = storageDetails.getOptions();
