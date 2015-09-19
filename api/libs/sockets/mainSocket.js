@@ -1,8 +1,9 @@
 var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
+var socketPathHelper= require('./../config/socketPathHelper');
 
-function MainSocket(server, storagesDetail, time, objectType) {
-    this.__proto__ = new baseSocket(server, time, objectType);
+function MainSocket(server, storagesDetail, ioInstance) {
+    this.__proto__ = new baseSocket(server, socketPathHelper.mainPath, ioInstance);
     this.generalBuildStorage = storagesDetail.generalBuildStorage.storage;
     this.additionalBuildStorage = storagesDetail.additionalBuildStorage.storage;
     this.agentStorage = storagesDetail.agentStorage.storage;

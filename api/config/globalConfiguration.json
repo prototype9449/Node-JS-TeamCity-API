@@ -18,5 +18,11 @@
     "wrapperAgentsName": "agents",
     "wrapperBuildTypesName": "buildTypes"
   },
+  "socketPaths": {
+    "buildPath": "build",
+    "agentPath": "agent",
+    "mainPath": "main",
+    "settingsPath": "settings"
+  },
   "dateMast": "YYYY-MM-DD hh:mm:ss"
 }

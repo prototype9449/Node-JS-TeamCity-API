@@ -1,7 +1,8 @@
 var baseSocket = require('./baseSocket');
+var socketPathHelper= require('./../config/socketPathHelper');
 
-function SocketManager(server, storagesDetail, time, objectType) {
-    this.__proto__ = new baseSocket(server, time, objectType);
+function SocketManager(server, storagesDetail, ioInstance) {
+    this.__proto__ = new baseSocket(server, socketPathHelper.buildPath, ioInstance);
     this.generalBuildStorage = storagesDetail.generalBuildStorage.storage;
     this.agentStorage = storagesDetail.agentStorage.storage;
     var self = this;

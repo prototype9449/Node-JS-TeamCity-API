@@ -3,25 +3,27 @@ var agentSocket = require('./agentSocket');
 var buildSocket = require('./buildSocket');
 var settingSocket = require('./settingSocket');
 
-function SocketRunner(server, storages, time) {
-    var timeTick = time;
-    this.main = new mainSocket(server, storages, timeTick, 'main');
-    this.agent = new agentSocket(server, storages, timeTick, 'agent');
-    this.build = new buildSocket(server, storages, timeTick, 'build');
-    this.setting = new settingSocket(server, storages, timeTick, 'settings');
-
-    this.start = function() {
-        this.main.start();
-        this.agent.start();
-        this.build.start();
-        this.setting.start();
+function SocketRunner(server) {
+    this.ioInstances = {};
+    this.server = server;
+    var self = this;
+    this.start = function (storages) {
+        this.sockets = {
+            main: new mainSocket(self.server, storages, this.ioInstances['main']),
+            agent: new agentSocket(self.server, storages, this.ioInstances['agent']),
+            build: new buildSocket(self.server, storages, this.ioInstances['build']),
+            setting: new settingSocket(self.server, storages, this.ioInstances['setting'])
+        };
+        for (var socket in this.sockets) {
+            this.sockets[socket].start();
+        }
     };
 
-    this.stop = function(){
-        this.main.stop();
-        this.agent.stop();
-        this.build.stop();
-        this.setting.stop();
+    this.stop = function () {
+        for (var socket in this.sockets) {
+            this.sockets[socket].stop();
+            this.ioInstances[socket] = this.sockets[socket].io;
+        }
     }
 }
 

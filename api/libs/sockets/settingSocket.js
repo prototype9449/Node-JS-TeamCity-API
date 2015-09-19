@@ -2,9 +2,10 @@ var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
 var ConfigManager = require('./../config/configManager');
 var configManager = new ConfigManager();
+var socketPathHelper= require('./../config/socketPathHelper');
 
-function SettingSocket(server, storagesDetail, time, objectType) {
-    this.__proto__ = new baseSocket(server, time, objectType);
+function SettingSocket(server, storagesDetail, ioInstance) {
+    this.__proto__ = new baseSocket(server, socketPathHelper.settingsPath, ioInstance);
     this.buildTypeStorage = storagesDetail.buildTypeStorage.storage;
     this.agentStorage = storagesDetail.agentStorage.storage;
 
