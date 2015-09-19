@@ -4,7 +4,7 @@
       "url": "http://localhost:8111",
       "method" : "GET",
       "auth": {
-        "user": "Unknow",
+        "user": "prototype9449",
         "pass": "termit"
       },
       "headers": {

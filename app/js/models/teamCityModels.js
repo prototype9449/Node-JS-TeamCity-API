@@ -90,7 +90,7 @@ window.UrlSettings = Backbone.Model.extend({
                 template: "currentUrl"
             }
         },
-        sendUrlChanging : ""
+        sendUrlChanging: ""
     },
     handleUrlChanging: function (selectedUrl) {
         var urlsSettins = this.get('object').urlsSetting;
@@ -119,7 +119,7 @@ window.AgentsSettings = Backbone.Model.extend({
                 template: "SettingsPanel"
             }
         },
-        sendSettingSubmit : ""
+        sendSettingSubmit: ""
     },
 
     handleSettingSubmit: function (data) {
@@ -133,7 +133,7 @@ window.NewConnectionSetting = Backbone.Model.extend({
     defaults: {
         needToUpdate: false,
         id: "0",
-        object: "",
+        object: {url: "", user: "", pass: ""},
         options: {
             path: "/settings",
             view: {
@@ -142,7 +142,7 @@ window.NewConnectionSetting = Backbone.Model.extend({
                 template: "newConnection"
             }
         },
-        sendConnectionSubmit : ""
+        sendConnectionSubmit: ""
     },
     handleConnectionSubmit: function (data) {
         var sendConnectionSubmit = this.get('sendConnectionSubmit');

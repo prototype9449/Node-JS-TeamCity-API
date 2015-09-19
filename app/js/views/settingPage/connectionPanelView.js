@@ -8,15 +8,9 @@ window.NewConnectionPanelView = ObjectView.extend({
         e.preventDefault();
         $(this).trigger('reset');
 
-        var object = {};
-        var arrayData = $(this.el).find('#connection-form').serializeArray();
-        arrayData.map(function(value){
-            object[value.name] = value.value;
-        });
-
-        var handler = this.model.settings.handleConnectionSubmit;
+        var handler = this.model.handleConnectionSubmit;
         if (handler)
-            handler.call(this.model.settings, object);
+            handler.call(this.model, this.model.get('object'));
     },
 
     render: function () {
@@ -24,6 +18,7 @@ window.NewConnectionPanelView = ObjectView.extend({
         if (!html)  return this;
 
         $(this.el).html(html);
+        this.rivets = rivets.bind($(this.el).find("#connection-form"), {object: this.model.get('object')});
 
         return this;
     }
