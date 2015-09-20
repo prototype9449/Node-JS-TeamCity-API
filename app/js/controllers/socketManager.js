@@ -52,14 +52,6 @@ var sendNewAuthentication = function(result){
 };
 
 socketManager = {
-    bindLaunchingBuild: function (agent, socket) {
-        (function (agent, socket) {
-            $('#launchBuildButton-' + agent.id).click(function () {
-                socket.emit('launchBuild', agent);
-            });
-        })(agent, socket);
-    },
-
     setMainSocket: function (model) {
 
         var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});

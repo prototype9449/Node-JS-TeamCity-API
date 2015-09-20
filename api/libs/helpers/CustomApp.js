@@ -23,18 +23,22 @@ function CustomApp() {
 
 
     function getError(responce) {
-        return function() {
+        return function () {
             responce.set({
-                'Status': '409'
-            });
+                    'Content-Type': 'text',
+                    'Access-Control-Allow-Origin': '*',
+                    'Status': '409'
+                });
             responce.send('error');
         }
     }
 
     function getSuccess(responce) {
-        return function() {
+        return function () {
             responce.set({
-                'Status': '202'
+                'Status': '202',
+                'Content-Type': 'text',
+                'Access-Control-Allow-Origin': '*'
             });
             responce.send('success');
         }
@@ -50,9 +54,6 @@ function CustomApp() {
     });
 
     this.app.post('/changeConfiguration', function (req, res) {
-        res.set({
-            'Content-Type': 'text'
-        });
         configManager.changeTeamCity(req.body).then(getSuccess(res), getError(res));
     });
 
@@ -64,17 +65,11 @@ function CustomApp() {
                 pass: req.body.pass
             }
         };
-        res.set({
-            'Content-Type': 'text'
-        });
         configManager.addNewTeamCity(options).then(getSuccess(res), getError(res));
     });
 
     this.app.post('/launchBuild', function (req, res) {
         var agent = req.body;
-        res.set({
-            'Content-Type': 'text'
-        });
         launchBuild(agent).then(getSuccess(res), getError(res));
     });
 
