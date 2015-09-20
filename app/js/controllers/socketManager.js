@@ -4,17 +4,21 @@ var sendLaunchBuild = function (agent) {
             type: "POST",
             url: 'http://localhost:8080/launchBuild',
             data: result,
-            dataType: 'application/json',
-            response: 'text',
-            success: function () {
+            dataType: 'text'
+        }).done(function (data) {
+            if (data === 'success') {
                 agent.set({state: 'success'});
-                setTimeout(function(){ agent.set({state: 'default'})}, 12000);
-            },
-
-            error: function () {
+            } else {
                 agent.set({state: 'failure'});
-                setTimeout(function(){ agent.set({state: 'default'})}, 12000);
             }
+            setTimeout(function () {
+                agent.set({state: 'default'})
+            }, 12000);
+        }).fail(function (data) {
+            agent.set({state: 'error'});
+            setTimeout(function () {
+                agent.set({state: 'default'})
+            }, 12000);
         });
     }
 };

@@ -33,9 +33,19 @@ function CustomApp () {
     this.app.post('/launchBuild', function (req, res) {
         var agent = req.body;
         launchBuild(agent).then(function () {
-            res.end('success');
+            res.set({
+                'Status': '200',
+                'Access-Control-Allow-Origin' : '*',
+                'Content-Type' : 'text'
+            });
+            res.send('success');
         }, function () {
-            res.end('error');
+            res.set({
+                'Status': '404',
+                'Access-Control-Allow-Origin' : '*',
+                'Content-Type' : 'text'
+            });
+            res.send('error');
         });
     });
 
