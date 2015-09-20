@@ -96,20 +96,7 @@ function SettingSocket(server, storagesDetail, ioInstance) {
     };
 
     this.createClient = function (socket) {
-        socket.on('new authentication', function (data) {
-            var options = {
-                url: data.url,
-                auth: {
-                    user: data.user,
-                    pass: data.pass
-                }
-            };
-            configManager.addNewTeamCity(options)
-        });
 
-        socket.on('change configuration', function (data) {
-            configManager.changeTeamCity(data);
-        });
 
         this.clients[socket.id] = {
             socket: socket

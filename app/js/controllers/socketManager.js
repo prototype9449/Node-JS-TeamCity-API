@@ -33,6 +33,24 @@ var sendUrlChanging = function (result) {
     location.reload();
 };
 
+var sendConfigurationChanging = function(result){
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost:8080/changeConfiguration',
+        data: result,
+        dataType: 'application/json'
+    });
+};
+
+var sendNewAuthentication = function(result){
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost:8080/newAuthentication',
+        data: result,
+        dataType: 'application/json'
+    });
+};
+
 socketManager = {
     bindLaunchingBuild: function (agent, socket) {
         (function (agent, socket) {
@@ -100,16 +118,8 @@ socketManager = {
         });
 
         model.urlSettings.set({sendUrlChanging: sendUrlChanging}, {silent: true});
-
-        var sendSettingSubmit = function (result) {
-            socket.emit('change configuration', result);
-        };
-        model.settings.set({sendSettingSubmit: sendSettingSubmit}, {silent: true});
-
-        var sendConnectionSubmit = function (result) {
-            socket.emit('new authentication', result);
-        };
-        model.connectionSetting.set({sendConnectionSubmit: sendConnectionSubmit}, {silent: true});
+        model.settings.set({sendSettingSubmit: sendConfigurationChanging}, {silent: true});
+        model.connectionSetting.set({sendConnectionSubmit: sendNewAuthentication }, {silent: true});
 
         return socket;
     },
