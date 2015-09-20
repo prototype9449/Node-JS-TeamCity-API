@@ -23,7 +23,7 @@ TeamcityController = Backbone.Router.extend({
 
         this.mainModel = model;
 
-        this.showView('#content', new MainPageView({model: model, router: this}));
+        this.showView('#content', new MainPageView({model: model}));
         this.socket = socketManager.setMainSocket(model);
     },
 
@@ -34,7 +34,7 @@ TeamcityController = Backbone.Router.extend({
             connectionSetting : new NewConnectionSetting()
         };
 
-        this.showView('#content', new SettingsPageView({model: model, router: this}));
+        this.showView('#content', new SettingsPageView({model: model}));
         this.socket = socketManager.setSettingsSocket(model);
     },
 
@@ -57,7 +57,7 @@ TeamcityController = Backbone.Router.extend({
             buildList: new ObjectsCollection([], {modelProvider: BuildHistory})
         };
 
-        this.showView('#content', new BuildPageView({model: model, router: this}));
+        this.showView('#content', new BuildPageView({model: model}));
         this.socket = socketManager.setBuildSocket(model, id);
 
     }
@@ -82,7 +82,7 @@ TeamcityController = Backbone.Router.extend({
             buildList: new ObjectsCollection([], {modelProvider: AgentHistory})
         };
 
-        this.showView('#content', new AgentPageView({model: model, router: this}));
+        this.showView('#content', new AgentPageView({model: model}));
         this.socket = socketManager.setAgentSocket(model, id);
     }
     ,

@@ -15,15 +15,15 @@ window.MainPageView = Backbone.View.extend({
 
         $(this.el).html(this.template());
 
-        this.agentListView = new ObjectCollectionView({model: this.model.agentList, router: this.options.router, objectViewProvider : AgentView});
+        this.agentListView = new ObjectCollectionView({model: this.model.agentList, objectViewProvider : AgentView});
         this.agentListView.$el = this.$('#agents-panel');
         this.agentListView.render();
 
-        this.generalBuildListView = new ObjectCollectionView({model: this.model.generalBuildList, router: this.options.router});
+        this.generalBuildListView = new ObjectCollectionView({model: this.model.generalBuildList});
         this.generalBuildListView.$el = this.$('#general-builds-panel');
         this.generalBuildListView.render();
 
-        this.additionalBuildListView = new ObjectCollectionView({model: this.model.additionalBuildList, router: this.options.router});
+        this.additionalBuildListView = new ObjectCollectionView({model: this.model.additionalBuildList});
         this.additionalBuildListView.$el = this.$('#additional-builds-panel');
         this.additionalBuildListView.render();
         this.additionalBuildListView.panel = this.$('#additional-build-panel');

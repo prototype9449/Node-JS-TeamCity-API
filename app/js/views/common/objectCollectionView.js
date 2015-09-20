@@ -21,9 +21,9 @@ window.ObjectCollectionView = Backbone.View.extend({
 
         var item;
         if (this.options.objectViewProvider)
-            item = new this.options.objectViewProvider({model: model, router: this.options.router});
+            item = new this.options.objectViewProvider({model: model});
         else
-            item = new ObjectView({model: model, router: this.options.router});
+            item = new ObjectView({model: model});
 
         $(this.$el).prepend(item.render().el);
     },

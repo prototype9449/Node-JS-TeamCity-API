@@ -15,11 +15,11 @@ window.BuildPageView = Backbone.View.extend({
 
         $(this.el).html(this.template());
 
-        this.buildView = new ObjectView({model : this.model.build, router: this.options.router});
+        this.buildView = new ObjectView({model : this.model.build});
         this.$('#build-info').html(this.buildView.render().el);
         this.buildView.delegateEvents();
 
-        this.buildHistoryView =new ObjectCollectionView({model: this.model.buildList,router: this.options.router});
+        this.buildHistoryView =new ObjectCollectionView({model: this.model.buildList});
         this.buildHistoryView.$el = this.$('#history-table-panel');
         this.buildHistoryView.render();
 

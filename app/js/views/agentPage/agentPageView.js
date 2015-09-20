@@ -13,11 +13,11 @@ window.AgentPageView = Backbone.View.extend({
     render: function () {
         $(this.el).html(this.template());
 
-        this.agentView = new AgentView({model: this.model.agent, router: this.options.router});
+        this.agentView = new AgentView({model: this.model.agent});
         this.$('#agent-info').html(this.agentView.render().el);
         this.agentView.delegateEvents();
 
-        this.buildHistoryView = new ObjectCollectionView({model: this.model.buildList, router: this.options.router});
+        this.buildHistoryView = new ObjectCollectionView({model: this.model.buildList});
         this.buildHistoryView.$el = this.$('#history-table-panel');
         this.buildHistoryView.render();
 
