@@ -13,7 +13,8 @@ window.NewConnectionPanelView = ObjectView.extend({
     },
 
     render: function () {
-        var html = this.template();
+        var model = this.model.getModel();
+        var html = this.template(model);
         if (!html)  return this;
 
         $(this.el).html(html);

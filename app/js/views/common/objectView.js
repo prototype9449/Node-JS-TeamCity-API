@@ -31,7 +31,7 @@ window.ObjectView = Backbone.View.extend({
     },
 
     render: function () {
-        var model = this.model.get("object");
+        var model = this.model.getModel();
         var html = "";
         if (model)
             html = this.template(model);
@@ -46,7 +46,8 @@ window.ObjectView = Backbone.View.extend({
 
     renderChange: function () {
         var needToUpdate = this.model.get('options')["view"]['needToUpdate'];
-        var html = this.template(this.model.get("object"));
+        var model = this.model.getModel();
+        var html = this.template(model);
         if (!html)  return this;
 
         if (needToUpdate) {

@@ -14,7 +14,8 @@ window.UrlSettingView = ObjectView.extend({
     },
 
     renderChange: function () {
-        var html = this.template(this.model.get("object"));
+        var model = this.model.getModel();
+        var html = this.template(model);
         if (!html)  return this;
 
         $(this.el).html(html);

@@ -10,6 +10,9 @@ window.FullBuild = Backbone.Model.extend({
                 template: "fullBuild"
             }
         }
+    },
+    getModel: function () {
+        return this.get("object");
     }
 });
 
@@ -25,5 +28,8 @@ window.BuildHistory = Backbone.Model.extend({
                 template: "buildHistory"
             }
         }
+    },
+    getModel: function () {
+        return this.get("object");
     }
 });

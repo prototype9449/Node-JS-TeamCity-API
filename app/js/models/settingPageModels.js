@@ -25,6 +25,9 @@ window.UrlSettings = Backbone.Model.extend({
         var sendUrlChanging = this.get('sendUrlChanging');
         if (sendUrlChanging)
             sendUrlChanging(result);
+    },
+    getModel: function () {
+        return this.get("object");
     }
 });
 
@@ -47,10 +50,13 @@ window.AgentsSettings = Backbone.Model.extend({
         },
         sendSettingSubmit: ""
     },
+    getModel: function () {
+        return this.get("object");
+    },
     set: function (attributes, options) {
         if (attributes.object && attributes.object.urlsSetting) {
             for (var i in attributes.object.urlsSetting) {
-                if(attributes.object.urlsSetting[i].isCurrent) {
+                if (attributes.object.urlsSetting[i].isCurrent) {
                     this.get('currentSetting').url = attributes.object.urlsSetting[i].url;
                     this.get('currentSetting').userName = attributes.object.urlsSetting[i].userName;
                 }
@@ -74,10 +80,9 @@ window.AgentsSettings = Backbone.Model.extend({
         }
     },
 
-
     handleSettingSubmit: function () {
         var data = this.get('currentSetting');
-        var result = {url:data.url, userName : data.userName, agentFixBuilds : []};
+        var result = {url: data.url, userName: data.userName, agentFixBuilds: []};
         for (var i in data.agentFixBuilds) {
             result.agentFixBuilds[result.agentFixBuilds.length] = {};
             result.agentFixBuilds[result.agentFixBuilds.length - 1].agentName = i;
@@ -104,6 +109,10 @@ window.NewConnectionSetting = Backbone.Model.extend({
         },
         sendConnectionSubmit: ""
     },
+    getModel: function () {
+        return this.get("object");
+    },
+
     handleConnectionSubmit: function () {
         var data = this.get('object');
 
