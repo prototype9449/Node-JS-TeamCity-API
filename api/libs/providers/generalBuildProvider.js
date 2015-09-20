@@ -2,8 +2,9 @@ var requestp = require('request-promise');
 var Promise = require('promise');
 var config = require('./../config/generalOptionHelper');
 require('date-format-lite');
+var globalHelper = require('./../config/globalHelper');
 
-Date.masks.default = 'YYYY-MM-DD hh:mm:ss';
+Date.masks.default = globalHelper.dateMask;
 
 var getDateFromString = function (strDate) {
     if (!strDate) return undefined;

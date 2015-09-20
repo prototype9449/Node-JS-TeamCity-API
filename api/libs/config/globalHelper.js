@@ -24,4 +24,10 @@ Object.defineProperty(globalHelper, 'timeTickSendingData', {
     }
 });
 
+Object.defineProperty(globalHelper, 'dateMask', {
+    get: function() {
+        return clone(config.globalOptions().get("application").dateMask);
+    }
+});
+
 module.exports = globalHelper;
