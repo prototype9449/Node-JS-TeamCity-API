@@ -1,55 +1,31 @@
-var sendLaunchBuild = function (agent) {
+var sendPostRequest = function (model, url, isReload) {
     return function (result) {
         $.ajax({
             type: "POST",
-            url: 'http://localhost:8080/launchBuild',
+            url: url,
             data: result,
             dataType: 'text'
         }).done(function (data) {
             if (data === 'success') {
-                agent.set({state: 'success'});
+                model.set({state: 'success'});
             } else {
-                agent.set({state: 'failure'});
+                model.set({state: 'failure'});
             }
             setTimeout(function () {
-                agent.set({state: 'default'})
-            }, 12000);
+                model.set({state: 'default'})
+            }, 7000);
         }).fail(function (data) {
-            agent.set({state: 'error'});
+            model.set({state: 'error'});
             setTimeout(function () {
-                agent.set({state: 'default'})
-            }, 12000);
+                model.set({state: 'default'})
+            }, 7000);
         });
+        if(isReload)
+            location.reload();
+
     }
 };
 
-var sendUrlChanging = function (result) {
-    $.ajax({
-        type: "POST",
-        url: 'http://localhost:8080/changeUrl',
-        data: result,
-        dataType: 'application/json'
-    });
-    location.reload();
-};
-
-var sendConfigurationChanging = function(result){
-    $.ajax({
-        type: "POST",
-        url: 'http://localhost:8080/changeConfiguration',
-        data: result,
-        dataType: 'application/json'
-    });
-};
-
-var sendNewAuthentication = function(result){
-    $.ajax({
-        type: "POST",
-        url: 'http://localhost:8080/newAuthentication',
-        data: result,
-        dataType: 'application/json'
-    });
-};
 
 socketManager = {
     setMainSocket: function (model) {
@@ -81,7 +57,7 @@ socketManager = {
                     return item.id == id;
                 });
 
-                agent.set({sendLaunchBuild: sendLaunchBuild(agent)});
+                agent.set({sendLaunchBuild: sendPostRequest(agent, 'http://localhost:8080/launchBuild')});
             }
         });
 
@@ -109,9 +85,9 @@ socketManager = {
 
         });
 
-        model.urlSettings.set({sendUrlChanging: sendUrlChanging}, {silent: true});
-        model.settings.set({sendSettingSubmit: sendConfigurationChanging}, {silent: true});
-        model.connectionSetting.set({sendConnectionSubmit: sendNewAuthentication }, {silent: true});
+        model.urlSettings.set({sendUrlChanging: sendPostRequest( model.urlSettings, 'http://localhost:8080/changeUrl',  true)}, {silent: true});
+        model.settings.set({sendSettingSubmit: sendPostRequest( model.settings, 'http://localhost:8080/changeConfiguration')}, {silent: true});
+        model.connectionSetting.set({sendConnectionSubmit: sendPostRequest( model.connectionSetting, 'http://localhost:8080/newAuthentication') }, {silent: true});
 
         return socket;
     },

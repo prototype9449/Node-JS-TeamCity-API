@@ -43,3 +43,31 @@ var getClassesByStatus = function(status) {
            return "";
     }
 };
+
+
+var getNewConnectionStatus = function(status) {
+    switch (status) {
+        case 'running':
+            return "Option sending!";
+        case 'failure':
+            return "Wrong!";
+        case 'success':
+            return "Option sent successfully!";
+        default:
+            return "";
+    }
+};
+
+var getNewConnectionClass = function(status) {
+    switch (status) {
+        case 'running':
+            return "status-panel-running";
+        case 'failure':
+            return "status-panel-error";
+        case 'success':
+            return "status-panel-success";
+        default:
+            return "";
+    }
+};
+

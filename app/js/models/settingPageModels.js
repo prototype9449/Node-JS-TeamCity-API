@@ -2,6 +2,7 @@ window.UrlSettings = Backbone.Model.extend({
     defaults: {
         id: "0",
         object: "",
+        state: "default",
         options: {
             view: {
                 needToUpdate: false,
@@ -22,12 +23,16 @@ window.UrlSettings = Backbone.Model.extend({
             user: objects[1]
         };
 
+        this.set({state: 'running'});
         var sendUrlChanging = this.get('sendUrlChanging');
         if (sendUrlChanging)
             sendUrlChanging(result);
     },
+
     getModel: function () {
-        return this.get("object");
+        var model = this.get("object");
+        model.state = this.get("state");
+        return model;
     }
 });
 
@@ -36,6 +41,7 @@ window.AgentsSettings = Backbone.Model.extend({
 
         id: "0",
         object: "",
+        state: "default",
         options: {
             view: {
                 needToUpdate: false,
@@ -51,7 +57,9 @@ window.AgentsSettings = Backbone.Model.extend({
         sendSettingSubmit: ""
     },
     getModel: function () {
-        return this.get("object");
+        var model = this.get("object");
+        model.state = this.get("state");
+        return model;
     },
     set: function (attributes, options) {
         if (attributes.object && attributes.object.urlsSetting) {
@@ -89,6 +97,7 @@ window.AgentsSettings = Backbone.Model.extend({
             result.agentFixBuilds[result.agentFixBuilds.length - 1].buildTypeId = data.agentFixBuilds[i];
         }
 
+        this.set({state: 'running'});
         var sendSettingSubmit = this.get('sendSettingSubmit');
         if (sendSettingSubmit)
             sendSettingSubmit(result);
@@ -99,6 +108,7 @@ window.NewConnectionSetting = Backbone.Model.extend({
     defaults: {
         id: "0",
         object: {url: "", user: "", pass: ""},
+        state: "default",
         options: {
             view: {
                 needToUpdate: false,
@@ -110,12 +120,15 @@ window.NewConnectionSetting = Backbone.Model.extend({
         sendConnectionSubmit: ""
     },
     getModel: function () {
-        return this.get("object");
+        var model = this.get("object");
+        model.state = this.get("state");
+        return model;
     },
 
     handleConnectionSubmit: function () {
         var data = this.get('object');
 
+        this.set({state: 'running'});
         var sendConnectionSubmit = this.get('sendConnectionSubmit');
         if (sendConnectionSubmit)
             sendConnectionSubmit(data);

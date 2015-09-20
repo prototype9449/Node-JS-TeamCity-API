@@ -2,7 +2,7 @@ window.FullAgent = Backbone.Model.extend({
     defaults: {
         id: "0",
         object: "",
-        state: "",
+        state: "default",
         options: {
             view: {
                 needToUpdate: false,
