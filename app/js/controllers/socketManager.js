@@ -20,14 +20,14 @@ var sendPostRequest = function (model, url, isReload) {
                 model.set({state: 'default'})
             }, 7000);
         });
-        if(isReload)
+        if (isReload)
             location.reload();
 
     }
 };
 
 
-socketManager = {
+window.socketManager = {
     setMainSocket: function (model) {
 
         var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});
@@ -85,9 +85,9 @@ socketManager = {
 
         });
 
-        model.urlSettings.set({sendUrlChanging: sendPostRequest( model.urlSettings, 'http://localhost:8080/changeUrl',  true)}, {silent: true});
-        model.settings.set({sendSettingSubmit: sendPostRequest( model.settings, 'http://localhost:8080/changeConfiguration')}, {silent: true});
-        model.connectionSetting.set({sendConnectionSubmit: sendPostRequest( model.connectionSetting, 'http://localhost:8080/newAuthentication') }, {silent: true});
+        model.urlSettings.set({sendUrlChanging: sendPostRequest(model.urlSettings, 'http://localhost:8080/changeUrl', true)}, {silent: true});
+        model.settings.set({sendSettingSubmit: sendPostRequest(model.settings, 'http://localhost:8080/changeConfiguration')}, {silent: true});
+        model.connectionSetting.set({sendConnectionSubmit: sendPostRequest(model.connectionSetting, 'http://localhost:8080/newAuthentication')}, {silent: true});
 
         return socket;
     },
@@ -126,7 +126,10 @@ socketManager = {
 
         socket.on('agent', function (agent) {
             var object = agent[0].model;
-            model.agent.set({object: object, sendLaunchBuild: sendLaunchBuild(model.agent)});
+            model.agent.set({
+                object: object,
+                sendLaunchBuild: sendPostRequest(agent, 'http://localhost:8080/launchBuild')
+            });
         });
 
         socket.on('agentHistory', function (newBuilds) {
