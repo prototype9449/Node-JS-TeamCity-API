@@ -48,6 +48,16 @@ function SocketManager(server, storageDetails, ioInstance) {
         client.historyHelper = new this.objectHelper('builds', client.getBuildHistoryById);
         this.clients[socket.id] = client;
     };
+
+    this.stop = function () {
+        clearInterval(this.interval);
+        this.generalBuildStorage.clear();
+        this.agentStorage.clear();
+        for (var id in this.clients) {
+            this.clients[id].generalBuildHelper.clear();
+            this.clients[id].historyHelper.clear();
+        }
+    };
 }
 
 module.exports = SocketManager;

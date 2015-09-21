@@ -48,6 +48,11 @@ var ObjectStorage = function (name) {
 
         return result;
     };
+
+    this.clear = function()
+    {
+        this.objects = [];
+    }
 };
 
 module.exports.ObjectStorage = ObjectStorage;

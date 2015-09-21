@@ -55,6 +55,15 @@ function MainSocket(server, storageDetails, ioInstance) {
             socket: socket
         };
     };
+    this.stop = function () {
+        clearInterval(this.interval);
+        this.generalBuildStorage.clear();
+        this.additionalBuildStorage.clear();
+        this.agentStorage.clear();
+        this.generalBuildHelper.clear();
+        this.additionalBuildHelper.clear();
+        this.agentHelper.clear();
+    };
 }
 
 module.exports = MainSocket;

@@ -51,6 +51,16 @@ function AgentSocket(server, storagesDetail, ioInstance) {
 
         this.clients[socket.id] = client;
     };
+
+    this.stop = function () {
+        clearInterval(this.interval);
+        this.generalBuildStorage.clear();
+        this.agentStorage.clear();
+        for (var id in this.clients) {
+            this.clients[id].agentHelper.clear();
+            this.clients[id].historyHelper.clear();
+        }
+    };
 }
 
 module.exports = AgentSocket;

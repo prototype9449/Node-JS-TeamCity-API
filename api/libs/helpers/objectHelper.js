@@ -75,6 +75,12 @@ function ObjectHelper(name, getObjects) {
 
         callback(newObjects);
     };
+
+    this.clear = function()
+    {
+        this.count = 0;
+        this.objectsFromMemory = null;
+    }
 }
 
 module.exports = ObjectHelper;

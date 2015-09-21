@@ -11,6 +11,7 @@ function SettingSocket(server, storagesDetail, ioInstance) {
 
     this.buildTypeHelper = new this.objectHelper('buildTypes', this.buildTypeStorage.getBuildTypes);
     this.agentHelper = new this.objectHelper('agents', this.agentStorage.getAgents);
+   // this.urlsHelper = new this.objectHelper('agents', getUrls);
 
     var self = this;
 
@@ -62,7 +63,8 @@ function SettingSocket(server, storagesDetail, ioInstance) {
         });
     }.bind(this);
 
-    var sendUrls = function () {
+    var getUrls = function()
+    {
         var otherSettings = config.getOtherOptions();
         var currentConfig = {
             url: config.getGeneralOptions().connection.url,
@@ -80,7 +82,12 @@ function SettingSocket(server, storagesDetail, ioInstance) {
             };
         });
 
-        this.sendDataToAllClients('urls', allUrls);
+        return allUrls;
+    };
+    var sendUrls = function () {
+
+
+        this.sendDataToAllClients('urls', getUrls());
 
     }.bind(this);
 
@@ -104,6 +111,13 @@ function SettingSocket(server, storagesDetail, ioInstance) {
         this.clients[socket.id] = {
             socket: socket
         };
+    };
+    this.stop = function () {
+        clearInterval(this.interval);
+        this.buildTypeStorage.clear();
+        this.agentStorage.clear();
+        this.buildTypeHelper.clear();
+        this.agentHelper.clear();
     };
 }
 

@@ -31,15 +31,17 @@ function BaseSocket(server, objectType, ioInstance) {
         }
     };
 
-    this.start = function () {
+    var setTimer = function () {
         var self = this;
+        console.log("timer started");
+        this.interval = setInterval(function () {
+            self.sendInfo();
+        }, self.time);
+    };
 
-        var setTimer = function () {
-            console.log("timer started");
-            this.interval = setInterval(function () {
-                self.sendInfo();
-            }, self.time);
-        };
+
+    this.init = function () {
+        var self = this;
 
         this.io.on('connection', function (socket) {
             self.createClient(socket);
@@ -49,10 +51,14 @@ function BaseSocket(server, objectType, ioInstance) {
 
             socket.on('disconnect', function () {
                 delete self.clients[socket.id];
-                self.stop();
             });
             setTimer.apply(self);
         });
+    };
+
+    this.start = function()
+    {
+        setTimer.apply(self);
     };
 
     this.stop = function () {

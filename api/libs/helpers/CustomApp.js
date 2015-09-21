@@ -73,10 +73,17 @@ function CustomApp() {
         launchBuild(agent).then(getSuccess(res), getError(res));
     });
 
-    this.start = function () {
+    this.init = function () {
         console.log(process.memoryUsage());
         this.storages = new StorageManager().getStorages();
         this.dataProvider = new DataProvider(this.storages, globalHelper.timeTickPullingData);
+        this.socketRunner = new SocketRunner();
+        this.dataProvider.start();
+        this.socketRunner.init(this.storages);
+    };
+
+    this.start = function () {
+        console.log(process.memoryUsage());
         this.dataProvider.start();
         this.socketRunner.start(this.storages);
     };
@@ -91,5 +98,7 @@ function CustomApp() {
         this.server = server;
         this.socketRunner = new SocketRunner(server);
     }
+
+    this.init();
 }
 module.exports = CustomApp;
