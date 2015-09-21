@@ -14,6 +14,7 @@ function CustomApp() {
     this.app = express();
     this.storages = {};
     this.dataProvider = {};
+    this.server = {};
     var self = this;
 
     this.app.use(morgan('dev'));
@@ -77,7 +78,7 @@ function CustomApp() {
         console.log(process.memoryUsage());
         this.storages = new StorageManager().getStorages();
         this.dataProvider = new DataProvider(this.storages, globalHelper.timeTickPullingData);
-        this.socketRunner = new SocketRunner();
+        this.socketRunner = new SocketRunner(this.server);
         this.dataProvider.start();
         this.socketRunner.init(this.storages);
     };
@@ -91,14 +92,10 @@ function CustomApp() {
     this.stop = function () {
         this.dataProvider.stop();
         this.socketRunner.stop();
-        delete this.dataProvider;
     };
 
     this.setServer = function (server) {
         this.server = server;
-        this.socketRunner = new SocketRunner(server);
-    }
-
-    this.init();
+    };
 }
 module.exports = CustomApp;

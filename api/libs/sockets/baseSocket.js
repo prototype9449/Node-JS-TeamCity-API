@@ -58,7 +58,7 @@ function BaseSocket(server, objectType, ioInstance) {
 
     this.start = function()
     {
-        setTimer.apply(self);
+        setTimer.apply(this);
     };
 
     this.stop = function () {

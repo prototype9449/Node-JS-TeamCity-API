@@ -4,6 +4,6 @@ var customApp = new CustomApp();
 var server = http.createServer(customApp.app);
 var globalHelper= require('././libs/config/globalHelper');
 customApp.setServer(server);
-customApp.start();
+customApp.init();
 var port = process.env.PORT || globalHelper.port;
 server.listen(port);
