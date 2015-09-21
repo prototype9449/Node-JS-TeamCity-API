@@ -26,10 +26,10 @@ function CustomApp() {
     function getError(responce) {
         return function () {
             responce.set({
-                    'Content-Type': 'text',
-                    'Access-Control-Allow-Origin': '*',
-                    'Status': '409'
-                });
+                'Content-Type': 'text',
+                'Access-Control-Allow-Origin': '*',
+                'Status': '409'
+            });
             responce.send('error');
         }
     }
@@ -49,8 +49,8 @@ function CustomApp() {
         var url = req.body.url;
         var userName = req.body.user;
         self.stop();
-        self.start();
         configManager.chooseGeneralTeamCity(url, userName);
+        self.start();
         res.end();
     });
 

@@ -1,5 +1,5 @@
 var http = require('http');
-var CustomApp = require('./libs/helpers/CustomApp');
+var CustomApp = require('./libs/helpers/customApp');
 var customApp = new CustomApp();
 var server = http.createServer(customApp.app);
 var globalHelper= require('././libs/config/globalHelper');
