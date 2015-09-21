@@ -2,7 +2,7 @@ var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
 var ConfigManager = require('./../config/configManager');
 var configManager = new ConfigManager();
-var socketPathHelper= require('./../config/socketPathHelper');
+var socketPathHelper = require('./../config/socketPathHelper');
 
 function SettingSocket(server, storagesDetail, ioInstance) {
     this.__proto__ = new baseSocket(server, socketPathHelper.settingsPath, ioInstance);
@@ -33,14 +33,16 @@ function SettingSocket(server, storagesDetail, ioInstance) {
     }.bind(this);
 
     var getSettings = function (buildTypes, agentsFromStorage) {
-        var agents = agentsFromStorage.map(function (value) {
+        var agentWithIndexes = agentsFromStorage.map(function (value) {
             return {
                 agentName: value.name,
                 indexOfBuildType: getIndexOfBuildTypeByAgent(value.name, buildTypes)
             }
+        }).sort(function (agent1, agent2) {
+            return agent1.agentName.localeCompare(agent2.agentName);
         });
         return {
-            agents: agents,
+            agents: agentWithIndexes,
             buildTypes: buildTypes
         };
     };
@@ -68,7 +70,8 @@ function SettingSocket(server, storagesDetail, ioInstance) {
         };
 
         var allUrls = otherSettings.map(function (value) {
-            var isCurrent = currentConfig.url === value.connection.url && currentConfig.userName === value.connection.auth.user;
+            var isCurrent = currentConfig.url === value.connection.url
+                && currentConfig.userName === value.connection.auth.user;
 
             return {
                 url: value.connection.url,
