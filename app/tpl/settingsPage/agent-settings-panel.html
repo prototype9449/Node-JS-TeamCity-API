@@ -17,7 +17,8 @@
                         <td>
                             <select class="selectpicker show-tick" rv-value="currentSetting.agentFixBuilds.<%= agent.agentName %>" name="<%= agent.agentName %>">
                                 <% _.each(settings.buildTypes, function(buildType, index) { %>
-                                <% if (agent.indexOfBuildType === index) { %>
+
+                                <% if (currentSetting.agentFixBuilds[agent.agentName] === buildType.id) { %>
                                 <option selected><%= buildType.id %></option>
                                 <% } else { %>
                                 <option><%= buildType.id %></option>

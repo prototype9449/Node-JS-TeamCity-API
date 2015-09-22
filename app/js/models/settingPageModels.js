@@ -52,13 +52,17 @@ window.AgentsSettings = Backbone.Model.extend({
         },
         currentSetting: {
             url: "",
-            userName: ""
+            userName: "",
+            agentFixBuilds : ""
         },
         sendSettingSubmit: ""
     },
+
+
     getModel: function () {
         var model = this.get("object");
         model.state = this.get("state");
+        model.currentSetting = this.get("currentSetting");
         return model;
     },
     set: function (attributes, options) {
@@ -72,9 +76,6 @@ window.AgentsSettings = Backbone.Model.extend({
             return;
         }
 
-        Backbone.Model.prototype.set.call(this, attributes, options);
-
-
         if (attributes.object && attributes.object.settings && attributes.object.settings.agents) {
             this.get('currentSetting').agentFixBuilds = {};
             var agentsInModel = this.get('currentSetting').agentFixBuilds;
@@ -86,6 +87,8 @@ window.AgentsSettings = Backbone.Model.extend({
                     agentsInModel[attributes.object.settings.agents[i].agentName] = attributes.object.settings.buildTypes[0].id;
             }
         }
+
+        Backbone.Model.prototype.set.call(this, attributes, options);
     },
 
     handleSettingSubmit: function () {

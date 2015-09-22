@@ -108,6 +108,8 @@ var generateBuildBranch = function (data) {
             data.jsonBuild.build.branchName = getBuildBranchName(vscJson);
             resolve(data.jsonBuild);
         }, function (err) {
+            console.log(optionTeamCity.url);
+            resolve('---');
             throw err;
         });
     });
