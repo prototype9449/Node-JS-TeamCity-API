@@ -16,10 +16,10 @@ var GeneralBuildStorage = function (maxCount) {
     this.pushObjects = function (objects) {
         var indexes = new Array(objects.length);
 
-        objects.forEach(function (object, index) {
+        objects.forEach(function (object) {
             for (var i = 0; i < self.objects.length; i++) {
                 if (self.objects[i].id == object.id) {
-                    indexes[index] = objects[i];
+                    indexes[i] = object;
                 }
             }
         });
