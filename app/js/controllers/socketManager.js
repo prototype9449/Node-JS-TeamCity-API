@@ -128,7 +128,7 @@ window.socketManager = {
             var object = agent[0].model;
             model.agent.set({
                 object: object,
-                sendLaunchBuild: sendPostRequest(agent, 'http://localhost:8080/launchBuild')
+                sendLaunchBuild: sendPostRequest(model.agent, 'http://localhost:8080/launchBuild')
             });
         });
 

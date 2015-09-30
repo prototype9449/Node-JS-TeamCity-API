@@ -40,14 +40,17 @@ var GeneralBuildStorage = function (maxCount) {
 
     this.getBuildHistoryById = function (id) {
         var mainBuild = self.clone(self.getObjectById(id, this));
-        var buildsOfConfiguration = [];
+        var result = {builds: []};
+        if(!mainBuild.build) return result;
+
         self.objects.map(function (build) {
+
             if (build.build.configuration.id == mainBuild.build.configuration.id) {
-                buildsOfConfiguration.push(build);
+                result.builds.push(build);
             }
 
         });
-        return {builds: buildsOfConfiguration};
+        return result;
     };
 
     this.getAgentHistoryById = function (id) {

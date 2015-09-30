@@ -1,5 +1,5 @@
 var baseSocket = require('./baseSocket');
-var socketPathHelper= require('./../config/socketPathHelper');
+var socketPathHelper = require('./../config/socketPathHelper');
 
 function SocketManager(server, storageDetails, ioInstance) {
     this.__proto__ = new baseSocket(server, socketPathHelper.buildPath, ioInstance);
@@ -23,6 +23,7 @@ function SocketManager(server, storageDetails, ioInstance) {
                     client.socket.emit('buildHistory', buildsData);
                 });
             })(client)
+
         }
     };
 
