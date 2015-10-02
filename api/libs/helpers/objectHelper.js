@@ -51,10 +51,11 @@ function ObjectHelper(name, getObjects) {
         return newObjects;
     };
 
-    this.generateNewObjects = function (callback, number) {
+    this.generateNewObjects = function (callback, number) {       
         var dataFromStorage = this.getObjects(number);
         var objectsFromStorage = dataFromStorage[this.name];
-        if (!objectsFromStorage) return;
+        if (objectsFromStorage.length == 0) return;
+
 
         var newObjects = selectNewObjects(this, objectsFromStorage);
 
@@ -75,6 +76,12 @@ function ObjectHelper(name, getObjects) {
 
         callback(newObjects);
     };
+
+    this.clear = function()
+    {
+        this.count = 0;
+        this.objectsFromMemory = null;
+    }
 }
 
 module.exports = ObjectHelper;

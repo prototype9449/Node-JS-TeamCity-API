@@ -1,0 +1,16 @@
+<div id="general-build-<%- build.id %>" class="panel panel-info buildInfo">
+    <div class="panel-heading">
+        <b><a href="#/build/id:<%- build.id %>"><%- build.configuration.name %></a></b>
+    </div>
+    <div class="panel-body">
+        <li><b>Branch Name:</b> <%- build.branchName %></li>
+        <li><b>Launch date:</b> <%- build.launchDate %></li>
+        <li>
+            <b>Status: </b><span><%- build.status %></span>
+            <span name="status-span" class="<%-getClassesByStatus(build.status)%>" aria-hidden="true"></span>
+        </li>
+        <li><b>Agent Name: <a href="#/agent/id:<%- agent.id %>"><%- agent.name %></a></b></li>
+        <li><b>Project Name:</b> <%- build.configuration.projectName %></li>
+        <li><b>Author:</b> <%- build.authorName %></li>
+    </div>
+</div>

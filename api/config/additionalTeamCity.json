@@ -1,0 +1,31 @@
+{
+  "additionalOptions": {
+    "connection": {
+      "url": "http://localhost:8111",
+      "auth": {
+        "user": "prototype9449",
+        "pass": "termit"
+      },
+      "headers": {
+        "Accept": "application/json"
+      }
+    },
+    "options": {
+      "projects": [
+        {
+          "projectName": "Portal",
+          "buildTypeNames": [
+            "Portal Core",
+            "Portal UIPPocess"
+          ]
+        },
+        {
+          "projectName": "Other Project",
+          "buildTypeNames": [
+            "Portal Core"
+          ]
+        }
+      ]
+    }
+  }
+}

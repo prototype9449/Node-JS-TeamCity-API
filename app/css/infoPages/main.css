@@ -47,39 +47,131 @@ th, td {
 }
 
 .build-column {
-    width: 700px;
+    width: 660px;
 }
 
-.buildInfo, .agentInfo{
+.panel-heading {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.panel {
+    margin-bottom: 10px;
+}
+
+.general-buildInfo, .additional-buildInfo, .agentInfo{
     margin: 5px;
 }
 
+.second-column {
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 566px;
+    display: block;
+}
 .buildInfo{
-    display: none;
-    height: 230px;
+    height: 240px;
     width:300px;
     float:left;
-    margin-left: 20px;
+    margin-left: 12px;
+}
+
+#agents-panel-container {
+    display: inline-block;
+}
+
+.agent-panel {
+    padding-bottom: 5px;
 }
 
 .runningState{
     color: orange;
 }
 
-.glyphicon-cog {
+.arrow-processing-icon {
+    background-image: url(../../images/arrow-processing-icon-black.png);
     animation-name: spin;
     animation-duration: 600ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-
-    z-index: 100;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
 }
 
 @keyframes spin {
     from {
-        transform:rotate(0deg);
-    }
-    to {
         transform:rotate(360deg);
     }
+    to {
+        transform:rotate(0deg);
+    }
+}
+
+.agent-history-control, .build-history-control {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Agent-panel, #Build-panel {
+    margin-top: 5px;
+    display: table;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#history-table-panel {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+.launch-button {
+    padding: 0px 7px 0px 7px;
+    font-size: 13px;
+}
+
+.glyphicon-ok-circle {
+    color: #00D800;
+}
+
+.glyphicon-remove-circle {
+    color: red;
+}
+
+.glyphicon-ban-circle {
+    color: #FF9B1A;
+}
+
+#additional-build-panel {
+    display: inline-block;
+}
+
+#additional-builds-panel td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+#wrapper-builds-panel {
+    padding-left: 11px;
+}
+
+#settings-page-button {
+    float: right;
+    margin-bottom: 5px;
+}
+
+#settings-page-button-container {
+    display: flex;
+}
+
+#third-column {
+    margin-top: 6px;
+    margin-left: 5px;
 }

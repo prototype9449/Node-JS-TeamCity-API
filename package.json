@@ -1,0 +1,18 @@
+{
+  "name": "node-rest-express-seed",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "date-format-lite": "^0.7.4",
+    "express": "^4.13.3",
+    "install": "^0.1.8",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1",
+    "nconf": "^0.8.1",
+    "npm": "^3.3.5",
+    "promise": "^7.0.4",
+    "request": "^2.64.0",
+    "request-promise": "^0.4.3",
+    "socket.io": "^1.3.7"
+  }
+}

@@ -1,0 +1,16 @@
+<div id="agent-<%-id%>" class="panel panel-info agentInfo agent-panel">
+    <div class="panel-heading">
+        <b><a href="#/agent/id:<%- id %>"><%- name %></a></b>
+    </div>
+    <div class="panel-body">
+        <li><b>Ready: <%- status.ready %></b></li>
+        <li><b>Free Space:</b> <%- freeSpace %> Gb
+            <button type="button" class="btn btn-success launch-button" aria-label="Left Align" id="launchBuildButton-<%- id %>">
+                Fix
+                <span class="glyphicon glyphicon-play" aria-hidden="true" ></span>
+            </button>
+            <span name="status-span" class="<%-getClassesByStatus(state)%>" aria-hidden="true"></span>
+        </li>
+        <li><b>Current Tasks:</b> <%- currentTask %></li>
+    </div>
+</div>

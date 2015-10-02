@@ -1,35 +1,64 @@
-function BaseSocket(server, time, objectType) {
-    this.time = time;
+var config = require('./../config/generalOptionHelper');
+var launchBuild = require('../providers/generalBuildProvider').launchBuildConfiguration;
+var globalHelper = require('./../config/globalHelper');
+
+function BaseSocket(server, objectType, ioInstance) {
+    this.time = globalHelper.timeTickSendingData;
     this.objectHelper = require('./../helpers/objectHelper');
     //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
-    this.io = require('socket.io')(server, {path: '/' + objectType});//WebStorm
-    this.objectType = objectType;
+    if (ioInstance) {
+        this.io = ioInstance;
+    } else {
+        this.io = require('socket.io')(server, {path: '/' + objectType});//WebStorm
+    }
+
     this.clients = {};
 
-    this.start = function () {
-        function SetTimer(self) {
-            console.log("timer started");
-            self.interval = setInterval(function send() {
-                self.sendInfo(self.clients);
-            }, self.time);
+    this.pushModels = function (models) {
+        var result = [];
+        for (var id in models)
+            result.push({id: models[id].id, model: models[id]});
+
+        result.sort(function (item1, item2) {
+            return item1.id - item2.id;
+        });
+        return result;
+    };
+
+    this.sendDataToAllClients = function (eventName, data) {
+        for (var id in this.clients) {
+            this.clients[id].socket.emit(eventName, data);
         }
+    };
 
-        function begin(self) {
-            self.io.on('connection', function (socket) {
-                self.createClient(socket);
+    var setTimer = function () {
+        var self = this;
+        console.log("timer started");
+        this.interval = setInterval(function () {
+            self.sendInfo();
+        }, self.time);
+    };
 
-                self.sendInitialData(socket);
 
-                console.log('Clients online : ' + self.clients);
+    this.init = function () {
+        var self = this;
 
-                socket.on('disconnect', function () {
-                    delete self.clients[socket.id];
-                });
-                SetTimer(self);
+        this.io.on('connection', function (socket) {
+            self.createClient(socket);
+            self.sendInitialData(socket);
+
+            console.log('Clients online : ' + self.clients);
+
+            socket.on('disconnect', function () {
+                delete self.clients[socket.id];
             });
-        }
+            setTimer.apply(self);
+        });
+    };
 
-        begin(this);
+    this.start = function()
+    {
+        setTimer.apply(this);
     };
 
     this.stop = function () {

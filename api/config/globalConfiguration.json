@@ -1,0 +1,14 @@
+{
+  "application": {
+    "port": 8080,
+    "timeTickPullingData": 4000,
+    "timeTickSendingData": 4000,
+    "dateMask": "YYYY-MM-DD hh:mm:ss"
+  },
+  "socketPaths": {
+    "buildPath": "build",
+    "agentPath": "agent",
+    "mainPath": "main",
+    "settingsPath": "settings"
+  }
+}

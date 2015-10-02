@@ -1,0 +1,42 @@
+<form id="settings-form">
+
+
+    <nav id="current-agent-settings-control" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h3 id="agent-configuration-label">TeamCity configuration:</h3>
+                <table>
+                    <thead>
+                    <th>Agent's Name</th>
+                    <th>Build for execution</th>
+                    </thead>
+                    <tbody>
+                    <% _.each(settings.agents, function(agent) { %>
+                    <tr>
+                        <td><%= agent.agentName %></td>
+                        <td>
+                            <select class="selectpicker show-tick" rv-value="currentSetting.agentFixBuilds.<%= agent.agentName %>" name="<%= agent.agentName %>">
+                                <% _.each(settings.buildTypes, function(buildType, index) { %>
+
+                                <% if (currentSetting.agentFixBuilds[agent.agentName] === buildType.id) { %>
+                                <option selected><%= buildType.id %></option>
+                                <% } else { %>
+                                <option><%= buildType.id %></option>
+                                <% } %>
+                                <% }); %>
+                            </select>
+                        </td>
+                    </tr>
+                    <% }); %>
+
+                    </tbody>
+                </table>
+
+                <button id="save-settings" type="submit" class="btn btn-success settings-button">
+                    Save <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <span class="status-panel <%-getNewConnectionClass(state)%>" aria-hidden="true"><%-getNewConnectionStatus(state)%></span>
+            </div>
+        </div>
+    </nav>
+</form>

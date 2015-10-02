@@ -1,72 +1,22 @@
 {
-  "generalTeamCity": {
+  "generalOptions": {
     "connection": {
       "url": "http://localhost:8111",
+      "method" : "GET",
       "auth": {
         "user": "prototype9449",
         "pass": "termit"
       },
       "headers": {
         "Accept": "application/json"
-      }
-    }
-  },
-
-  "additionalTeamCity": {
-    "connection": {
-      "url": "192.168.21.112:8111",
-      "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
       },
-      "headers": {
-        "Accept": "application/json"
-      }
+      "timeout": 200000
     },
-
-    "options": {
-      "projects": [
-        {
-          "projectName": "MyRepozitoryGitHub",
-          "buildTypeNames": [
-            "Some other build config",
-            "Tests for hashtebale"
-          ]
-        }
-      ]
-    }
-  },
-
-  "teamCityLaunchBuilds": {
-    "relativeUrl": "/httpAuth/app/rest/buildQueue",
-    "Content-Type": "application/xml",
-    "body": "<build><buildType id='_buildTypeId_'/><agent id='_agentId_'/></build>"
-  },
-
-  "teamCityAgents": {
-    "relativeUrl": "/httpAuth/app/rest/agents",
-    "options": {
-      "restApiPath": "/api/agents",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\agent-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\agent-full-information-panel.html",
-      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\agent-history-panel.html"
-    }
-  },
-
-  "teamCityBuilds": {
-    "relativeUrl": "/httpAuth/app/rest/builds",
-    "relativeUrlWithRunnedBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any",
-    "relativeUrlSinceIdBuilds": "/httpAuth/app/rest/builds?locator=running:any,canceled:any,sinceBuild:",
-    "relativeUrlOneBuildByBuildTypeId": "/httpAuth/app/rest/buildTypes/id:_buildTypeId_/builds/?locator=running:any,canceled:any,count:1",
-    "options": {
-      "restApiPath": "/api/builds",
-      "pageHtmlTemplatePath": "\\..\\public\\pages\\build-brief-information-panel.html",
-      "pageFullHtmlTemplatePath": "\\..\\public\\pages\\build-full-information-panel.html",
-      "pageHistoryHtmlTemplatePath": "\\..\\public\\pages\\build-history-panel.html"
-    }
-  },
-
-  "teamCityBuildTypes": {
-    "relativeUrl": "/httpAuth/app/rest/buildTypes"
+    "agentFixBuilds": [
+      {
+        "agentName": "Home",
+        "buildTypeId": "MyRepozitoryGitHub_TestsForHashtebale"
+      }
+    ]
   }
 }

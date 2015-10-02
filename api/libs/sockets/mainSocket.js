@@ -1,66 +1,68 @@
-var config = require('./../helpers/generalConnectionOptionHelper');
-var htmlGenerator = require('./../htmlGenerator');
+var config = require('./../config/generalOptionHelper');
 var baseSocket = require('./baseSocket');
-var launchBuild = require('../providers/jsonBuildProvider').launchBuildConfiguration;
+var socketPathHelper= require('./../config/socketPathHelper');
 
-function MainSocket(server, storages, time, objectType) {
-    this.__proto__ = new baseSocket(server, time, objectType);
-    this.buildStorage = storages.buildStorage;
-    this.agentStorage = storages.agentStorage;
+function MainSocket(server, storageDetails, ioInstance) {
+    this.__proto__ = new baseSocket(server, socketPathHelper.mainPath, ioInstance);
+    this.generalBuildStorage = storageDetails.generalBuildStorage.storage;
+    this.additionalBuildStorage = storageDetails.additionalBuildStorage.storage;
+    this.agentStorage = storageDetails.agentStorage.storage;
 
-    this.buildHelper = new this.objectHelper('builds', this.buildStorage.getBuilds);
+    this.generalBuildHelper = new this.objectHelper('builds', this.generalBuildStorage.getBuilds);
+    this.additionalBuildHelper = new this.objectHelper('builds', this.additionalBuildStorage.getBuilds);
     this.agentHelper = new this.objectHelper('agents', this.agentStorage.getAgents);
     this.buildCount = 10;
-
     var self = this;
 
-    this.sendInfo = function (clients) {
-        self.buildHelper.generateNewObjects(function (builds) {
-            var optionTeamCity = config.getBuildOptions();
-            htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-                for (var id in self.clients) {
-                    clients[id].socket.emit('newBuilds', html);
-                }
-            });
+    this.sendInfo = function () {
+
+        this.generalBuildHelper.generateNewObjects(function (builds) {
+            var buildsData = self.pushModels(builds);
+            self.sendDataToAllClients('generalBuilds', buildsData);
+
         }, this.buildCount);
 
-        self.agentHelper.generateNewObjects(function (agents) {
-            var optionTeamCity = config.getAgentOptions();
-            htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-                for (var id in self.clients) {
-                    clients[id].socket.emit('newAgents', html);
-                }
-            });
+        this.additionalBuildHelper.generateNewObjects(function (builds) {
+            var buildsData = self.pushModels(builds);
+            self.sendDataToAllClients('additionalBuilds', buildsData);
+
+        });
+
+        this.agentHelper.generateNewObjects(function (agents) {
+            var agentsData = self.pushModels(agents);
+            self.sendDataToAllClients('agents', agentsData);
+
         });
     };
 
     this.sendInitialData = function (socket) {
-        var builds = self.buildStorage.getBuilds(this.buildCount)["builds"];
-        var optionTeamCity = config.getBuildOptions();
-        htmlGenerator.generateHtmlFromJson({builds: builds}, "builds", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-            socket.emit('newBuilds', html);
-        });
 
-        var agents = self.agentStorage.getAgents()["agents"];
-        optionTeamCity = config.getAgentOptions();
-        htmlGenerator.generateHtmlFromJson({agents: agents}, "agents", optionTeamCity.options.pageHtmlTemplatePath, function (html) {
-            socket.emit('newAgents', html);
-        });
+        var generalBuilds = this.generalBuildStorage.getBuilds(this.buildCount)["builds"];
+        var generalBuildsData = this.pushModels(generalBuilds);
+        socket.emit('generalBuilds', generalBuildsData);
+
+        var additionalBuilds = this.additionalBuildStorage.getBuilds()["builds"];
+        var additionalBuildsData = this.pushModels(additionalBuilds);
+        socket.emit('additionalBuilds', additionalBuildsData);
+
+        var agents = this.agentStorage.getAgents()["agents"];
+        var agentsData = this.pushModels(agents);
+        socket.emit('agents', agentsData);
     };
 
     this.createClient = function (socket) {
-
-        socket.on('launchBuild', function (agentId) {
-            if (agentId != 1) {
-                launchBuild('Portal_PortalControls', agentId);
-            } else {
-                launchBuild('Portal_PortalCore', agentId);
-            }
-        });
-
         this.clients[socket.id] = {
             socket: socket
         };
+    };
+    this.stop = function () {
+        clearInterval(this.interval);
+        this.generalBuildStorage.clear();
+        this.additionalBuildStorage.clear();
+        this.agentStorage.clear();
+        this.generalBuildHelper.clear();
+        this.additionalBuildHelper.clear();
+        this.agentHelper.clear();
     };
 }
 

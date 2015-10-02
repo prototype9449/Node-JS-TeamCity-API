@@ -1,0 +1,111 @@
+body {
+    font-family: 'Abel', sans-serif;
+    font-size: 18px;
+}
+
+.input-group-sm {
+    width: 150px;
+}
+
+.input-group-sm {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 220px;
+}
+
+.status-panel {
+    font-size: medium;
+    font-style: italic;
+     display: inline;
+     position: relative;
+    text-align: center;
+}
+
+.status-panel-success {
+    color: green;
+}
+
+.status-panel-error {
+    color: darkred;
+}
+
+.status-panel-running {
+    color: #000000;
+}
+
+#save-teamcity-settings-button {
+    float: right;
+    margin: 5px 0px 5px 5px;
+}
+
+#new-teamcity-connection-settings-panel {
+    display: inline-flex;
+}
+
+#hide-new-connection-button {
+    display: flex;
+    float: right;
+}
+
+.SettingsPanel {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#settings-block {
+    margin-top: 5px;
+}
+
+#agent-configuration-label {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#current-agent-settings-control {
+    margin-top: 5px;
+}
+
+.dropdown-left-offset {
+    margin-left: 5px;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+#save-settings {
+    float: right;
+    margin-bottom: 5px;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+th {
+    width: 200px;
+    text-align: center;
+}
+
+td {
+    padding: 3px;
+}
+
+#new-teamcity-connection-settings-panel {
+    width: 250px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.panel-body {
+    padding-bottom: 0px;
+}
+
+.settings-button {
+    font-size: 13px;
+    padding: 4px 6px 4px 6px;
+}

@@ -1,3 +1,6 @@
+var Enumerable = require('../linq/linq.min');
+require("../linq/extensions/linq.qunit")({'Enumerable': Enumerable});
+
 var ObjectStorage = function (name) {
     this.objects = [];
     this.name = name;
@@ -32,11 +35,7 @@ var ObjectStorage = function (name) {
         }
     };
 
-    this.push = function (objects) {
-        this.objects = objects;
-    };
-
-    this.get = function (number) {
+    this.getObjects = function (number) {
         var result = {};
         result[this.name] = this.getSpliceArray(this.objects, number);
 
@@ -49,6 +48,11 @@ var ObjectStorage = function (name) {
 
         return result;
     };
+
+    this.clear = function()
+    {
+        this.objects = [];
+    }
 };
 
 module.exports.ObjectStorage = ObjectStorage;
