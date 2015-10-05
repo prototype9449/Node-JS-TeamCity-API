@@ -1,11 +1,10 @@
 {
   "generalOptions": {
     "connection": {
-      "url": "http://localhost:8111",
-      "method" : "GET",
+      "url": "http://co-osl-devb97:85",
       "auth": {
-        "user": "prototype9449",
-        "pass": "termit"
+        "user": "SergeyPo",
+        "pass": "qwerty12345!"
       },
       "headers": {
         "Accept": "application/json"
@@ -14,8 +13,16 @@
     },
     "agentFixBuilds": [
       {
-        "agentName": "Home",
-        "buildTypeId": "MyRepozitoryGitHub_TestsForHashtebale"
+        "agentName": "osl-devb35-sel",
+        "buildTypeId": "Huby_0RunDataProcessingLegacyTests"
+      },
+      {
+        "agentName": "OSL-DEVB54-SEL",
+        "buildTypeId": "Huby_0RunDataProcessingLegacyTests"
+      },
+      {
+        "agentName": "osl-devb97-sel",
+        "buildTypeId": "Huby_0RunDataProcessingLegacyTests"
       }
     ]
   }

@@ -26,7 +26,7 @@ function CustomApp() {
     function getError(responce) {
         return function () {
             responce.set({
-                'Content-Type': 'text',
+                'Content-Type': 'text/plain',
                 'Access-Control-Allow-Origin': '*',
                 'Status': '409'
             });
@@ -38,7 +38,7 @@ function CustomApp() {
         return function () {
             responce.set({
                 'Status': '202',
-                'Content-Type': 'text',
+                'Content-Type': 'text/plain',
                 'Access-Control-Allow-Origin': '*'
             });
             responce.send('success');

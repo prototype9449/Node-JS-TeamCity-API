@@ -2,52 +2,6 @@
   "teamCityObjects": [
     {
       "connection": {
-        "url": "http://localhost:8111",
-        "auth": {
-          "user": "prototype9449",
-          "pass": "termit"
-        },
-        "headers": {
-          "Accept": "application/json"
-        },
-        "timeout": 200000
-      },
-      "agentFixBuilds": [
-        {
-          "agentName": "CO-YAR-WS132",
-          "buildTypeId": "Portal_PortalCore"
-        },
-        {
-          "agentName": "CO-YAR-WS152",
-          "buildTypeId": "OtherProject_PortalCore"
-        }
-      ]
-    },
-    {
-      "connection": {
-        "url": "http://192.168.21.113:8111",
-        "auth": {
-          "user": "prototype9449",
-          "pass": "termit"
-        },
-        "headers": {
-          "Accept": "application/json"
-        },
-        "timeout": 200000
-      },
-      "agentFixBuilds": [
-        {
-          "agentName": "CO-YAR-WS152",
-          "buildTypeId": "Portal_PortalCore"
-        },
-        {
-          "agentName": "CO-YAR-WS132",
-          "buildTypeId": "Portal_PortalPortalLib"
-        }
-      ]
-    },
-    {
-      "connection": {
         "url": "http://co-osl-devb97:85",
         "auth": {
           "user": "SergeyPo",
@@ -57,7 +11,21 @@
           "Accept": "application/json"
         },
         "timeout": 200000
-      }
+      },
+      "agentFixBuilds": [
+        {
+          "agentName": "osl-devb35-sel",
+          "buildTypeId": "Huby_0RunDataProcessingLegacyTests"
+        },
+        {
+          "agentName": "OSL-DEVB54-SEL",
+          "buildTypeId": "Huby_0RunDataProcessingLegacyTests"
+        },
+        {
+          "agentName": "osl-devb97-sel",
+          "buildTypeId": "Huby_0RunDataProcessingLegacyTests"
+        }
+      ]
     }
   ]
 }
