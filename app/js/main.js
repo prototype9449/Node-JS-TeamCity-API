@@ -82,3 +82,4 @@ $(function () {
     });
 });
 
+window.socketSettings = {url: 'http://localhost:8080', basePath: '/'};

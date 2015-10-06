@@ -6,6 +6,7 @@
     "dateMask": "YYYY-MM-DD hh:mm:ss"
   },
   "socketPaths": {
+    "base": "/",
     "buildPath": "build",
     "agentPath": "agent",
     "mainPath": "main",

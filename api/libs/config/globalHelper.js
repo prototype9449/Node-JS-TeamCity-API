@@ -30,4 +30,10 @@ Object.defineProperty(globalHelper, 'dateMask', {
     }
 });
 
+Object.defineProperty(globalHelper, 'baseSocketPath', {
+    get: function() {
+        return clone(config.globalOptions().get("socketPaths").base);
+    }
+});
+
 module.exports = globalHelper;

@@ -26,11 +26,10 @@ var sendPostRequest = function (model, url, isReload) {
     }
 };
 
-
 window.socketManager = {
     setMainSocket: function (model) {
 
-        var socket = io.connect('http://localhost:8080', {'path': '/main', 'force new connection': true});
+        var socket = io.connect(socketSettings.url, {'path': socketSettings.basePath + 'main', 'force new connection': true});
 
         socket.on('generalBuilds', function (generalBuilds) {
             for (var i = 0; i < generalBuilds.length; i++) {
@@ -57,7 +56,7 @@ window.socketManager = {
                     return item.id == id;
                 });
 
-                agent.set({sendLaunchBuild: sendPostRequest(agent, 'http://localhost:8080/launchBuild')});
+                agent.set({sendLaunchBuild: sendPostRequest(agent, socketSettings.url + '/launchBuild')});
             }
         });
 
@@ -66,7 +65,7 @@ window.socketManager = {
 
     setSettingsSocket: function (model) {
 
-        var socket = io.connect('http://localhost:8080', {'path': '/settings', 'force new connection': true});
+        var socket = io.connect(socketSettings.url, {'path': socketSettings.basePath + 'settings', 'force new connection': true});
 
         socket.on('urls', function (urls) {
             var object = {
@@ -85,17 +84,17 @@ window.socketManager = {
 
         });
 
-        model.urlSettings.set({sendUrlChanging: sendPostRequest(model.urlSettings, 'http://localhost:8080/changeUrl', true)}, {silent: true});
-        model.settings.set({sendSettingSubmit: sendPostRequest(model.settings, 'http://localhost:8080/changeConfiguration')}, {silent: true});
-        model.connectionSetting.set({sendConnectionSubmit: sendPostRequest(model.connectionSetting, 'http://localhost:8080/newAuthentication')}, {silent: true});
+        model.urlSettings.set({sendUrlChanging: sendPostRequest(model.urlSettings, socketSettings.url + '/changeUrl', true)}, {silent: true});
+        model.settings.set({sendSettingSubmit: sendPostRequest(model.settings, socketSettings.url + '/changeConfiguration')}, {silent: true});
+        model.connectionSetting.set({sendConnectionSubmit: sendPostRequest(model.connectionSetting, socketSettings.url + '/newAuthentication')}, {silent: true});
 
         return socket;
     },
 
     setBuildSocket: function (model, id) {
 
-        var socket = io.connect('http://localhost:8080', {
-            'path': '/build',
+        var socket = io.connect(socketSettings.url, {
+            'path': socketSettings.basePath + 'build',
             'query': 'id=' + id,
             'force new connection': true
         });
@@ -118,8 +117,8 @@ window.socketManager = {
 
     setAgentSocket: function (model, id) {
 
-        var socket = io.connect('http://localhost:8080', {
-            'path': '/agent',
+        var socket = io.connect(socketSettings.url, {
+            'path': socketSettings.basePath + 'agent',
             'query': 'id=' + id,
             'force new connection': true
         });
@@ -128,7 +127,7 @@ window.socketManager = {
             var object = agent[0].model;
             model.agent.set({
                 object: object,
-                sendLaunchBuild: sendPostRequest(model.agent, 'http://localhost:8080/launchBuild')
+                sendLaunchBuild: sendPostRequest(model.agent, socketSettings.url + '/launchBuild')
             });
         });
 

@@ -5,11 +5,10 @@ var globalHelper = require('./../config/globalHelper');
 function BaseSocket(server, objectType, ioInstance) {
     this.time = globalHelper.timeTickSendingData;
     this.objectHelper = require('./../helpers/objectHelper');
-    //this.io = require('socket.io')(server, { path:  '/api/socket.io' });//IIS
     if (ioInstance) {
         this.io = ioInstance;
     } else {
-        this.io = require('socket.io')(server, {path: '/' + objectType});//WebStorm
+        this.io = require('socket.io')(server, {path: globalHelper.baseSocketPath + objectType});//WebStorm
     }
 
     this.clients = {};
